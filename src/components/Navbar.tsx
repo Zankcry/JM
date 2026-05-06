@@ -100,7 +100,7 @@ export function Navbar() {
       </header>
 
       <aside className="fixed left-8 top-1/2 z-30 hidden -translate-y-1/2 lg:left-10 xl:left-14 lg:block">
-        <nav className="flex flex-col items-start gap-6" aria-label="Section navigation">
+        <nav className="flex flex-col items-start gap-7" aria-label="Section navigation">
           {primaryNavLinks.map((link) => (
             <a
               key={link.label}
@@ -116,7 +116,7 @@ export function Navbar() {
               <span>More</span>
             </summary>
 
-            <div className="absolute left-full top-1/2 ml-10 w-64 -translate-y-1/2 rounded-3xl border border-theme-border/60 bg-theme-bg-elevated/95 p-2 shadow-soft backdrop-blur">
+            <div className="absolute left-full top-1/2 ml-14 w-64 -translate-y-1/2 rounded-3xl border border-theme-border/60 bg-theme-bg-elevated/95 p-2 shadow-soft backdrop-blur">
               {moreNavLinks.map((link) => (
                 <a
                   key={link.label}

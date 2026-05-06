@@ -12,11 +12,11 @@ export default function App() {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed left-[4.5rem] top-0 hidden h-[calc(50%-6rem)] w-0.5 bg-theme-border/70 lg:block"
+        className="pointer-events-none fixed left-[4.5rem] top-0 hidden h-[calc(50%-6.5rem)] w-0.5 bg-theme-border/70 lg:block"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed left-[4.5rem] bottom-0 hidden h-[calc(50%-6rem)] w-0.5 bg-theme-border/70 lg:block"
+        className="pointer-events-none fixed left-[4.5rem] bottom-0 hidden h-[calc(50%-6.5rem)] w-0.5 bg-theme-border/70 lg:block"
       />
 
       <div
