@@ -23,9 +23,25 @@ export function Hero() {
 
         <h1
           id="hero-title"
-          className="max-w-3xl text-4xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-5xl lg:text-6xl"
+          className="flex max-w-3xl flex-wrap items-center gap-x-3 gap-y-2 text-3xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-4xl lg:text-5xl"
         >
-          Hey! I&apos;m <span className="text-theme-accent transition-colors duration-300 ease-out">Alex Carter</span>
+          <span>Hey! I&apos;m</span>
+          <span className="inline-flex items-center gap-2 whitespace-nowrap">
+            <span className="ml-2 text-theme-accent transition-colors duration-300 ease-out">
+              James Michael
+            </span>
+            <video
+              className="h-14 w-14 rounded-2xl object-cover transition-transform duration-300 ease-out sm:h-16 sm:w-16"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+            >
+              <source src="/chibi.webm" type="video/webm" />
+            </video>
+          </span>
         </h1>
 
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">
