@@ -1,16 +1,41 @@
 import { socialLinks } from '../data/navigation';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+  IconFileCv,
+  IconAddressBook,
+  IconBrandHtml5,
+  IconBrandJavascript,
+  IconBrandTailwind,
+} from '@tabler/icons-react';
 
 type TechStackItem = {
   label: string;
   shortLabel: string;
   tone: string;
+  icon: 'brand-javascript' | 'brand-html5' | 'brand-tailwind';
 };
 
 const techStack: TechStackItem[] = [
-  { label: 'JavaScript', shortLabel: 'JS', tone: '#F7DF1E' },
-  { label: 'HTML5', shortLabel: 'H5', tone: '#E34F26' },
-  { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8' },
+  { label: 'JavaScript', shortLabel: 'JS', tone: '#F7DF1E', icon: 'brand-javascript' },
+  { label: 'HTML5', shortLabel: 'H5', tone: '#E34F26', icon: 'brand-html5' },
+  { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8', icon: 'brand-tailwind' },
 ];
+
+const techStackIcons = {
+  'brand-javascript': IconBrandJavascript,
+  'brand-html5': IconBrandHtml5,
+  'brand-tailwind': IconBrandTailwind,
+} as const;
+
+const socialIcons = {
+  'brand-github': IconBrandGithub,
+  'brand-linkedin': IconBrandLinkedin,
+  'brand-instagram': IconBrandInstagram,
+  'file-cv': IconFileCv,
+  user: IconAddressBook,
+} as const;
 
 export function Hero() {
   return (
@@ -61,9 +86,14 @@ export function Hero() {
             <span key={link.label} className="flex items-center gap-3">
               <a
                 href={link.href}
-                className="transition hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg"
+                aria-label={link.label}
+                className="inline-flex items-center gap-2 transition hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg"
               >
-                {link.label}
+                {link.icon ? (() => {
+                  const SocialIcon = socialIcons[link.icon as keyof typeof socialIcons];
+                  return <SocialIcon size={18} stroke={1.8} aria-hidden="true" />;
+                })() : null}
+                <span>{link.label}</span>
               </a>
               {index < socialLinks.length - 1 ? <span aria-hidden="true">|</span> : null}
             </span>
@@ -71,7 +101,7 @@ export function Hero() {
         </div>
 
         <div className="mt-12 pt-6">
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-5 flex items-center gap-3">
             <p className="text-xs uppercase tracking-[0.35em] text-theme-text-muted/80">
               Tech stack
             </p>
@@ -80,15 +110,11 @@ export function Hero() {
           <div className="flex items-center gap-4 overflow-x-auto pb-1 text-sm text-theme-text-muted sm:gap-4">
             {techStack.map((item, index) => (
               <span key={item.label} className="inline-flex items-center whitespace-nowrap">
-                <span className="inline-flex items-center gap-2.5">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-theme-border/60 bg-theme-bg-elevated/85 shadow-sm backdrop-blur">
-                    <span
-                      className="text-[9px] font-semibold tracking-[0.2em]"
-                      style={{ color: item.tone }}
-                    >
-                      {item.shortLabel}
-                    </span>
-                  </span>
+                <span className="inline-flex items-center gap-2">
+                  {(() => {
+                    const TechIcon = techStackIcons[item.icon];
+                    return <TechIcon size={22} stroke={1.8} style={{ color: item.tone }} aria-hidden="true" />;
+                  })()}
                   <span className="text-xs font-medium tracking-tight text-theme-text-muted sm:text-[13px]">
                     {item.label}
                   </span>

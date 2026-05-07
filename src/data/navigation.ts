@@ -2,6 +2,7 @@ export type NavLink = {
   label: string;
   href: string;
   description?: string;
+  icon?: string;
 };
 
 export const primaryNavLinks: NavLink[] = [
@@ -18,8 +19,9 @@ export const moreNavLinks: NavLink[] = [
 ];
 
 export const socialLinks: NavLink[] = [
-  { label: 'GitHub', href: 'https://github.com/' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
-  { label: 'X', href: 'https://x.com/' },
-  { label: 'More about me', href: '#about' },
+  { label: 'GitHub', href: 'https://github.com/', icon: 'brand-github' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'brand-linkedin' },
+  { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'brand-instagram' },
+  { label: 'Resume', href: '/resume.pdf', icon: 'file-cv' },
+  { label: 'More about me...', href: '#about', icon: 'user' },
 ];
