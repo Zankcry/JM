@@ -6,27 +6,64 @@ import {
   IconFileCv,
   IconAddressBook,
   IconBrandHtml5,
+  IconBrandCss3,
   IconBrandJavascript,
+  IconBrandTypescript,
+  IconBrandPhp,
+  IconBrandReact,
+  IconBrandVue,
+  IconBrandAngular,
   IconBrandTailwind,
+  IconBrandMongodb,
+  IconBrandMysql,
+  IconBrandFirebase,
+  IconBrandSupabase,
+  IconBrandVercel,
 } from '@tabler/icons-react';
 
 type TechStackItem = {
   label: string;
   shortLabel: string;
   tone: string;
-  icon: 'brand-javascript' | 'brand-html5' | 'brand-tailwind';
+  icon: 'brand-html5' | 'brand-css3' | 'brand-javascript' | 'brand-typescript' | 'brand-php' | 'brand-react' | 'brand-vue' | 'brand-angular' | 'brand-tailwind' | 'brand-mongodb' | 'brand-mysql' | 'brand-firebase' | 'brand-supabase' | 'brand-vercel';
 };
 
 const techStack: TechStackItem[] = [
-  { label: 'JavaScript', shortLabel: 'JS', tone: '#F7DF1E', icon: 'brand-javascript' },
+  // Core Languages
   { label: 'HTML5', shortLabel: 'H5', tone: '#E34F26', icon: 'brand-html5' },
+  { label: 'CSS3', shortLabel: 'CSS', tone: '#1572B6', icon: 'brand-css3' },
+  { label: 'JavaScript', shortLabel: 'JS', tone: '#F7DF1E', icon: 'brand-javascript' },
+  { label: 'TypeScript', shortLabel: 'TS', tone: '#3178C6', icon: 'brand-typescript' },
+  { label: 'PHP', shortLabel: 'PHP', tone: '#777BB4', icon: 'brand-php' },
+  // Frontend Frameworks & Libraries
+  { label: 'React', shortLabel: 'React', tone: '#61DAFB', icon: 'brand-react' },
+  { label: 'Vue', shortLabel: 'Vue', tone: '#4FC08D', icon: 'brand-vue' },
+  { label: 'Angular', shortLabel: 'Ng', tone: '#DD0031', icon: 'brand-angular' },
   { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8', icon: 'brand-tailwind' },
+  // Databases & Backend
+  { label: 'MongoDB', shortLabel: 'MDB', tone: '#47A248', icon: 'brand-mongodb' },
+  { label: 'MySQL', shortLabel: 'SQL', tone: '#4479A1', icon: 'brand-mysql' },
+  { label: 'Firebase', shortLabel: 'FB', tone: '#FFCA28', icon: 'brand-firebase' },
+  { label: 'Supabase', shortLabel: 'Supa', tone: '#3ECF8E', icon: 'brand-supabase' },
+  // Infrastructure
+  { label: 'Vercel', shortLabel: 'Ver', tone: '#000000', icon: 'brand-vercel' },
 ];
 
 const techStackIcons = {
-  'brand-javascript': IconBrandJavascript,
   'brand-html5': IconBrandHtml5,
+  'brand-css3': IconBrandCss3,
+  'brand-javascript': IconBrandJavascript,
+  'brand-typescript': IconBrandTypescript,
+  'brand-php': IconBrandPhp,
+  'brand-react': IconBrandReact,
+  'brand-vue': IconBrandVue,
+  'brand-angular': IconBrandAngular,
   'brand-tailwind': IconBrandTailwind,
+  'brand-mongodb': IconBrandMongodb,
+  'brand-mysql': IconBrandMysql,
+  'brand-firebase': IconBrandFirebase,
+  'brand-supabase': IconBrandSupabase,
+  'brand-vercel': IconBrandVercel,
 } as const;
 
 const socialIcons = {
@@ -71,13 +108,10 @@ export function Hero() {
 
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">
           <p>
-            I build product interfaces, design systems, and lightweight tools that help teams ship
-            quickly without losing the details that make a site feel considered.
+            I&apos;m an IT undergraduate specializing in Web Development. I obsess over pixel-perfect details while building websites for school projects and local businesses like helping a local barbershop increase their online awareness.
           </p>
           <p>
-            Right now I&apos;m focused on polished frontend experiences, thoughtful information
-            hierarchy, and the kind of small interactions that make a page feel calm instead of
-            cluttered.
+            Right now, my main focus is learning <a href="https://esotericsoftware.com/" className="text-theme-accent px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20" target="_blank" rel="noreferrer">Spine 2D</a> and crafting unique UI experiences for future projects. On the side, I love tinkering with and building useful browser extensions and web apps.
           </p>
         </div>
 
@@ -95,7 +129,7 @@ export function Hero() {
                 })() : null}
                 <span>{link.label}</span>
               </a>
-              {index < socialLinks.length - 1 ? <span aria-hidden="true">|</span> : null}
+              {index < socialLinks.length - 1 ? <span className="text-theme-text-muted/40" aria-hidden="true">|</span> : null}
             </span>
           ))}
         </div>
@@ -107,7 +141,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="flex items-center gap-4 overflow-x-auto pb-1 text-sm text-theme-text-muted sm:gap-4">
+          <div className="flex flex-wrap items-center gap-y-4 pb-1 text-sm text-theme-text-muted">
             {techStack.map((item, index) => (
               <span key={item.label} className="inline-flex items-center whitespace-nowrap">
                 <span className="inline-flex items-center gap-2">
