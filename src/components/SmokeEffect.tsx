@@ -78,15 +78,9 @@ export const SmokeEffect: React.FC = () => {
       }
     };
 
-    const handleContextMenu = (e: MouseEvent) => {
-      // Prevent context menu to allow right-click drawing (like in osu!)
-      e.preventDefault();
-    };
-
     window.addEventListener('pointerdown', handlePointerDown);
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', handlePointerUp);
-    window.addEventListener('contextmenu', handleContextMenu);
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -139,7 +133,6 @@ export const SmokeEffect: React.FC = () => {
       window.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
-      window.removeEventListener('contextmenu', handleContextMenu);
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
   }, []);
