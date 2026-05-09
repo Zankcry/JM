@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { SmokeEffect } from './components/SmokeEffect';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
+import PostsPage from './pages/PostsPage';
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/posts" element={<PostsPage />} />
           </Routes>
         </div>
       </div>
