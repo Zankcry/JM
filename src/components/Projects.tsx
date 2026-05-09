@@ -5,18 +5,48 @@ const projects = [
   {
     title: 'Charlie\'s Barber & Salon',
     description: 'A high-performance static website highlighting services, portfolio, and an integrated blog section. Designed for excellent user experience and local SEO visibility.',
-    image: '/project_1.png',
+    image: '/videos/project_1.webp',
+    poster: '/images/project_poster_1.webp',
     tags: ['HTML5', 'Tailwind CSS', 'JavaScript', 'Firebase'],
     links: { github: 'https://github.com/Zankcry/Barbershop_Website', live: 'https://charliesbarbershop.vercel.app/' }
   },
   {
     title: 'Cognosphere / Hoyoverse Hub',
-    description: 'A web application built with Angular, showcasing the games and services of Cognosphere (Hoyoverse). Features dedicated sections for products, services, and the company profile.',
-    image: '/project_2.png',
+    description: 'A web application built with Angular, showcasing the games and services of Cognosphere (Hoyoverse). Features dedicated sections for products, and services.',
+    image: '/videos/project_2.webp',
+    poster: '/images/project_poster_2.webp',
     tags: ['Angular', 'TypeScript', 'Tailwind CSS'],
     links: { github: 'https://github.com/Zankcry/prelim-project-JM', live: 'https://prelim-project-jm.vercel.app' }
   },
 ];
+
+// Smooth Transition logic for Poster to Video
+function ProjectPreview({ project }: { project: typeof projects[0] }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-theme-border/50 bg-theme-surface/10">
+      {/* Poster Image (Static) */}
+      <img
+        src={project.poster}
+        alt=""
+        aria-hidden="true"
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
+      />
+
+      {/* Animated WebP (Lazy Loaded) */}
+      <img
+        src={project.image}
+        alt={project.title}
+        onLoad={() => setIsLoaded(true)}
+        loading="lazy"
+        className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+      />
+    </div>
+  );
+}
 
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -55,16 +85,10 @@ export function Projects() {
         {projects.slice(0, 2).map((project, i) => (
           <div
             key={i}
+            id={i === 0 ? 'project-1' : undefined}
             className="group relative flex flex-col overflow-hidden rounded-3xl border border-theme-border/60 bg-theme-surface/30 shadow-sm transition-all hover:border-theme-border-strong hover:bg-theme-surface/50"
           >
-            <div className="aspect-[16/9] w-full overflow-hidden border-b border-theme-border/50">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
+            <ProjectPreview project={project} />
 
             <div className="flex flex-1 flex-col p-5">
               <div className="flex items-center justify-between gap-4">
@@ -73,12 +97,12 @@ export function Projects() {
                 </h3>
                 <div className="flex items-center gap-3 text-theme-text-muted">
                   {project.links.github && (
-                    <a href={project.links.github} aria-label="GitHub Repository" className="hover:text-theme-accent transition-colors">
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" className="hover:text-theme-accent transition-colors">
                       <IconBrandGithub size={18} stroke={1.8} />
                     </a>
                   )}
                   {project.links.live && (
-                    <a href={project.links.live} aria-label="Live Project" className="group/link hover:text-theme-accent transition-colors">
+                    <a href={project.links.live} target="_blank" rel="noopener noreferrer" aria-label="Live Project" className="group/link hover:text-theme-accent transition-colors">
                       <IconExternalLink size={18} stroke={1.8} className="transition-transform duration-300 ease-out group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                     </a>
                   )}

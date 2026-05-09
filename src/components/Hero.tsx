@@ -101,17 +101,17 @@ export function Hero() {
               preload="auto"
               aria-hidden="true"
             >
-              <source src="/chibi.webm" type="video/webm" />
+              <source src="/videos/chibi.webm" type="video/webm" />
             </video>
           </span>
         </h1>
 
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">
           <p>
-            I&apos;m an IT undergraduate specializing in Web Development. I obsess over pixel-perfect details while building websites for school projects and local businesses like helping a local barbershop increase their online awareness.
+            I&apos;m an IT undergraduate specializing in Web Development. I obsess over pixel-perfect details while building websites for school projects and local businesses like helping a local <a href="#project-1" className="text-theme-accent px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20">Barbershop</a> increase their online awareness.
           </p>
           <p>
-            Right now, my main focus is learning <a href="https://esotericsoftware.com/" className="text-theme-accent px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20" target="_blank" rel="noreferrer">Spine 2D</a> and crafting unique UI experiences for future projects. On the side, I love tinkering with and building useful browser extensions and web apps.
+            Right now, my main focus is learning <a href="https://esotericsoftware.com/" className="text-theme-accent px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20" target="_blank" rel="noreferrer">Spine 2D</a> and crafting unique UI experiences for future projects. On the side, I love tinkering with PCs, OS's and building useful browser extensions.
           </p>
         </div>
 
