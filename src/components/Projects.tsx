@@ -1,52 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { IconExternalLink, IconBrandGithub, IconArrowRight, IconHeart } from '@tabler/icons-react';
-
-const projects = [
-  {
-    title: 'Charlie\'s Barber & Salon',
-    description: 'A high-performance static website highlighting services, portfolio, and an integrated blog section. Designed for excellent user experience and local SEO visibility.',
-    image: '/videos/project_1.webp',
-    poster: '/images/project_poster_1.webp',
-    tags: ['HTML5', 'Tailwind CSS', 'JavaScript', 'Firebase'],
-    links: { github: 'https://github.com/Zankcry/Barbershop_Website', live: 'https://charliesbarbershop.vercel.app/' }
-  },
-  {
-    title: 'Cognosphere / Hoyoverse Hub',
-    description: 'A web application built with Angular, showcasing the games and services of Cognosphere (Hoyoverse). Features dedicated sections for products, and services.',
-    image: '/videos/project_2.webp',
-    poster: '/images/project_poster_2.webp',
-    tags: ['Angular', 'TypeScript', 'Tailwind CSS'],
-    links: { github: 'https://github.com/Zankcry/prelim-project-JM', live: 'https://prelim-project-jm.vercel.app' }
-  },
-];
-
-// Smooth Transition logic for Poster to Video
-function ProjectPreview({ project }: { project: typeof projects[0] }) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-theme-border/50 bg-theme-surface/10">
-      {/* Poster Image (Static) */}
-      <img
-        src={project.poster}
-        alt=""
-        aria-hidden="true"
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-0' : 'opacity-100'
-          }`}
-      />
-
-      {/* Animated WebP (Lazy Loaded) */}
-      <img
-        src={project.image}
-        alt={project.title}
-        onLoad={() => setIsLoaded(true)}
-        loading="lazy"
-        className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-      />
-    </div>
-  );
-}
+import { projects } from '../data/projects';
+import { ProjectPreview } from './ProjectPreview';
 
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -72,13 +28,13 @@ export function Projects() {
           </h2>
           <div className="h-px flex-1 bg-gradient-to-r from-theme-border/70 to-transparent"></div>
         </div>
-        <a
-          href="#all-projects"
+        <Link
+          to="/projects"
           className="group flex items-center gap-2 whitespace-nowrap text-sm font-medium text-theme-text-muted transition-colors hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-md px-1"
         >
           View all projects
           <IconArrowRight size={16} stroke={2} className="transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
