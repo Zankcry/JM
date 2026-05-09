@@ -4,6 +4,9 @@ import { FeaturedProjectBanner } from '../components/FeaturedProjectBanner';
 import { ProjectCard } from '../components/ProjectCard';
 
 export default function ProjectsPage() {
+  const featuredProject = projects[0];
+  const otherProjects = projects.filter(p => p !== featuredProject);
+
   return (
     <div className="flex flex-1 flex-col items-start gap-16 w-full pt-8 sm:pt-14 lg:pt-16">
       <header className="flex w-full items-center gap-6">
@@ -11,15 +14,15 @@ export default function ProjectsPage() {
           <IconFolderOpen size={42} stroke={2.5} className="text-theme-accent" />
           Projects
         </h1>
-        <div className="h-px flex-1 bg-gradient-to-r from-theme-border/60 to-transparent" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/60" />
       </header>
 
-      {/* Hero Section for the first project */}
-      <FeaturedProjectBanner project={projects[0]} />
+      {/* Hero Section for the featured project */}
+      <FeaturedProjectBanner project={featuredProject} />
 
       {/* Grid for the rest of the projects */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 w-full">
-        {projects.map((project, i) => (
+        {otherProjects.map((project, i) => (
           <ProjectCard key={i} project={project} padding="p-6" />
         ))}
       </div>
