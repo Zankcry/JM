@@ -23,6 +23,14 @@ export const mangaRecommendations: Recommendation[] = [
     rating: 8,
     status: 'Reading',
     image: '/images/myBias.webp'
+  },
+  {
+    id: '3',
+    title: 'Jujutsu Kaisen',
+    description: 'A high-stakes supernatural battle manga following Yuji Itadori as he enters the world of Jujutsu Sorcerers to combat powerful Curses.',
+    rating: 10,
+    status: 'Finished',
+    image: '/images/jujutsuKaisen.webp'
   }
 ];
 
@@ -42,5 +50,13 @@ export const animeRecommendations: Recommendation[] = [
     rating: 9,
     status: 'Finished',
     image: '/images/blackClover.webp'
+  },
+  {
+    id: '3',
+    title: 'Jujutsu Kaisen',
+    description: 'A visually stunning adaptation by MAPPA, featuring incredible fight choreography and a dark, compelling supernatural world.',
+    rating: 10,
+    status: 'Finished',
+    image: '/images/jujutsuKaisen.webp'
   }
 ];
