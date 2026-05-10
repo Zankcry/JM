@@ -11,7 +11,7 @@ export default function App() {
     <Router>
       <div className="relative min-h-screen overflow-hidden bg-theme-bg text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text">
         <SmokeEffect />
-        
+
         {/* Background Gradients */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute left-1/2 top-[-7rem] h-72 w-72 -translate-x-1/2 rounded-full bg-theme-accent/10 blur-3xl transition-colors duration-300 ease-out" />
@@ -22,19 +22,19 @@ export default function App() {
         {/* Decorative Lines */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed left-[4.9375rem] top-0 z-50 hidden h-[calc(50%-6.5rem)] w-px bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed left-[4.9375rem] top-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed left-[4.9375rem] bottom-0 z-50 hidden h-[calc(50%-6.5rem)] w-px bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed left-[4.9375rem] bottom-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed right-[4.9375rem] top-0 z-50 hidden h-[calc(40%-6rem)] w-px bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed right-[4.9375rem] top-0 z-50 hidden h-[calc(40%-6rem)] w-0.5 bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed right-[4.9375rem] bottom-0 z-50 hidden h-[calc(40%-6rem)] w-px bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed right-[4.9375rem] bottom-0 z-50 hidden h-[calc(40%-6rem)] w-0.5 bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
         />
 
         <Navbar />
@@ -50,4 +50,4 @@ export default function App() {
       </div>
     </Router>
   );
-}
+}
