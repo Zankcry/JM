@@ -17,9 +17,102 @@ const spotifyEmbeds: SpotifyEmbed[] = [
   { type: 'track', id: '1FXrYwvWwjmbw8cqFC1OWz' },
 ];
 
+type JpWord = {
+  kanji: string;
+  furigana: string;
+  romaji: string;
+  pos: string; // part of speech
+  meaning: string;
+  example?: { jp: string; en: string };
+};
+
+const jpWords: JpWord[] = [
+  { kanji: '頑張る', furigana: 'がんばる', romaji: 'ganbaru', pos: 'verb', meaning: 'To do one\'s best; to persist; to hang in there', example: { jp: '毎日頑張っています。', en: 'I\'m doing my best every day.' } },
+  { kanji: '懐かしい', furigana: 'なつかしい', romaji: 'natsukashii', pos: 'adjective', meaning: 'Nostalgic; fondly remembered', example: { jp: 'この曲は懐かしいな。', en: 'This song brings back memories.' } },
+  { kanji: '相変わらず', furigana: 'あいかわらず', romaji: 'aikawarazu', pos: 'adverb', meaning: 'Your still the cutest', example: { jp: '相変わらず可愛いね。', en: 'You are still the cutest.' } },
+  { kanji: '物語', furigana: 'ものがたり', romaji: 'monogatari', pos: 'noun', meaning: 'Story; tale; narrative', example: { jp: '面白い物語を読んだ。', en: 'I read an interesting story.' } },
+  { kanji: 'いつか会える', furigana: 'いつかあえる', romaji: 'itsuka aeru', pos: 'phrase', meaning: 'I hope to see you someday', example: { jp: 'いつかまた会えるのを楽しみにしています。', en: 'I look forward to seeing you again someday.' } },
+  { kanji: '縁', furigana: 'えん', romaji: 'en', pos: 'noun', meaning: 'Fate; destiny; a karmic bond between people', example: { jp: '不思議な縁で出会った。', en: 'We met through a mysterious fate.' } },
+  { kanji: '原動力', furigana: 'げんどうりょく', romaji: 'gendouryoku', pos: 'noun', meaning: 'Your my motivation', example: { jp: '君は僕の原動力だよ。', en: 'You are the driving force that keeps me going.' } },
+  { kanji: '夢中', furigana: 'むちゅう', romaji: 'muchuu', pos: 'noun/adjective', meaning: 'Absorbed in; crazy about; engrossed', example: { jp: 'ゲームに夢中になった。', en: 'I got completely absorbed in the game.' } },
+  { kanji: '雰囲気', furigana: 'ふんいき', romaji: 'fun\'iki', pos: 'noun', meaning: 'Atmosphere; vibe; ambiance', example: { jp: 'いい雰囲気のカフェだ。', en: 'It\'s a café with a nice vibe.' } },
+  { kanji: '恋しい', furigana: 'こいしい', romaji: 'koishii', pos: 'adjective', meaning: 'I absolutely miss someone', example: { jp: '君の声が恋しい。', en: 'I absolutely miss hearing your voice.' } },
+  { kanji: '切ない', furigana: 'せつない', romaji: 'setsunai', pos: 'adjective', meaning: 'Heartbreaking; melancholic; aching', example: { jp: '切ない音楽が好きだ。', en: 'I like melancholic music.' } },
+  { kanji: '積み重ねる', furigana: 'つみかさねる', romaji: 'tsumikasaneru', pos: 'verb', meaning: 'To pile up; to accumulate (effort, experience)', example: { jp: '経験を積み重ねる。', en: 'To accumulate experience.' } },
+];
+
+// Deterministically pick a word based on ISO week number
+function getWeekWord(): JpWord {
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 1);
+  const weekNumber = Math.ceil(((now.getTime() - startOfYear.getTime()) / 86400000 + startOfYear.getDay() + 1) / 7);
+  return jpWords[weekNumber % jpWords.length];
+}
+
+function WordOfTheWeek() {
+  const word = getWeekWord();
+  return (
+    <section className="flex flex-col gap-6">
+      {/* Section header */}
+      <div className="flex items-center gap-4">
+        <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
+          Word of the Week
+        </h2>
+        <div className="h-px flex-1 bg-gradient-to-r from-theme-border/40 to-transparent" />
+        <span className="text-[11px] font-mono text-theme-text-muted/50">日本語</span>
+      </div>
+
+      {/* Card */}
+      <div className="relative overflow-hidden rounded-2xl border border-theme-border/40 bg-theme-surface/20 p-6 shadow-sm transition hover:border-theme-accent/30">
+        {/* Decorative kanji watermark */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-4 -top-6 select-none text-[9rem] font-bold leading-none text-theme-text opacity-[0.04]"
+        >
+          {word.kanji[0]}
+        </span>
+
+        <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
+          {/* Left: kanji + furigana */}
+          <div className="flex flex-col items-start gap-1 shrink-0">
+            <div className="pt-5">
+              <ruby className="text-5xl font-bold text-theme-text [ruby-align:start]">
+                {word.kanji}
+                <rt className="text-sm font-normal text-theme-accent tracking-widest text-left pb-1">{word.furigana}</rt>
+              </ruby>
+            </div>
+            <span className="text-xs font-mono text-theme-text-muted/60 mt-1 tracking-wider">{word.romaji}</span>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden sm:block w-px self-stretch bg-theme-border/40" />
+          <div className="block sm:hidden h-px w-full bg-theme-border/40" />
+
+          {/* Right: meaning + example */}
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-theme-accent/30 bg-theme-accent/10 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-theme-accent">
+                {word.pos}
+              </span>
+              <p className="text-base text-theme-text leading-relaxed">{word.meaning}</p>
+            </div>
+
+            {word.example && (
+              <div className="rounded-xl border border-theme-border/30 bg-theme-bg/40 px-4 py-3">
+                <p className="text-sm text-theme-text font-medium">{word.example.jp}</p>
+                <p className="text-xs text-theme-text-muted mt-1 italic">{word.example.en}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function AboutPage() {
   return (
-    <main className="flex flex-1 flex-col gap-16 w-full pt-8 sm:pt-14 lg:pt-16">
+    <main className="flex flex-1 flex-col gap-16 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
 
       {/* ── Page header ─────────────────────────────────── */}
       <header className="flex w-full items-center gap-6">
@@ -48,11 +141,11 @@ export default function AboutPage() {
               loop
               muted
               playsInline
-              className="absolute -bottom-4 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none"
+              className="absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none"
             />
           </div>
 
-          <div className="text-center lg:text-left">
+          <div className="text-left">
             <p className="text-lg font-semibold text-theme-text">James Michael</p>
             <p className="text-xs font-mono text-theme-text-muted tracking-widest">ジェームズ・マイケル</p>
             <p className="text-sm text-theme-accent">@Zankcry</p>
@@ -120,6 +213,9 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {/* ── Word of the Week ─────────────────────────────── */}
+      <WordOfTheWeek />
 
       {/* ── Music I Code To ─────────────────────────────── */}
       <section className="flex flex-col gap-6 pb-4">
