@@ -6,6 +6,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import PostsPage from './pages/PostsPage';
 import PostDetailPage from './pages/PostDetailPage';
 import AboutPage from './pages/AboutPage';
+import PicsPage from './pages/PicsPage';
 
 export default function App() {
   return (
@@ -47,6 +48,7 @@ export default function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/posts" element={<PostsPage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
+            <Route path="/pics" element={<PicsPage />} />
           </Routes>
         </div>
       </div>

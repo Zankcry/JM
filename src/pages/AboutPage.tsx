@@ -58,7 +58,7 @@ function WordOfTheWeek() {
         <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
           Word of the Week
         </h2>
-        <div className="h-px flex-1 bg-gradient-to-r from-theme-border/40 to-transparent" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/40" />
         <span className="text-[11px] font-mono text-theme-text-muted/50">日本語</span>
       </div>
 
@@ -117,9 +117,9 @@ export default function AboutPage() {
       {/* ── Page header ─────────────────────────────────── */}
       <header className="flex w-full items-center gap-6">
         <h1 className="shrink-0 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
-          About
+          About Me
         </h1>
-        <div className="h-px flex-1 bg-gradient-to-r from-theme-border/60 to-transparent" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/60" />
       </header>
 
       {/* ── Hero bio ────────────────────────────────────── */}
