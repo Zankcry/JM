@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { moreNavLinks, primaryNavLinks } from '../data/navigation';
+import { primaryNavLinks } from '../data/navigation';
 import { AccentSwitcher } from './AccentSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
@@ -121,40 +121,6 @@ export function Navbar() {
                 })}
               </nav>
 
-              <div>
-                <div className="mb-2 text-xs uppercase tracking-[0.35em] text-theme-text-muted/85">More</div>
-                <div className="grid gap-2">
-                  {moreNavLinks.map((link) => {
-                    const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
-                    return isInternal ? (
-                      <Link
-                        key={link.label}
-                        to={link.href}
-                        onClick={() => handleLinkClick(link.href)}
-                        className="rounded-2xl border border-theme-border/40 bg-theme-surface/40 px-3 py-3 transition hover:bg-theme-surface/70 focus:outline-none focus-visible:bg-theme-surface/70"
-                      >
-                        <div className="text-sm font-medium text-theme-text">{link.label}</div>
-                        {link.description ? (
-                          <div className="mt-1 text-xs leading-5 text-theme-text-muted">{link.description}</div>
-                        ) : null}
-                      </Link>
-                    ) : (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-2xl border border-theme-border/40 bg-theme-surface/40 px-3 py-3 transition hover:bg-theme-surface/70 focus:outline-none focus-visible:bg-theme-surface/70"
-                      >
-                        <div className="text-sm font-medium text-theme-text">{link.label}</div>
-                        {link.description ? (
-                          <div className="mt-1 text-xs leading-5 text-theme-text-muted">{link.description}</div>
-                        ) : null}
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
 
               <ThemeSwitcher />
             </div>
@@ -190,43 +156,6 @@ export function Navbar() {
             );
           })}
 
-          <details className="group relative">
-            <summary className="flex cursor-pointer list-none items-center gap-1 text-sm text-theme-text-muted transition duration-150 hover:text-theme-accent focus:outline-none focus-visible:text-theme-accent focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg">
-              <span>More</span>
-            </summary>
-
-            <div className="absolute left-full top-1/2 ml-14 w-64 -translate-y-1/2 rounded-3xl border border-theme-border/60 bg-theme-bg-elevated/95 p-2 shadow-soft backdrop-blur">
-              {moreNavLinks.map((link) => {
-                const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
-                return isInternal ? (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    onClick={() => handleLinkClick(link.href)}
-                    className="block rounded-2xl px-3 py-3 transition hover:bg-theme-surface/70 focus:outline-none focus-visible:bg-theme-surface/70"
-                  >
-                    <div className="text-sm font-medium text-theme-text">{link.label}</div>
-                    {link.description ? (
-                      <div className="mt-1 text-xs leading-5 text-theme-text-muted">{link.description}</div>
-                    ) : null}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block rounded-2xl px-3 py-3 transition hover:bg-theme-surface/70 focus:outline-none focus-visible:bg-theme-surface/70"
-                  >
-                    <div className="text-sm font-medium text-theme-text">{link.label}</div>
-                    {link.description ? (
-                      <div className="mt-1 text-xs leading-5 text-theme-text-muted">{link.description}</div>
-                    ) : null}
-                  </a>
-                );
-              })}
-            </div>
-          </details>
         </nav>
       </aside>
 

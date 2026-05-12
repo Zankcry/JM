@@ -6,7 +6,10 @@ import {
   IconMapPin,
   IconClock,
   IconBriefcase,
-  IconArrowUpRight
+  IconArrowUpRight,
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconMail
 } from '@tabler/icons-react';
 
 
@@ -70,17 +73,49 @@ export function BentoProfile() {
           <h3 className="text-sm font-semibold tracking-tight opacity-80">Contact Me</h3>
         </div>
         <p className="mb-auto text-[13px] leading-relaxed text-theme-text-muted">
-          Always open to interesting projects, new technologies, and conversations.
+          Let's connect and explore new opportunities together.
         </p>
-        <div className="mt-8">
+
+        <div className="mt-auto flex flex-col gap-4">
+          <div className="flex items-center justify-center gap-2">
+            <a
+              href="https://github.com/Zankcry"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              title="GitHub"
+            >
+              <IconBrandGithub size={18} className="transition-transform group-hover/icon:scale-110" />
+              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">GH</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/james-michael-duque-100154350/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              title="LinkedIn"
+            >
+              <IconBrandLinkedin size={18} className="transition-transform group-hover/icon:scale-110" />
+              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">LI</span>
+            </a>
+            <a
+              href="mailto:duquejames657@gmail.com"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              title="Email"
+            >
+              <IconMail size={18} className="transition-transform group-hover/icon:scale-110" />
+              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">MAIL</span>
+            </a>
+          </div>
+
           <a
             href="https://www.linkedin.com/in/james-michael-duque-100154350/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-3 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-3.5 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
           >
-            <span>Book a Chat</span>
-            <IconArrowUpRight size={18} />
+            <span>Message Me</span>
+            <IconArrowUpRight size={14} />
           </a>
         </div>
       </div>
@@ -89,7 +124,7 @@ export function BentoProfile() {
       <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/50 sm:col-span-2 lg:col-span-2">
         <div className="absolute left-6 top-6 z-20 flex items-center gap-2 text-theme-text">
           <IconMapPin size={20} stroke={2} className="text-theme-accent" />
-          <h3 className="text-sm font-semibold tracking-tight opacity-80">Currently Based</h3>
+          <h3 className="text-sm font-semibold tracking-tight opacity-80">Currently Located In</h3>
         </div>
 
         <div className="h-48 w-full grayscale-[0.8] contrast-[1.1] transition-all duration-700 group-hover:grayscale-0 group-hover:contrast-100">
@@ -110,7 +145,7 @@ export function BentoProfile() {
 
         <div className="flex items-center justify-between p-5 pt-4">
           <div className="text-[13px] font-medium text-theme-text">
-            Pampanga, PH
+            Pampanga, Philippines
           </div>
           <div className="flex items-center gap-1.5 text-[12px] text-theme-text-muted">
             <IconClock size={14} />
@@ -119,7 +154,7 @@ export function BentoProfile() {
               minute: '2-digit',
               second: '2-digit',
               hour12: false
-            })}
+            })} <span className="opacity-60">(GMT+8)</span>
           </div>
         </div>
       </div>

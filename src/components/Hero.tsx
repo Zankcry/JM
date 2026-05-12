@@ -6,66 +6,8 @@ import {
   IconBrandInstagram,
   IconFileCv,
   IconAddressBook,
-  IconBrandHtml5,
-  IconBrandCss3,
-  IconBrandJavascript,
-  IconBrandTypescript,
-  IconBrandPhp,
-  IconBrandReact,
-  IconBrandVue,
-  IconBrandAngular,
-  IconBrandTailwind,
-  IconBrandMongodb,
-  IconBrandMysql,
-  IconBrandFirebase,
-  IconBrandSupabase,
-  IconBrandVercel,
 } from '@tabler/icons-react';
-
-type TechStackItem = {
-  label: string;
-  shortLabel: string;
-  tone: string;
-  icon: 'brand-html5' | 'brand-css3' | 'brand-javascript' | 'brand-typescript' | 'brand-php' | 'brand-react' | 'brand-vue' | 'brand-angular' | 'brand-tailwind' | 'brand-mongodb' | 'brand-mysql' | 'brand-firebase' | 'brand-supabase' | 'brand-vercel';
-};
-
-const techStack: TechStackItem[] = [
-  // Core Languages
-  { label: 'HTML5', shortLabel: 'H5', tone: '#E34F26', icon: 'brand-html5' },
-  { label: 'CSS3', shortLabel: 'CSS', tone: '#1572B6', icon: 'brand-css3' },
-  { label: 'JavaScript', shortLabel: 'JS', tone: '#F7DF1E', icon: 'brand-javascript' },
-  { label: 'TypeScript', shortLabel: 'TS', tone: '#3178C6', icon: 'brand-typescript' },
-  { label: 'PHP', shortLabel: 'PHP', tone: '#777BB4', icon: 'brand-php' },
-  // Frontend Frameworks & Libraries
-  { label: 'React', shortLabel: 'React', tone: '#61DAFB', icon: 'brand-react' },
-  { label: 'Vue', shortLabel: 'Vue', tone: '#4FC08D', icon: 'brand-vue' },
-  { label: 'Angular', shortLabel: 'Ng', tone: '#DD0031', icon: 'brand-angular' },
-  { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8', icon: 'brand-tailwind' },
-  // Databases & Backend
-  { label: 'MongoDB', shortLabel: 'MDB', tone: '#47A248', icon: 'brand-mongodb' },
-  { label: 'MySQL', shortLabel: 'SQL', tone: '#4479A1', icon: 'brand-mysql' },
-  { label: 'Firebase', shortLabel: 'FB', tone: '#FFCA28', icon: 'brand-firebase' },
-  { label: 'Supabase', shortLabel: 'Supa', tone: '#3ECF8E', icon: 'brand-supabase' },
-  // Infrastructure
-  { label: 'Vercel', shortLabel: 'Ver', tone: '#000000', icon: 'brand-vercel' },
-];
-
-const techStackIcons = {
-  'brand-html5': IconBrandHtml5,
-  'brand-css3': IconBrandCss3,
-  'brand-javascript': IconBrandJavascript,
-  'brand-typescript': IconBrandTypescript,
-  'brand-php': IconBrandPhp,
-  'brand-react': IconBrandReact,
-  'brand-vue': IconBrandVue,
-  'brand-angular': IconBrandAngular,
-  'brand-tailwind': IconBrandTailwind,
-  'brand-mongodb': IconBrandMongodb,
-  'brand-mysql': IconBrandMysql,
-  'brand-firebase': IconBrandFirebase,
-  'brand-supabase': IconBrandSupabase,
-  'brand-vercel': IconBrandVercel,
-} as const;
+import { techStack, techStackIcons } from '../data/tech';
 
 const socialIcons = {
   'brand-github': IconBrandGithub,
@@ -88,7 +30,7 @@ export function Hero() {
           id="hero-title"
           className="flex max-w-3xl flex-wrap items-center gap-x-3 gap-y-2 text-3xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-4xl lg:text-5xl"
         >
-          <span>Hey! I&apos;m</span>
+          <span>Yahho! I&apos;m</span>
           <span className="group/name inline-flex items-center gap-2 whitespace-nowrap">
             <span className="relative ml-2 inline-block cursor-default text-theme-accent transition-colors duration-300 ease-out">
               <span className="inline-block transition-all duration-300 group-hover/name:pointer-events-none group-hover/name:-translate-y-1 group-hover/name:opacity-0">
@@ -121,27 +63,28 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-theme-text-muted">
-          {socialLinks.map((link, index) => {
+        <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-theme-text-muted">
+          {socialLinks.map((link) => {
             const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
+            const cls = "group flex items-center gap-2 rounded-lg border border-theme-accent/20 bg-theme-bg/50 px-3 py-1.5 text-xs font-medium text-theme-text-muted transition-all hover:border-theme-accent/50 hover:text-theme-text hover:shadow-sm active:scale-95";
+
             const inner = (
               <>
                 {link.icon ? (() => {
                   const SocialIcon = socialIcons[link.icon as keyof typeof socialIcons];
-                  return <SocialIcon size={18} stroke={1.8} aria-hidden="true" />;
+                  return <SocialIcon size={16} stroke={1.8} aria-hidden="true" />;
                 })() : null}
                 <span>{link.label}</span>
               </>
             );
-            const cls = "inline-flex items-center gap-2 transition hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg";
+
             return (
-              <span key={link.label} className="flex items-center gap-3">
+              <span key={link.label}>
                 {isInternal ? (
                   <Link to={link.href} aria-label={link.label} className={cls}>{inner}</Link>
                 ) : (
                   <a href={link.href} aria-label={link.label} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
                 )}
-                {index < socialLinks.length - 1 ? <span className="text-theme-text-muted/40" aria-hidden="true">|</span> : null}
               </span>
             );
           })}
@@ -154,22 +97,26 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-y-4 pb-1 text-sm text-theme-text-muted">
-            {techStack.map((item, index) => (
-              <span key={item.label} className="inline-flex items-center whitespace-nowrap">
-                <span className="inline-flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 pb-1">
+            {techStack.map((item) => (
+              <div 
+                key={item.label} 
+                className="group flex items-center gap-2 rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2.5 py-1.5 transition-all hover:border-theme-accent/30 hover:bg-theme-bg"
+                style={{ '--brand-color': item.tone } as React.CSSProperties}
+              >
+                <div 
+                  className="flex h-5 w-5 items-center justify-center rounded-md bg-white/5 transition-transform group-hover:scale-110"
+                  style={{ color: item.tone }}
+                >
                   {(() => {
                     const TechIcon = techStackIcons[item.icon];
-                    return <TechIcon size={22} stroke={1.8} style={{ color: item.tone }} aria-hidden="true" />;
+                    return <TechIcon size={16} stroke={2} aria-hidden="true" />;
                   })()}
-                  <span className="text-xs font-medium tracking-tight text-theme-text-muted sm:text-[13px]">
-                    {item.label}
-                  </span>
+                </div>
+                <span className="text-[11px] font-semibold tracking-wide text-theme-text-muted transition-colors group-hover:text-theme-text uppercase">
+                  {item.label}
                 </span>
-                {index < techStack.length - 1 ? (
-                  <span className="mx-3 text-theme-text-muted/60 sm:mx-4">/</span>
-                ) : null}
-              </span>
+              </div>
             ))}
           </div>
         </div>

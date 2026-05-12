@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IconExternalLink, IconBrandGithub, IconArrowRight, IconHeart } from '@tabler/icons-react';
 import { projects } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
+import { techStack, techStackIcons } from '../data/tech';
 
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -69,15 +70,43 @@ export function Projects() {
                 {project.description}
               </p>
 
-              <div className="mt-auto pt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-theme-bg-elevated/80 px-2.5 py-1 text-[11px] font-medium tracking-wide text-theme-text-subtle shadow-sm ring-1 ring-theme-border/50"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="mt-auto pt-6 flex flex-wrap gap-2">
+                {project.tags.map((tag) => {
+                  const tech = techStack.find(t => 
+                    t.label.toLowerCase() === tag.toLowerCase() || 
+                    t.shortLabel.toLowerCase() === tag.toLowerCase()
+                  );
+
+                  if (!tech) {
+                    return (
+                      <span
+                        key={tag}
+                        className="rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted"
+                      >
+                        {tag}
+                      </span>
+                    );
+                  }
+
+                  const TechIcon = techStackIcons[tech.icon];
+
+                  return (
+                    <div 
+                      key={tag} 
+                      className="group/tag flex items-center gap-1.5 rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2 py-1 transition-all hover:border-theme-accent/30 hover:bg-theme-bg"
+                    >
+                      <div 
+                        className="flex h-4 w-4 items-center justify-center transition-transform group-hover/tag:scale-110"
+                        style={{ color: tech.tone }}
+                      >
+                        <TechIcon size={14} stroke={2} aria-hidden="true" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted transition-colors group-hover/tag:text-theme-text">
+                        {tech.label}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
