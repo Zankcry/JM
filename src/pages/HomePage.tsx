@@ -1,13 +1,13 @@
 import { Hero } from '../components/Hero';
 import { Projects } from '../components/Projects';
-import { BentoProfile } from '../components/BentoProfile';
+import { RecentActivity } from '../components/RecentActivity';
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col items-start gap-10 w-full">
+    <main className="flex flex-1 flex-col items-start gap-12 w-full">
       <Hero />
       <Projects />
-      <BentoProfile />
+      <RecentActivity />
     </main>
   );
 }

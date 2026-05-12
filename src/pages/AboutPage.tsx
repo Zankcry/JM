@@ -1,10 +1,12 @@
-import { IconBrandSpotify } from '@tabler/icons-react';
+import { IconBrandSpotify, IconBook } from '@tabler/icons-react';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandInstagram,
   IconFileCv,
+  IconStar,
 } from '@tabler/icons-react';
+import { mangaRecommendations } from '../data/recommendations';
 
 type SpotifyEmbed = {
   type: 'track' | 'playlist';
@@ -52,7 +54,7 @@ function getWeekWord(): JpWord {
 function WordOfTheWeek() {
   const word = getWeekWord();
   return (
-    <section className="flex flex-col gap-6">
+    <section id="word-of-the-week" className="flex flex-col gap-6">
       {/* Section header */}
       <div className="flex items-center gap-4">
         <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
@@ -218,7 +220,7 @@ export default function AboutPage() {
       <WordOfTheWeek />
 
       {/* ── Music I Code To ─────────────────────────────── */}
-      <section className="flex flex-col gap-6 pb-4">
+      <section id="music" className="flex flex-col gap-6 pb-4">
         {/* Section header */}
         <div className="flex items-center gap-4">
           <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
@@ -270,6 +272,56 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Manga Recommendations ───────────────────────── */}
+      <section id="manga" className="flex flex-col gap-6">
+        <div className="flex items-center gap-4">
+          <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
+            Manga Recommendations
+          </h2>
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/30" />
+          <IconBook size={18} className="text-theme-text-muted/60" />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {mangaRecommendations.map((manga) => (
+            <div
+              key={manga.id}
+              className="group flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition hover:border-theme-accent/50"
+            >
+              <div className="flex gap-4">
+                {manga.image && (
+                  <div className="h-32 w-24 shrink-0 overflow-hidden rounded-lg border border-theme-border/40">
+                    <img
+                      src={manga.image}
+                      alt={manga.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-lg font-bold text-theme-text leading-tight group-hover:text-theme-accent transition-colors">
+                      {manga.title}
+                    </h3>
+                    <div className="flex items-center gap-1 rounded-full bg-theme-accent/10 px-2 py-0.5 text-[10px] font-bold text-theme-accent uppercase tracking-wider">
+                      <IconStar size={10} fill="currentColor" />
+                      {manga.rating}/10
+                    </div>
+                  </div>
+                  <p className="line-clamp-3 text-sm leading-relaxed text-theme-text-muted">
+                    {manga.description}
+                  </p>
+                  <div className="mt-auto">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-theme-text-muted/60">
+                      Status: {manga.status}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

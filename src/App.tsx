@@ -7,10 +7,12 @@ import PostsPage from './pages/PostsPage';
 import PostDetailPage from './pages/PostDetailPage';
 import AboutPage from './pages/AboutPage';
 import PicsPage from './pages/PicsPage';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="relative min-h-screen overflow-hidden bg-theme-bg text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text">
         <SmokeEffect />
 
