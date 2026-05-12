@@ -14,7 +14,7 @@ export default function ProjectsPage() {
           <IconFolderOpen size={42} stroke={2.5} className="text-theme-accent" />
           Projects
         </h1>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/60" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
       </header>
 
       {/* Hero Section for the featured project */}

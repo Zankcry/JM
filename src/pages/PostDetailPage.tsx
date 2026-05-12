@@ -54,7 +54,7 @@ export default function PostDetailPage() {
       </header>
 
       {/* Decorative Line */}
-      <div className="h-px w-full bg-gradient-to-r from-theme-accent/40 via-theme-border/60 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-theme-accent/40 via-theme-accent/20 to-transparent" />
 
       {/* Structured Content - Manually Styled */}
       <div className="flex flex-col gap-16 pb-20 text-[17px] leading-relaxed text-theme-text-muted sm:text-[18px]">
@@ -148,7 +148,7 @@ export default function PostDetailPage() {
 
       {/* Footer */}
       <footer className="flex flex-col gap-8 pb-20">
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-theme-border/60 to-transparent" />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-theme-accent/40 to-transparent" />
         <p className="text-center text-sm font-medium text-theme-text-muted/60">
           Thanks for reading! Check out my other posts or head back to the homepage.
         </p>

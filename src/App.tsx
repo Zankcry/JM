@@ -24,19 +24,19 @@ export default function App() {
         {/* Decorative Lines */}
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed left-[4.9375rem] top-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed left-[4.9375rem] top-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-b from-theme-accent/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed left-[4.9375rem] bottom-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed left-[4.9375rem] bottom-0 z-50 hidden h-[calc(50%-6.5rem)] w-0.5 bg-gradient-to-t from-theme-accent/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed right-[4.9375rem] top-0 z-50 hidden h-[calc(40%-6rem)] w-0.5 bg-gradient-to-b from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed right-[4.9375rem] top-0 z-50 hidden h-[calc(42%-6rem)] w-0.5 bg-gradient-to-b from-theme-accent/50 to-transparent lg:block"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed right-[4.9375rem] bottom-0 z-50 hidden h-[calc(40%-6rem)] w-0.5 bg-gradient-to-t from-theme-border/50 to-transparent lg:block"
+          className="pointer-events-none fixed right-[4.9375rem] bottom-0 z-50 hidden h-[calc(42%-6rem)] w-0.5 bg-gradient-to-t from-theme-accent/50 to-transparent lg:block"
         />
 
         <Navbar />

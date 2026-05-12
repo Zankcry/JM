@@ -35,7 +35,7 @@ export default function PicsPage() {
             <IconCamera className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
             Pics
           </h1>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/60" />
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
         </header>
         <p className="text-theme-text-muted text-base sm:text-lg leading-relaxed">
           A collection of memories, random snaps, random thoughts, and visual sceneries.

@@ -26,7 +26,7 @@ export function Projects() {
             </button>
             Featured Projects
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-theme-border/70 to-transparent"></div>
+          <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent"></div>
         </div>
         <Link
           to="/projects"

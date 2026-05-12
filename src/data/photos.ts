@@ -45,7 +45,7 @@ export const allPhotos: Photo[] = [
   {
     id: '7',
     src: '/images/pics/christmas-day.jpg',
-    tags: ['memories'],
+    tags: ['memories', 'scenery'],
     comment: 'Christmas Day 2023.'
   },
   {
@@ -81,7 +81,7 @@ export const allPhotos: Photo[] = [
   {
     id: '13',
     src: '/images/pics/christmas-eve.jpg',
-    tags: ['memories'],
+    tags: ['memories', 'scenery'],
     comment: 'Christmas Eve 2023.'
   },
   {
@@ -135,7 +135,7 @@ export const allPhotos: Photo[] = [
   {
     id: '22',
     src: '/images/pics/good-times.jpg',
-    tags: ['memories'],
+    tags: ['memories', 'scenery'],
     comment: 'Good times.'
   },
   {

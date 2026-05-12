@@ -58,7 +58,7 @@ function WordOfTheWeek() {
         <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
           Word of the Week
         </h2>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/40" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/30" />
         <span className="text-[11px] font-mono text-theme-text-muted/50">日本語</span>
       </div>
 
@@ -85,8 +85,8 @@ function WordOfTheWeek() {
           </div>
 
           {/* Divider */}
-          <div className="hidden sm:block w-px self-stretch bg-theme-border/40" />
-          <div className="block sm:hidden h-px w-full bg-theme-border/40" />
+          <div className="hidden sm:block w-px self-stretch bg-theme-accent/30" />
+          <div className="block sm:hidden h-px w-full bg-theme-accent/30" />
 
           {/* Right: meaning + example */}
           <div className="flex flex-col gap-3">
@@ -119,7 +119,7 @@ export default function AboutPage() {
         <h1 className="shrink-0 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
           About Me
         </h1>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-border/60" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
       </header>
 
       {/* ── Hero bio ────────────────────────────────────── */}
@@ -224,7 +224,7 @@ export default function AboutPage() {
           <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
             Music I Code To
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-theme-border/40 to-transparent" />
+          <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/30 to-transparent" />
           {/* Animated equalizer bars */}
           <div className="flex items-end gap-[3px]" aria-hidden="true">
             {[12, 18, 10, 16, 8].map((h, i) => (
