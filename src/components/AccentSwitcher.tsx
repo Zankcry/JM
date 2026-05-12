@@ -27,7 +27,7 @@ export function AccentSwitcher() {
     <aside className="fixed right-[4.5rem] top-1/2 z-30 hidden -translate-y-1/2 lg:flex xl:right-[4.5rem]">
       <div ref={containerRef} className="relative flex flex-col gap-2">
         <div
-          className="absolute rounded-[10px] border-[2px] border-theme-border-strong transition-all duration-500 ease-out pointer-events-none z-20"
+          className="absolute rounded-lg border-2 border-theme-accent transition-all duration-500 ease-out pointer-events-none z-20"
           style={{
             top: `${indicatorStyle.top - 4}px`,
             left: `${indicatorStyle.left - 4}px`,

@@ -14,7 +14,7 @@ type Project = {
 
 export function FeaturedProjectBanner({ project }: { project: Project }) {
   return (
-    <div className="relative w-full overflow-hidden rounded-[2rem] bg-theme-surface/30 shadow-sm border border-theme-border/60">
+    <div className="relative w-full overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
       <div className="flex min-h-[320px] flex-col md:flex-row">
         {/* Left Content */}
         <div className="relative z-10 flex flex-1 flex-col justify-center p-8 md:p-10 lg:p-12">

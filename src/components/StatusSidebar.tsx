@@ -9,7 +9,7 @@ export function StatusSidebar() {
   return (
     <aside className="hidden w-full max-w-[320px] flex-col gap-6 lg:flex">
       {/* About Section */}
-      <div className="rounded-2xl border border-theme-border/60 bg-theme-surface/30 p-6 shadow-sm">
+      <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg">
         <h3 className="text-xs font-bold uppercase tracking-widest text-theme-accent">
           My Picks
         </h3>
@@ -19,7 +19,7 @@ export function StatusSidebar() {
       </div>
 
       {/* Recommendations List */}
-      <div className="rounded-2xl border border-theme-border/60 bg-theme-surface/30 p-6 shadow-sm">
+      <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-bold uppercase tracking-widest text-theme-text-subtle">
             {category === 'manga' ? 'Manga' : 'Anime'} Recs
@@ -40,7 +40,7 @@ export function StatusSidebar() {
             <div key={item.id} className="group flex items-start gap-4">
               {/* Cover Image on the Left */}
               {item.image && (
-                <div className="relative aspect-[2/3] w-20 shrink-0 overflow-hidden rounded-lg border border-theme-border/40 bg-theme-surface/50">
+                <div className="relative aspect-[2/3] w-20 shrink-0 overflow-hidden rounded-lg border border-theme-accent/20 bg-theme-bg">
                   <img
                     src={item.image}
                     alt={item.title}

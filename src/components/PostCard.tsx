@@ -5,7 +5,7 @@ import { Post } from '../data/posts';
 export function PostCard({ post }: { post: Post }) {
   return (
     <Link to={`/posts/${post.id}`} className="block w-full">
-      <article className="group relative flex w-full flex-col gap-3 rounded-2xl border border-theme-border/60 bg-theme-surface/30 p-6 shadow-sm transition-all hover:border-theme-border-strong hover:bg-theme-surface/50">
+      <article className="group relative flex w-full flex-col gap-3 rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition-all hover:border-theme-accent/50">
       {/* Top Metadata */}
       <div className="flex items-center gap-3 text-[11px] font-medium tracking-wide text-theme-text-muted/70">
         <span>{post.date}</span>

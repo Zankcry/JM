@@ -26,12 +26,12 @@ export function ThemeSwitcher() {
       <span className="uppercase tracking-[0.35em] text-theme-text-muted/85">Theme</span>
       <div
         ref={containerRef}
-        className="relative inline-flex flex-wrap gap-1 rounded-full border border-theme-border/70 bg-theme-bg-elevated/80 p-1 shadow-sm backdrop-blur"
+        className="relative inline-flex flex-wrap gap-1 rounded-xl border border-theme-accent/20 bg-theme-bg p-1 shadow-lg"
         role="radiogroup"
         aria-label="Color theme"
       >
         <div
-          className="absolute bottom-1 top-1 rounded-full bg-theme-accent shadow-sm transition-all duration-500 ease-out"
+          className="absolute bottom-1 top-1 rounded-lg bg-theme-accent shadow-sm transition-all duration-500 ease-out"
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,

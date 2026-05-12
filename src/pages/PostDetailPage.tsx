@@ -68,7 +68,7 @@ export default function PostDetailPage() {
           <p>
             Spline 2D is a revolutionary tool that allows designers and developers to create <span className="font-semibold text-theme-text">interactive, vector-based animations</span> that run natively in the browser. Unlike traditional video formats like MP4 or static GIFs, Spline exports "scenes" that remain fully interactive.
           </p>
-          <div className="rounded-2xl border border-theme-border/40 bg-theme-surface/30 p-6 italic text-theme-accent">
+          <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 italic text-theme-accent shadow-lg">
             "This means elements can follow the user's cursor, react to clicks, or change state based on scroll position."
           </div>
         </section>
@@ -89,7 +89,7 @@ export default function PostDetailPage() {
             Its very cool! Sites like <a href="https://www.zenlesszonezero.com" className="text-theme-accent">Zenlesszonezero </a> uses it for their website, take a look!
           </p>
 
-          <div className="overflow-hidden rounded-2xl border border-theme-border/40 bg-theme-surface/50 shadow-2xl">
+          <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
             <img
               src="/videos/spline2d.webp"
               alt="Spline 2D Demonstration"
@@ -110,18 +110,18 @@ export default function PostDetailPage() {
             The Bridge to Web Dev
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
-            <div className="rounded-2xl border border-theme-border/40 bg-theme-surface/30 p-6">
+            <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg">
               <h3 className="mb-2 text-sm font-bold uppercase text-theme-accent">How it's used</h3>
               <p className="text-sm leading-relaxed">Designers create the scene, and developers embed it using a simple React component. You can easily control states via code.</p>
             </div>
-            <div className="rounded-2xl border border-theme-border/40 bg-theme-surface/30 p-6">
+            <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg">
               <h3 className="mb-2 text-sm font-bold uppercase text-theme-accent">The Complement</h3>
               <p className="text-sm leading-relaxed">It allows the designer to build the motion and the developer to implement it exactly as intended.</p>
             </div>
           </div>
           <p>Heres another Example! From <a href="https://www.youtube.com/@yuphi_kid" className="text-theme-accent">Yuphi</a> a youtuber showcasing and making tutorials about Spline2D</p>
 
-          <div className="overflow-hidden rounded-2xl border border-theme-border/40 bg-theme-surface/50 shadow-2xl">
+          <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
             <img
               src="/videos/spline2d_2.webp"
               alt="Spline 2D Tutorial Example"

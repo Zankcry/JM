@@ -17,7 +17,7 @@ export function ProjectCard({ project, id, padding = 'p-5' }: { project: Project
   return (
     <div
       id={id}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-theme-border/60 bg-theme-surface/30 shadow-sm transition-all hover:border-theme-border-strong hover:bg-theme-surface/50"
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/50"
     >
       <ProjectPreview project={project} />
 

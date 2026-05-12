@@ -10,7 +10,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className={`relative overflow-hidden ${className || 'aspect-[16/9] border-b border-theme-border/50 bg-theme-surface/10'}`}>
+    <div className={`relative overflow-hidden ${className || 'aspect-[16/9] border-b border-theme-accent/20 bg-theme-bg/20'}`}>
       {/* Poster Image (Static) */}
       {project.poster && (
         <img

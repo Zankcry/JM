@@ -63,7 +63,7 @@ function WordOfTheWeek() {
       </div>
 
       {/* Card */}
-      <div className="relative overflow-hidden rounded-2xl border border-theme-border/40 bg-theme-surface/20 p-6 shadow-sm transition hover:border-theme-accent/30">
+      <div className="relative overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition hover:border-theme-accent/50">
         {/* Decorative kanji watermark */}
         <span
           aria-hidden="true"
@@ -98,7 +98,7 @@ function WordOfTheWeek() {
             </div>
 
             {word.example && (
-              <div className="rounded-xl border border-theme-border/30 bg-theme-bg/40 px-4 py-3">
+              <div className="rounded-xl border border-theme-accent/20 bg-theme-bg/40 px-4 py-3 shadow-sm">
                 <p className="text-sm text-theme-text font-medium">{word.example.jp}</p>
                 <p className="text-xs text-theme-text-muted mt-1 italic">{word.example.en}</p>
               </div>
@@ -127,7 +127,7 @@ export default function AboutPage() {
         {/* Avatar + quick facts */}
         <div className="flex shrink-0 flex-col items-center gap-6 lg:items-start lg:pt-2">
           <div className="relative">
-            <div className="h-48 w-48 overflow-hidden rounded-[1.5rem] border-2 border-theme-accent/40 bg-theme-surface/50 shadow-xl">
+            <div className="h-48 w-48 overflow-hidden rounded-xl border-2 border-theme-accent/40 bg-theme-bg shadow-xl">
               <img
                 src="/images/profilePic.jpg"
                 alt="James Michael"
@@ -254,7 +254,7 @@ export default function AboutPage() {
           {spotifyEmbeds.map(({ type, id }) => (
             <div
               key={id}
-              className="overflow-hidden rounded-2xl border border-theme-border/40 bg-theme-surface/20 shadow-sm transition hover:border-theme-accent/30"
+              className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition hover:border-theme-accent/50"
             >
               <iframe
                 src={`https://open.spotify.com/embed/${type}/${id}?utm_source=generator&theme=1`}
