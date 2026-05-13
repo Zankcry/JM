@@ -7,13 +7,14 @@ import PostsPage from './pages/PostsPage';
 import PostDetailPage from './pages/PostDetailPage';
 import AboutPage from './pages/AboutPage';
 import PicsPage from './pages/PicsPage';
+import { Footer } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="relative min-h-screen overflow-hidden bg-theme-bg text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text">
+      <div className="relative min-h-screen overflow-hidden bg-theme-bg text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col">
         <SmokeEffect />
 
         {/* Background Gradients */}
@@ -43,7 +44,7 @@ export default function App() {
 
         <Navbar />
 
-        <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col px-5 pb-16 pt-32 sm:px-8 lg:px-12">
+        <div className="mx-auto flex flex-1 w-full max-w-6xl flex-col px-5 pb-16 pt-32 sm:px-8 lg:px-12">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
@@ -53,6 +54,7 @@ export default function App() {
             <Route path="/pics" element={<PicsPage />} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   );
