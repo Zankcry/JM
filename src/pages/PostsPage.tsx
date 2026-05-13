@@ -1,6 +1,6 @@
 import { IconArticle } from '@tabler/icons-react';
 import { PostCard } from '../components/PostCard';
-import { StatusSidebar } from '../components/StatusSidebar';
+import { RecommendationsSidebar } from '../components/RecommendationsSidebar';
 import { posts } from '../data/posts';
 
 export default function PostsPage() {
@@ -25,7 +25,7 @@ export default function PostsPage() {
         </div>
 
         {/* Sidebar for "What I'm doing" */}
-        <StatusSidebar />
+        <RecommendationsSidebar />
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="mt-auto w-full border-t border-theme-accent/10 bg-theme-bg/50 py-12 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
-          
+
           {/* Left: Branding & Copyright */}
           <div className="flex flex-col items-center gap-2 sm:items-start">
             <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-[11px] font-medium text-theme-text-muted/60">
-              © {currentYear} James Michael Duque. All rights reserved.
+              © {currentYear} James Michael. All rights reserved.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export function Footer() {
                 );
               })}
             </div>
-            
+
             <button
               onClick={scrollToTop}
               className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-theme-text-muted transition-colors hover:text-theme-accent"

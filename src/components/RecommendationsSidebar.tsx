@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { IconStar, IconBook, IconPlayerPlay } from '@tabler/icons-react';
 import { mangaRecommendations, animeRecommendations } from '../data/recommendations';
 
-export function StatusSidebar() {
+export function RecommendationsSidebar() {
   const [category, setCategory] = useState<'manga' | 'anime'>('manga');
   const data = category === 'manga' ? mangaRecommendations : animeRecommendations;
 

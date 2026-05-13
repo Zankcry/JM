@@ -149,5 +149,11 @@ export const allPhotos: Photo[] = [
     src: '/images/pics/leaving-for-class.jpg',
     tags: ['university', 'memories'],
     comment: 'Pic before leaving for class'
+  },
+  {
+    id: '25',
+    src: '/images/pics/billiards.jpg',
+    tags: ['memories'],
+    comment: 'Billiards'
   }
 ];

@@ -1,4 +1,5 @@
-import { IconBrandSpotify, IconBook } from '@tabler/icons-react';
+import { useState, useEffect } from 'react';
+import { IconBrandSpotify } from '@tabler/icons-react';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -6,18 +7,15 @@ import {
   IconFileCv,
   IconStar,
 } from '@tabler/icons-react';
-import { mangaRecommendations } from '../data/recommendations';
+import { allPhotos } from '../data/photos';
+
 
 type SpotifyEmbed = {
   type: 'track' | 'playlist';
   id: string;
 };
 
-const spotifyEmbeds: SpotifyEmbed[] = [
-  { type: 'track', id: '348NF6vX0Yh22xvH0EZEro' },
-  { type: 'track', id: '14mT8BCOXiUUcGlb7KujkT' },
-  { type: 'track', id: '1FXrYwvWwjmbw8cqFC1OWz' },
-];
+const spotifyPlaylist: SpotifyEmbed = { type: 'playlist', id: '4JBe2E2lZx0HWE8fMynVo5' };
 
 type JpWord = {
   kanji: string;
@@ -65,25 +63,25 @@ function WordOfTheWeek() {
       </div>
 
       {/* Card */}
-      <div className="group relative overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition hover:border-theme-accent/50">
+      <div className="group relative overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-6 sm:p-8 shadow-lg transition hover:border-theme-accent/50">
         {/* Decorative kanji watermark */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -right-4 -top-6 select-none text-[9rem] font-bold leading-none text-theme-text opacity-[0.04] transition-all duration-700 group-hover:scale-110 group-hover:opacity-[0.10]"
+          className="pointer-events-none absolute -right-12 -top-6 select-none text-[9rem] font-bold leading-none text-theme-text opacity-[0.04] transition-all duration-700 group-hover:scale-110 group-hover:opacity-[0.10]"
         >
-          {word.kanji[0]}
+          {word.kanji}
         </span>
 
-        <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
+        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-12">
           {/* Left: kanji + furigana */}
-          <div className="flex flex-col items-start gap-1 shrink-0">
-            <div className="pt-5">
+          <div className="flex flex-col items-start gap-1 shrink-0 sm:min-w-[140px]">
+            <div className="pt-2">
               <ruby className="text-5xl font-bold text-theme-text [ruby-align:start]">
                 {word.kanji}
                 <rt className="text-sm font-normal text-theme-accent tracking-widest text-left pb-1">{word.furigana}</rt>
               </ruby>
             </div>
-            <span className="text-xs font-mono text-theme-text-muted/60 mt-1 tracking-wider">{word.romaji}</span>
+            <span className="text-xs font-mono text-theme-text-muted/60 mt-2 tracking-wider">{word.romaji}</span>
           </div>
 
           {/* Divider */}
@@ -113,6 +111,20 @@ function WordOfTheWeek() {
 }
 
 export default function AboutPage() {
+  const [randomPhoto, setRandomPhoto] = useState(allPhotos[Math.floor(Math.random() * allPhotos.length)]);
+  const [isFading, setIsFading] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFading(true);
+      setTimeout(() => {
+        setRandomPhoto(allPhotos[Math.floor(Math.random() * allPhotos.length)]);
+        setIsFading(false);
+      }, 500);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="flex flex-1 flex-col gap-16 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
 
@@ -243,82 +255,46 @@ export default function AboutPage() {
             href="https://open.spotify.com/user/zankcry"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-[11px] text-theme-text-muted/60 transition hover:text-[#1DB954]"
+            className="flex items-center gap-1.5 text-[11px] text-[#1DB954] transition hover:opacity-80"
           >
             <IconBrandSpotify size={14} />
             Spotify
           </a>
         </div>
 
-        {/* Embeds */}
-        <div className="flex flex-col gap-4">
-          {spotifyEmbeds.map(({ type, id }) => (
-            <div
-              key={id}
-              className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition hover:border-theme-accent/50"
-            >
-              <iframe
-                src={`https://open.spotify.com/embed/${type}/${id}?utm_source=generator&theme=1`}
-                width="100%"
-                height={type === 'playlist' ? 232 : 80}
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="border-0"
-                title={`Spotify ${type} embed`}
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Manga Recommendations ───────────────────────── */}
-      <section id="manga" className="flex flex-col gap-6">
-        <div className="flex items-center gap-4">
-          <h2 className="text-xs font-bold uppercase tracking-[0.35em] text-theme-text-muted/80">
-            Manga Recommendations
-          </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/30" />
-          <IconBook size={18} className="text-theme-text-muted/60" />
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {mangaRecommendations.map((manga) => (
-            <div
-              key={manga.id}
-              className="group flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition hover:border-theme-accent/50"
-            >
-              <div className="flex gap-4">
-                {manga.image && (
-                  <div className="h-32 w-24 shrink-0 overflow-hidden rounded-lg border border-theme-border/40">
-                    <img
-                      src={manga.image}
-                      alt={manga.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-lg font-bold text-theme-text leading-tight group-hover:text-theme-accent transition-colors">
-                      {manga.title}
-                    </h3>
-                    <div className="flex items-center gap-1 rounded-full bg-theme-accent/10 px-2 py-0.5 text-[10px] font-bold text-theme-accent uppercase tracking-wider">
-                      <IconStar size={10} fill="currentColor" />
-                      {manga.rating}/10
-                    </div>
-                  </div>
-                  <p className="line-clamp-3 text-sm leading-relaxed text-theme-text-muted">
-                    {manga.description}
-                  </p>
-                  <div className="mt-auto">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-theme-text-muted/60">
-                      Status: {manga.status}
-                    </span>
-                  </div>
-                </div>
+        {/* Two-column layout for Music */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* Left: Random Photo */}
+          <div className="flex flex-col lg:h-[352px]">
+            <div className="group relative h-full w-full overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition hover:border-theme-accent/50">
+              <div className={`h-full w-full transition-opacity duration-500 ease-in-out ${isFading ? 'opacity-0' : 'opacity-100'}`}>
+                <img
+                  src={randomPhoto.src}
+                  alt={randomPhoto.id}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-theme-bg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+                <p className="absolute bottom-3 left-4 text-[10px] font-mono text-theme-text opacity-0 transition-all duration-500 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
+                  {randomPhoto.comment}
+                </p>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Right: Playlist */}
+          <div className="flex flex-col">
+            <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition hover:border-theme-accent/50">
+              <iframe
+                src={`https://open.spotify.com/embed/playlist/${spotifyPlaylist.id}?utm_source=generator&theme=1`}
+                width="100%"
+                height="352"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="border-0 w-full block"
+                title="Spotify playlist"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </main>
