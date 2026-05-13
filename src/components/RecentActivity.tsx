@@ -136,7 +136,7 @@ export function RecentActivity() {
                     {card.description}
                   </p>
 
-                  <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-theme-accent opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-theme-accent">
                     <span>View</span>
                     <IconArrowRight size={12} />
                   </div>

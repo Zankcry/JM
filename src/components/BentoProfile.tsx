@@ -75,7 +75,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
           Let's connect and explore new opportunities together.
         </p>
 
-        <div className="mt-auto flex flex-col gap-4">
+        <div className="mt-2 flex flex-col gap-4">
           <div className="flex items-center justify-center gap-2">
             <a
               href="https://github.com/Zankcry"

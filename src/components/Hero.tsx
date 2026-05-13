@@ -33,10 +33,10 @@ export function Hero() {
           <span>Yahho! I&apos;m</span>
           <span className="group/name inline-flex items-center gap-2 whitespace-nowrap">
             <span className="relative ml-2 inline-block cursor-default text-theme-accent transition-colors duration-300 ease-out">
-              <span className="inline-block transition-all duration-300 group-hover/name:pointer-events-none group-hover/name:opacity-0">
+              <span className="inline-block transition-all duration-500 ease-out group-hover/name:pointer-events-none group-hover/name:-translate-y-4 group-hover/name:opacity-0">
                 James Michael
               </span>
-              <span className="absolute left-0 top-0 inline-block opacity-0 transition-all duration-300 group-hover/name:opacity-100">
+              <span className="absolute left-0 top-0 inline-block translate-y-4 opacity-0 transition-all duration-500 ease-out group-hover/name:translate-y-0 group-hover/name:opacity-100">
                 ジェームズマイケル
               </span>
             </span>

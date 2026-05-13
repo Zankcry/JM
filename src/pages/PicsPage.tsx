@@ -25,22 +25,22 @@ export default function PicsPage() {
 
   return (
     <main className="flex flex-1 flex-col gap-8 w-full pt-8 sm:pt-14 lg:pt-16">
-      
+
       <div className="flex flex-col gap-6">
 
-      {/* ── Page header ─────────────────────────────────── */}
-      <div className="flex flex-col gap-4">
-        <header className="flex w-full items-center gap-6">
-          <h1 className="shrink-0 flex items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
-            <IconCamera className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
-            Pics
-          </h1>
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
-        </header>
-        <p className="text-theme-text-muted text-base sm:text-lg leading-relaxed">
-          A collection of memories, random snaps, random thoughts, and visual sceneries.
-        </p>
-      </div>
+        {/* ── Page header ─────────────────────────────────── */}
+        <div className="flex flex-col gap-4">
+          <header className="flex w-full items-center gap-6">
+            <h1 className="shrink-0 flex items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
+              <IconCamera className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
+              Pics
+            </h1>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
+          </header>
+          <p className="text-theme-text-muted text-base sm:text-lg leading-relaxed">
+            A collection of memories, random snaps, random thoughts, and visual sceneries.
+          </p>
+        </div>
 
         {/* ── Filters ─────────────────────────────────────── */}
         <PicsFilter

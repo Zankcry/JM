@@ -14,7 +14,7 @@ export function StatusSidebar() {
           My Picks
         </h3>
         <p className="mt-4 text-[13px] leading-relaxed text-theme-text-muted">
-          I post whatever I find interesting sometimes unrelated to web dev, and I'm a man of culture. 😆
+          I post whatever I find interesting sometimes unrelated to programming or web development.✌️
         </p>
       </div>
 
