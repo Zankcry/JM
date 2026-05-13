@@ -195,8 +195,7 @@ export default function AboutPage() {
             apply my knowledge in real-world environments.
           </p>
           <p>
-            I&apos;ve worked on school projects and helped a local barbershop level up
-            their online presence. Right now I&apos;m deep in learning{' '}
+            I&apos;ve worked on personal projects and helped a local barbershop achieve <span className="text-theme-accent">Top 10</span> on seo local search. Right now I&apos;m deep in learning{' '}
             <a
               href="https://esotericsoftware.com/"
               target="_blank"
