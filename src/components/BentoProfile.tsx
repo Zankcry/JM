@@ -33,7 +33,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
   return (
     <>
       {/* Availability Card */}
-      <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/40 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
+      <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
         {/* Decorative Background Kanji */}
         <span className="absolute -right-2 -bottom-2 select-none text-[8rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
           稼働
@@ -66,7 +66,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
       </div>
 
       {/* Let's Connect Card */}
-      <div className="group flex flex-col rounded-xl border border-theme-accent/40 bg-theme-bg p-4 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
+      <div className="group flex flex-col rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
         <div className="mb-4 flex items-center gap-2 text-theme-text">
           <IconCalendar size={20} stroke={2} className="text-theme-accent" />
           <h3 className="text-sm font-semibold tracking-tight opacity-80">Contact Me</h3>
@@ -81,7 +81,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
               href="https://github.com/Zankcry"
               target="_blank"
               rel="noopener noreferrer"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
               title="GitHub"
             >
               <IconBrandGithub size={18} className="transition-transform group-hover/icon:scale-110" />
@@ -91,7 +91,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
               href="https://www.linkedin.com/in/james-michael-duque-100154350/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
               title="LinkedIn"
             >
               <IconBrandLinkedin size={18} className="transition-transform group-hover/icon:scale-110" />
@@ -99,7 +99,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
             </a>
             <a
               href="mailto:duquejames657@gmail.com"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/40 hover:bg-theme-surface/70 hover:text-theme-accent"
+              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
               title="Email"
             >
               <IconMail size={18} className="transition-transform group-hover/icon:scale-110" />
@@ -120,7 +120,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
       </div>
 
       {/* Location Card - Wider on desktop */}
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-theme-accent/40 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/70 sm:col-span-2 lg:col-span-2 min-h-[180px]">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/70 sm:col-span-2 lg:col-span-2 min-h-[180px]">
         {/* Header - Absolute overlay */}
         <div className="absolute left-6 top-6 z-20 flex items-center gap-2 text-theme-text drop-shadow-md">
           <IconMapPin size={20} stroke={2} className="text-theme-accent" />

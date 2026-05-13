@@ -97,7 +97,7 @@ export function RecentActivity() {
             <Link
               key={card.title}
               to={card.href}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/40 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg"
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg"
             >
               {/* Background Preview - Layered above card bg but below content */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
