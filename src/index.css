@@ -24,9 +24,6 @@
   --theme-shadow: 35 38 52;
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
 body {
   min-height: 100vh;

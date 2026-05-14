@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { primaryNavLinks } from '../data/navigation';
 import { AccentSwitcher } from './AccentSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
@@ -54,18 +55,27 @@ export function Navbar() {
             className="inline-flex items-center gap-1.5 rounded-full px-1 py-1 text-lg font-bold tracking-tight text-theme-text transition-colors duration-300 ease-out hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg"
             aria-label="Go to home"
           >
-            <span className="text-theme-accent transition-colors duration-300 ease-out">
-              {(() => {
-                const path = location.pathname;
-                if (path === '/') return 'ホーム';
-                if (path === '/about') return 'アバウト';
-                if (path === '/projects') return 'プロジェクト';
-                if (path === '/posts') return 'ポスト';
-                if (path.startsWith('/posts/')) return 'コンテンツ';
-                if (path === '/pics') return 'ピクス';
-                return 'ホーム';
-              })()}
-            </span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={location.pathname}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="text-theme-accent transition-colors duration-300 ease-out inline-block"
+              >
+                {(() => {
+                  const path = location.pathname;
+                  if (path === '/') return 'ホーム';
+                  if (path === '/about') return 'アバウト';
+                  if (path === '/projects') return 'プロジェクト';
+                  if (path === '/posts') return 'ポスト';
+                  if (path.startsWith('/posts/')) return 'コンテンツ';
+                  if (path === '/pics') return 'ピクス';
+                  return 'ホーム';
+                })()}
+              </motion.span>
+            </AnimatePresence>
             <span className="text-theme-text/40 font-light"></span>
           </Link>
 
