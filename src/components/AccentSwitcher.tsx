@@ -48,7 +48,7 @@ export function AccentSwitcher() {
               aria-pressed={isActive}
               onClick={() => setAccent(option)}
               className={[
-                'relative z-10 h-4 w-4 rounded-md border transition-all duration-500 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg',
+                'relative z-10 h-4 w-4 rounded border transition-all duration-500 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg',
                 isActive
                   ? 'scale-110 border-theme-border-strong'
                   : 'border-theme-border/50 hover:scale-110 hover:border-theme-border-strong',
