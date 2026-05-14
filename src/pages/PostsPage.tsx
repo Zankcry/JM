@@ -5,7 +5,7 @@ import { posts } from '../data/posts';
 
 export default function PostsPage() {
   return (
-    <div className="flex flex-1 flex-col items-start gap-12 w-full pt-8 sm:pt-14 lg:pt-16">
+    <div className="flex flex-1 flex-col items-start gap-12 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
       {/* Header same as Projects Page */}
       <header className="flex w-full items-center gap-6">
         <h1 className="flex shrink-0 items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">

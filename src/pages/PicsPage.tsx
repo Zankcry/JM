@@ -24,7 +24,7 @@ export default function PicsPage() {
   }, [displayedPhotos.length]);
 
   return (
-    <main className="flex flex-1 flex-col gap-8 w-full pt-8 sm:pt-14 lg:pt-16">
+    <main className="flex flex-1 flex-col gap-8 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
 
       <div className="flex flex-col gap-6">
 

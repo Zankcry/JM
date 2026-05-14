@@ -8,7 +8,7 @@ export default function ProjectsPage() {
   const otherProjects = projects.filter(p => p !== featuredProject);
 
   return (
-    <div className="flex flex-1 flex-col items-start gap-16 w-full pt-8 sm:pt-14 lg:pt-16">
+    <div className="flex flex-1 flex-col items-start gap-16 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
       <header className="flex w-full items-center gap-6">
         <h1 className="flex shrink-0 items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
           <IconFolderOpen size={42} stroke={2.5} className="text-theme-accent" />

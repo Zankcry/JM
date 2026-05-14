@@ -19,7 +19,7 @@ export default function PostDetailPage() {
   const postTags = ['Spline', 'Animation', 'UX Design', 'WebDev'];
 
   return (
-    <article className="mx-auto flex w-full max-w-3xl flex-col gap-12 pt-8 sm:pt-14 lg:pt-16">
+    <article className="mx-auto flex w-full max-w-3xl flex-col gap-12 pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
       {/* Navigation & Back Button */}
       <Link
         to="/posts"
@@ -57,7 +57,7 @@ export default function PostDetailPage() {
       <div className="h-px w-full bg-gradient-to-r from-theme-accent/40 via-theme-accent/20 to-transparent" />
 
       {/* Structured Content - Manually Styled */}
-      <div className="flex flex-col gap-16 pb-20 text-[17px] leading-relaxed text-theme-text-muted sm:text-[18px]">
+      <div className="flex flex-col gap-16 text-[17px] leading-relaxed text-theme-text-muted sm:text-[18px]">
 
         {/* Section 1 */}
         <section className="flex flex-col gap-6">
@@ -147,7 +147,7 @@ export default function PostDetailPage() {
       </div>
 
       {/* Footer */}
-      <footer className="flex flex-col gap-8 pb-20">
+      <footer className="flex flex-col gap-8">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-theme-accent/40 to-transparent" />
         <p className="text-center text-sm font-medium text-theme-text-muted/60">
           Thanks for reading! Check out my other posts or head back to the homepage.
