@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { IconCamera } from '@tabler/icons-react';
+import { IconBrandGooglePhotos } from '@tabler/icons-react';
 import { allPhotos } from '../data/photos';
 import PicsFilter from '../components/PicsFilter';
 import PicsGrid from '../components/PicsGrid';
@@ -32,7 +32,7 @@ export default function PicsPage() {
         <div className="flex flex-col gap-4">
           <header className="flex w-full items-center gap-6">
             <h1 className="shrink-0 flex items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
-              <IconCamera className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
+              <IconBrandGooglePhotos className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
               Pics
             </h1>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />

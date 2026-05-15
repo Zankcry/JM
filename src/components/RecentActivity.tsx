@@ -4,7 +4,7 @@ import {
   IconArrowRight,
   IconBook,
   IconMusic,
-  IconCamera,
+  IconBrandGooglePhotos,
   IconLanguage,
   IconNews,
   IconBrandSpotify
@@ -48,7 +48,7 @@ export function RecentActivity() {
     {
       title: 'Photo Gallery',
       description: 'My Captured moments and visual inspirations.',
-      icon: IconCamera,
+      icon: IconBrandGooglePhotos,
       href: '/pics',
       color: '#38BDF8'
     }

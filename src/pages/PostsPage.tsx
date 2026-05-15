@@ -1,4 +1,4 @@
-import { IconArticle } from '@tabler/icons-react';
+import { IconNews } from '@tabler/icons-react';
 import { PostCard } from '../components/PostCard';
 import { RecommendationsSidebar } from '../components/RecommendationsSidebar';
 import { posts } from '../data/posts';
@@ -9,7 +9,7 @@ export default function PostsPage() {
       {/* Header same as Projects Page */}
       <header className="flex w-full items-center gap-6">
         <h1 className="flex shrink-0 items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
-          <IconArticle size={42} stroke={2.5} className="text-theme-accent" />
+          <IconNews size={42} stroke={2.5} className="text-theme-accent" />
           Posts
         </h1>
         <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />

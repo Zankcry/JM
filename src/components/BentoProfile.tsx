@@ -9,7 +9,10 @@ import {
   IconArrowUpRight,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconMail
+  IconMail,
+  IconCopy,
+  IconCheck,
+  IconMessage2
 } from '@tabler/icons-react';
 import { useTheme } from '../theme/ThemeProvider';
 
@@ -22,9 +25,36 @@ function MapRecenter({ center }: { center: [number, number] }) {
   return null;
 }
 
+function CopyEmailButton({ email }: { email: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+      title="Copy Email"
+    >
+      {copied ? (
+        <IconCheck size={18} className="text-green-500" />
+      ) : (
+        <IconCopy size={18} className="transition-transform group-hover/icon:scale-110" />
+      )}
+      <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">
+        {copied ? 'COPIED' : 'COPY'}
+      </span>
+    </button>
+  );
+}
+
 export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
   const { theme } = useTheme();
-  const hauCoordinates: [number, number] = [15.1400, 120.5901];
+  const hauCoordinates: [number, number] = [15.1400, 120.5890];
 
   const mapUrl = theme === 'latte'
     ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
@@ -66,56 +96,56 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
       </div>
 
       {/* Let's Connect Card */}
-      <div className="group flex flex-col rounded-xl border border-theme-accent/20 bg-theme-bg p-4 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
-        <div className="mb-4 flex items-center gap-2 text-theme-text">
-          <IconCalendar size={20} stroke={2} className="text-theme-accent" />
-          <h3 className="text-sm font-semibold tracking-tight opacity-80">Contact Me</h3>
-        </div>
-        <p className="mb-auto text-[13px] leading-relaxed text-theme-text-muted">
-          Let's connect and explore new opportunities together.
-        </p>
+      <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
+        {/* Decorative Background Kanji */}
+        <span className="absolute -right-2 -bottom-2 select-none text-[8rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
+          連絡
+        </span>
 
-        <div className="mt-2 flex flex-col gap-4">
-          <div className="flex items-center justify-center gap-2">
-            <a
-              href="https://github.com/Zankcry"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
-              title="GitHub"
-            >
-              <IconBrandGithub size={18} className="transition-transform group-hover/icon:scale-110" />
-              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">GH</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/james-michael-duque-100154350/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
-              title="LinkedIn"
-            >
-              <IconBrandLinkedin size={18} className="transition-transform group-hover/icon:scale-110" />
-              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">LI</span>
-            </a>
-            <a
-              href="mailto:duquejames657@gmail.com"
-              className="group/icon flex h-14 w-full flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
-              title="Email"
-            >
-              <IconMail size={18} className="transition-transform group-hover/icon:scale-110" />
-              <span className="text-[8px] font-bold uppercase tracking-widest opacity-50 transition-opacity group-hover/icon:opacity-100">MAIL</span>
-            </a>
+        <div className="relative z-10 flex h-full flex-col">
+          <div className="flex items-center gap-3">
+            <div className="h-4 w-[2px] bg-theme-accent"></div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Contact Me</span>
           </div>
 
-          <a
-            href="https://www.linkedin.com/in/james-michael-duque-100154350/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-3.5 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
-          >
-            <span>Message Me</span>
-            <IconArrowUpRight size={14} />
-          </a>
+          <div className="mt-7">
+            <p className="text-[13px] leading-relaxed text-theme-text-muted mb-6">
+              Let's connect and explore new opportunities together.
+            </p>
+
+            <div className="grid grid-cols-3 gap-2 mb-4">
+              <a
+                href="https://github.com/Zankcry"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+                title="GitHub"
+              >
+                <IconBrandGithub size={18} className="transition-transform group-hover/icon:scale-110" />
+                <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">GH</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/james-michael-duque-100154350/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+                title="LinkedIn"
+              >
+                <IconBrandLinkedin size={18} className="transition-transform group-hover/icon:scale-110" />
+                <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">LI</span>
+              </a>
+              <CopyEmailButton email="duquejames657@gmail.com" />
+            </div>
+
+            <a
+              href="mailto:duquejames657@gmail.com"
+              className="group/btn flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-3 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
+            >
+              <IconMessage2 size={16} className="transition-transform group-hover/btn:rotate-12" />
+              <span>Send Message</span>
+              <IconArrowUpRight size={14} className="opacity-50" />
+            </a>
+          </div>
         </div>
       </div>
 
