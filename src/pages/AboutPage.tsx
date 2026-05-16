@@ -4,10 +4,10 @@ import { IconBrandSpotify } from '@tabler/icons-react';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandInstagram,
   IconFileCv,
   IconStar,
   IconArrowUpRight,
+  IconMail,
 } from '@tabler/icons-react';
 import { allPhotos } from '../data/photos';
 
@@ -172,8 +172,8 @@ export default function AboutPage() {
             {[
               { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub' },
               { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/james-michael-duque-100154350/', label: 'LinkedIn' },
-              { icon: IconBrandInstagram, href: 'https://www.instagram.com/jme_smichael/?hl=en', label: 'Instagram' },
               { icon: IconFileCv, href: '/resume.pdf', label: 'Resume' },
+              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: 'Mail' },
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
