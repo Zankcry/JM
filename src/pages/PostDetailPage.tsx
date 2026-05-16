@@ -5,7 +5,7 @@ export default function PostDetailPage() {
   const { id } = useParams();
 
   // Since you want unique designs, we'll check the ID and render the specific post
-  if (id !== 'spline-2d-guide') {
+  if (id !== 'spine-2d-guide') {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
         <h1 className="text-2xl font-bold text-theme-text">Post not found</h1>
@@ -14,9 +14,9 @@ export default function PostDetailPage() {
     );
   }
 
-  // Metadata for Spline 2D
+  // Metadata for Spine 2D
   const postDate = "May 12, 2024";
-  const postTags = ['Spline', 'Animation', 'UX Design', 'WebDev'];
+  const postTags = ['Spine', 'Animation', 'UX Design', 'WebDev'];
 
   return (
     <article className="mx-auto flex w-full max-w-3xl flex-col gap-12 pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
@@ -37,7 +37,7 @@ export default function PostDetailPage() {
             {postDate}
           </div>
           <h1 className="text-5xl font-black leading-[1.1] tracking-tighter text-theme-text sm:text-6xl lg:text-7xl">
-            The Power of <span className="text-theme-accent">Spline 2D</span> in Modern Web Design
+            The Power of <span className="text-theme-accent">Spine 2D</span> in Modern Web Design
           </h1>
         </div>
 
@@ -63,10 +63,10 @@ export default function PostDetailPage() {
         <section className="flex flex-col gap-6">
           <h2 className="flex items-center gap-4 text-2xl font-bold tracking-tight text-theme-text">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-accent/10 text-xs text-theme-accent">01</span>
-            What is Spline 2D?
+            What is Spine 2D?
           </h2>
           <p>
-            Spline 2D is a revolutionary tool that allows designers and developers to create <span className="font-semibold text-theme-text">interactive, vector-based animations</span> that run natively in the browser. Unlike traditional video formats like MP4 or static GIFs, Spline exports "scenes" that remain fully interactive.
+            Spine 2D is a revolutionary tool that allows designers and developers to create <span className="font-semibold text-theme-text">interactive, vector-based animations</span> that run natively in the browser. Unlike traditional video formats like MP4 or static GIFs, Spine exports "scenes" that remain fully interactive.
           </p>
           <div className="rounded-xl border border-theme-accent/20 bg-theme-bg p-4 italic text-theme-accent shadow-lg">
             "This means elements can follow the user's cursor, react to clicks, or change state based on scroll position."
@@ -80,10 +80,10 @@ export default function PostDetailPage() {
             Why is it used?
           </h2>
           <p>
-            The primary reason Spline 2D is used is <strong className="text-theme-accent underline decoration-theme-accent/30 underline-offset-4">Performance and Interactivity</strong>. Traditional high-fidelity animations usually require heavy video files that slow down page loads.
+            The primary reason Spine 2D is used is <strong className="text-theme-accent underline decoration-theme-accent/30 underline-offset-4">Performance and Interactivity</strong>. Traditional high-fidelity animations usually require heavy video files that slow down page loads.
           </p>
           <p>
-            Spline uses WebGL and small vector data, allowing for complex motion that is incredibly lightweight. It's used by top-tier brands to create a "premium" feel that static sites simply can't match.
+            Spine uses WebGL and small vector data, allowing for complex motion that is incredibly lightweight. It's used by top-tier brands to create a "premium" feel that static sites simply can't match.
           </p>
           <p>
             Its very cool! Sites like <a href="https://www.zenlesszonezero.com" className="text-theme-accent">Zenlesszonezero </a> uses it for their website, take a look!
@@ -91,8 +91,8 @@ export default function PostDetailPage() {
 
           <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
             <img
-              src="/videos/spline2d.webp"
-              alt="Spline 2D Demonstration"
+              src="/videos/spine2d.webp"
+              alt="Spine 2D Demonstration"
               className="w-full"
             />
           </div>
@@ -119,12 +119,12 @@ export default function PostDetailPage() {
               <p className="text-sm leading-relaxed">It allows the designer to build the motion and the developer to implement it exactly as intended.</p>
             </div>
           </div>
-          <p>Heres another Example! From <a href="https://www.youtube.com/@yuphi_kid" className="text-theme-accent">Yuphi</a> a youtuber showcasing and making tutorials about Spline2D</p>
+          <p>Heres another Example! From <a href="https://www.youtube.com/@yuphi_kid" className="text-theme-accent">Yuphi</a> a youtuber showcasing and making tutorials about Spine2D</p>
 
           <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
             <img
-              src="/videos/spline2d_2.webp"
-              alt="Spline 2D Tutorial Example"
+              src="/videos/spine2d_2.webp"
+              alt="Spine 2D Tutorial Example"
               className="w-full"
             />
           </div>
@@ -137,7 +137,7 @@ export default function PostDetailPage() {
             Final Thoughts
           </h2>
           <p>
-            Overall, I think Spline2d is a great tool for creating interactive animations that can be embedded in websites. It's easy to use and can be used to create a variety of different animations. Not to mention the performance benefits!
+            Overall, I think Spine2d is a great tool for creating interactive animations that can be embedded in websites. It's easy to use and can be used to create a variety of different animations. Not to mention the performance benefits!
           </p>
           <p>
             Its why im learning it and hope to use it in my future projects! Thats all about what i think of it so far. Arigatou Gozaimasu and Sayonara!👋❤️❤️
