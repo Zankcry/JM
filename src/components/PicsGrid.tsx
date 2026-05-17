@@ -14,7 +14,7 @@ export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
         return (
           <div
             key={photo.id}
-            className="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg mb-4"
+            className="break-inside-avoid relative group cursor-pointer overflow-hidden bg-theme-bg shadow-lg mb-4 rounded-3xl"
             onClick={() => onPhotoClick(globalIndex)}
           >
             <img
