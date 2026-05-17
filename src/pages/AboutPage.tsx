@@ -141,7 +141,7 @@ export default function AboutPage() {
       {/* ── Hero bio ────────────────────────────────────── */}
       <section className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
         {/* Avatar + quick facts */}
-        <div className="flex shrink-0 flex-col items-center gap-6 lg:items-start lg:pt-2">
+        <div className="flex shrink-0 flex-col items-center gap-6 lg:items-start lg:pt-1">
           <div className="relative">
             <div className="h-48 w-48 overflow-hidden rounded-xl border-2 border-theme-accent/20 bg-theme-bg shadow-xl">
               <img
@@ -161,14 +161,14 @@ export default function AboutPage() {
             />
           </div>
 
-          <div className="text-left">
+          <div className="text-center mt-2 w-full">
             <p className="text-lg font-semibold text-theme-text">James Michael</p>
             <p className="text-xs font-mono text-theme-text-muted tracking-widest">ジェームズ・マイケル</p>
             <p className="text-sm text-theme-accent">@Zankcry</p>
           </div>
 
           {/* Social links */}
-          <div className="flex items-center gap-3 text-theme-text-muted">
+          <div className="flex w-full items-center justify-center gap-3 text-theme-text-muted">
             {[
               { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub' },
               { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/james-michael-duque-100154350/', label: 'LinkedIn' },
@@ -282,8 +282,8 @@ export default function AboutPage() {
                   alt={randomPhoto.id}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-theme-bg/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
-                <p className="absolute bottom-3 left-4 text-[10px] font-mono text-theme-text opacity-0 transition-all duration-500 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
+                <p className="absolute bottom-3 left-4 text-[10px] font-mono text-white opacity-0 transition-all duration-500 translate-y-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
                   {randomPhoto.comment}
                 </p>
               </div>
