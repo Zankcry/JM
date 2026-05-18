@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { IconBrandGooglePhotos } from '@tabler/icons-react';
 import { allPhotos } from '../data/photos';
 import PicsFilter from '../components/PicsFilter';
@@ -52,10 +53,13 @@ export default function PicsPage() {
       </div>
 
       {/* ── Masonry Grid ────────────────────────────────── */}
-      <PicsGrid
-        photos={displayedPhotos}
-        onPhotoClick={setCurrentIndex}
-      />
+      <AnimatePresence mode="wait">
+        <PicsGrid
+          key={filter}
+          photos={displayedPhotos}
+          onPhotoClick={setCurrentIndex}
+        />
+      </AnimatePresence>
 
       {/* ── Lightbox ────────────────────────────────────── */}
       <PicsLightbox

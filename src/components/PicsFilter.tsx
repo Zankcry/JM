@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { motion } from 'framer-motion';
 import { Photo } from '../data/photos';
 
 type PicsFilterProps = {
@@ -14,20 +14,37 @@ export default function PicsFilter({ tags, filter, setFilter, allPhotos }: PicsF
     if (tag === 'all') return allPhotos.length;
     return allPhotos.filter(p => p.tags.includes(tag)).length;
   };
+
   return (
-    <div className="flex flex-wrap gap-2">
-      {tags.map(tag => (
-        <button
-          key={tag}
-          onClick={() => setFilter(tag)}
-          className={`px-3 py-1 text-sm rounded-full transition ${filter === tag
-            ? 'bg-theme-accent text-theme-bg font-semibold'
-            : 'bg-theme-surface text-theme-text-muted hover:text-theme-text hover:border-theme-accent/50'
-            }`}
-        >
-          {tag.charAt(0).toUpperCase() + tag.slice(1)} <span className="opacity-60 text-xs ml-1">({getCount(tag)})</span>
-        </button>
-      ))}
+    <div className="flex flex-wrap gap-1 p-1 rounded-xl bg-theme-surface/50 w-fit">
+      {tags.map(tag => {
+        const isActive = filter === tag;
+        return (
+          <button
+            key={tag}
+            onClick={() => setFilter(tag)}
+            className="relative px-3 py-1.5 text-xs rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-theme-accent/60"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            {isActive && (
+              <motion.span
+                layoutId="filter-pill"
+                className="absolute inset-0 rounded-lg bg-theme-accent"
+                transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+              />
+            )}
+            <span
+              className="relative z-10 flex items-baseline gap-1.5 transition-colors duration-200"
+              style={{ color: isActive ? 'rgb(var(--theme-bg))' : 'rgb(var(--theme-text-muted))' }}
+            >
+              <span className={isActive ? 'font-semibold' : ''}>
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              </span>
+              <span className="opacity-60 text-[10px]">({getCount(tag)})</span>
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }

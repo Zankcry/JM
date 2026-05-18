@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Photo } from '../data/photos';
 
 type PicsGridProps = {
@@ -6,14 +7,66 @@ type PicsGridProps = {
   onPhotoClick: (globalIndex: number) => void;
 };
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.02,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.015,
+      staggerDirection: -1,
+      when: "afterChildren",
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+    scale: 0.98,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as const, // ultra-smooth cubic bezier tuple
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -6,
+    scale: 0.98,
+    transition: {
+      duration: 0.22,
+      ease: [0.7, 0, 0.84, 0] as const,
+    },
+  },
+};
+
 export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
   return (
-    <div className="columns-1 sm:columns-2 gap-4 space-y-4">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="columns-1 sm:columns-2 gap-4 space-y-4"
+    >
       {photos.map((photo) => {
         const globalIndex = photos.findIndex(p => p.id === photo.id);
         return (
-          <div
+          <motion.div
             key={photo.id}
+            variants={cardVariants}
             className="break-inside-avoid relative group cursor-pointer overflow-hidden bg-theme-bg shadow-lg mb-4 rounded-3xl"
             onClick={() => onPhotoClick(globalIndex)}
           >
@@ -27,9 +80,9 @@ export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
                 "{photo.comment}"
               </p>
             </div>
-          </div>
+          </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 }
