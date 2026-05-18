@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { IconArrowRight } from '@tabler/icons-react';
+
 import { Post } from '../data/posts';
 
 export function PostCard({ post }: { post: Post }) {
@@ -24,10 +24,6 @@ export function PostCard({ post }: { post: Post }) {
           <div className="flex flex-col gap-2.5">
             <h2 className="flex items-center gap-2 text-xl font-bold tracking-tight text-theme-text transition-colors duration-300 group-hover:text-theme-accent sm:text-2xl">
               <span>{post.title}</span>
-              <IconArrowRight
-                size={18}
-                className="inline-block opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-theme-accent shrink-0"
-              />
             </h2>
             <p className="text-[14px] leading-relaxed text-theme-text-muted sm:text-[15px] max-w-2xl font-light">
               {post.description}
