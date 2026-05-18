@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { socialLinks } from '../data/navigation';
 import {
   IconBrandGithub,
@@ -31,17 +32,38 @@ export function Hero() {
           className="flex max-w-3xl flex-wrap items-center gap-x-3 gap-y-2 text-3xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-4xl lg:text-5xl"
         >
           <span>Yahho! I&apos;m</span>
-          <span className="group/name inline-flex items-center gap-2 whitespace-nowrap">
-            <span className="relative ml-2 inline-block cursor-default text-theme-accent transition-colors duration-300 ease-out">
-              <span className="inline-block transition-all duration-500 ease-out group-hover/name:pointer-events-none group-hover/name:-translate-y-4 group-hover/name:opacity-0">
+          <motion.span
+            className="group/name inline-flex items-center gap-2 whitespace-nowrap"
+            initial="initial"
+            whileHover="hover"
+          >
+            <div
+              className="relative ml-2 inline-flex items-center justify-start cursor-default text-theme-accent select-none"
+              style={{ perspective: '800px' }}
+            >
+              <motion.span
+                className="block transition-colors duration-300"
+                variants={{
+                  initial: { y: 0, opacity: 1, rotateX: 0 },
+                  hover: { y: -20, opacity: 0, rotateX: 90 }
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              >
                 James Michael
-              </span>
-              <span className="absolute left-0 top-0 inline-block translate-y-4 opacity-0 transition-all duration-500 ease-out group-hover/name:translate-y-0 group-hover/name:opacity-100">
+              </motion.span>
+              <motion.span
+                className="absolute left-0 block font-semibold tracking-wider whitespace-nowrap pointer-events-none"
+                variants={{
+                  initial: { y: 20, opacity: 0, rotateX: -90 },
+                  hover: { y: 0, opacity: 1, rotateX: 0 }
+                }}
+                transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+              >
                 ジェームズマイケル
-              </span>
-            </span>
+              </motion.span>
+            </div>
             <video
-              className="h-14 w-14 rounded-2xl object-cover transition-transform duration-500 ease-out group-hover/name:translate-x-16 sm:h-16 sm:w-16"
+              className="h-14 w-14 rounded-2xl object-cover transition-transform duration-500 ease-out group-hover/name:translate-x-20 sm:h-16 sm:w-16"
               autoPlay
               loop
               muted
@@ -51,7 +73,7 @@ export function Hero() {
             >
               <source src="/videos/chibi.webm" type="video/webm" />
             </video>
-          </span>
+          </motion.span>
         </h1>
 
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">

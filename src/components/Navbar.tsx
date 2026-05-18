@@ -5,6 +5,14 @@ import { primaryNavLinks } from '../data/navigation';
 import { AccentSwitcher } from './AccentSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
+const TRANSLATIONS: Record<string, string> = {
+  Home: 'ホーム',
+  About: 'アバウト',
+  Projects: 'プロジェクト',
+  Posts: 'ポスト',
+  Pics: 'ピクス',
+};
+
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -141,28 +149,77 @@ export function Navbar() {
       <div
         aria-hidden="true"
         className="pointer-events-none fixed left-[5rem] top-0 z-50 w-0.5 -translate-x-1/2 bg-gradient-to-b from-theme-accent/50 to-transparent hidden lg:block"
-        style={{ height: 'calc(50vh - 120px)' }}
+        style={{ height: 'calc(50vh - 140px)' }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none fixed left-[5rem] bottom-0 z-50 w-0.5 -translate-x-1/2 bg-gradient-to-t from-theme-accent/50 to-transparent hidden lg:block"
-        style={{ height: 'calc(50vh - 120px)' }}
+        style={{ height: 'calc(50vh - 140px)' }}
       />
- 
+
       <aside className="fixed left-[5rem] top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
         <nav className="flex flex-col items-center gap-7" aria-label="Section navigation">
           {primaryNavLinks.map((link) => {
             const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
             const href = link.href === '#projects' ? '/projects' : link.href;
+            const jpLabel = TRANSLATIONS[link.label] || link.label;
+            const isLinkActive = link.href === '/'
+              ? location.pathname === '/'
+              : location.pathname.startsWith(href);
+
+            // Move overflow-hidden and 3D perspective inside the slide wrapper
+            const content = (
+              <motion.div
+                className="relative h-[1.375rem] select-none flex items-center justify-center"
+                style={{ perspective: '600px' }}
+                initial="initial"
+                whileHover="hover"
+              >
+                {/* English face */}
+                <motion.span
+                  className={`block leading-[1.375rem] font-medium transition-colors duration-300 ${isLinkActive ? 'text-theme-accent' : 'text-theme-text-muted group-hover:text-theme-text'
+                    }`}
+                  variants={{
+                    initial: { y: 0, opacity: 1, rotateX: 0 },
+                    hover: { y: -10, opacity: 0, rotateX: 90 }
+                  }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                >
+                  {link.label}
+                </motion.span>
+
+                {/* Japanese face (Absolute so it doesn't artificially stretch the container width) */}
+                <motion.span
+                  className="absolute block leading-[1.375rem] font-semibold text-theme-accent tracking-wider whitespace-nowrap pointer-events-none"
+                  variants={{
+                    initial: { y: 10, opacity: 0, rotateX: -90 },
+                    hover: { y: 0, opacity: 1, rotateX: 0 }
+                  }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                >
+                  {jpLabel}
+                </motion.span>
+              </motion.div>
+            );
 
             return isInternal ? (
               <Link
                 key={link.label}
                 to={href}
                 onClick={() => handleLinkClick(href)}
-                className="text-sm text-theme-text-muted transition duration-150 hover:text-theme-accent focus:outline-none focus-visible:text-theme-accent focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg"
+                // Removed overflow-hidden to allow indicator visibility, added pb-1.5 gutter
+                className="group relative block pb-1.5 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded px-2"
               >
-                {link.label}
+                {content}
+
+                {/* Dynamic gliding active marker under the text (scales with layoutId width) */}
+                {isLinkActive && (
+                  <motion.span
+                    layoutId="active-indicator-underline"
+                    className="absolute bottom-0 left-3 right-3 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50"
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                  />
+                )}
               </Link>
             ) : (
               <a
@@ -170,9 +227,9 @@ export function Navbar() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-theme-text-muted transition duration-150 hover:text-theme-accent focus:outline-none focus-visible:text-theme-accent focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg"
+                className="group relative block pb-1.5 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded px-2"
               >
-                {link.label}
+                {content}
               </a>
             );
           })}
