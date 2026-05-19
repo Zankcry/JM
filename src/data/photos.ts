@@ -130,7 +130,7 @@ export const allPhotos: Photo[] = [
     id: '21',
     src: '/images/pics/motivation.jpg',
     tags: ['personal'],
-    comment: 'My motivation.'
+    comment: 'My role model & motivation❤️'
   },
   {
     id: '22',
