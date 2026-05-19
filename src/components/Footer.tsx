@@ -21,7 +21,7 @@ export function Footer() {
 
   const getHoverCommand = (label: string) => {
     switch (label) {
-      case 'GitHub': return 'ssh github';
+      case 'GitHub': return 'open github';
       case 'LinkedIn': return 'open linkedin';
       case 'Resume': return 'cat resume.pdf';
       default: return 'ssh mail';

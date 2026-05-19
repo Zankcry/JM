@@ -10,6 +10,7 @@ import {
   IconMail,
 } from '@tabler/icons-react';
 import { allPhotos } from '../data/photos';
+import { useTerminal } from '../context/TerminalContext';
 
 
 type SpotifyEmbed = {
@@ -114,6 +115,7 @@ function WordOfTheWeek() {
 }
 
 export default function AboutPage() {
+  const { setHoveredCommand } = useTerminal();
   const [randomPhoto, setRandomPhoto] = useState(allPhotos[Math.floor(Math.random() * allPhotos.length)]);
   const [isFading, setIsFading] = useState(false);
 
@@ -171,11 +173,11 @@ export default function AboutPage() {
           {/* Social links */}
           <div className="flex w-full items-center justify-center gap-3 text-theme-text-muted">
             {[
-              { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub' },
-              { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/james-michael-duque-100154350/', label: 'LinkedIn' },
-              { icon: IconFileCv, href: '/resume.pdf', label: 'Resume' },
-              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: 'Mail' },
-            ].map(({ icon: Icon, href, label }) => (
+              { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub', cmd: 'open github' },
+              { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/james-michael-duque-100154350/', label: 'LinkedIn', cmd: 'open linkedin' },
+              { icon: IconFileCv, href: '/resume.pdf', label: 'Resume', cmd: 'cat resume.pdf' },
+              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: 'Mail', cmd: 'ssh mail' },
+            ].map(({ icon: Icon, href, label, cmd }) => (
               <a
                 key={label}
                 href={href}
@@ -183,6 +185,8 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 aria-label={label}
                 className="rounded-lg p-2 transition hover:bg-theme-surface/60 hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus"
+                onMouseEnter={() => setHoveredCommand(cmd)}
+                onMouseLeave={() => setHoveredCommand(null)}
               >
                 <Icon size={18} stroke={1.8} />
               </a>
@@ -273,6 +277,8 @@ export default function AboutPage() {
               <Link
                 to="/pics"
                 className="absolute right-3 top-3 z-20 flex items-center gap-1.5 rounded-full bg-theme-bg/60 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-theme-text backdrop-blur-md opacity-0 transition-all duration-300 hover:bg-theme-accent hover:text-theme-on-accent group-hover:opacity-100"
+                onMouseEnter={() => setHoveredCommand('pics')}
+                onMouseLeave={() => setHoveredCommand(null)}
               >
                 <span>View All</span>
                 <IconArrowUpRight size={12} stroke={2.5} />
