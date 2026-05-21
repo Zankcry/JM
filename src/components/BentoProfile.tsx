@@ -37,13 +37,13 @@ function CopyEmailButton({ email }: { email: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+      className="group/icon flex h-10 flex-col items-center justify-center gap-0.5 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
       title="Copy Email"
     >
       {copied ? (
-        <IconCheck size={18} className="text-green-500" />
+        <IconCheck size={16} className="text-green-500" />
       ) : (
-        <IconCopy size={18} className="transition-transform group-hover/icon:scale-110" />
+        <IconCopy size={16} className="transition-transform group-hover/icon:scale-110" />
       )}
       <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">
         {copied ? 'COPIED' : 'COPY'}
@@ -65,7 +65,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
       {/* Availability Card */}
       <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
         {/* Decorative Background Kanji */}
-        <span className="absolute -right-2 -bottom-2 select-none text-[8rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
+        <span className="absolute -right-2 -bottom-2 select-none text-[6.5rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
           稼働
         </span>
 
@@ -75,17 +75,17 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Status: Active</span>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-5">
             <div className="flex items-center gap-2 text-theme-text-muted mb-1">
               <IconBriefcase size={14} />
               <span className="text-[11px] font-mono tracking-tighter uppercase">Role: [Internship]</span>
             </div>
-            <h3 className="text-3xl font-black tracking-tighter text-theme-text leading-tight">
+            <h3 className="text-2xl font-black tracking-tighter text-theme-text leading-tight">
               OPEN FOR <br /> <span className="text-theme-accent">WORK</span>
             </h3>
           </div>
 
-          <div className="mt-auto pt-6 flex items-center gap-2">
+          <div className="mt-auto pt-4 flex items-center gap-2">
             <div className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
@@ -98,7 +98,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
       {/* Let's Connect Card */}
       <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1">
         {/* Decorative Background Kanji */}
-        <span className="absolute -right-2 -bottom-2 select-none text-[8rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
+        <span className="absolute -right-2 -bottom-2 select-none text-[6.5rem] font-black leading-none text-theme-accent/[0.08] transition-all duration-700 group-hover:text-theme-accent/[0.15] group-hover:scale-110">
           連絡
         </span>
 
@@ -108,30 +108,30 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Contact Me</span>
           </div>
 
-          <div className="mt-7">
-            <p className="text-[13px] leading-relaxed text-theme-text-muted mb-6">
+          <div className="mt-5">
+            <p className="text-[13px] leading-relaxed text-theme-text-muted mb-3.5">
               Let's connect and explore new opportunities together.
             </p>
 
-            <div className="grid grid-cols-3 gap-2 mb-4">
+            <div className="grid grid-cols-3 gap-2 mb-3">
               <a
                 href="https://github.com/Zankcry"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+                className="group/icon flex h-10 flex-col items-center justify-center gap-0.5 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
                 title="GitHub"
               >
-                <IconBrandGithub size={18} className="transition-transform group-hover/icon:scale-110" />
+                <IconBrandGithub size={16} className="transition-transform group-hover/icon:scale-110" />
                 <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">GH</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/james-michael-duque-100154350/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/icon flex h-12 flex-col items-center justify-center gap-1 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
+                className="group/icon flex h-10 flex-col items-center justify-center gap-0.5 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
                 title="LinkedIn"
               >
-                <IconBrandLinkedin size={18} className="transition-transform group-hover/icon:scale-110" />
+                <IconBrandLinkedin size={16} className="transition-transform group-hover/icon:scale-110" />
                 <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">LI</span>
               </a>
               <CopyEmailButton email="duquejames657@gmail.com" />
@@ -139,7 +139,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
 
             <a
               href="mailto:duquejames657@gmail.com"
-              className="group/btn flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-3 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
+              className="group/btn flex w-full items-center justify-center gap-2 rounded-xl bg-theme-accent px-4 py-2 text-[13px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
             >
               <IconMessage2 size={16} className="transition-transform group-hover/btn:rotate-12" />
               <span>Send Message</span>
