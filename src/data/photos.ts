@@ -158,19 +158,19 @@ export const allPhotos: Photo[] = [
   },
   {
     id: '26',
-    src: '/images/pics/20251019220051.png',
+    src: '/images/pics/natlan-secret-place.png',
     tags: ['genshin', 'scenery'],
     comment: 'Secret Place in Natlan'
   },
   {
     id: '27',
-    src: '/images/pics/20251106221909.png',
+    src: '/images/pics/natlan-volcano-peak.png',
     tags: ['genshin', 'scenery'],
     comment: 'Volcano peak!!'
   },
   {
     id: '28',
-    src: '/images/pics/20251106223343.png',
+    src: '/images/pics/genshin-selfie.png',
     tags: ['genshin'],
     comment: 'Selfie~'
   }

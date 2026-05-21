@@ -53,9 +53,6 @@ const cardVariants: Variants = {
 };
 
 const ASPECT_RATIO_LOOKUP: Record<string, number> = {
-  '20251019220051.png': 1080 / 1920,
-  '20251106221909.png': 1080 / 1920,
-  '20251106223343.png': 1080 / 1920,
   'august.jpg': 2608 / 4640,
   'aurora-trip.jpg': 3024 / 4032,
   'baguio.jpg': 1836 / 3264,
@@ -66,6 +63,7 @@ const ASPECT_RATIO_LOOKUP: Record<string, number> = {
   'christmas-day.jpg': 2608 / 4640,
   'christmas-eve.jpg': 2608 / 4640,
   'elegant-furina.png': 1080 / 1920,
+  'genshin-selfie.png': 1080 / 1920,
   'good-times.jpg': 917 / 1223,
   'heading-to-class.jpg': 4032 / 3024,
   'holy-angel.webp': 4032 / 3024,
@@ -75,6 +73,8 @@ const ASPECT_RATIO_LOOKUP: Record<string, number> = {
   'mecha-oishii.jpeg': 2048 / 1536,
   'missing.jpg': 474 / 843,
   'motivation.jpg': 1440 / 1080,
+  'natlan-secret-place.png': 1080 / 1920,
+  'natlan-volcano-peak.png': 1080 / 1920,
   'quiet-afternoon.jpg': 3024 / 4032,
   'silly-furina.png': 1080 / 1920,
   'starting-2025.jpg': 2608 / 4640,
