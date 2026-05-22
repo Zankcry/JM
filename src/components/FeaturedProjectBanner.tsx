@@ -69,14 +69,12 @@ export function FeaturedProjectBanner({
         {/* Right Image/Slanted Area */}
         <div className="relative h-[240px] w-full overflow-hidden md:h-auto md:w-[50%] lg:w-[55%]">
           <div 
-            className="absolute inset-0 bg-theme-accent"
+            className="absolute inset-0"
             style={{
               clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)',
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-theme-accent to-theme-accent-strong opacity-80" />
             <ProjectPreview project={project} className="h-full w-full" />
-            <div className="absolute inset-0 bg-theme-accent/10 mix-blend-overlay pointer-events-none" />
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export const projects: Project[] = [
     description: "A premium, high-performance static web application for a premier barbershop in Angeles City, featuring Tailwind CSS styling, Firebase Authentication, local SEO schemas, and GA4 analytics tracking.",
     image: '/videos/project_1.webp',
     poster: '/images/project_poster_1.webp',
-    tags: ['HTML5', 'TailwindCSS', 'JavaScript', 'Firebase', 'GA4', 'AOS'],
+    tags: ['HTML5', 'TailwindCSS', 'JavaScript', 'Firebase'],
     links: { github: 'https://github.com/Zankcry/Barbershop_Website', live: 'https://charliesbarbershop.vercel.app/' },
     details: {
       subtitle: "PREMIUM WEB STOREFRONT & LOCAL SEARCH DOMINATION",
@@ -87,7 +87,7 @@ export const projects: Project[] = [
     description: 'A responsive web portal built with Angular 18+ and Tailwind CSS v4, showcasing flagship games (Genshin Impact, Honkai: Star Rail), global statistics, and a full employee registry system.',
     image: '/videos/project_2.webp',
     poster: '/images/project_poster_2.webp',
-    tags: ['Angular', 'TypeScript', 'TailwindCSS', 'AOS', 'RemixIcon'],
+    tags: ['Angular', 'TypeScript', 'TailwindCSS'],
     links: { github: 'https://github.com/Zankcry/prelim-project-JM', live: 'https://prelim-project-jm.vercel.app' },
     details: {
       subtitle: "HOYOVERSE-INSPIRED WEB HUB & TEAM REGISTRY",
@@ -124,7 +124,7 @@ export const projects: Project[] = [
     description: 'A clean, ad-free, cross-platform web and light novel reader app with a Tachiyomi-inspired UI, built using Flutter and a PHP/MySQL REST API backend.',
     image: '/videos/project_3.webp',
     poster: '/images/project_poster_3.png',
-    tags: ['Flutter', 'Dart', 'PHP', 'MySQL', 'GitHubActions'],
+    tags: ['Flutter', 'Dart', 'PHP', 'MySQL'],
     links: { github: 'https://github.com/Zankcry/Yomi', live: 'https://yomi.infinityfreeapp.com/' },
     details: {
       subtitle: "TACHIYOMI-INSPIRED CROSS-PLATFORM NOVEL READER",

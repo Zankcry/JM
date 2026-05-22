@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react';
 import { Project } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
+import { techStack, techStackIcons } from '../data/tech';
 
 type ProjectDetailModalProps = {
   project: Project | null;
@@ -98,23 +99,53 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               <h2 id="modal-project-title" className="text-3xl font-black tracking-tight text-theme-text sm:text-4xl lg:text-5xl leading-tight">
                 {project.title}
               </h2>
-
-              {/* Tag Cloud */}
-              <div className="flex flex-wrap gap-2 mt-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-lg border border-theme-accent/10 bg-theme-bg-elevated/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted/80"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </header>
 
-            {/* Animated WebP / Video Banner */}
-            <div className="overflow-hidden rounded-xl border border-theme-accent/25 bg-theme-bg-elevated/10 shadow-lg aspect-[16/9] w-full relative">
-              <ProjectPreview project={project} className="h-full w-full" />
+            {/* Animated WebP / Video Banner & Tags Group */}
+            <div className="flex flex-col gap-3.5">
+              <ProjectPreview 
+                project={project} 
+                className="overflow-hidden rounded-xl border border-theme-accent/25 bg-theme-bg-elevated/10 shadow-lg aspect-[16/9] w-full relative" 
+              />
+              {/* Tag Cloud */}
+              <div className="flex flex-wrap gap-2 mt-1">
+                {project.tags.map((tag) => {
+                  const tech = techStack.find(t => 
+                    t.label.toLowerCase() === tag.toLowerCase() || 
+                    t.shortLabel.toLowerCase() === tag.toLowerCase()
+                  );
+
+                  if (!tech) {
+                    return (
+                      <span
+                        key={tag}
+                        className="rounded-lg border border-theme-accent/10 bg-theme-bg-elevated/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted/80"
+                      >
+                        {tag}
+                      </span>
+                    );
+                  }
+
+                  const TechIcon = techStackIcons[tech.icon];
+
+                  return (
+                    <div 
+                      key={tag} 
+                      className="group/tag flex items-center gap-1.5 rounded-lg border border-theme-accent/10 bg-theme-bg-elevated/50 px-2.5 py-1 transition-all hover:border-theme-accent/30 hover:bg-theme-bg-elevated"
+                    >
+                      <div 
+                        className="flex h-4 w-4 items-center justify-center transition-transform group-hover/tag:scale-110"
+                        style={{ color: tech.tone }}
+                      >
+                        <TechIcon size={14} stroke={2} aria-hidden="true" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted/80 transition-colors group-hover/tag:text-theme-text">
+                        {tech.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Gradient Decorative Line Divider */}
@@ -298,21 +329,52 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               <h2 id="modal-project-title" className="text-3xl font-bold tracking-tight text-theme-text sm:text-4xl">
                 {project.title}
               </h2>
-              <div className="flex flex-wrap gap-1.5 mt-1">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded bg-theme-bg-elevated px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-theme-text-muted"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </header>
 
-            {/* Animated WebP / Video Banner */}
-            <div className="overflow-hidden rounded-xl border border-theme-accent/25 bg-theme-bg-elevated/10 shadow-lg aspect-[16/9] w-full relative">
-              <ProjectPreview project={project} className="h-full w-full" />
+            {/* Animated WebP / Video Banner & Tags Group */}
+            <div className="flex flex-col gap-3.5">
+              <ProjectPreview 
+                project={project} 
+                className="overflow-hidden rounded-xl border border-theme-accent/25 bg-theme-bg-elevated/10 shadow-lg aspect-[16/9] w-full relative" 
+              />
+              <div className="flex flex-wrap gap-1.5 mt-1">
+                {project.tags.map((tag) => {
+                  const tech = techStack.find(t => 
+                    t.label.toLowerCase() === tag.toLowerCase() || 
+                    t.shortLabel.toLowerCase() === tag.toLowerCase()
+                  );
+
+                  if (!tech) {
+                    return (
+                      <span
+                        key={tag}
+                        className="rounded bg-theme-bg-elevated px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-theme-text-muted"
+                      >
+                        {tag}
+                      </span>
+                    );
+                  }
+
+                  const TechIcon = techStackIcons[tech.icon];
+
+                  return (
+                    <div 
+                      key={tag} 
+                      className="group/tag flex items-center gap-1 px-2 py-0.5 rounded bg-theme-bg-elevated text-[9px] font-semibold uppercase tracking-wider text-theme-text-muted/80 transition-all hover:bg-theme-bg-elevated/80"
+                    >
+                      <div 
+                        className="flex h-3.5 w-3.5 items-center justify-center transition-transform group-hover/tag:scale-110"
+                        style={{ color: tech.tone }}
+                      >
+                        <TechIcon size={12} stroke={2} aria-hidden="true" />
+                      </div>
+                      <span className="transition-colors group-hover/tag:text-theme-text">
+                        {tech.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="h-px w-full bg-theme-border/20" />
