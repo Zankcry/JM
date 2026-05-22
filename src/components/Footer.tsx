@@ -34,7 +34,7 @@ export function Footer() {
   return (
     <footer className={[
       "mt-auto w-full py-12 transition-all duration-300 ease-out",
-      effect === 'cyber-pattern'
+      effect !== 'none'
         ? "border-t border-transparent bg-transparent"
         : "border-t border-theme-accent/10 bg-theme-bg/50 backdrop-blur-sm"
     ].join(' ')}>

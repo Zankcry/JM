@@ -13,7 +13,7 @@ export function ThemeSwitcher({ id = 'default' }: { id?: string }) {
       <div
         className={[
           "relative inline-flex flex-wrap gap-1 rounded-xl border p-1 transition-all duration-300 ease-out",
-          effect === 'cyber-pattern'
+          effect !== 'none'
             ? "border-theme-accent/15 bg-transparent"
             : "border-theme-accent/20 bg-theme-bg shadow-lg"
         ].join(' ')}

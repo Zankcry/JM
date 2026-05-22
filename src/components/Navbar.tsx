@@ -171,7 +171,7 @@ export function Navbar() {
         <div
           className={[
             "pointer-events-none absolute inset-x-0 top-0 h-[175%] -z-10 transition-all duration-300 ease-out",
-            effect === 'cyber-pattern' ? "bg-transparent" : "bg-theme-bg/80 backdrop-blur-md"
+            effect !== 'none' ? "bg-transparent" : "bg-theme-bg/80 backdrop-blur-md"
           ].join(' ')}
           style={{
             maskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)',

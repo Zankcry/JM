@@ -74,23 +74,33 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  const { effect } = useBackground();
+  const { effect, smokeEnabled } = useBackground();
 
   return (
     <TerminalProvider>
       <Router>
         <div className={[
           "relative min-h-screen overflow-hidden text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col transition-colors duration-300 ease-out",
-          effect === 'cyber-pattern' ? 'cyber-pattern' : 'bg-theme-bg'
+          effect === 'cyber-pattern'
+            ? 'cyber-pattern'
+            : effect === 'dot-matrix'
+            ? 'dot-matrix'
+            : effect === 'retro-scanlines'
+            ? 'retro-scanlines'
+            : effect === 'hex-blueprint'
+            ? 'hex-blueprint'
+            : 'bg-theme-bg'
         ].join(' ')}>
-          <SmokeEffect />
+          {smokeEnabled && <SmokeEffect />}
 
           {/* Background Gradients */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute left-1/2 top-[-7rem] h-72 w-72 -translate-x-1/2 rounded-full bg-theme-accent/10 blur-3xl transition-colors duration-300 ease-out" />
-            <div className="absolute right-[-6rem] top-1/3 h-96 w-96 rounded-full bg-theme-link/10 blur-3xl transition-colors duration-300 ease-out" />
-            <div className="absolute bottom-[-8rem] left-[-4rem] h-80 w-80 rounded-full bg-theme-accent-strong/10 blur-3xl transition-colors duration-300 ease-out" />
-          </div>
+          {effect !== 'hex-blueprint' && (
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+              <div className="absolute left-1/2 top-[-7rem] h-72 w-72 -translate-x-1/2 rounded-full bg-theme-accent/10 blur-3xl transition-colors duration-300 ease-out" />
+              <div className="absolute right-[-6rem] top-1/3 h-96 w-96 rounded-full bg-theme-link/10 blur-3xl transition-colors duration-300 ease-out" />
+              <div className="absolute bottom-[-8rem] left-[-4rem] h-80 w-80 rounded-full bg-theme-accent-strong/10 blur-3xl transition-colors duration-300 ease-out" />
+            </div>
+          )}
 
           <Navbar />
 

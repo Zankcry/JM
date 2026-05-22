@@ -166,4 +166,95 @@ summary::-webkit-details-marker {
       /* Grille Cyan bouge de 60px (1 carreau) */ 40px 40px,
       40px 40px; /* Grille Magenta bouge de 40px (plus vite/décalé) */
   }
+}
+
+
+/* Dot Matrix glowing background pattern */
+.dot-matrix {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(var(--theme-bg));
+  background-attachment: fixed;
+  
+  background-image: 
+    /* 1. Vignette shadow to fade dots at viewport edges */
+    radial-gradient(circle at center, transparent 40%, rgb(var(--theme-bg)) 95%),
+    /* 2. Micro Dot Grid */
+    radial-gradient(rgb(var(--theme-accent) / 0.18) 1.5px, transparent 1.5px);
+  
+  background-size: 100% 100%, 24px 24px;
+  animation: dot-drift 24s linear infinite;
+}
+
+@keyframes dot-drift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 24px 24px;
+  }
+}
+
+/* Retro Scanlines background pattern */
+.retro-scanlines {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(var(--theme-bg));
+  background-attachment: fixed;
+  
+  background-image: 
+    /* 1. Subtle horizontal scanlines using dynamic text colors */
+    linear-gradient(rgb(var(--theme-text) / 0.04) 50%, transparent 50%),
+    /* 2. Soft radial vignette for vintage screen look */
+    radial-gradient(circle at center, transparent 35%, rgb(var(--theme-bg)) 95%);
+  
+  background-size: 100% 4px, 100% 100%;
+  animation: scanline-scroll 12s linear infinite;
+}
+
+@keyframes scanline-scroll {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 40px, 0 0;
+  }
+}
+
+/* Tech Hexagon Blueprint background pattern */
+.hex-blueprint {
+  position: relative;
+}
+
+.hex-blueprint::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -20;
+  
+  /* 1. Accent color radial gradient so lines fade beautifully near the viewport edges */
+  background-image: radial-gradient(circle at center, rgb(var(--theme-accent) / 0.12) 30%, transparent 90%);
+  background-attachment: fixed;
+  
+  /* 2. Seamless repeating regular hexagon SVG mask (fully URL-encoded for cross-browser safety) */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org/2000%2Fsvg%22%20width%3D%2260%22%20height%3D%22104%22%20viewBox%3D%220%200%2060%20104%22%3E%3Cpath%20d%3D%22M30%200%20L0%2017.32%20L0%2051.96%20L30%2069.28%20L30%20104%20M30%200%20L60%2017.32%20M30%2069.28%20L60%2051.96%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org/2000%2Fsvg%22%20width%3D%2260%22%20height%3D%22104%22%20viewBox%3D%220%200%2060%20104%22%3E%3Cpath%20d%3D%22M30%200%20L0%2017.32%20L0%2051.96%20L30%2069.28%20L30%20104%20M30%200%20L60%2017.32%20M30%2069.28%20L60%2051.96%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-size: 60px 104px;
+  mask-size: 60px 104px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  
+  animation: hex-drift 30s linear infinite;
+}
+
+@keyframes hex-drift {
+  0% {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  100% {
+    -webkit-mask-position: 60px 104px;
+    mask-position: 60px 104px;
+  }
 }
