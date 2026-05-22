@@ -122,7 +122,7 @@ export function RecentActivity() {
                   </div>
                 ) : (
                   <img
-                    src={card.title === 'Photo Gallery' ? '/images/pics/quiet-afternoon.jpg' : '/images/manga/randomChat.webp'}
+                    src={card.title === 'Photo Gallery' ? '/images/pics/quiet-afternoon.jpg' : '/images/anime_manga/randomChat.webp'}
                     alt=""
                     className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
                   />
