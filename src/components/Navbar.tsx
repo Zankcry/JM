@@ -318,7 +318,7 @@ export function Navbar() {
                 {isLinkActive && (
                   <motion.span
                     layoutId="active-indicator-underline"
-                    className="absolute bottom-2 left-6 right-6 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50"
+                    className="absolute bottom-2 left-7 right-7 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50"
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   />
                 )}
