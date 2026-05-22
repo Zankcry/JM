@@ -202,9 +202,9 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                     </span>
                     Key Features
                   </h3>
-                  <ul className="grid gap-3 sm:grid-cols-2 mt-1">
+                  <ul className="flex flex-col gap-3 mt-1">
                     {details.keyFeatures.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2.5 text-[13px]">
+                      <li key={index} className="flex items-start gap-2.5 text-[13px] leading-relaxed">
                         <IconCircleCheck size={18} className="text-theme-accent shrink-0 mt-0.5" />
                         <span className="text-theme-text-subtle">{feature}</span>
                       </li>
