@@ -1,15 +1,22 @@
 import { motion } from 'framer-motion';
 import { themeLabels } from '../theme/catppuccin';
 import { useTheme } from '../theme/ThemeProvider';
+import { useBackground } from '../context/BackgroundContext';
 
 export function ThemeSwitcher({ id = 'default' }: { id?: string }) {
   const { theme, themes, setTheme } = useTheme();
+  const { effect } = useBackground();
 
   return (
     <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
       <span className="uppercase tracking-[0.35em] text-theme-text-muted/85">Theme</span>
       <div
-        className="relative inline-flex flex-wrap gap-1 rounded-xl border border-theme-accent/20 bg-theme-bg p-1 shadow-lg"
+        className={[
+          "relative inline-flex flex-wrap gap-1 rounded-xl border p-1 transition-all duration-300 ease-out",
+          effect === 'cyber-pattern'
+            ? "border-theme-accent/15 bg-transparent"
+            : "border-theme-accent/20 bg-theme-bg shadow-lg"
+        ].join(' ')}
         role="radiogroup"
         aria-label="Color theme"
       >

@@ -11,6 +11,8 @@ import AboutPage from './pages/AboutPage';
 import PicsPage from './pages/PicsPage';
 import { Footer } from './components/Footer';
 import { TerminalProvider } from './context/TerminalContext';
+import { useBackground } from './context/BackgroundContext';
+
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -72,10 +74,15 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  const { effect } = useBackground();
+
   return (
     <TerminalProvider>
       <Router>
-        <div className="relative min-h-screen overflow-hidden bg-theme-bg text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col">
+        <div className={[
+          "relative min-h-screen overflow-hidden text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col transition-colors duration-300 ease-out",
+          effect === 'cyber-pattern' ? 'cyber-pattern' : 'bg-theme-bg'
+        ].join(' ')}>
           <SmokeEffect />
 
           {/* Background Gradients */}

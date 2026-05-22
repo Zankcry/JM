@@ -1,10 +1,13 @@
 import { IconBrandGithub, IconBrandLinkedin, IconMail, IconArrowUp, IconFileCv } from '@tabler/icons-react';
 import { socialLinks } from '../data/navigation';
 import { useTerminal } from '../context/TerminalContext';
+import { EffectSwitcher } from './EffectSwitcher';
+import { useBackground } from '../context/BackgroundContext';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const { setHoveredCommand } = useTerminal();
+  const { effect } = useBackground();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,7 +32,12 @@ export function Footer() {
   };
 
   return (
-    <footer className="mt-auto w-full border-t border-theme-accent/10 bg-theme-bg/50 py-12 backdrop-blur-sm">
+    <footer className={[
+      "mt-auto w-full py-12 transition-all duration-300 ease-out",
+      effect === 'cyber-pattern'
+        ? "border-t border-transparent bg-transparent"
+        : "border-t border-theme-accent/10 bg-theme-bg/50 backdrop-blur-sm"
+    ].join(' ')}>
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
 
@@ -49,13 +57,9 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Middle: Status/Quote */}
+          {/* Middle: Background Effect Switcher */}
           <div className="hidden lg:block">
-            <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.3em] text-theme-accent/40">
-              <span>Designing with intent</span>
-              <span className="h-1 w-1 rounded-full bg-theme-accent/40"></span>
-              <span>Building with passion</span>
-            </div>
+            <EffectSwitcher />
           </div>
 
           {/* Right: Socials & Back to Top */}

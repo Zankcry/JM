@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ThemeProvider } from './theme/ThemeProvider';
+import { BackgroundProvider } from './context/BackgroundContext';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <BackgroundProvider>
+        <App />
+      </BackgroundProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

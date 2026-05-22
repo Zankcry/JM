@@ -5,6 +5,8 @@ import { primaryNavLinks } from '../data/navigation';
 import { AccentSwitcher } from './AccentSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { useTerminal } from '../context/TerminalContext';
+import { useBackground } from '../context/BackgroundContext';
+
 
 const TRANSLATIONS: Record<string, string> = {
   Home: 'ホーム',
@@ -131,6 +133,7 @@ function TerminalHomeButton({
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { hoveredCommand, setHoveredCommand } = useTerminal();
+  const { effect } = useBackground();
   const location = useLocation();
 
   useEffect(() => {
@@ -166,7 +169,10 @@ export function Navbar() {
     <>
       <header className="fixed top-0 left-0 z-40 pt-5 pb-4 px-5 sm:px-8 lg:px-12" style={{ right: 'var(--scrollbar-width, 0px)' }}>
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-[175%] -z-10 bg-theme-bg/80 backdrop-blur-md"
+          className={[
+            "pointer-events-none absolute inset-x-0 top-0 h-[175%] -z-10 transition-all duration-300 ease-out",
+            effect === 'cyber-pattern' ? "bg-transparent" : "bg-theme-bg/80 backdrop-blur-md"
+          ].join(' ')}
           style={{
             maskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)'
