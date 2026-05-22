@@ -13,12 +13,12 @@ export function EffectSwitcher() {
   ] as const;
 
   return (
-    <div className="flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em]">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] font-bold uppercase tracking-[0.2em] w-full">
       {/* Background Effect Selector */}
-      <div className="flex items-center gap-3">
-        <span className="text-theme-accent/40 tracking-[0.3em]">FX //</span>
+      <div className="flex flex-col sm:flex-row items-center gap-3">
+        <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">FX //</span>
         <div
-          className="relative inline-flex gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
+          className="relative inline-flex flex-wrap justify-center gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
           role="radiogroup"
           aria-label="Background effect"
         >
@@ -52,9 +52,6 @@ export function EffectSwitcher() {
           })}
         </div>
       </div>
-
-      {/* Divider */}
-      <div className="hidden sm:block h-4 w-px bg-theme-accent/15" />
 
       {/* Smoke Effect Toggle */}
       <div className="flex items-center gap-3">

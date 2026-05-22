@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { SmokeEffect } from './components/SmokeEffect';
+import { KonamiEasterEgg } from './components/KonamiEasterEgg';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import PostsPage from './pages/PostsPage';
@@ -92,6 +93,7 @@ export default function App() {
             : 'bg-theme-bg'
         ].join(' ')}>
           {smokeEnabled && <SmokeEffect />}
+          <KonamiEasterEgg />
 
           {/* Background Gradients */}
           {effect !== 'hex-blueprint' && (

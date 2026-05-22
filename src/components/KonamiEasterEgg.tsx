@@ -1,0 +1,208 @@
+import { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface FrameData {
+  name: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotated: boolean;
+  frameX: number;
+  frameY: number;
+  frameWidth: number;
+  frameHeight: number;
+}
+
+// Sparrows/Funkin Packer XML frame layout coordinates parsed into JSON format
+const FOXY_FRAMES: FrameData[] = [
+  { name: '385', x: 1339, y: 2055, width: 243, height: 438, rotated: true, frameX: -263, frameY: -198, frameWidth: 1024, frameHeight: 768 },
+  { name: '386', x: 2083, y: 1280, width: 278, height: 458, rotated: true, frameX: -252, frameY: -165, frameWidth: 1024, frameHeight: 768 },
+  { name: '387', x: 2083, y: 781, width: 317, height: 496, rotated: true, frameX: -228, frameY: -126, frameWidth: 1024, frameHeight: 768 },
+  { name: '389', x: 1984, y: 1911, width: 540, height: 354, rotated: false, frameX: -202, frameY: -89, frameWidth: 1024, frameHeight: 768 },
+  { name: '390', x: 1604, y: 1911, width: 377, height: 585, rotated: true, frameX: -175, frameY: -65, frameWidth: 1024, frameHeight: 768 },
+  { name: '391', x: 701, y: 2055, width: 635, height: 389, rotated: false, frameX: -145, frameY: -51, frameWidth: 1024, frameHeight: 768 },
+  { name: '392', x: 1, y: 2053, width: 697, height: 420, rotated: false, frameX: -108, frameY: -22, frameWidth: 1024, frameHeight: 768 },
+  { name: '393', x: 1704, y: 1, width: 453, height: 777, rotated: true, frameX: -60, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '394', x: 1604, y: 1028, width: 476, height: 880, rotated: true, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '395', x: 1, y: 1543, width: 940, height: 507, rotated: false, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '396', x: 1028, y: 1028, width: 573, height: 1024, rotated: true, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '397', x: 1028, y: 1, width: 673, height: 1024, rotated: true, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '398', x: 1, y: 1, width: 1024, height: 768, rotated: false, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+  { name: '399', x: 1, y: 772, width: 1024, height: 768, rotated: false, frameX: 0, frameY: 0, frameWidth: 1024, frameHeight: 768 },
+];
+
+const KONAMI_SEQUENCE = [
+  'ArrowUp', 'ArrowUp',
+  'ArrowDown', 'ArrowDown',
+  'ArrowLeft', 'ArrowRight',
+  'ArrowLeft', 'ArrowRight',
+  'b', 'a',
+];
+
+export function KonamiEasterEgg() {
+  const [activated, setActivated] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Konami code listener
+  useEffect(() => {
+    let current = 0;
+
+    const handleKey = (e: KeyboardEvent) => {
+      const key =
+        e.key === 'ArrowUp' ? 'ArrowUp' :
+          e.key === 'ArrowDown' ? 'ArrowDown' :
+            e.key === 'ArrowLeft' ? 'ArrowLeft' :
+              e.key === 'ArrowRight' ? 'ArrowRight' :
+                e.key.toLowerCase();
+
+      if (key === KONAMI_SEQUENCE[current]) {
+        current++;
+        setProgress(Math.round((current / KONAMI_SEQUENCE.length) * 100));
+
+        if (current === KONAMI_SEQUENCE.length) {
+          current = 0;
+          setProgress(0);
+          setActivated(true);
+        }
+      } else {
+        current = 0;
+        setProgress(0);
+      }
+    };
+
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  // Audio and spritesheet loading and playback loop
+  useEffect(() => {
+    if (!activated) return;
+
+    // Load elements
+    const img = new Image();
+    img.src = 'foxy/foxy-jump.png';
+
+    const audio = new Audio('foxy/Xscream3.ogg');
+    audio.volume = 1;
+    audio.play().catch(err => {
+      console.warn('Audio autoplay prevented or failed:', err);
+    });
+
+    let animationFrameId: number;
+    let isPlaying = true;
+    let currentFrameIndex = 0;
+    let lastTime = 0;
+    const fps = 24; // Jump scare playback frame rate
+    const frameDuration = 1000 / fps;
+
+    const renderLoop = (time: number) => {
+      if (!isPlaying) return;
+
+      const canvas = canvasRef.current;
+      if (canvas && img.complete) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          // Set standard canvas sizes (matches native frameWidth/frameHeight)
+          if (canvas.width !== 1024 || canvas.height !== 768) {
+            canvas.width = 1024;
+            canvas.height = 768;
+          }
+
+          if (lastTime === 0) {
+            lastTime = time;
+          }
+
+          const elapsed = time - lastTime;
+
+          if (elapsed >= frameDuration) {
+            lastTime = time - (elapsed % frameDuration);
+
+            // Draw current frame
+            const frame = FOXY_FRAMES[currentFrameIndex];
+            ctx.clearRect(0, 0, 1024, 768);
+
+            ctx.save();
+            const destX = -frame.frameX;
+            const destY = -frame.frameY;
+
+            if (frame.rotated) {
+              // Sparrow XML rotated sheets are rotated 90 degrees counter-clockwise.
+              // To draw upright: translate to dest top-left, then down by height, rotate 90 deg clockwise.
+              ctx.translate(destX, destY);
+              ctx.translate(0, frame.width); // width in XML corresponds to height on-screen
+              ctx.rotate(-Math.PI / 2);
+              ctx.drawImage(img, frame.x, frame.y, frame.width, frame.height, 0, 0, frame.width, frame.height);
+            } else {
+              ctx.drawImage(img, frame.x, frame.y, frame.width, frame.height, destX, destY, frame.width, frame.height);
+            }
+            ctx.restore();
+
+            // Advance frame index or let the final frame linger
+            if (currentFrameIndex < FOXY_FRAMES.length - 1) {
+              currentFrameIndex++;
+            } else {
+              // Let the terrifying final frame linger on screen for 800ms
+              isPlaying = false;
+              setTimeout(() => {
+                setActivated(false);
+              }, 800);
+              return;
+            }
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    img.onload = () => {
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    // If image is already cached/complete, start immediately
+    if (img.complete) {
+      animationFrameId = requestAnimationFrame(renderLoop);
+    }
+
+    return () => {
+      isPlaying = false;
+      cancelAnimationFrame(animationFrameId);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [activated]);
+
+  return (
+    <AnimatePresence>
+      {activated && (
+        <motion.div
+          className="fixed inset-0 z-[99999] pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          {/* Visible Canvas scaling to cover the full viewport */}
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </motion.div>
+      )}
+
+      {/* Progress chip while typing the code */}
+      {progress > 0 && progress < 100 && !activated && (
+        <motion.div
+          className="fixed bottom-4 right-4 z-[99998] rounded-lg border border-theme-accent/20 bg-theme-bg/90 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-widest text-theme-accent/60 backdrop-blur-sm"
+          initial={{ opacity: 0, scale: 0.9, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 8 }}
+        >
+          ↑↓←→ {progress}%
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
