@@ -12,6 +12,7 @@ import {
 import { Project } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
 import { techStack, techStackIcons } from '../data/tech';
+import { useTheme } from '../theme/ThemeProvider';
 
 type ProjectDetailModalProps = {
   project: Project | null;
@@ -19,6 +20,7 @@ type ProjectDetailModalProps = {
 };
 
 export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps) {
+  const { theme } = useTheme();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   // Lock body scroll when modal is open and prevent layout shifts
@@ -86,7 +88,9 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
         exit={{ opacity: 0 }}
         transition={{ duration: 0.55, ease: 'easeOut' }}
         onClick={onClose}
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
+        className={`absolute inset-0 backdrop-blur-[6px] ${
+          theme === 'latte' ? 'bg-white/35' : 'bg-black/60'
+        }`}
       />
 
       {/* Outer Wrapper for Modal + Outside Close Button */}
@@ -98,7 +102,11 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="w-full rounded-xl border border-theme-accent/15 bg-theme-bg shadow-[0_0_50px_-12px_rgb(var(--theme-shadow)/0.4)] overflow-y-auto md:overflow-hidden max-h-[90vh] md:h-[85vh] md:max-h-[800px] p-6 sm:p-8 text-left flex flex-col md:flex-row gap-8"
+          className={`w-full rounded-xl border border-theme-accent/20 backdrop-blur-xl overflow-y-auto md:overflow-hidden max-h-[90vh] md:h-[85vh] md:max-h-[800px] p-6 sm:p-8 text-left flex flex-col md:flex-row gap-8 ${
+            theme === 'latte'
+              ? 'bg-theme-bg/85 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_20_50px_-12px_rgba(var(--theme-shadow),0.15)]'
+              : 'bg-theme-bg/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_20_50px_-12px_rgba(var(--theme-shadow),0.4)]'
+          }`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-project-title"
@@ -272,7 +280,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                       </h3>
                       <ul className="flex flex-col gap-3.5 pl-1.5">
                         {details.keyFeatures.map((feature, index) => {
-                          const match = feature.match(/^([\u2300-\u32FF\uDC00-\uDFFF\uD83C-\uD83E][\uFE0F]?)\s*(.*)/);
+                          const match = feature.match(/^((?:[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2300-\u32FF])[\uFE0F]?)\s*(.*)/);
                           const displayEmoji = match ? match[1] : null;
                           const displayText = match ? match[2] : feature;
 
@@ -300,7 +308,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                       </h3>
                       
                       {/* High Fidelity Developer Dashboard grid */}
-                      <div className="rounded-xl border border-theme-border/10 bg-theme-bg-elevated/20 p-5 shadow-sm flex flex-col gap-5">
+                      <div className="rounded-xl border border-theme-border/10 bg-theme-bg-elevated/10 backdrop-blur-md p-5 shadow-sm flex flex-col gap-5">
                         
                         {/* SEO Block */}
                         {details.localSeo && (
@@ -382,7 +390,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
             </div>
 
             {/* Always Visible Sticky Footer */}
-            <div className="border-t border-theme-border/10 bg-theme-bg pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-10 mt-auto">
+            <div className="border-t border-theme-border/10 bg-transparent pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-10 mt-auto">
               {/* CTA Actions */}
               <div className="flex flex-wrap items-center gap-2.5">
                 {project.links.live && (

@@ -134,7 +134,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Yomi (読み)',
-    description: 'A clean, ad-free, cross-platform web and light novel reader app with a Tachiyomi-inspired UI, built using Flutter and a PHP/MySQL REST API backend.',
+    description: 'A clean, ad-free, cross-platform web and light novel reader app with a Tachiyomi-inspired dark UI, built using Flutter. It integrates customizable reading views, live progress syncing, and a PHP/MySQL REST API backend.',
     image: '/videos/project_3.webp',
     poster: '/images/project_poster_3.png',
     tags: ['Flutter', 'Dart', 'PHP', 'MySQL'],
@@ -174,7 +174,7 @@ export const projects: Project[] = [
     description: 'A modern, interactive anonymous message board built with Next.js 16 (App Router), React 19, Supabase (PostgreSQL), and Tailwind CSS v4, supporting image uploads and real-time moderation.',
     image: '/videos/project_4.webp',
     poster: '/images/project_poster_4.png',
-    tags: ['Next.js', 'React', 'TailwindCSS', 'Supabase', 'TypeScript'],
+    tags: ['Next.js', 'TailwindCSS', 'Supabase', 'TypeScript'],
     links: { github: 'https://github.com/Zankcry/freedom-wall', live: 'https://freedom-wall-three.vercel.app/' },
     details: {
       subtitle: "REAL-TIME ANONYMOUS EXPRESSION PLATFORM",
