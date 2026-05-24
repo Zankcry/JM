@@ -10,6 +10,7 @@ export function EffectSwitcher() {
     { value: 'dot-matrix', label: 'Dot Matrix' },
     { value: 'retro-scanlines', label: 'Scanlines' },
     { value: 'hex-blueprint', label: 'Hex Blueprint' },
+    { value: 'woven-grid', label: 'Woven Grid' },
   ] as const;
 
   return (

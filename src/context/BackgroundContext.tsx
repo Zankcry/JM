@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
-export type BackgroundEffect = 'none' | 'cyber-pattern' | 'dot-matrix' | 'retro-scanlines' | 'hex-blueprint';
+export type BackgroundEffect = 'none' | 'cyber-pattern' | 'dot-matrix' | 'retro-scanlines' | 'hex-blueprint' | 'woven-grid';
 
 type BackgroundContextType = {
   effect: BackgroundEffect;
@@ -15,7 +15,7 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   const [effect, setEffect] = useState<BackgroundEffect>(() => {
     if (typeof window === 'undefined') return 'none';
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return (stored === 'cyber-pattern' || stored === 'dot-matrix' || stored === 'retro-scanlines' || stored === 'hex-blueprint' || stored === 'none') ? (stored as BackgroundEffect) : 'none';
+    return (stored === 'cyber-pattern' || stored === 'dot-matrix' || stored === 'retro-scanlines' || stored === 'hex-blueprint' || stored === 'woven-grid' || stored === 'none') ? (stored as BackgroundEffect) : 'none';
   });
 
   useEffect(() => {
