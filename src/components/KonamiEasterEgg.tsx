@@ -42,7 +42,6 @@ const KONAMI_SEQUENCE = [
 
 export function KonamiEasterEgg() {
   const [activated, setActivated] = useState(false);
-  const [progress, setProgress] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Konami code listener
@@ -59,16 +58,13 @@ export function KonamiEasterEgg() {
 
       if (key === KONAMI_SEQUENCE[current]) {
         current++;
-        setProgress(Math.round((current / KONAMI_SEQUENCE.length) * 100));
 
         if (current === KONAMI_SEQUENCE.length) {
           current = 0;
-          setProgress(0);
           setActivated(true);
         }
       } else {
         current = 0;
-        setProgress(0);
       }
     };
 
@@ -96,6 +92,8 @@ export function KonamiEasterEgg() {
     let lastTime = 0;
     const fps = 24; // Jump scare playback frame rate
     const frameDuration = 1000 / fps;
+    let isLingering = false;
+    let lingerTimeoutId: NodeJS.Timeout;
 
     const renderLoop = (time: number) => {
       if (!isPlaying) return;
@@ -124,6 +122,15 @@ export function KonamiEasterEgg() {
             ctx.clearRect(0, 0, 1024, 768);
 
             ctx.save();
+
+            // Add scary violent shake offsets only at the end (when lingering)!
+            if (isLingering) {
+              const shakeIntensity = 35;
+              const shakeX = (Math.random() - 0.5) * shakeIntensity;
+              const shakeY = (Math.random() - 0.5) * shakeIntensity;
+              ctx.translate(shakeX, shakeY);
+            }
+
             const destX = -frame.frameX;
             const destY = -frame.frameY;
 
@@ -139,16 +146,16 @@ export function KonamiEasterEgg() {
             }
             ctx.restore();
 
-            // Advance frame index or let the final frame linger
+            // Advance frame index or trigger lingering
             if (currentFrameIndex < FOXY_FRAMES.length - 1) {
               currentFrameIndex++;
-            } else {
-              // Let the terrifying final frame linger on screen for 800ms
-              isPlaying = false;
-              setTimeout(() => {
+            } else if (!isLingering) {
+              isLingering = true;
+              // Let the terrifying final frame linger on screen shaking violently for 2200ms
+              lingerTimeoutId = setTimeout(() => {
+                isPlaying = false;
                 setActivated(false);
-              }, 800);
-              return;
+              }, 2200);
             }
           }
         }
@@ -169,6 +176,7 @@ export function KonamiEasterEgg() {
     return () => {
       isPlaying = false;
       cancelAnimationFrame(animationFrameId);
+      if (lingerTimeoutId) clearTimeout(lingerTimeoutId);
       audio.pause();
       audio.currentTime = 0;
     };
@@ -189,18 +197,6 @@ export function KonamiEasterEgg() {
             ref={canvasRef}
             className="absolute inset-0 h-full w-full object-cover"
           />
-        </motion.div>
-      )}
-
-      {/* Progress chip while typing the code */}
-      {progress > 0 && progress < 100 && !activated && (
-        <motion.div
-          className="fixed bottom-4 right-4 z-[99998] rounded-lg border border-theme-accent/20 bg-theme-bg/90 px-3 py-2 font-mono text-[9px] font-bold uppercase tracking-widest text-theme-accent/60 backdrop-blur-sm"
-          initial={{ opacity: 0, scale: 0.9, y: 8 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 8 }}
-        >
-          ↑↓←→ {progress}%
         </motion.div>
       )}
     </AnimatePresence>
