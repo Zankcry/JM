@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { IconNews, IconStar, IconBook, IconPlayerPlay, IconCheck, IconHeart, IconX } from '@tabler/icons-react';
+import { IconNews, IconStar, IconBookmark, IconPlayerPlay, IconCheck, IconHeart, IconX } from '@tabler/icons-react';
 import { PostCard } from '../components/PostCard';
 import { posts } from '../data/posts';
 import { mangaRecommendations, animeRecommendations } from '../data/recommendations';
@@ -162,7 +162,7 @@ export default function PostsPage() {
                         : 'border-theme-accent/10 hover:border-theme-accent/30 text-theme-text-muted hover:text-theme-text'
                         }`}
                     >
-                      <IconBook size={15} />
+                      <IconBookmark size={15} />
                       Manga
                     </button>
                     <button

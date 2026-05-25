@@ -223,7 +223,13 @@ export default function AboutPage() {
             >
               Spine 2D
             </a>{' '}
-            to animate characters and build richer UI experiences.
+            to animate characters and also <a
+              href="https://ui.shadcn.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-theme-accent px-1.5 py-0.5 rounded-md transition hover:bg-theme-accent/20">
+              Shadcn
+            </a> for quickly building beautiful UIs.
           </p>
           <p>
             Outside the screen, I spend my free time learning{' '}

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   IconArrowRight,
-  IconBook,
-  IconMusic,
+  IconBookmark,
+  IconPlaylist,
   IconBrandGooglePhotos,
   IconLanguage,
   IconNews,
@@ -36,14 +36,14 @@ export function RecentActivity() {
     {
       title: 'Music I Code To',
       description: 'My top musics I listen to while coding',
-      icon: IconMusic,
+      icon: IconPlaylist,
       href: '/about#music',
       color: '#1DB954'
     },
     {
       title: 'Manga Recommendations',
       description: 'My personal manga/anime recommendations',
-      icon: IconBook,
+      icon: IconBookmark,
       href: '/posts#recs',
       color: '#A855F7'
     },
@@ -133,8 +133,7 @@ export function RecentActivity() {
 
               <div className="relative z-10 flex h-full flex-col">
                 <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-theme-accent/10 bg-theme-bg/80 backdrop-blur-sm transition-colors group-hover:bg-theme-accent/10"
-                  style={{ color: card.color }}
+                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-theme-accent/10 bg-theme-bg/80 text-theme-accent backdrop-blur-sm transition-colors group-hover:bg-theme-accent/10"
                 >
                   <card.icon size={20} stroke={1.5} />
                 </div>

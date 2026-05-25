@@ -61,20 +61,20 @@ export function Footer() {
 
           {/* Middle: Konami Code Hint */}
           <div className="hidden lg:flex flex-col items-center gap-1.5 text-center">
-            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-theme-text-muted/30">
+            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-theme-text-muted/60">
               HINT //
             </span>
             <div className="flex items-center gap-1">
               {['↑','↑','↓','↓','←','→','←','→','B','A'].map((key, i) => (
                 <span
                   key={i}
-                  className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-theme-accent/15 bg-theme-bg-elevated/30 px-1 font-mono text-[9px] font-bold text-theme-text-muted/40 transition-colors hover:border-theme-accent/40 hover:text-theme-accent/60"
+                  className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-theme-accent/25 bg-theme-bg-elevated/40 px-1 font-mono text-[9px] font-bold text-theme-text-muted/70 transition-colors hover:border-theme-accent/50 hover:text-theme-accent/95"
                 >
                   {key}
                 </span>
               ))}
             </div>
-            <span className="text-[8px] tracking-[0.2em] text-theme-text-muted/20 uppercase font-medium">
+            <span className="text-[8px] tracking-[0.2em] text-theme-text-muted/50 uppercase font-medium">
               try it on keyboard
             </span>
           </div>

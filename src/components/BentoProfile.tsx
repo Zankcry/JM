@@ -52,9 +52,10 @@ function CopyEmailButton({ email }: { email: string }) {
   );
 }
 
+const PORAC_COORDINATES: [number, number] = [15.0731, 120.5435];
+
 export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
   const { theme } = useTheme();
-  const hauCoordinates: [number, number] = [15.1400, 120.5890];
 
   const mapUrl = theme === 'latte'
     ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
@@ -160,8 +161,8 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
         {/* Map - Now fills the container with full color by default */}
         <div className="absolute inset-0 z-10 grayscale-0 contrast-40 opacity-90 transition-all duration-700 ease-out group-hover:scale-110">
           <MapContainer
-            center={hauCoordinates}
-            zoom={13}
+            center={PORAC_COORDINATES}
+            zoom={14}
             scrollWheelZoom={false}
             zoomControl={false}
             attributionControl={false}
@@ -170,7 +171,7 @@ export function ProfileWidgets({ currentTime }: { currentTime: Date }) {
             <TileLayer
               url={mapUrl}
             />
-            <MapRecenter center={hauCoordinates} />
+            <MapRecenter center={PORAC_COORDINATES} />
           </MapContainer>
         </div>
 

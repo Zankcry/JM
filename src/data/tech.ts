@@ -58,10 +58,10 @@ export const techStack: TechStackItem[] = [
   { label: 'MySQL', shortLabel: 'SQL', tone: '#4479A1', icon: 'brand-mysql' },
   { label: 'Firebase', shortLabel: 'FB', tone: '#FFCA28', icon: 'brand-firebase' },
   { label: 'Supabase', shortLabel: 'Supa', tone: '#3ECF8E', icon: 'brand-supabase' },
-  { label: 'Vercel', shortLabel: 'Ver', tone: '#000000', icon: 'brand-vercel' },
+  { label: 'Vercel', shortLabel: 'Ver', tone: 'currentColor', icon: 'brand-vercel' },
   { label: 'Flutter', shortLabel: 'Flu', tone: '#02569B', icon: 'brand-flutter' },
   { label: 'Dart', shortLabel: 'Dart', tone: '#00CC76', icon: 'code' },
-  { label: 'Next.js', shortLabel: 'Next', tone: '#FFFFFF', icon: 'brand-nextjs' },
+  { label: 'Next.js', shortLabel: 'Next', tone: 'currentColor', icon: 'brand-nextjs' },
 ];
 
 export const techStackIcons = {
