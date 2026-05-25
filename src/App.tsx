@@ -12,6 +12,8 @@ import PicsPage from './pages/PicsPage';
 import { Footer } from './components/Footer';
 import { TerminalProvider } from './context/TerminalContext';
 import { BackgroundLayer } from './components/BackgroundLayer';
+import { BrushStrokeCanvas } from './components/BrushStrokeCanvas';
+import { useBackground } from './context/BackgroundContext';
 
 
 function AnimatedRoutes() {
@@ -74,6 +76,7 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  const { brushActive } = useBackground();
 
   return (
     <TerminalProvider>
@@ -81,6 +84,9 @@ export default function App() {
         <div className="relative z-0 min-h-screen overflow-hidden text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col transition-colors duration-300 ease-out">
           {/* Isolated Hardware-Accelerated Background Pattern */}
           <BackgroundLayer />
+
+          {/* Interactive Japanese sumi-e style brush stroke canvas */}
+          {brushActive && <BrushStrokeCanvas />}
 
           <KonamiEasterEgg />
 
