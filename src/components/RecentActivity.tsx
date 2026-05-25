@@ -11,7 +11,7 @@ import {
 } from '@tabler/icons-react';
 import { posts } from '../data/posts';
 import { PostCard } from './PostCard';
-import { ProfileWidgets } from './BentoProfile';
+import { AvailabilityCard, ConnectCard, LocationCard } from './BentoProfile';
 import { useTerminal } from '../context/TerminalContext';
 
 export function RecentActivity() {
@@ -28,31 +28,21 @@ export function RecentActivity() {
   const exploreCards = [
     {
       title: 'Word of the Week',
-      description: 'Sharing my love for the japanese language',
+      description: 'Sharing my love for the Japanese language',
       icon: IconLanguage,
       href: '/about#word-of-the-week',
-      color: '#FF4B4B'
     },
     {
       title: 'Music I Code To',
-      description: 'My top musics I listen to while coding',
+      description: 'My top tracks I listen to while coding',
       icon: IconPlaylist,
       href: '/about#music',
-      color: '#1DB954'
     },
     {
       title: 'Manga Recommendations',
       description: 'My personal manga/anime recommendations',
       icon: IconBookmark,
       href: '/posts#recs',
-      color: '#A855F7'
-    },
-    {
-      title: 'Photo Gallery',
-      description: 'My Captured moments and visual inspirations.',
-      icon: IconBrandGooglePhotos,
-      href: '/pics',
-      color: '#38BDF8'
     }
   ];
 
@@ -91,7 +81,7 @@ export function RecentActivity() {
         </div>
       </div>
 
-      {/* Dashboard Section (Explore + Profile) */}
+      {/* Dashboard Section (Asymmetric Bento Grid) */}
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-4">
           <h2 className="flex items-center gap-2 whitespace-nowrap text-xl font-medium tracking-tight text-theme-text sm:text-2xl">
@@ -101,7 +91,7 @@ export function RecentActivity() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Explore Cards */}
+          {/* Row 1 - 1x1 slots */}
           {exploreCards.map((card) => (
             <Link
               key={card.title}
@@ -113,16 +103,25 @@ export function RecentActivity() {
               {/* Background Preview - Layered above card bg but below content */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {card.title === 'Word of the Week' ? (
-                  <div className="absolute -right-2 -top-4 select-none text-[7rem] font-bold leading-none text-theme-text opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.15] group-hover:scale-110">
-                    語
-                  </div>
-                ) : card.title === 'Music I Code To' ? (
-                  <div className="absolute -right-4 -top-4 opacity-[0.12] transition-all duration-500 group-hover:opacity-[0.25] group-hover:scale-110">
-                    <IconBrandSpotify size={140} style={{ color: '#1DB954' }} />
-                  </div>
+                  <>
+                    <img
+                      src="/images/pics/holy-angel.webp"
+                      alt=""
+                      className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-45"
+                    />
+                    <div className="absolute -right-2 -top-4 select-none text-[7rem] font-bold leading-none text-theme-text opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.15] group-hover:scale-110">
+                      語
+                    </div>
+                  </>
+                ) : card.title === 'Manga Recommendations' ? (
+                  <img
+                    src="/images/anime_manga/myBias.webp"
+                    alt=""
+                    className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
+                  />
                 ) : (
                   <img
-                    src={card.title === 'Photo Gallery' ? '/images/pics/quiet-afternoon.jpg' : '/images/anime_manga/randomChat.webp'}
+                    src="/images/spotify.png"
                     alt=""
                     className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-40"
                   />
@@ -132,9 +131,7 @@ export function RecentActivity() {
               </div>
 
               <div className="relative z-10 flex h-full flex-col">
-                <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-theme-accent/10 bg-theme-bg/80 text-theme-accent backdrop-blur-sm transition-colors group-hover:bg-theme-accent/10"
-                >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-theme-accent/10 bg-theme-bg/80 text-theme-accent backdrop-blur-sm transition-colors group-hover:bg-theme-accent/10">
                   <card.icon size={20} stroke={1.5} />
                 </div>
 
@@ -155,8 +152,50 @@ export function RecentActivity() {
             </Link>
           ))}
 
-          {/* Profile Widgets (Merged into the same grid) */}
-          <ProfileWidgets currentTime={currentTime} />
+          {/* Location map (1x1 square) */}
+          <LocationCard currentTime={currentTime} />
+
+          {/* Row 2 - 2x1 Photo Gallery */}
+          <Link
+            to="/pics"
+            onMouseEnter={() => setHoveredCommand('pics')}
+            onMouseLeave={() => setHoveredCommand(null)}
+            className="group relative flex flex-col md:flex-row overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg sm:col-span-2 lg:col-span-2 min-h-[180px]"
+          >
+            {/* Background image preview covering the right half */}
+            <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 overflow-hidden pointer-events-none opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:scale-105">
+              <img
+                src="/images/pics/quiet-afternoon.jpg"
+                alt="Gallery Preview"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-theme-bg via-theme-bg/60 to-transparent"></div>
+            </div>
+
+            <div className="relative z-10 flex h-full flex-col justify-between w-full md:w-1/2">
+              <div>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-theme-accent/10 bg-theme-bg/80 text-theme-accent backdrop-blur-sm transition-colors group-hover:bg-theme-accent/10">
+                  <IconBrandGooglePhotos size={20} stroke={1.5} />
+                </div>
+                <h3 className="mb-1 text-sm font-bold tracking-tight text-theme-text group-hover:text-theme-accent">
+                  Photo Gallery
+                </h3>
+                <p className="text-[12px] leading-relaxed text-theme-text-muted opacity-80">
+                  Captured moments and visual inspirations.
+                </p>
+              </div>
+              <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-theme-accent">
+                <span>View Gallery</span>
+                <IconArrowRight size={12} />
+              </div>
+            </div>
+          </Link>
+
+          {/* Availability Widget (1x1) */}
+          <AvailabilityCard />
+
+          {/* Connect Card (1x1) */}
+          <ConnectCard />
         </div>
       </div>
     </section>
