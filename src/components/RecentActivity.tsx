@@ -109,7 +109,7 @@ export function RecentActivity() {
                       alt=""
                       className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-45"
                     />
-                    <div className="absolute -right-2 -top-4 select-none text-[7rem] font-bold leading-none text-theme-text opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.15] group-hover:scale-110">
+                    <div className="absolute -right-2 -top-4 select-none text-[7rem] font-bold leading-none text-theme-accent opacity-[0.08] transition-all duration-500 group-hover:opacity-[0.15] group-hover:scale-110">
                       語
                     </div>
                   </>
