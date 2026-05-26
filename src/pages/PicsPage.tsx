@@ -34,7 +34,7 @@ export default function PicsPage() {
           <header className="flex w-full items-center gap-6">
             <h1 className="shrink-0 flex items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
               <IconBrandGooglePhotos className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
-              Pics
+              Photos
             </h1>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
           </header>

@@ -13,7 +13,7 @@ const TRANSLATIONS: Record<string, string> = {
   About: 'アバウト',
   Projects: 'プロジェクト',
   Posts: 'ポスト',
-  Pics: 'ピクス',
+  Photos: 'フォト',
 };
 
 // ── Terminal-style home button ──────────────────────────────────────────────
@@ -21,7 +21,7 @@ function pathToSegment(pathname: string): string {
   if (pathname === '/') return 'home';
   if (pathname === '/about') return 'about';
   if (pathname === '/projects') return 'projects';
-  if (pathname === '/pics') return 'pics';
+  if (pathname === '/photos') return 'photos';
   if (pathname.startsWith('/posts/')) return 'posts/article';
   if (pathname === '/posts') return 'posts';
   return 'home';

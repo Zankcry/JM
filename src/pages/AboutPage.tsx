@@ -281,9 +281,9 @@ export default function AboutPage() {
           <div className="flex flex-col lg:h-[352px]">
             <div className="group relative h-full w-full overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition hover:border-theme-accent/50">
               <Link
-                to="/pics"
+                to="/photos"
                 className="absolute right-3 top-3 z-20 flex items-center gap-1.5 rounded-full bg-theme-bg/60 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-theme-text backdrop-blur-md opacity-0 transition-all duration-300 hover:bg-theme-accent hover:text-theme-on-accent group-hover:opacity-100"
-                onMouseEnter={() => setHoveredCommand('pics')}
+                onMouseEnter={() => setHoveredCommand('photos')}
                 onMouseLeave={() => setHoveredCommand(null)}
               >
                 <span>View All</span>

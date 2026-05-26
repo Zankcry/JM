@@ -66,7 +66,7 @@ function AnimatedRoutes() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/posts" element={<PostsPage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
-            <Route path="/pics" element={<PicsPage />} />
+            <Route path="/photos" element={<PicsPage />} />
           </Routes>
         </div>
         <Footer />

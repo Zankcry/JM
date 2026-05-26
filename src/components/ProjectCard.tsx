@@ -4,14 +4,14 @@ import { techStack, techStackIcons } from '../data/tech';
 import { useTerminal } from '../context/TerminalContext';
 import { Project } from '../data/projects';
 
-export function ProjectCard({ 
-  project, 
-  id, 
+export function ProjectCard({
+  project,
+  id,
   padding = 'p-5',
   onClick
-}: { 
-  project: Project; 
-  id?: string; 
+}: {
+  project: Project;
+  id?: string;
   padding?: string;
   onClick?: () => void;
 }) {
@@ -45,11 +45,11 @@ export function ProjectCard({
           </h3>
           <div className="flex items-center gap-3 text-theme-text-muted">
             {project.links.github && (
-              <a 
-                href={project.links.github} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="GitHub Repository" 
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Repository"
                 className="hover:text-theme-accent transition-colors relative z-10"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -57,11 +57,11 @@ export function ProjectCard({
               </a>
             )}
             {project.links.live && (
-              <a 
-                href={project.links.live} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="Live Project" 
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Live Project"
                 className="group/link hover:text-theme-accent transition-colors relative z-10"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -77,8 +77,8 @@ export function ProjectCard({
 
         <div className="pt-6 flex flex-wrap gap-2 flex-grow items-start">
           {project.tags.map((tag) => {
-            const tech = techStack.find(t => 
-              t.label.toLowerCase() === tag.toLowerCase() || 
+            const tech = techStack.find(t =>
+              t.label.toLowerCase() === tag.toLowerCase() ||
               t.shortLabel.toLowerCase() === tag.toLowerCase()
             );
 
@@ -96,11 +96,11 @@ export function ProjectCard({
             const TechIcon = techStackIcons[tech.icon];
 
             return (
-              <div 
-                key={tag} 
+              <div
+                key={tag}
                 className="group/tag flex items-center gap-1.5 rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2 py-1 transition-all hover:border-theme-accent/30 hover:bg-theme-bg"
               >
-                <div 
+                <div
                   className="flex h-4 w-4 items-center justify-center transition-transform group-hover/tag:scale-110"
                   style={{ color: tech.tone }}
                 >

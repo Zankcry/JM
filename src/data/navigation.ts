@@ -10,7 +10,7 @@ export const primaryNavLinks: NavLink[] = [
   { label: 'About', href: '/about' },
   { label: 'Projects', href: '/projects' },
   { label: 'Posts', href: '/posts' },
-  { label: 'Pics', href: '/pics' },
+  { label: 'Photos', href: '/photos' },
 ];
 
 

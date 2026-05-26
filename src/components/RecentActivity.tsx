@@ -157,8 +157,8 @@ export function RecentActivity() {
 
           {/* Row 2 - 2x1 Photo Gallery */}
           <Link
-            to="/pics"
-            onMouseEnter={() => setHoveredCommand('pics')}
+            to="/photos"
+            onMouseEnter={() => setHoveredCommand('photos')}
             onMouseLeave={() => setHoveredCommand(null)}
             className="group relative flex flex-col md:flex-row overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg sm:col-span-2 lg:col-span-2 min-h-[180px]"
           >
