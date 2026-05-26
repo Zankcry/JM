@@ -90,7 +90,7 @@ export const projects: Project[] = [
     }
   },
   {
-    title: 'Cognosphere / Hoyoverse Hub',
+    title: 'Hoyoverse Hub',
     description: 'A responsive fan portal built with Angular 18+ and Tailwind CSS, featuring game catalogs, active stats, search filters, and a custom employee directory with full database management.',
     image: '/videos/project_2.webp',
     poster: '/images/project_poster_2.webp',
@@ -264,7 +264,7 @@ export const projects: Project[] = [
     }
   },
   {
-    title: 'Simple Player (Simple Miniplayer)',
+    title: 'Simpler Player',
     description: 'A "Cinematic Terminal" Picture-in-Picture experience for web videos, Reels, and Shorts. Vibe coded as a browser extension using the modern Document PiP API.',
     image: '/videos/project_6.webp',
     poster: '/images/project6Preview_1.png',
