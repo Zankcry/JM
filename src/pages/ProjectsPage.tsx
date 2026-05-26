@@ -30,14 +30,21 @@ export default function ProjectsPage() {
 
       {/* Grid for the rest of the projects */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 w-full">
-        {otherProjects.map((project, i) => (
-          <ProjectCard 
-            key={i} 
-            project={project} 
-            padding="p-6" 
-            onClick={() => setActiveProject(project)}
-          />
-        ))}
+        {otherProjects.map((project, i) => {
+          const isLastAndOdd = i === otherProjects.length - 1 && otherProjects.length % 2 !== 0;
+          return (
+            <div
+              key={i}
+              className={isLastAndOdd ? "sm:col-span-2 sm:w-[calc(50%-16px)] sm:mx-auto w-full" : "w-full"}
+            >
+              <ProjectCard 
+                project={project} 
+                padding="p-6" 
+                onClick={() => setActiveProject(project)}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Elegant AnimatePresence Project Detail Modal */}
