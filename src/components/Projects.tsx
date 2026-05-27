@@ -232,7 +232,7 @@ export function Projects() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="absolute bottom-10 left-10 w-[440px] text-left p-7 text-white bg-[rgba(15,15,20,0.55)] backdrop-blur-md border-none rounded-xl shadow-2xl z-10 flex flex-col gap-4 max-lg:left-10 max-lg:bottom-[30px] max-lg:w-[380px] max-lg:p-6 max-md:left-5 max-md:right-5 max-md:bottom-6 max-md:w-auto"
+                className="absolute bottom-10 left-10 w-[440px] text-left p-7 text-white bg-[rgba(15,15,20,0.55)] backdrop-blur-md border border-theme-accent/20 rounded-xl shadow-2xl z-10 flex flex-col gap-4 max-lg:left-10 max-lg:bottom-[30px] max-lg:w-[380px] max-lg:p-6 max-md:left-5 max-md:right-5 max-md:bottom-6 max-md:w-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="text-2xl font-bold leading-tight">{activeSlideProject.title}</div>
@@ -319,7 +319,7 @@ export function Projects() {
                       initial="initial"
                       animate="animate"
                       exit="exit"
-                      className="flex-shrink-0 w-[260px] h-[155px] bg-center bg-cover rounded-xl cursor-pointer transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.05] max-lg:w-[190px] max-lg:h-[115px]"
+                      className="flex-shrink-0 w-[260px] h-[155px] bg-center bg-cover rounded-md cursor-pointer transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.05] max-lg:w-[190px] max-lg:h-[115px]"
                       style={{ backgroundImage: `url(${screenshot})` }}
                       onClick={() => {
                         setActiveProject(activeSlideProject);
@@ -338,7 +338,7 @@ export function Projects() {
             aria-label="Previous Project"
             onMouseEnter={() => setHoveredCommand('prev project')}
             onMouseLeave={() => setHoveredCommand(isHovered ? `open projects/${activeProjectSlug}` : null)}
-            className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-theme-text transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-start pl-5 text-3xl opacity-35 hover:opacity-95 hover:pl-3 hover:bg-gradient-to-r hover:from-theme-bg/15 hover:to-transparent active:opacity-60"
+            className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-start pl-5 text-3xl opacity-35 hover:opacity-95 hover:pl-3 hover:bg-gradient-to-r hover:from-black/15 hover:to-transparent active:opacity-60"
           >
             ❮
           </button>
@@ -347,7 +347,7 @@ export function Projects() {
             aria-label="Next Project"
             onMouseEnter={() => setHoveredCommand('next project')}
             onMouseLeave={() => setHoveredCommand(isHovered ? `open projects/${activeProjectSlug}` : null)}
-            className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-theme-text transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-end pr-5 text-3xl opacity-35 hover:opacity-95 hover:pr-3 hover:bg-gradient-to-l hover:from-theme-bg/15 hover:to-transparent active:opacity-60"
+            className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-end pr-5 text-3xl opacity-35 hover:opacity-95 hover:pr-3 hover:bg-gradient-to-l hover:from-black/15 hover:to-transparent active:opacity-60"
           >
             ❯
           </button>
