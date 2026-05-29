@@ -4,10 +4,15 @@ import { useTerminal } from '../context/TerminalContext';
 import { EffectSwitcher } from './EffectSwitcher';
 import { useBackground } from '../context/BackgroundContext';
 
+import { useTheme } from '../theme/ThemeProvider';
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const { setHoveredCommand } = useTerminal();
   const { effect } = useBackground();
+  const { theme } = useTheme();
+  const isLight = theme === 'latte';
+  const favDir = isLight ? 'favicon_black' : 'favicon_white';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -41,16 +46,18 @@ export function Footer() {
         : "border-t border-theme-accent/10 bg-theme-bg/50 backdrop-blur-sm"
     ].join(' ')}>
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
-        
+
         {/* Top Row: Branding, Easter Egg Hint & Socials */}
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
 
           {/* Left: Branding & Copyright */}
           <div className="flex flex-col items-center gap-2 sm:items-start">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tighter text-theme-text">
-                JM<span className="text-theme-accent">.</span>
-              </span>
+              <img
+                src={`/${favDir}/apple-touch-icon.png?v=3`}
+                alt="Logo"
+                className="h-6 w-6 sm:h-7 sm:w-7 object-contain"
+              />
               <div className="h-4 w-px bg-theme-accent/20"></div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted">
                 Portfolio v2
@@ -67,7 +74,7 @@ export function Footer() {
               HINT //
             </span>
             <div className="flex items-center gap-1">
-              {['↑','↑','↓','↓','←','→','←','→','B','A'].map((key, i) => (
+              {['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].map((key, i) => (
                 <span
                   key={i}
                   className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-theme-accent/25 bg-theme-bg-elevated/40 px-1 font-mono text-[9px] font-bold text-theme-text-muted/70 transition-colors hover:border-theme-accent/50 hover:text-theme-accent/95"
