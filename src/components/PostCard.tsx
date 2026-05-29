@@ -13,7 +13,7 @@ export function PostCard({ post }: { post: Post }) {
         onMouseEnter={() => setHoveredCommand(`posts/${post.id}`)}
         onMouseLeave={() => setHoveredCommand(null)}
       >
-        <article className="relative flex w-full flex-col gap-3.5 rounded-2xl border border-theme-accent/10 bg-theme-bg/40 p-6 shadow-lg backdrop-blur-sm">
+        <article className="relative flex w-full flex-col gap-3.5 rounded-2xl border border-theme-accent/10 bg-theme-bg p-6 shadow-lg">
           {/* Top Metadata */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[11px] font-semibold tracking-wider text-theme-text-muted/60 uppercase">
             <span>{post.date}</span>

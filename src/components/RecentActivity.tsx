@@ -98,7 +98,7 @@ export function RecentActivity() {
               to={card.href}
               onMouseEnter={() => setHoveredCommand(getCommandFromHref(card.href))}
               onMouseLeave={() => setHoveredCommand(null)}
-              className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg"
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70"
             >
               {/* Background Preview - Layered above card bg but below content */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -160,7 +160,7 @@ export function RecentActivity() {
             to="/photos"
             onMouseEnter={() => setHoveredCommand('photos')}
             onMouseLeave={() => setHoveredCommand(null)}
-            className="group relative flex flex-col md:flex-row overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg/30 p-5 shadow-lg transition-all hover:border-theme-accent/70 hover:bg-theme-bg sm:col-span-2 lg:col-span-2 min-h-[180px]"
+            className="group relative flex flex-col md:flex-row overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 sm:col-span-2 lg:col-span-2 min-h-[180px]"
           >
             {/* Background image preview covering the right half */}
             <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 overflow-hidden pointer-events-none opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:scale-105">
