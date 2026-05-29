@@ -2,10 +2,10 @@ import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import { ProjectPreview } from './ProjectPreview';
 import { Project } from '../data/projects';
 
-export function FeaturedProjectBanner({ 
+export function FeaturedProjectBanner({
   project,
-  onClick 
-}: { 
+  onClick
+}: {
   project: Project;
   onClick?: () => void;
 }) {
@@ -17,14 +17,14 @@ export function FeaturedProjectBanner({
   };
 
   return (
-    <div 
+    <div
       role="button"
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       className="relative w-full overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg cursor-pointer transition-all hover:border-theme-accent/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent/50 selection:bg-transparent"
     >
-      <div className="flex min-h-[320px] flex-col md:flex-row">
+      <div className="flex min-h-[260px] xl:min-h-[300px] 2xl:min-h-[340px] flex-col md:flex-row">
         {/* Left Content */}
         <div className="relative z-10 flex flex-1 flex-col justify-center p-8 md:p-10 lg:p-12">
           <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
@@ -33,17 +33,17 @@ export function FeaturedProjectBanner({
           <h2 className="mb-3 text-3xl font-bold tracking-tight text-theme-text md:text-4xl lg:text-5xl group-hover:text-theme-accent transition-colors">
             {project.title}
           </h2>
-          
+
           <p className="max-w-md text-base leading-relaxed text-theme-text-muted font-light">
             {project.description}
           </p>
 
           <div className="mt-8 flex items-center gap-6">
             {project.links.github && (
-              <a 
-                href={project.links.github} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs font-bold text-theme-text hover:text-theme-accent transition-colors relative z-20"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -52,10 +52,10 @@ export function FeaturedProjectBanner({
               </a>
             )}
             {project.links.live && (
-              <a 
-                href={project.links.live} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={project.links.live}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs font-bold text-theme-text hover:text-theme-accent transition-colors relative z-20"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -67,8 +67,8 @@ export function FeaturedProjectBanner({
         </div>
 
         {/* Right Image/Slanted Area */}
-        <div className="relative h-[240px] w-full overflow-hidden md:h-auto md:w-[50%] lg:w-[55%]">
-          <div 
+        <div className="relative h-[180px] w-full overflow-hidden md:h-auto md:w-[50%] lg:w-[55%]">
+          <div
             className="absolute inset-0"
             style={{
               clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)',

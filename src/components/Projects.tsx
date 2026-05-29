@@ -118,38 +118,36 @@ export function Projects() {
 
   return (
     <section id="projects" className="w-full pb-10">
-      <div className="mb-8 flex items-center justify-between gap-6">
-        <div className="flex flex-1 items-center gap-4">
-          <h2 className="flex items-center gap-2 whitespace-nowrap text-xl font-medium tracking-tight text-theme-text sm:text-2xl">
-            <button
-              onClick={() => setIsHeartFilled(!isHeartFilled)}
-              className="text-theme-accent transition-transform hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus rounded-full"
-              aria-label={isHeartFilled ? "Unlike" : "Like"}
-              title={isHeartFilled ? "Unlike" : "Like"}
-            >
-              <IconHeart
-                size={24}
-                fill={isHeartFilled ? "currentColor" : "none"}
-                className="transition-all duration-300"
-              />
-            </button>
-            Featured Projects
-          </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent"></div>
-        </div>
+      <div className="mb-8 flex items-center gap-4">
+        <h2 className="flex shrink-0 items-center gap-2 text-xl font-medium tracking-tight text-theme-text sm:text-2xl">
+          <button
+            onClick={() => setIsHeartFilled(!isHeartFilled)}
+            className="text-theme-accent transition-transform hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus rounded-full"
+            aria-label={isHeartFilled ? "Unlike" : "Like"}
+            title={isHeartFilled ? "Unlike" : "Like"}
+          >
+            <IconHeart
+              size={24}
+              fill={isHeartFilled ? "currentColor" : "none"}
+              className="transition-all duration-300"
+            />
+          </button>
+          Featured Projects
+        </h2>
+        <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent" />
         <Link
           to="/projects"
           onMouseEnter={() => setHoveredCommand('projects')}
           onMouseLeave={() => setHoveredCommand(null)}
-          className="group flex items-center gap-2 whitespace-nowrap text-sm font-medium text-theme-text-muted transition-colors hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-md px-1"
+          className="group flex shrink-0 items-center gap-2 text-sm font-medium text-theme-text-muted transition-colors hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-md px-1"
         >
-          View all projects
+          View All
           <IconArrowRight size={16} stroke={2} className="transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
 
       <div
-        className="w-full h-[560px] overflow-hidden relative rounded-2xl bg-theme-bg-elevated/30 border border-theme-accent/15 shadow-[0_20px_40px_-15px_rgba(var(--theme-shadow),0.3)] group/slider selection:bg-transparent max-lg:h-[500px] max-md:h-[440px]"
+        className="w-full h-[440px] xl:h-[480px] 2xl:h-[560px] max-lg:h-[420px] max-md:h-[380px] overflow-hidden relative rounded-2xl bg-theme-bg-elevated/30 border border-theme-accent/15 shadow-[0_20px_40px_-15px_rgba(var(--theme-shadow),0.3)] group/slider selection:bg-transparent"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -238,10 +236,10 @@ export function Projects() {
                 className="absolute bottom-10 left-10 w-[440px] text-left p-7 text-white z-10 flex flex-col gap-4 max-lg:left-10 max-lg:bottom-[30px] max-lg:w-[380px] max-lg:p-6 max-md:left-5 max-md:right-5 max-md:bottom-6 max-md:w-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="text-2xl font-bold leading-tight">{activeSlideProject.title}</div>
-                <div className="text-xs leading-relaxed text-white/70 line-clamp-2">{activeSlideProject.description}</div>
+                <div className="text-lg font-bold leading-tight sm:text-2xl">{activeSlideProject.title}</div>
+                <div className="text-[11px] leading-relaxed text-white/70 line-clamp-2 sm:text-xs">{activeSlideProject.description}</div>
 
-                <div className="flex flex-wrap gap-1.5">
+                <div className="hidden sm:flex flex-wrap gap-1.5">
                   {activeSlideProject.tags.map((tag) => {
                     const tech = techStack.find(t =>
                       t.label.toLowerCase() === tag.toLowerCase() ||

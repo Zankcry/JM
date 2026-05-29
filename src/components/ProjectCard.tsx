@@ -32,7 +32,7 @@ export function ProjectCard({
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/50 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent/50 selection:bg-transparent"
+      className="group relative flex flex-col h-full overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/50 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent/50 selection:bg-transparent"
       onMouseEnter={() => setHoveredCommand(`open projects/${projectSlug}`)}
       onMouseLeave={() => setHoveredCommand(null)}
     >
@@ -40,7 +40,7 @@ export function ProjectCard({
 
       <div className={`flex flex-1 flex-col ${padding}`}>
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-[17px] font-semibold tracking-tight text-theme-text transition-colors group-hover:text-theme-accent">
+          <h3 className="text-[17px] font-semibold tracking-tight text-theme-text transition-colors group-hover:text-theme-accent line-clamp-1 min-h-[1.5rem]">
             {project.title}
           </h3>
           <div className="flex items-center gap-3 text-theme-text-muted">
@@ -71,7 +71,7 @@ export function ProjectCard({
           </div>
         </div>
 
-        <p className="mt-2.5 text-[13px] leading-relaxed text-theme-text-muted">
+        <p className="mt-2.5 text-[13px] leading-relaxed text-theme-text-muted line-clamp-3 h-[3.9rem] overflow-hidden">
           {project.description}
         </p>
 

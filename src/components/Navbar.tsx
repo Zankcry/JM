@@ -124,7 +124,7 @@ function TerminalHomeButton({
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       >
-        <span className="text-theme-accent font-semibold">james@portfolio</span>
+        <span className="text-theme-accent font-semibold">root@james</span>
         <span className="text-theme-text/40">:</span>
         <span className="text-theme-text/70">~/{segment}</span>
         <span className="text-theme-text/40">$</span>
@@ -178,7 +178,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-40 pt-5 pb-4 px-5 sm:px-8 lg:px-12" style={{ right: 'var(--scrollbar-width, 0px)' }}>
+      <header className="fixed top-0 left-0 z-40 pt-5 pb-4 px-5 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12" style={{ right: 'var(--scrollbar-width, 0px)' }}>
         <div
           className={[
             "pointer-events-none absolute inset-x-0 top-0 h-[175%] -z-10 transition-all duration-300 ease-out",

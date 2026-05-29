@@ -45,7 +45,7 @@ export function Footer() {
         ? "border-t border-transparent bg-transparent"
         : "border-t border-theme-accent/10 bg-theme-bg/50 backdrop-blur-sm"
     ].join(' ')}>
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12">
 
         {/* Top Row: Branding, Easter Egg Hint & Socials */}
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">

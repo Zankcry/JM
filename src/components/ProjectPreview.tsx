@@ -19,6 +19,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
                     src={project.poster}
                     alt=""
                     aria-hidden="true"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
                     className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-0' : 'opacity-100'
                         }`}
                 />
@@ -30,6 +31,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
                 alt={project.title}
                 onLoad={() => setIsLoaded(true)}
                 loading="lazy"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
                 className={`h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
             />

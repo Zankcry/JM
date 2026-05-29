@@ -24,7 +24,9 @@ export default {
                 soft: '0 20px 60px rgb(var(--theme-shadow) / 0.14)',
             },
             fontFamily: {
-                mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+                mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+                inter: ['"JetBrains Mono"', 'sans-serif'],
+                sans: ['"JetBrains Mono"', 'sans-serif'],
             },
             letterSpacing: {
                 snug: '-0.03em',

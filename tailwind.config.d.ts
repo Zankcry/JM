@@ -25,6 +25,8 @@ declare const _default: {
             };
             fontFamily: {
                 mono: [string, string, string, string];
+                inter: [string, string];
+                sans: [string, string];
             };
             letterSpacing: {
                 snug: string;
