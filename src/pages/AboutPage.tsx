@@ -219,7 +219,7 @@ export default function AboutPage() {
               href="https://esotericsoftware.com/"
               target="_blank"
               rel="noreferrer"
-              className="text-theme-accent px-1.5 py-0.5 rounded-md transition hover:bg-theme-accent/20"
+              className="text-theme-accent -mx-1.5 px-1.5 py-0.5 rounded-md transition hover:bg-theme-accent/20"
             >
               Spine 2D
             </a>{' '}
@@ -227,7 +227,7 @@ export default function AboutPage() {
               href="https://ui.shadcn.com/"
               target="_blank"
               rel="noreferrer"
-              className="text-theme-accent px-1.5 py-0.5 rounded-md transition hover:bg-theme-accent/20">
+              className="text-theme-accent -mx-1.5 px-1.5 py-0.5 rounded-md transition hover:bg-theme-accent/20">
               Shadcn
             </a> for quickly building beautiful UIs.
           </p>

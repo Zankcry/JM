@@ -25,6 +25,18 @@ export function BrushStrokeCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const strokesRef = useRef<Stroke[]>([]);
 
+  // State to track if the screen is mobile or tablet (< 1024px)
+  const [isMobileOrTablet, setIsMobileOrTablet] = React.useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   // Stroke width presets map
   const widthPresets = {
     thin: { base: 10, min: 2, splatter: 2, spread: 20 },
@@ -58,6 +70,8 @@ export function BrushStrokeCanvas() {
   const loopRef = useRef<() => void>();
 
   useEffect(() => {
+    if (isMobileOrTablet) return;
+
     const handleResize = () => {
       if (canvasRef.current) {
         canvasRef.current.width = window.innerWidth;
@@ -80,9 +94,11 @@ export function BrushStrokeCanvas() {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleFirstMove);
     };
-  }, []);
+  }, [isMobileOrTablet]);
 
   useEffect(() => {
+    if (isMobileOrTablet) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -204,10 +220,12 @@ export function BrushStrokeCanvas() {
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isMobileOrTablet]);
 
   // Drawing and Physics loop
   useEffect(() => {
+    if (isMobileOrTablet) return;
+
     let animationFrameId: number;
 
     const updateAndRender = () => {
@@ -426,7 +444,9 @@ export function BrushStrokeCanvas() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, []);
+  }, [isMobileOrTablet]);
+
+  if (isMobileOrTablet) return null;
 
   return (
     <canvas

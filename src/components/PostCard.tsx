@@ -29,7 +29,7 @@ export function PostCard({ post }: { post: Post }) {
               <h2 className="flex items-center gap-2 text-lg font-bold tracking-tight text-theme-text transition-colors duration-300 group-hover:text-theme-accent sm:text-xl line-clamp-2">
                 <span>{post.title}</span>
               </h2>
-              <p className="text-[14px] leading-relaxed text-theme-text-muted sm:text-[15px] max-w-2xl font-light line-clamp-2">
+              <p className="text-[14px] leading-relaxed text-theme-text-muted sm:text-[15px] max-w-4xl font-light line-clamp-2">
                 {post.description}
               </p>
             </div>

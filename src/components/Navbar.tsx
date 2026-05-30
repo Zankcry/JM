@@ -62,16 +62,15 @@ function TerminalHomeButton({
     if (isInitial) {
       target = 'echo "Hello World!"';
     } else if (hoverCommand) {
-      if (
-        hoverCommand.startsWith('cd ') ||
-        hoverCommand.startsWith('open ') ||
-        hoverCommand.startsWith('cat ') ||
-        hoverCommand.startsWith('git ') ||
-        hoverCommand.startsWith('ssh ')
-      ) {
-        target = hoverCommand;
-      } else {
-        target = `cd ${hoverCommand}`;
+      const allowedPages = ['home', 'about', 'projects', 'posts', 'photos'];
+      const normalizedCmd = hoverCommand.toLowerCase().trim();
+      let pageName = normalizedCmd;
+      if (normalizedCmd.startsWith('cd ')) {
+        pageName = normalizedCmd.substring(3).trim();
+      }
+
+      if (allowedPages.includes(pageName)) {
+        target = `cd ${pageName}`;
       }
     }
     setTyping(true);

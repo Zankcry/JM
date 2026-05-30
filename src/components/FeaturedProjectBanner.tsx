@@ -27,7 +27,7 @@ export function FeaturedProjectBanner({
       <div className="flex min-h-[260px] xl:min-h-[300px] 2xl:min-h-[340px] flex-col md:flex-row">
         {/* Left Content */}
         <div className="relative z-10 flex flex-1 flex-col justify-center p-8 md:p-10 lg:p-12">
-          <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
+          <span className="mb-5 text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
             FEATURED PROJECT
           </span>
           <h2 className="mb-3 text-3xl font-bold tracking-tight text-theme-text md:text-4xl lg:text-5xl group-hover:text-theme-accent transition-colors">
@@ -68,12 +68,7 @@ export function FeaturedProjectBanner({
 
         {/* Right Image/Slanted Area */}
         <div className="relative h-[180px] w-full overflow-hidden md:h-auto md:w-[50%] lg:w-[55%]">
-          <div
-            className="absolute inset-0"
-            style={{
-              clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0% 100%)',
-            }}
-          >
+          <div className="absolute inset-0 featured-project-clip">
             <ProjectPreview project={project} className="h-full w-full" />
           </div>
         </div>

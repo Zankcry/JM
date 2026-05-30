@@ -39,20 +39,24 @@ export default function PicsLightbox({
     >
       <button
         onClick={() => setCurrentIndex(null)}
-        className="absolute top-6 right-6 text-white/70 hover:text-white transition bg-black/40 hover:bg-black/80 rounded-full p-2"
+        className="absolute top-6 right-6 z-[110] text-white/70 hover:text-white transition bg-black/40 hover:bg-black/80 rounded-full p-2"
       >
         <IconX size={24} />
       </button>
 
       <button
         onClick={(e) => { e.stopPropagation(); onPrev(); }}
-        className="absolute left-4 sm:left-8 text-white/70 hover:text-white transition bg-black/40 hover:bg-black/80 rounded-full p-3"
+        className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
+        aria-label="Previous photo"
       >
-        <IconChevronLeft size={32} />
+        <IconChevronLeft
+          size={36}
+          className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+        />
       </button>
 
       <div
-        className="relative flex flex-col items-center max-w-full max-h-full group"
+        className="relative z-[105] flex flex-col items-center max-w-full max-h-full group"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative">
@@ -75,9 +79,13 @@ export default function PicsLightbox({
 
       <button
         onClick={(e) => { e.stopPropagation(); onNext(); }}
-        className="absolute right-4 sm:right-8 text-white/70 hover:text-white transition bg-black/40 hover:bg-black/80 rounded-full p-3"
+        className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
+        aria-label="Next photo"
       >
-        <IconChevronRight size={32} />
+        <IconChevronRight
+          size={36}
+          className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+        />
       </button>
     </div>
   );

@@ -6,11 +6,11 @@ export function EffectSwitcher() {
 
   const options = [
     { value: 'none', label: 'None' },
-    { value: 'cyber-pattern', label: 'Cyber Grid' },
-    { value: 'dot-matrix', label: 'Dot Matrix' },
-    { value: 'retro-scanlines', label: 'Scanlines' },
-    { value: 'hex-blueprint', label: 'Hex Blueprint' },
-    { value: 'woven-grid', label: 'Woven Grid' },
+    { value: 'cyber-pattern', label: 'Grid' },
+    { value: 'dot-matrix', label: 'Dot' },
+    { value: 'retro-scanlines', label: 'Lines' },
+    { value: 'hex-blueprint', label: 'Hex' },
+    { value: 'woven-grid', label: 'Woven' },
   ] as const;
 
   return (
@@ -58,7 +58,7 @@ export function EffectSwitcher() {
       <div className="hidden lg:block h-5 w-px bg-theme-accent/15"></div>
 
       {/* Brush Stroke Toggle Switcher */}
-      <div className="flex flex-col sm:flex-row items-center gap-3">
+      <div className="hidden lg:flex flex-col sm:flex-row items-center gap-3">
         <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">BRUSH //</span>
         <div
           className="relative inline-flex gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"

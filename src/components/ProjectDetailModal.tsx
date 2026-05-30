@@ -94,7 +94,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
       />
 
       {/* Outer Wrapper for Modal + Outside Close Button */}
-      <div className="relative z-10 w-full max-w-6xl flex flex-col items-stretch">
+      <div className="relative z-10 w-full max-w-7xl flex flex-col items-stretch">
         
         {/* Modal Dialog Content Panel */}
         <motion.div
@@ -444,7 +444,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
             <IconX size={24} />
           </button>
 
-          {/* Previous Arrow */}
+          {/* Previous Arrow Zone */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -452,10 +452,13 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                 prev !== null ? (prev - 1 + project.screenshots!.length) % project.screenshots!.length : null
               );
             }}
-            className="absolute left-4 sm:left-8 text-white/70 hover:text-white transition-all bg-black/40 hover:bg-black/80 rounded-full p-3 z-[110] active:scale-95 border border-white/10"
+            className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
             aria-label="Previous image"
           >
-            <IconChevronLeft size={32} />
+            <IconChevronLeft
+              size={36}
+              className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+            />
           </button>
 
           {/* Main Screenshot Container */}
@@ -481,7 +484,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
             </div>
           </div>
 
-          {/* Next Arrow */}
+          {/* Next Arrow Zone */}
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -489,10 +492,13 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                 prev !== null ? (prev + 1) % project.screenshots!.length : null
               );
             }}
-            className="absolute right-4 sm:right-8 text-white/70 hover:text-white transition-all bg-black/40 hover:bg-black/80 rounded-full p-3 z-[110] active:scale-95 border border-white/10"
+            className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
             aria-label="Next image"
           >
-            <IconChevronRight size={32} />
+            <IconChevronRight
+              size={36}
+              className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+            />
           </button>
         </div>
       )}

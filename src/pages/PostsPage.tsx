@@ -48,7 +48,7 @@ export default function PostsPage() {
   };
 
   return (
-    <div className="flex flex-1 flex-col items-center gap-12 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32 max-w-5xl mx-auto">
+    <div className="flex flex-1 flex-col items-center gap-12 w-full pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32 max-w-7xl mx-auto">
 
       {/* Dynamic Header Section */}
       <div className="w-full flex flex-col gap-8">
@@ -125,7 +125,7 @@ export default function PostsPage() {
       <div className="w-full flex flex-col items-center">
         {activeTab === 'posts' ? (
           /* Single Column Elegant Typographic Feed */
-          <div className="flex w-full max-w-3xl flex-col gap-6 pt-4">
+          <div className="flex w-full max-w-5xl flex-col gap-6 pt-4">
             {posts.length > 0 ? (
               posts.map((post) => (
                 <PostCard key={post.id} post={post} />

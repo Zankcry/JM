@@ -191,7 +191,7 @@ export function LocationCard({ currentTime }: { currentTime: Date }) {
           {currentTime.toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
-            hour12: false
+            hour12: true
           })}
         </div>
       </div>

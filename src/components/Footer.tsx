@@ -42,10 +42,10 @@ export function Footer() {
     <footer className={[
       "mt-auto w-full py-12 transition-all duration-300 ease-out",
       effect !== 'none'
-        ? "border-t border-transparent bg-transparent"
-        : "border-t border-theme-accent/10 bg-theme-bg/50 backdrop-blur-sm"
+        ? "bg-transparent"
+        : "bg-theme-bg/50 backdrop-blur-sm"
     ].join(' ')}>
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12">
 
         {/* Top Row: Branding, Easter Egg Hint & Socials */}
         <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
@@ -77,9 +77,9 @@ export function Footer() {
               {['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].map((key, i) => (
                 <span
                   key={i}
-                  className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-theme-accent/25 bg-theme-bg-elevated/40 px-1 font-mono text-[9px] font-bold text-theme-text-muted/70 transition-colors hover:border-theme-accent/50 hover:text-theme-accent/95"
+                  className="inline-flex h-5 w-5 items-center justify-center rounded border border-theme-accent/25 bg-theme-bg-elevated/40 font-mono text-[9px] font-bold text-theme-text-muted/70 transition-colors hover:border-theme-accent/50 hover:text-theme-accent/95"
                 >
-                  {key}
+                  <span className="translate-y-[1px] transform leading-none">{key}</span>
                 </span>
               ))}
             </div>
