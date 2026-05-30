@@ -41,16 +41,7 @@ function TerminalHomeButton({
   const segment = pathToSegment(currentPath);
   const [commandText, setCommandText] = useState('');
   const [typing, setTyping] = useState(false);
-  const [isInitial, setIsInitial] = useState(true);
   const typingTimer = useRef<NodeJS.Timeout | null>(null);
-
-  // Initial welcome message timer
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitial(false);
-    }, 8000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     if (typingTimer.current) {
@@ -59,9 +50,7 @@ function TerminalHomeButton({
     }
 
     let target = '';
-    if (isInitial) {
-      target = 'echo "Hello World!"';
-    } else if (hoverCommand) {
+    if (hoverCommand) {
       const allowedPages = ['home', 'about', 'projects', 'posts', 'photos'];
       const normalizedCmd = hoverCommand.toLowerCase().trim();
       let pageName = normalizedCmd;
@@ -96,7 +85,7 @@ function TerminalHomeButton({
     return () => {
       if (typingTimer.current) clearInterval(typingTimer.current);
     };
-  }, [hoverCommand, isInitial]);
+  }, [hoverCommand]);
 
   return (
     <Link

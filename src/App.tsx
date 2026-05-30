@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
@@ -10,6 +10,7 @@ import PostDetailPage from './pages/PostDetailPage';
 import AboutPage from './pages/AboutPage';
 import PicsPage from './pages/PicsPage';
 import { Footer } from './components/Footer';
+import { LoadingScreen } from './components/LoadingScreen';
 import { TerminalProvider } from './context/TerminalContext';
 import { BackgroundLayer } from './components/BackgroundLayer';
 import { BrushStrokeCanvas } from './components/BrushStrokeCanvas';
@@ -77,10 +78,12 @@ function AnimatedRoutes() {
 
 export default function App() {
   const { brushActive } = useBackground();
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <TerminalProvider>
       <Router>
+        {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
         <div className="relative z-0 min-h-screen overflow-hidden text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col transition-colors duration-300 ease-out">
           {/* Isolated Hardware-Accelerated Background Pattern */}
           <BackgroundLayer />
