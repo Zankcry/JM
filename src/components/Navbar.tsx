@@ -226,14 +226,14 @@ export function Navbar() {
                       onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
                       onMouseLeave={() => setHoveredCommand(null)}
                       className={[
-                        "group flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-300",
+                        "group flex min-w-0 items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-300",
                         isLinkActive
                           ? "bg-theme-accent/10 text-theme-accent font-semibold border-l-2 border-theme-accent pl-3.5"
                           : "text-theme-text-muted hover:bg-theme-surface/75 hover:text-theme-text"
                       ].join(' ')}
                     >
-                      <span>{link.label}</span>
-                      <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
+                      <span className="truncate pr-3">{link.label}</span>
+                      <span className="shrink-0 font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 transition-opacity group-hover:opacity-75">
                         {jpLabel}
                       </span>
                     </Link>
@@ -245,10 +245,10 @@ export function Navbar() {
                       rel="noopener noreferrer"
                       onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
                       onMouseLeave={() => setHoveredCommand(null)}
-                      className="group flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium text-theme-text-muted transition-all duration-300 hover:bg-theme-surface/75 hover:text-theme-text"
+                      className="group flex min-w-0 items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium text-theme-text-muted transition-all duration-300 hover:bg-theme-surface/75 hover:text-theme-text"
                     >
-                      <span>{link.label}</span>
-                      <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
+                      <span className="truncate pr-3">{link.label}</span>
+                      <span className="shrink-0 font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 transition-opacity group-hover:opacity-75">
                         {jpLabel}
                       </span>
                     </a>
@@ -275,16 +275,16 @@ export function Navbar() {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed left-[5rem] top-0 z-50 w-0.5 -translate-x-1/2 bg-gradient-to-b from-theme-accent/50 to-transparent hidden xl:block"
-        style={{ height: 'calc(50vh - 140px)' }}
+        className="pointer-events-none fixed left-[4.25rem] top-0 z-50 hidden w-0.5 -translate-x-1/2 bg-gradient-to-b from-theme-accent/50 to-transparent xl:block 2xl:left-[5rem]"
+        style={{ height: 'clamp(3rem, calc(50vh - 8.75rem), 14rem)' }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed left-[5rem] bottom-0 z-50 w-0.5 -translate-x-1/2 bg-gradient-to-t from-theme-accent/50 to-transparent hidden xl:block"
-        style={{ height: 'calc(50vh - 140px)' }}
+        className="pointer-events-none fixed bottom-0 left-[4.25rem] z-50 hidden w-0.5 -translate-x-1/2 bg-gradient-to-t from-theme-accent/50 to-transparent xl:block 2xl:left-[5rem]"
+        style={{ height: 'clamp(3rem, calc(50vh - 8.75rem), 14rem)' }}
       />
 
-      <aside className="fixed left-[5rem] top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 xl:block">
+      <aside className="fixed left-[4.25rem] top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 xl:block 2xl:left-[5rem]">
         <nav className="flex flex-col items-center gap-2" aria-label="Section navigation">
           {primaryNavLinks.map((link) => {
             const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
@@ -337,7 +337,7 @@ export function Navbar() {
                 className="group relative block text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-xl"
               >
                 <motion.div
-                  className="py-3 px-6"
+                  className="px-4 py-2.5 2xl:px-6 2xl:py-3"
                   initial="initial"
                   whileHover="hover"
                 >
@@ -348,7 +348,7 @@ export function Navbar() {
                 {isLinkActive && (
                   <motion.span
                     layoutId="active-indicator-underline"
-                    className="absolute bottom-2 left-7 right-7 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50"
+                    className="absolute bottom-2 left-5 right-5 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50 2xl:left-7 2xl:right-7"
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                   />
                 )}
@@ -364,7 +364,7 @@ export function Navbar() {
                 className="group relative block text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-xl"
               >
                 <motion.div
-                  className="py-3 px-6"
+                  className="px-4 py-2.5 2xl:px-6 2xl:py-3"
                   initial="initial"
                   whileHover="hover"
                 >

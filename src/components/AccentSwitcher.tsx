@@ -100,8 +100,8 @@ export function AccentSwitcher({ inline = false }: { inline?: boolean } = {}) {
       {/* Dynamic Decorative Line (Top) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 bottom-[calc(100%+16px)] w-0.5 -translate-x-1/2 bg-gradient-to-b from-theme-accent/50 to-transparent hidden xl:block"
-        style={{ height: 'calc(50vh - 208px)' }}
+        className="pointer-events-none absolute left-1/2 bottom-[calc(100%+16px)] hidden w-0.5 -translate-x-1/2 bg-gradient-to-b from-theme-accent/50 to-transparent xl:block"
+        style={{ height: 'clamp(5rem, calc(50vh - 13rem), 16rem)' }}
       />
 
       <div className="relative flex flex-col gap-2">
@@ -144,7 +144,7 @@ export function AccentSwitcher({ inline = false }: { inline?: boolean } = {}) {
           const swatchColor = palette[option];
 
           return (
-            <div key={option} className="relative h-5 w-5 flex items-center justify-center">
+            <div key={option} className="relative flex h-4 w-4 items-center justify-center 2xl:h-5 2xl:w-5">
               {isActive && (
                 <motion.div
                   layoutId="accent-hex-marker"
@@ -196,8 +196,8 @@ export function AccentSwitcher({ inline = false }: { inline?: boolean } = {}) {
       {/* Dynamic Decorative Line (Bottom) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[calc(100%+16px)] w-0.5 -translate-x-1/2 bg-gradient-to-t from-theme-accent/50 to-transparent hidden xl:block"
-        style={{ height: 'calc(50vh - 208px)' }}
+        className="pointer-events-none absolute left-1/2 top-[calc(100%+16px)] hidden w-0.5 -translate-x-1/2 bg-gradient-to-t from-theme-accent/50 to-transparent xl:block"
+        style={{ height: 'clamp(5rem, calc(50vh - 13rem), 16rem)' }}
       />
     </aside>
   );
