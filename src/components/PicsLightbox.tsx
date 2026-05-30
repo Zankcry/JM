@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { IconX, IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { Photo } from '../data/photos';
 
@@ -17,6 +17,17 @@ export default function PicsLightbox({
   onPrev,
   onNext
 }: PicsLightboxProps) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Reset loaded state whenever the photo changes
+  useEffect(() => {
+    setLoaded(false);
+    // Immediately mark as loaded if already cached
+    if (imgRef.current?.complete) {
+      setLoaded(true);
+    }
+  }, [currentIndex]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -60,10 +71,20 @@ export default function PicsLightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative">
+          {/* Subtle spinner shown while next image loads */}
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
+            </div>
+          )}
           <img
+            ref={imgRef}
+            key={currentIndex}
             src={photos[currentIndex].src}
             alt="fullscreen"
-            className="max-w-full max-h-[85vh] object-contain shadow-2xl"
+            onLoad={() => setLoaded(true)}
+            className="max-w-full max-h-[85vh] object-contain shadow-2xl transition-opacity duration-400"
+            style={{ opacity: loaded ? 1 : 0 }}
           />
         </div>
 

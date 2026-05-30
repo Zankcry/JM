@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Photo } from '../data/photos';
 
@@ -83,6 +83,62 @@ const ASPECT_RATIO_LOOKUP: Record<string, number> = {
   'windmills.png': 1080 / 1920
 };
 
+// Individual photo card with shimmer skeleton + fade-in on load (prevents flash/glitch)
+type PhotoCardProps = {
+  photo: Photo;
+  globalIndex: number;
+  onPhotoClick: (idx: number) => void;
+};
+
+function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Handle cached images that fire onLoad before React attaches the handler
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setLoaded(true);
+    }
+  }, []);
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      className="relative group cursor-pointer overflow-hidden bg-theme-bg shadow-lg rounded-3xl"
+      onClick={() => onPhotoClick(globalIndex)}
+    >
+      {/* Shimmer skeleton shown while the image loads */}
+      {!loaded && (
+        <div
+          className="w-full animate-pulse bg-gradient-to-r from-theme-bg-elevated/40 via-theme-bg-elevated/70 to-theme-bg-elevated/40 bg-[length:200%_100%]"
+          style={{
+            aspectRatio: (() => {
+              const filename = photo.src.split('/').pop() || '';
+              const ratio = ASPECT_RATIO_LOOKUP[filename] || 0.75;
+              return `${ratio}`;
+            })(),
+          }}
+        />
+      )}
+      <img
+        ref={imgRef}
+        src={photo.src}
+        alt={photo.id}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        className="w-full h-auto object-cover transition-[transform,opacity] duration-500 group-hover:scale-105"
+        style={{ opacity: loaded ? 1 : 0 }}
+      />
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none">
+        <p className="text-white text-xs font-mono drop-shadow-[0_1px_2px_rgba(0,0,0,1)] line-clamp-2">
+          "{photo.comment}"
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
   const [columnsCount, setColumnsCount] = useState(1);
 
@@ -135,23 +191,12 @@ export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
           {col.map((photo) => {
             const globalIndex = photos.findIndex(p => p.id === photo.id);
             return (
-              <motion.div
+              <PhotoCard
                 key={photo.id}
-                variants={cardVariants}
-                className="relative group cursor-pointer overflow-hidden bg-theme-bg shadow-lg rounded-3xl"
-                onClick={() => onPhotoClick(globalIndex)}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.id}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none">
-                  <p className="text-white text-xs font-mono drop-shadow-[0_1px_2px_rgba(0,0,0,1)] line-clamp-2">
-                    "{photo.comment}"
-                  </p>
-                </div>
-              </motion.div>
+                photo={photo}
+                globalIndex={globalIndex}
+                onPhotoClick={onPhotoClick}
+              />
             );
           })}
         </div>
