@@ -172,6 +172,6 @@ export const allPhotos: Photo[] = [
     id: '28',
     src: '/images/pics/genshin-selfie.png',
     tags: ['genshin'],
-    comment: 'Selfie~'
+    comment: 'Selfie~ with Mataray na Masungit'
   }
 ];

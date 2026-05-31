@@ -3,3 +3,10 @@ dist
 .vite
 .DS_Store
 *.log
+
+# TypeScript build info (compiler cache, not source)
+*.tsbuildinfo
+
+# Vite/TS declaration emit artifacts
+vite.config.d.ts
+tailwind.config.d.ts
