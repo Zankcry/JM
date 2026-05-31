@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IconArrowRight, IconHeart } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,6 +6,8 @@ import { projects, Project } from '../data/projects';
 import { techStack, techStackIcons } from '../data/tech';
 import { useTerminal } from '../context/TerminalContext';
 import { ProjectDetailModal } from './ProjectDetailModal';
+import { ProjectThumbnailStrip } from './ProjectThumbnailStrip';
+import { slideVariants } from '../utils/animations';
 
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -18,44 +20,6 @@ export function Projects() {
   // The active project in the deck is item 2 (index 1)
   const activeSlideProject = slides[1] || slides[0];
   const activeProjectSlug = activeSlideProject?.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-  // Infinite horizontal scroll loop
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isScrollingPaused = useRef(false);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    let animationId: number;
-    const scrollSpeed = 0.65; // Slow, premium sliding motion
-
-    const scroll = () => {
-      if (el && !isScrollingPaused.current) {
-        el.scrollLeft += scrollSpeed;
-
-        // Find the first duplicated card to calculate exact seamless loop offset
-        const screenshotsCount = activeSlideProject.screenshots?.length || 0;
-        const firstDuplicatedCard = el.children[screenshotsCount] as HTMLElement;
-
-        if (firstDuplicatedCard) {
-          // Reset to 0 when the first duplicated card reaches the starting alignment position
-          if (el.scrollLeft >= firstDuplicatedCard.offsetLeft - 20) {
-            el.scrollLeft = 0;
-          }
-        } else {
-          // Fallback if elements aren't measured yet
-          if (el.scrollLeft >= el.scrollWidth / 2) {
-            el.scrollLeft = 0;
-          }
-        }
-      }
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    animationId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationId);
-  }, [activeSlideProject]);
 
   // Shift the first element to the end of the array
   const handleNext = () => {
@@ -170,28 +134,7 @@ export function Projects() {
               <motion.div
                 key={activeSlideProject.title}
                 custom={direction}
-                variants={{
-                  initial: (dir) => ({
-                    x: dir === 'next' ? '30%' : dir === 'prev' ? '-30%' : 0,
-                    opacity: 0
-                  }),
-                  animate: {
-                    x: 0,
-                    opacity: 1,
-                    transition: {
-                      x: { type: 'spring', stiffness: 220, damping: 26 },
-                      opacity: { duration: 0.35 }
-                    }
-                  },
-                  exit: (dir) => ({
-                    x: dir === 'next' ? '-30%' : dir === 'prev' ? '30%' : 0,
-                    opacity: 0,
-                    transition: {
-                      x: { type: 'spring', stiffness: 220, damping: 26 },
-                      opacity: { duration: 0.35 }
-                    }
-                  })
-                }}
+                variants={slideVariants('30%')}
                 initial="initial"
                 animate="animate"
                 exit="exit"
@@ -208,28 +151,7 @@ export function Projects() {
               <motion.div
                 key={activeSlideProject.title}
                 custom={direction}
-                variants={{
-                  initial: (dir) => ({
-                    x: dir === 'next' ? 40 : dir === 'prev' ? -40 : 0,
-                    opacity: 0
-                  }),
-                  animate: {
-                    x: 0,
-                    opacity: 1,
-                    transition: {
-                      x: { type: 'spring', stiffness: 220, damping: 26 },
-                      opacity: { duration: 0.35 }
-                    }
-                  },
-                  exit: (dir) => ({
-                    x: dir === 'next' ? -40 : dir === 'prev' ? 40 : 0,
-                    opacity: 0,
-                    transition: {
-                      x: { type: 'spring', stiffness: 220, damping: 26 },
-                      opacity: { duration: 0.35 }
-                    }
-                  })
-                }}
+                variants={slideVariants(40)}
                 initial="initial"
                 animate="animate"
                 exit="exit"
@@ -281,62 +203,15 @@ export function Projects() {
             </AnimatePresence>
           </div>
 
-          {/* Cards 3-6: The 4 screenshot previews wrapped in an infinite marquee scroller */}
-          <div
-            className="absolute left-[480px] bottom-10 right-0 h-[175px] z-10 overflow-hidden bg-transparent max-lg:left-[440px] max-lg:bottom-[30px] max-lg:h-[135px] max-md:hidden"
-            style={{
-              maskImage: 'linear-gradient(to right, transparent, white 50px)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, white 50px)'
-            }}
-          >
-            <div
-              className="flex gap-5 overflow-x-auto overflow-y-hidden w-full h-full pt-2.5 pb-2.5 pl-5 pr-[120px] items-end [scrollbar-width:none] [-ms-overflow-style:none] bg-transparent [&::-webkit-scrollbar]:hidden max-lg:pl-5 max-lg:pr-[100px]"
-              ref={scrollRef}
-              onMouseEnter={() => { isScrollingPaused.current = true; }}
-              onMouseLeave={() => { isScrollingPaused.current = false; }}
-            >
-              <AnimatePresence mode="popLayout" custom={direction}>
-                {[...(activeSlideProject.screenshots || []), ...(activeSlideProject.screenshots || [])].map((screenshot, idx) => {
-                  return (
-                    <motion.div
-                      key={`${activeSlideProject.title}-screenshot-${idx}`}
-                      custom={direction}
-                      variants={{
-                        initial: (dir) => ({
-                          x: dir === 'next' ? 60 : dir === 'prev' ? -60 : 0,
-                          opacity: 0
-                        }),
-                        animate: {
-                          x: 0,
-                          opacity: 1,
-                          transition: {
-                            x: { type: 'spring', stiffness: 220, damping: 26, delay: (idx % (activeSlideProject.screenshots?.length || 1)) * 0.05 },
-                            opacity: { duration: 0.35, delay: (idx % (activeSlideProject.screenshots?.length || 1)) * 0.05 }
-                          }
-                        },
-                        exit: (dir) => ({
-                          x: dir === 'next' ? -60 : dir === 'prev' ? 60 : 0,
-                          opacity: 0,
-                          transition: {
-                            x: { type: 'spring', stiffness: 220, damping: 26 },
-                            opacity: { duration: 0.3 }
-                          }
-                        })
-                      }}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                      className="flex-shrink-0 w-[260px] h-[155px] bg-center bg-cover rounded-md cursor-pointer transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.05] max-lg:w-[190px] max-lg:h-[115px]"
-                      style={{ backgroundImage: `url(${screenshot})` }}
-                      onClick={() => {
-                        setActiveProject(activeSlideProject);
-                      }}
-                    />
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-          </div>
+          {/* Cards 3+: The screenshot previews wrapped in an infinite marquee scroller */}
+          {activeSlideProject.screenshots && activeSlideProject.screenshots.length > 0 && (
+            <ProjectThumbnailStrip
+              screenshots={activeSlideProject.screenshots}
+              activeTitle={activeSlideProject.title}
+              direction={direction}
+              onScreenshotClick={() => setActiveProject(activeSlideProject)}
+            />
+          )}
         </div>
 
         <div className="absolute inset-y-0 left-0 w-full z-20 flex justify-between p-0 pointer-events-none">
