@@ -47,7 +47,7 @@ export function Hero() {
               loop
               muted
               playsInline
-              preload="auto"
+              preload="metadata"
               aria-hidden="true"
             >
               <source src="/videos/chibi.webm" type="video/webm" />

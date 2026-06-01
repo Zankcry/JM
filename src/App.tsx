@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { KonamiEasterEgg } from './components/KonamiEasterEgg';
-import HomePage from './pages/HomePage';
-import ProjectsPage from './pages/ProjectsPage';
-import PostsPage from './pages/PostsPage';
-import PostDetailPage from './pages/PostDetailPage';
-import AboutPage from './pages/AboutPage';
-import PicsPage from './pages/PicsPage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const PostsPage = lazy(() => import('./pages/PostsPage'));
+const PostDetailPage = lazy(() => import('./pages/PostDetailPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const PicsPage = lazy(() => import('./pages/PicsPage'));
+
 import { Footer } from './components/Footer';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TerminalProvider } from './context/TerminalContext';
@@ -61,14 +63,23 @@ function AnimatedRoutes() {
         className="flex flex-col flex-1"
       >
         <div className="mx-auto flex flex-1 w-full max-w-7xl flex-col px-5 pb-16 pt-32 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12">
-          <Routes location={location}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/posts" element={<PostsPage />} />
-            <Route path="/posts/:id" element={<PostDetailPage />} />
-            <Route path="/photos" element={<PicsPage />} />
-          </Routes>
+          <Suspense fallback={
+            <div className="flex h-[40vh] w-full flex-col items-center justify-center gap-3 text-sm font-mono tracking-widest text-theme-accent uppercase">
+              <div className="h-2 w-24 overflow-hidden rounded-full bg-theme-accent/20">
+                <div className="h-full w-1/2 animate-infinite-loading rounded-full bg-theme-accent" />
+              </div>
+              <span>Initializing Module...</span>
+            </div>
+          }>
+            <Routes location={location}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/posts" element={<PostsPage />} />
+              <Route path="/posts/:id" element={<PostDetailPage />} />
+              <Route path="/photos" element={<PicsPage />} />
+            </Routes>
+          </Suspense>
         </div>
         <Footer />
       </motion.div>
