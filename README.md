@@ -1,6 +1,6 @@
 # JM.
 
-My personal 2nd ver. web portfolio, to showcase my skills, projects, and memories through out my experience in college and my journey as a web developer.
+My personal 2nd ver. web portfolio, to showcase my skills, projects, and memories throughout my experience in college and my journey as a web developer. Inspired by many developers, portfolio sites and youtube portfolio reviews.
 
 ![Website Preview](./public/images/website.png)
 
@@ -12,3 +12,7 @@ My personal 2nd ver. web portfolio, to showcase my skills, projects, and memorie
   <img src="https://img.shields.io/badge/Framer_Motion-0055FF?logo=framer&logoColor=white" alt="Framer Motion" />
 </p>
 
+
+<p align="center">
+  <img src="./public/videos/sabina.gif" alt="Sabina" />
+</p>
