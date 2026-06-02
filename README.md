@@ -14,8 +14,6 @@ My personal 2nd version web portfolio, showcasing my skills, projects, and colle
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://framer.com/motion)
 
-#
-
 <img src="./public/images/website.png" alt="Website Preview" width="750" />
 
 #
