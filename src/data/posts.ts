@@ -9,7 +9,7 @@ export type Post = {
 export const posts: Post[] = [
   {
     id: 'why-i-built-simple-player',
-    title: 'Why I Created the Simple Player Extension',
+    title: 'Why I Created the Simple Miniplayer Extension',
     description: 'The backstory behind building a custom floating miniplayer equipped with subtitle rendering, live chat overlays, and a retro audio visualizer.',
     date: 'May 26, 2026',
     tags: ['ChromeExtension', 'JavaScript', 'Anime', 'DIY']

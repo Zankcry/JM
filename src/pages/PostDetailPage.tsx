@@ -41,7 +41,7 @@ export default function PostDetailPage() {
           <h1 className="text-4xl font-black leading-[1.1] tracking-tighter text-theme-text sm:text-5xl lg:text-6xl">
             {isSimplePlayer ? (
               <>
-                Why I Created the <span className="text-theme-accent">Simple Player</span> Extension
+                Why I Created the <span className="text-theme-accent">Simple Miniplayer</span> Extension
               </>
             ) : (
               <>
@@ -85,7 +85,7 @@ export default function PostDetailPage() {
               <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                 <img
                   src="/images/project6Preview_1.png"
-                  alt="Simple Player Active Subtitle View"
+                  alt="Simple Miniplayer Active Subtitle View"
                   className="w-full"
                 />
               </div>
@@ -109,7 +109,7 @@ export default function PostDetailPage() {
               <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                 <img
                   src="/images/project6Preview_2.png"
-                  alt="Simple Player UI Preview"
+                  alt="Simple Miniplayer UI Preview"
                   className="w-full"
                 />
               </div>
@@ -122,7 +122,7 @@ export default function PostDetailPage() {
                 Reels, Controls & Snapping
               </h2>
               <p>
-                I frequently browse Instagram Reels, YouTube Shorts, and Facebook Reels. Standard Picture-in-Picture engines completely break on scrollable nested frame layouts. Simple Player detects these containers and maps them to a responsive, floating terminal.
+                I frequently browse Instagram Reels, YouTube Shorts, and Facebook Reels. Standard Picture-in-Picture engines completely break on scrollable nested frame layouts. Simple Miniplayer detects these containers and maps them to a responsive, floating terminal.
               </p>
               <p>
                 I also integrated key playback tools:
