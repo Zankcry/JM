@@ -1,6 +1,6 @@
 # JM.
 
-My personal 2nd ver. web portfolio, to showcase my skills, projects, and memories throughout my experience in college and my journey as a web developer. Inspired by many developers, portfolio sites and youtube portfolio reviews.
+My personal 2nd ver. web portfolio, to showcase my skills, projects, and memories throughout my experience in college and my journey as a web developer. Inspired by many developers, portfolio sites, youtube portfolio reviews and my love for the japanese culture and language.
 
 ![Website Preview](./public/images/website.png)
 
@@ -14,5 +14,5 @@ My personal 2nd ver. web portfolio, to showcase my skills, projects, and memorie
 
 
 <p align="center">
-  <img src="./public/videos/sabina.gif" alt="Sabina" width="150" />
+  <img src="./public/videos/sabina.gif" alt="Sabina" width="250" />
 </p>
