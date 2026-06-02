@@ -121,13 +121,22 @@ export function BrushStrokeCanvas() {
           target.closest('select') ||
           target.closest('textarea') ||
           target.closest('[role="button"]') ||
-          target.closest('.interactive')
+          target.closest('.interactive') ||
+          target.closest('p, span, h1, h2, h3, h4, h5, h6, li, code, pre, td, th, figcaption, label')
         ) {
           return;
         }
       }
 
       const isRight = e.button === 2;
+      
+      // Prevent text selection/highlighting when starting to draw with left click
+      if (e.button === 0) {
+        e.preventDefault();
+        window.getSelection()?.removeAllRanges();
+      }
+      document.body.style.userSelect = 'none';
+
       mouseRef.current = {
         x: e.clientX + window.scrollX,
         y: e.clientY + window.scrollY,
@@ -200,6 +209,7 @@ export function BrushStrokeCanvas() {
 
     const handleMouseUp = () => {
       mouseRef.current.isDown = false;
+      document.body.style.userSelect = '';
       // Mark all current drawing strokes as no longer drawing, so they start fading
       strokesRef.current.forEach((stroke) => {
         if (stroke.isDrawing) {
