@@ -14,5 +14,5 @@ My personal 2nd ver. web portfolio, to showcase my skills, projects, and memorie
 
 
 <p align="center">
-  <img src="./public/videos/sabina.gif" alt="Sabina" />
+  <img src="./public/videos/sabina.gif" alt="Sabina" width="150" />
 </p>
