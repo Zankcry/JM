@@ -5,7 +5,6 @@ import {
   IconBrandTypescript,
   IconBrandPhp,
   IconBrandReact,
-  IconBrandVue,
   IconBrandAngular,
   IconBrandTailwind,
   IconBrandMongodb,
@@ -25,7 +24,6 @@ export type TechIconType =
   | 'brand-typescript' 
   | 'brand-php' 
   | 'brand-react' 
-  | 'brand-vue' 
   | 'brand-angular' 
   | 'brand-tailwind' 
   | 'brand-mongodb' 
@@ -51,7 +49,6 @@ export const techStack: TechStackItem[] = [
   { label: 'TypeScript', shortLabel: 'TS', tone: '#3178C6', icon: 'brand-typescript' },
   { label: 'PHP', shortLabel: 'PHP', tone: '#777BB4', icon: 'brand-php' },
   { label: 'React', shortLabel: 'React', tone: '#61DAFB', icon: 'brand-react' },
-  { label: 'Vue', shortLabel: 'Vue', tone: '#4FC08D', icon: 'brand-vue' },
   { label: 'Angular', shortLabel: 'Ng', tone: '#DD0031', icon: 'brand-angular' },
   { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8', icon: 'brand-tailwind' },
   { label: 'MongoDB', shortLabel: 'MDB', tone: '#47A248', icon: 'brand-mongodb' },
@@ -71,7 +68,6 @@ export const techStackIcons = {
   'brand-typescript': IconBrandTypescript,
   'brand-php': IconBrandPhp,
   'brand-react': IconBrandReact,
-  'brand-vue': IconBrandVue,
   'brand-angular': IconBrandAngular,
   'brand-tailwind': IconBrandTailwind,
   'brand-mongodb': IconBrandMongodb,
