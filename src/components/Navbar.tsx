@@ -126,12 +126,15 @@ export function Navbar() {
                       onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
                       onMouseLeave={() => setHoveredCommand(null)}
                       className={[
-                        "group flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-300",
+                        "group relative flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-300",
                         isLinkActive
-                          ? "bg-theme-accent/10 text-theme-accent font-semibold border-l-2 border-theme-accent pl-3.5"
+                          ? "bg-theme-accent/10 text-theme-accent font-semibold pl-6"
                           : "text-theme-text-muted hover:bg-theme-surface/75 hover:text-theme-text"
                       ].join(' ')}
                     >
+                      {isLinkActive && (
+                        <span className="absolute left-2.5 top-3 bottom-3 w-[3px] rounded-full bg-theme-accent" />
+                      )}
                       <span>{link.label}</span>
                       <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
                         {jpLabel}
