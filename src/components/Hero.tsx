@@ -9,7 +9,7 @@ import {
   IconAddressBook,
   IconMail,
 } from '@tabler/icons-react';
-import { Tooltip, YahhoTooltip } from './Tooltip';
+import { YahhoTooltip } from './Tooltip';
 import { techStack, techStackIcons } from '../data/tech';
 import { useTerminal } from '../context/TerminalContext';
 

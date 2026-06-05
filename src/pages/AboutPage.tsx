@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Tooltip, YahhoTooltip } from '../components/Tooltip';
+import { YahhoTooltip } from '../components/Tooltip';
 import { IconBrandSpotify } from '@tabler/icons-react';
 import {
   IconBrandGithub,

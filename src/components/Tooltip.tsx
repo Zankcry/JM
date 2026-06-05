@@ -6,7 +6,7 @@ interface TooltipProps {
   children: React.ReactNode;
 }
 
-export function Tooltip({ content, children }: TooltipProps) {
+function Tooltip({ content, children }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
   const tooltipRef = useRef<HTMLSpanElement>(null);
 
