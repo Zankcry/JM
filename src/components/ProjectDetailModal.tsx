@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  IconX,
   IconBrandGithub,
   IconExternalLink,
   IconSearch,
-  IconChartBar,
-  IconChevronLeft,
-  IconChevronRight
+  IconChartBar
 } from '@tabler/icons-react';
 import { Project } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
 import { techStack, techStackIcons } from '../data/tech';
 import { useTheme } from '../theme/ThemeProvider';
 import { fadeUpVariants } from '../utils/animations';
+import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
+import Lightbox from './Lightbox';
 
 type ProjectDetailModalProps = {
   project: Project | null;
@@ -24,28 +23,13 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
   const { theme } = useTheme();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  // Lock body scroll when modal is open and prevent layout shifts
+  // Reset lightbox index when project changes
   useEffect(() => {
     setLightboxIndex(null);
-    if (project) {
-      // Calculate scrollbar width
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      if (scrollbarWidth > 0) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
-        document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-      }
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-      document.documentElement.style.removeProperty('--scrollbar-width');
-    }
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-      document.documentElement.style.removeProperty('--scrollbar-width');
-    };
   }, [project]);
+
+  // Lock body scroll when modal is open
+  useBodyScrollLock(!!project);
 
   // Handle Escape key press for main modal
   useEffect(() => {
@@ -55,26 +39,6 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose, lightboxIndex]);
-
-  // Handle Keyboard navigation for Lightbox
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (lightboxIndex === null || !project?.screenshots) return;
-      if (e.key === 'Escape') setLightboxIndex(null);
-      if (e.key === 'ArrowLeft') {
-        setLightboxIndex((prev) => 
-          prev !== null ? (prev - 1 + project.screenshots!.length) % project.screenshots!.length : null
-        );
-      }
-      if (e.key === 'ArrowRight') {
-        setLightboxIndex((prev) => 
-          prev !== null ? (prev + 1) % project.screenshots!.length : null
-        );
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex, project?.screenshots]);
 
   if (!project) return null;
 
@@ -437,77 +401,22 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
       </div>
 
       {/* Fullscreen Lightbox Overlay for Screenshots */}
-      {lightboxIndex !== null && project.screenshots && (
-        <div
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-8"
-          onClick={() => setLightboxIndex(null)}
-        >
-          {/* Close Button */}
-          <button
-            onClick={() => setLightboxIndex(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-all bg-black/40 hover:bg-black/80 rounded-full p-2.5 z-[110] active:scale-95 border border-white/10"
-            aria-label="Close image viewer"
-          >
-            <IconX size={24} />
-          </button>
-
-          {/* Previous Arrow Zone */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) => 
-                prev !== null ? (prev - 1 + project.screenshots!.length) % project.screenshots!.length : null
-              );
-            }}
-            className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-            aria-label="Previous image"
-          >
-            <IconChevronLeft
-              size={36}
-              className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
-            />
-          </button>
-
-          {/* Main Screenshot Container */}
-          <div
-            className="relative flex flex-col items-center justify-center max-w-full max-h-[80vh] z-[105]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.img
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              src={project.screenshots[lightboxIndex]}
-              alt={`${project.title} screenshot ${lightboxIndex + 1}`}
-              className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl border border-white/10"
-            />
-
-            {/* Counter */}
-            <div className="mt-5 text-center font-mono pointer-events-none">
-              <p className="text-white/40 text-[11px] tracking-[0.2em] uppercase">
-                {lightboxIndex + 1} / {project.screenshots.length}
-              </p>
-            </div>
-          </div>
-
-          {/* Next Arrow Zone */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) => 
-                prev !== null ? (prev + 1) % project.screenshots!.length : null
-              );
-            }}
-            className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-            aria-label="Next image"
-          >
-            <IconChevronRight
-              size={36}
-              className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
-            />
-          </button>
-        </div>
+      {project.screenshots && (
+        <Lightbox
+          items={project.screenshots}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() =>
+            setLightboxIndex((prev) =>
+              prev !== null ? (prev - 1 + project.screenshots!.length) % project.screenshots!.length : null
+            )
+          }
+          onNext={() =>
+            setLightboxIndex((prev) =>
+              prev !== null ? (prev + 1) % project.screenshots!.length : null
+            )
+          }
+        />
       )}
     </div>
   );

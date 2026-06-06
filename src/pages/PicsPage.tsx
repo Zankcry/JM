@@ -4,7 +4,7 @@ import { IconBrandGooglePhotos } from '@tabler/icons-react';
 import { allPhotos } from '../data/photos';
 import PicsFilter from '../components/PicsFilter';
 import PicsGrid from '../components/PicsGrid';
-import PicsLightbox from '../components/PicsLightbox';
+import Lightbox from '../components/Lightbox';
 
 export default function PicsPage() {
   const [filter, setFilter] = useState('all');
@@ -62,10 +62,10 @@ export default function PicsPage() {
       </AnimatePresence>
 
       {/* ── Lightbox ────────────────────────────────────── */}
-      <PicsLightbox
-        photos={displayedPhotos}
+      <Lightbox
+        items={displayedPhotos}
         currentIndex={currentIndex}
-        setCurrentIndex={setCurrentIndex}
+        onClose={() => setCurrentIndex(null)}
         onPrev={handlePrev}
         onNext={handleNext}
       />
