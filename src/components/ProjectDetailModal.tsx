@@ -8,7 +8,7 @@ import {
 } from '@tabler/icons-react';
 import { Project } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
-import { techStack, techStackIcons } from '../data/tech';
+import { TechTag } from './TechTag';
 import { useTheme } from '../theme/ThemeProvider';
 import { fadeUpVariants } from '../utils/animations';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
@@ -98,42 +98,9 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               <div className="flex flex-col gap-2">
                 <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">Tech Stack</span>
                 <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => {
-                    const tech = techStack.find(t =>
-                      t.label.toLowerCase() === tag.toLowerCase() ||
-                      t.shortLabel.toLowerCase() === tag.toLowerCase()
-                    );
-
-                    if (!tech) {
-                      return (
-                        <span
-                          key={tag}
-                          className="rounded-md border border-theme-border/20 bg-theme-bg-elevated/40 px-2 py-0.5 text-[9px] font-medium tracking-wide text-theme-text-muted/95"
-                        >
-                          {tag}
-                        </span>
-                      );
-                    }
-
-                    const TechIcon = techStackIcons[tech.icon];
-
-                    return (
-                      <div
-                        key={tag}
-                        className="group/tag flex items-center gap-1.5 rounded-md border border-theme-border/10 bg-theme-bg-elevated/30 px-2 py-0.5 transition-all duration-200 hover:border-theme-accent/20 hover:bg-theme-bg-elevated/60"
-                      >
-                        <div
-                          className="flex h-3.5 w-3.5 items-center justify-center transition-transform duration-300 group-hover/tag:scale-110"
-                          style={{ color: tech.tone }}
-                        >
-                          <TechIcon size={11} stroke={2.5} aria-hidden="true" />
-                        </div>
-                        <span className="text-[9px] font-semibold tracking-wide text-theme-text-muted/80 transition-colors duration-200 group-hover/tag:text-theme-text">
-                          {tech.label}
-                        </span>
-                      </div>
-                    );
-                  })}
+                  {project.tags.map((tag) => (
+                    <TechTag key={tag} tag={tag} variant="modal" />
+                  ))}
                 </div>
               </div>
 

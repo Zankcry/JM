@@ -1,6 +1,6 @@
 import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import { ProjectPreview } from './ProjectPreview';
-import { techStack, techStackIcons } from '../data/tech';
+import { TechTag } from './TechTag';
 import { useTerminal } from '../context/TerminalContext';
 import { Project } from '../data/projects';
 
@@ -76,42 +76,9 @@ export function ProjectCard({
         </p>
 
         <div className="pt-6 flex flex-wrap gap-2 flex-grow items-start">
-          {project.tags.map((tag) => {
-            const tech = techStack.find(t =>
-              t.label.toLowerCase() === tag.toLowerCase() ||
-              t.shortLabel.toLowerCase() === tag.toLowerCase()
-            );
-
-            if (!tech) {
-              return (
-                <span
-                  key={tag}
-                  className="rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted"
-                >
-                  {tag}
-                </span>
-              );
-            }
-
-            const TechIcon = techStackIcons[tech.icon];
-
-            return (
-              <div
-                key={tag}
-                className="group/tag flex items-center gap-1.5 rounded-lg border border-theme-accent/10 bg-theme-bg/50 px-2 py-1 transition-all hover:border-theme-accent/30 hover:bg-theme-bg"
-              >
-                <div
-                  className="flex h-4 w-4 items-center justify-center transition-transform group-hover/tag:scale-110"
-                  style={{ color: tech.tone }}
-                >
-                  <TechIcon size={14} stroke={2} aria-hidden="true" />
-                </div>
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-theme-text-muted transition-colors group-hover/tag:text-theme-text">
-                  {tech.label}
-                </span>
-              </div>
-            );
-          })}
+          {project.tags.map((tag) => (
+            <TechTag key={tag} tag={tag} variant="card" />
+          ))}
         </div>
       </div>
     </div>
