@@ -144,10 +144,15 @@ export function Hero() {
 
           <div className="flex flex-wrap items-center gap-2 pb-1">
             {techStack.map((item) => (
-              <div
+              <a
                 key={item.label}
-                className="group flex items-center gap-1.5 rounded-md border border-theme-accent/10 bg-theme-bg/50 px-2 py-[0.30rem] transition-all hover:border-theme-accent/30 hover:bg-theme-bg"
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-1.5 rounded-md border border-theme-accent/10 bg-theme-bg/50 px-2 py-[0.30rem] transition-all hover:border-theme-accent/30 hover:bg-theme-bg hover:shadow-sm active:scale-95"
                 style={{ '--brand-color': item.tone } as React.CSSProperties}
+                onMouseEnter={() => setHoveredCommand(`open docs/${item.label.toLowerCase()}`)}
+                onMouseLeave={() => setHoveredCommand(null)}
               >
                 <div
                   className="flex h-4 w-4 items-center justify-center rounded transition-transform group-hover:scale-110"
@@ -161,7 +166,7 @@ export function Hero() {
                 <span className="text-[11px] font-semibold tracking-wide text-theme-text-muted transition-colors group-hover:text-theme-text uppercase">
                   {item.label}
                 </span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
