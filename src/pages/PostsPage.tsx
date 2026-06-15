@@ -230,7 +230,7 @@ export default function PostsPage() {
                   {/* Curated Text Content */}
                   <div className="flex flex-1 flex-col gap-3">
                     <div className="flex items-center gap-3">
-                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider uppercase border ${item.status === 'Finished'
+                      <span className={`inline-flex items-center justify-center h-5 gap-1 px-2.5 rounded-full text-[9px] font-bold leading-none tracking-wider uppercase border ${item.status === 'Finished'
                         ? 'border-emerald-500/20 bg-emerald-500/5 text-emerald-500'
                         : 'border-theme-accent/20 bg-theme-accent/5 text-theme-accent'
                         }`}>
