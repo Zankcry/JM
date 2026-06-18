@@ -12,7 +12,14 @@ import { slideVariants } from '../utils/animations';
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
-  const [slides, setSlides] = useState<Project[]>(projects);
+  const [slides, setSlides] = useState<Project[]>(() => {
+    const rotated = [...projects];
+    const last = rotated.pop();
+    if (last) {
+      rotated.unshift(last);
+    }
+    return rotated;
+  });
   const [direction, setDirection] = useState<'next' | 'prev' | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const { setHoveredCommand } = useTerminal();
