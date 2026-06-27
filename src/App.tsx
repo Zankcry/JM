@@ -59,18 +59,18 @@ function AnimatedRoutes() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        transition={{ duration: 0.75, ease: "easeInOut" }}
         className="flex flex-col flex-1"
       >
         <div className="mx-auto flex flex-1 w-full max-w-7xl flex-col px-5 pb-16 pt-32 sm:px-8 lg:px-12 xl:pl-32 xl:pr-32 2xl:px-12">
-            <Routes location={location}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/posts" element={<PostsPage />} />
-              <Route path="/posts/:id" element={<PostDetailPage />} />
-              <Route path="/photos" element={<PicsPage />} />
-            </Routes>
+          <Routes location={location}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/posts" element={<PostsPage />} />
+            <Route path="/posts/:id" element={<PostDetailPage />} />
+            <Route path="/photos" element={<PicsPage />} />
+          </Routes>
         </div>
         <Footer />
       </motion.div>
