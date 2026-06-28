@@ -172,13 +172,20 @@ export default function AboutPage() {
               />
             </div>
             {/* Chibi character overlay */}
+            {/* Mobile: WebP Image */}
+            <img
+              src="/videos/chibi.webp"
+              alt="Chibi character overlay"
+              className="absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none md:hidden"
+            />
+            {/* Desktop: WebM Video */}
             <video
               src="/videos/chibi.webm"
               autoPlay
               loop
               muted
               playsInline
-              className="absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none"
+              className="hidden md:block absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none"
             />
           </div>
 

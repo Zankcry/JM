@@ -45,8 +45,16 @@ export function Hero() {
             <span className="text-theme-accent ml-0 sm:ml-3">
               James Michael
             </span>
+            {/* Mobile: WebP Image */}
+            <img
+              src="/videos/chibi.webp"
+              alt="Chibi character"
+              className="h-14 w-14 rounded-2xl object-cover sm:h-16 sm:w-16 md:hidden"
+              aria-hidden="true"
+            />
+            {/* Desktop: WebM Video */}
             <video
-              className="h-14 w-14 rounded-2xl object-cover sm:h-16 sm:w-16"
+              className="hidden md:block h-14 w-14 rounded-2xl object-cover sm:h-16 sm:w-16"
               autoPlay
               loop
               muted
