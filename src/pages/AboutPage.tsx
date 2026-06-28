@@ -185,6 +185,7 @@ export default function AboutPage() {
               loop
               muted
               playsInline
+              preload="auto"
               className="hidden md:block absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none"
             />
           </div>
