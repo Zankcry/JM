@@ -24,9 +24,43 @@ export function Projects() {
   const [isHovered, setIsHovered] = useState(false);
   const { setHoveredCommand } = useTerminal();
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // The active project in the deck is item 2 (index 1)
   const activeSlideProject = slides[1] || slides[0];
   const activeProjectSlug = activeSlideProject?.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+  // Extract poster and screenshots for mobile slideshow
+  const mediaList = [
+    activeSlideProject?.poster,
+    ...(activeSlideProject?.screenshots || [])
+  ].filter(Boolean) as string[];
+
+  // Reset media cycle index when the active project slide changes
+  useEffect(() => {
+    setCurrentMediaIndex(0);
+  }, [activeSlideProject?.title]);
+
+  // Slideshow interval cycling on mobile
+  useEffect(() => {
+    if (!isMobile || mediaList.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentMediaIndex((prev) => (prev + 1) % mediaList.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isMobile, mediaList.length]);
 
   // Shift the first element to the end of the array
   const handleNext = () => {
@@ -127,7 +161,11 @@ export function Projects() {
           <div
             className="absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
             style={{
-              backgroundImage: `url(${slides[0]?.image || activeSlideProject.image})`,
+              backgroundImage: `url(${
+                isMobile
+                  ? (slides[0]?.poster || slides[0]?.image || activeSlideProject.poster || activeSlideProject.image)
+                  : (slides[0]?.image || activeSlideProject.image)
+              })`,
             }}
           />
 
@@ -145,9 +183,26 @@ export function Projects() {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                className="absolute inset-0 bg-cover bg-center z-0"
-                style={{ backgroundImage: `url(${activeSlideProject.image})` }}
+                className="absolute inset-0 z-0 overflow-hidden"
               >
+                {isMobile ? (
+                  <AnimatePresence initial={false}>
+                    <motion.div
+                      key={currentMediaIndex}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.8 }}
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${mediaList[currentMediaIndex]})` }}
+                    />
+                  </AnimatePresence>
+                ) : (
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${activeSlideProject.image})` }}
+                  />
+                )}
                 {/* Cinematic bottom-left gradient overlay to make text highly readable */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/25 to-transparent pointer-events-none" />
               </motion.div>
