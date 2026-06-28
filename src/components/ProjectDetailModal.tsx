@@ -82,7 +82,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
             initial="initial"
             animate="animate"
             exit="exit"
-            className="flex flex-col gap-6 w-full md:w-[45%] md:h-full md:justify-center md:pr-6 md:border-r md:border-theme-border/10 overflow-y-auto md:overflow-hidden custom-scrollbar"
+            className="flex flex-col gap-6 w-full shrink-0 overflow-visible md:w-[45%] md:h-full md:justify-center md:pr-6 md:border-r md:border-theme-border/10 md:overflow-y-auto md:overflow-x-hidden md:shrink custom-scrollbar"
           >
             <div className="flex flex-col gap-5">
               
@@ -138,11 +138,11 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full md:w-[55%] md:h-full flex flex-col justify-between overflow-hidden"
+            className="w-full shrink-0 overflow-visible md:w-[55%] md:h-full flex flex-col justify-between md:overflow-hidden"
           >
             
             {/* Scrollable Content Container */}
-            <div className="overflow-y-auto pr-1 md:pr-3 flex flex-col gap-6 custom-scrollbar pb-6 flex-grow">
+            <div className="overflow-visible md:overflow-y-auto pr-1 md:pr-3 flex flex-col gap-6 custom-scrollbar pb-6 flex-grow">
               
               {/* Header Title & Subtitle relocated here above the description */}
               <div className="flex flex-col gap-2 pt-2 pr-6">
