@@ -65,16 +65,16 @@ export function AvailabilityCard() {
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-center gap-3">
           <div className="h-4 w-[2px] bg-theme-accent"></div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Status: Active</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Status: OJT Intern</span>
         </div>
 
         <div className="mt-5">
           <div className="flex items-center gap-2 text-theme-text-muted mb-1">
             <IconBriefcase size={14} />
-            <span className="text-[11px] font-mono tracking-tighter uppercase">Role: [Internship]</span>
+            <span className="text-[11px] font-mono tracking-tighter uppercase">Role: [OJT Intern]</span>
           </div>
           <h3 className="text-2xl font-black tracking-tighter text-theme-text leading-tight">
-            OPEN FOR <br /> <span className="text-theme-accent">WORK</span>
+            CURRENTLY AN <br /> <span className="text-theme-accent">OJT INTERN</span>
           </h3>
         </div>
 
@@ -83,7 +83,7 @@ export function AvailabilityCard() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
           </div>
-          <span className="text-[10px] font-bold text-theme-text-muted uppercase">Available</span>
+          <span className="text-[10px] font-bold text-theme-text-muted uppercase">Currently Interning</span>
         </div>
       </div>
     </div>

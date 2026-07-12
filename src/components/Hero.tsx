@@ -84,7 +84,7 @@ export function Hero() {
               rel="noreferrer"
               onMouseEnter={() => setHoveredCommand('open spine2d')}
               onMouseLeave={() => setHoveredCommand(null)}
-            >Spine 2D</a> and crafting unique UI experiences for future projects. I&apos;m currently seeking web development internships to contribute and grow.
+            >Spine 2D</a> and crafting unique UI experiences for future projects. I&apos;m currently an OJT Intern to contribute and grow.
           </p>
         </div>
 

@@ -236,8 +236,8 @@ export default function AboutPage() {
             </span>. I&apos;m
             primarily a <span className="text-theme-accent">Frontend Web Developer</span>,
             but I&apos;m fully capable of working across the{' '}
-            <span className="text-theme-accent">Full Stack</span>. I am currently{' '}
-            <span className="text-theme-accent">looking for internships</span> to further
+            <span className="text-theme-accent">Full Stack</span>. I am currently an{' '}
+            <span className="text-theme-accent">OJT Intern</span> to further
             apply my knowledge in real-world environments.
           </p>
           <p>
