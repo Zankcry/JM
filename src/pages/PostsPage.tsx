@@ -5,8 +5,10 @@ import { IconNews, IconStar, IconBookmark, IconPlayerPlay, IconCheck, IconHeart,
 import { PostCard } from '../components/PostCard';
 import { posts } from '../data/posts';
 import { mangaRecommendations, animeRecommendations } from '../data/recommendations';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PostsPage() {
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'posts' | 'recs'>('posts');
   const [recCategory, setRecCategory] = useState<'manga' | 'anime'>('manga');
   const [showTastePopup, setShowTastePopup] = useState(false);
@@ -57,12 +59,12 @@ export default function PostsPage() {
             {activeTab === 'posts' ? (
               <>
                 <IconNews size={42} stroke={2} className="text-theme-accent" />
-                Posts
+                {t('nav.posts', 'Posts')}
               </>
             ) : (
               <>
                 <IconHeart size={42} stroke={2} className="text-theme-accent animate-pulse" />
-                My Picks
+                {t('posts.title', 'My Picks')}
               </>
             )}
           </h1>
@@ -93,7 +95,7 @@ export default function PostsPage() {
               )}
               <span className="relative z-10 flex items-center gap-2.5">
                 <IconNews size={16} />
-                Writing
+                {language === 'ja' ? '記事一覧' : 'Writing'}
               </span>
             </button>
             <button
@@ -114,7 +116,7 @@ export default function PostsPage() {
               )}
               <span className="relative z-10 flex items-center gap-2.5">
                 <IconStar size={16} />
-                Curated Recs
+                {language === 'ja' ? 'おすすめ作品' : 'Curated Recs'}
               </span>
             </button>
           </div>
@@ -150,7 +152,9 @@ export default function PostsPage() {
                 />
                 <div className="flex flex-col gap-4">
                   <p className="text-[14px] leading-relaxed text-theme-text-muted font-light">
-                    A highly subjective list of anime, manga and manhwa that left a lasting impression on me. Peak taste only. ✌️
+                    {language === 'ja'
+                      ? '私に強い印象を残したアニメ、漫画、ウェブトゥーンの個人的な選集。最高の作品のみ。✌️'
+                      : 'A highly subjective list of anime, manga and manhwa that left a lasting impression on me. Peak taste only. ✌️'}
                   </p>
 
                   {/* Sub-Category Filter Buttons */}
@@ -163,7 +167,7 @@ export default function PostsPage() {
                         }`}
                     >
                       <IconBookmark size={15} />
-                      Manga
+                      {language === 'ja' ? '漫画' : 'Manga'}
                     </button>
                     <button
                       onClick={() => setRecCategory('anime')}
@@ -173,7 +177,7 @@ export default function PostsPage() {
                         }`}
                     >
                       <IconPlayerPlay size={15} />
-                      Anime
+                      {language === 'ja' ? 'アニメ' : 'Anime'}
                     </button>
                   </div>
                 </div>
@@ -182,14 +186,14 @@ export default function PostsPage() {
               {/* Right Side: The Question Box */}
               <div className="flex flex-col items-start lg:items-end gap-3 shrink-0 pt-2 lg:pt-8">
                 <p className="text-[13px] font-medium text-theme-text-muted tracking-wide">
-                  Agree with my peak taste?
+                  {language === 'ja' ? '私の最高の好みと同感ですか？' : 'Agree with my peak taste?'}
                 </p>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={openTastePopup}
                     className="w-16 h-8 rounded-full border border-theme-accent/30 bg-transparent text-theme-accent text-xs font-bold transition-all hover:border-theme-accent hover:bg-theme-accent hover:text-theme-on-accent active:scale-95 flex items-center justify-center"
                   >
-                    Yes
+                    {language === 'ja' ? 'はい' : 'Yes'}
                   </button>
                   <button
                     onClick={openTastePopup}
@@ -197,7 +201,9 @@ export default function PostsPage() {
                     onMouseLeave={() => setIsNoHovered(false)}
                     className="w-16 h-8 rounded-full border border-theme-accent/30 bg-transparent text-theme-accent text-xs font-bold transition-all hover:border-theme-accent hover:bg-theme-accent hover:text-theme-on-accent active:scale-95 flex items-center justify-center"
                   >
-                    {isNoHovered ? 'Yes' : 'No'}
+                    {language === 'ja'
+                      ? (isNoHovered ? 'はい' : 'いいえ')
+                      : (isNoHovered ? 'Yes' : 'No')}
                   </button>
                 </div>
               </div>
@@ -234,17 +240,21 @@ export default function PostsPage() {
                         ? 'border-emerald-500/20 bg-emerald-500/5 text-emerald-500'
                         : 'border-theme-accent/20 bg-theme-accent/5 text-theme-accent'
                         }`}>
-                        {item.status}
+                        {language === 'ja' ? (
+                          item.status === 'Finished' ? '読了 / 完結' : '読書・視聴中'
+                        ) : (
+                          item.status
+                        )}
                         {item.status === 'Finished' && <IconCheck size={10} stroke={3} />}
                       </span>
                     </div>
 
                     <h3 className="text-lg font-bold leading-tight text-theme-text group-hover:text-theme-accent transition-colors duration-300">
-                      {item.title}
+                      {(language === 'ja' && item.title_ja) ? item.title_ja : item.title}
                     </h3>
 
                     <p className="text-[13px] leading-relaxed text-theme-text-muted font-light">
-                      {item.description}
+                      {(language === 'ja' && item.description_ja) ? item.description_ja : item.description}
                     </p>
                   </div>
                 </div>

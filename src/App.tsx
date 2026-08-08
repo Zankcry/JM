@@ -14,6 +14,7 @@ import PicsPage from './pages/PicsPage';
 import { Footer } from './components/Footer';
 import { LoadingScreen } from './components/LoadingScreen';
 import { TerminalProvider } from './context/TerminalContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { BackgroundLayer } from './components/BackgroundLayer';
 import { BrushStrokeCanvas } from './components/BrushStrokeCanvas';
 import { useBackground } from './context/BackgroundContext';
@@ -83,9 +84,10 @@ export default function App() {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <TerminalProvider>
-      <Router>
-        {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
+    <LanguageProvider>
+      <TerminalProvider>
+        <Router>
+          {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
         <div className="relative z-0 min-h-screen overflow-hidden text-theme-text font-inter selection:bg-theme-accent/30 selection:text-theme-text flex flex-col transition-colors duration-300 ease-out">
           {/* Isolated Hardware-Accelerated Background Pattern */}
           <BackgroundLayer />
@@ -101,5 +103,6 @@ export default function App() {
         </div>
       </Router>
     </TerminalProvider>
+  </LanguageProvider>
   );
 }

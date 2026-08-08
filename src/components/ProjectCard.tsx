@@ -2,6 +2,7 @@ import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import { ProjectPreview } from './ProjectPreview';
 import { TechTag } from './TechTag';
 import { useTerminal } from '../context/TerminalContext';
+import { useLanguage } from '../context/LanguageContext';
 import { Project } from '../data/projects';
 
 export function ProjectCard({
@@ -16,7 +17,9 @@ export function ProjectCard({
   onClick?: () => void;
 }) {
   const { setHoveredCommand } = useTerminal();
+  const { language } = useLanguage();
   const projectSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const descriptionText = (language === 'ja' && project.description_ja) ? project.description_ja : project.description;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -41,7 +44,7 @@ export function ProjectCard({
       <div className={`flex flex-1 flex-col ${padding}`}>
         <div className="flex items-center justify-between gap-4">
           <h3 className="text-[17px] font-semibold tracking-tight text-theme-text transition-colors group-hover:text-theme-accent line-clamp-1 min-h-[1.5rem]">
-            {project.title}
+            {(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
           </h3>
           <div className="flex items-center gap-3 text-theme-text-muted">
             {project.links.github && (
@@ -72,7 +75,7 @@ export function ProjectCard({
         </div>
 
         <p className="mt-2.5 text-[13px] leading-relaxed text-theme-text-muted line-clamp-3 h-[3.9rem] overflow-hidden">
-          {project.description}
+          {descriptionText}
         </p>
 
         <div className="pt-6 flex flex-wrap gap-2 flex-grow items-start">

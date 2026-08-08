@@ -6,8 +6,11 @@ import { FeaturedProjectBanner } from '../components/FeaturedProjectBanner';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectDetailModal } from '../components/ProjectDetailModal';
 
+import { useLanguage } from '../context/LanguageContext';
+
 export default function ProjectsPage() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { t } = useLanguage();
   
   const featuredProject = projects[0];
   const otherProjects = projects.filter(p => p !== featuredProject);
@@ -17,7 +20,7 @@ export default function ProjectsPage() {
       <header className="flex w-full items-center gap-6">
         <h1 className="flex shrink-0 items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
           <IconRocket size={42} stroke={2.5} className="text-theme-accent" />
-          Projects
+          {t('nav.projects', 'Projects')}
         </h1>
         <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
       </header>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -13,6 +14,15 @@ function pathToSegment(pathname: string): string {
   if (pathname === '/posts') return 'posts';
   return 'home';
 }
+
+const segmentJpMap: Record<string, string> = {
+  'home': 'ホーム',
+  'about': '私について',
+  'projects': 'プロジェクト',
+  'photos': '写真',
+  'posts': '記事',
+  'posts/article': '記事/詳細',
+};
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
@@ -29,7 +39,9 @@ export function TerminalHomeButton({
   onHoverChange,
   onClick,
 }: TerminalHomeButtonProps) {
-  const segment = pathToSegment(currentPath);
+  const { language } = useLanguage();
+  const rawSegment = pathToSegment(currentPath);
+  const segment = language === 'ja' ? (segmentJpMap[rawSegment] || rawSegment) : rawSegment;
   const [commandText, setCommandText] = useState('');
   const [typing, setTyping] = useState(false);
   const typingTimer = useRef<NodeJS.Timeout | null>(null);
@@ -50,7 +62,8 @@ export function TerminalHomeButton({
       }
 
       if (allowedPages.includes(pageName)) {
-        target = `cd ${pageName}`;
+        const displayPage = language === 'ja' ? (segmentJpMap[pageName] || pageName) : pageName;
+        target = `cd ${displayPage}`;
       }
     }
     setTyping(true);
@@ -103,7 +116,7 @@ export function TerminalHomeButton({
         whileHover={{ scale: 1.02 }}
         transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       >
-        <span className="text-theme-accent font-semibold">root@james</span>
+        <span className="text-theme-accent font-semibold">{language === 'ja' ? 'root@ジェームズ' : 'root@james'}</span>
         <span className="text-theme-text/40">:</span>
         <span className="text-theme-text/70">~/{segment}</span>
         <span className="text-theme-text/40">$</span>

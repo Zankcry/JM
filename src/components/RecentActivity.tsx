@@ -14,28 +14,30 @@ import { posts } from '../data/posts';
 import { PostCard } from './PostCard';
 import { AvailabilityCard, ConnectCard, LocationCard } from './BentoProfile';
 import { useTerminal } from '../context/TerminalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export function RecentActivity() {
   const { setHoveredCommand } = useTerminal();
+  const { t, language } = useLanguage();
 
   const recentPosts = posts.slice(0, 2);
 
   const exploreCards = [
     {
-      title: 'Word of the Week',
-      description: 'Sharing my love for the Japanese language',
+      title: t('about.word_title', 'Word of the Week'),
+      description: language === 'ja' ? '日本語の表現とその魅力' : 'Sharing my love for Japanese',
       icon: IconLanguage,
       href: '/about#word-of-the-week',
     },
     {
-      title: 'Music I Code To',
-      description: 'My top tracks I listen to while coding',
+      title: t('about.music_title', 'Music I Code To'),
+      description: language === 'ja' ? 'コーディング中のお気に入りBGM' : 'My top tracks while coding',
       icon: IconPlaylist,
       href: '/about#music',
     },
     {
-      title: 'Manga Recommendations',
-      description: 'My personal manga/anime recommendations',
+      title: t('about.manga_title', 'Manga Recommendations'),
+      description: language === 'ja' ? 'おすすめの漫画 ＆ アニメ' : 'My manga & anime recommendations',
       icon: IconBookmark,
       href: '/posts#recs',
     }
@@ -54,7 +56,7 @@ export function RecentActivity() {
           <div className="flex flex-1 items-center gap-4">
             <h2 className="flex items-center gap-2 whitespace-nowrap text-xl font-medium tracking-tight text-theme-text sm:text-2xl">
               <IconNews size={24} className="text-theme-accent" />
-              Recent Posts
+              {t('posts.title', 'Recent Posts')}
             </h2>
             <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent"></div>
           </div>
@@ -64,7 +66,7 @@ export function RecentActivity() {
             onMouseLeave={() => setHoveredCommand(null)}
             className="group flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-theme-text-muted transition-colors hover:text-theme-accent"
           >
-            View All
+            {language === 'ja' ? 'すべて見る' : 'View All'}
             <IconArrowUpRight size={16} stroke={2} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
@@ -81,7 +83,7 @@ export function RecentActivity() {
         <div className="flex items-center gap-4">
           <h2 className="flex items-center gap-2 whitespace-nowrap text-xl font-medium tracking-tight text-theme-text sm:text-2xl">
             <IconCompass size={24} className="text-theme-accent" />
-            Explore & Connect
+            {language === 'ja' ? '探索 ＆ 接続' : 'Explore & Connect'}
           </h2>
           <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent"></div>
         </div>
@@ -98,7 +100,7 @@ export function RecentActivity() {
             >
               {/* Background Preview - Layered above card bg but below content */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {card.title === 'Word of the Week' ? (
+                {card.href.includes('word-of-the-week') ? (
                   <>
                     <img
                       src="/images/pics/holy-angel.webp"
@@ -109,7 +111,7 @@ export function RecentActivity() {
                       語
                     </div>
                   </>
-                ) : card.title === 'Manga Recommendations' ? (
+                ) : card.href.includes('recs') ? (
                   <img
                     src="/images/anime_manga/myBias.webp"
                     alt=""
@@ -135,12 +137,12 @@ export function RecentActivity() {
                   <h3 className="mb-1 text-sm font-bold tracking-tight text-theme-text group-hover:text-theme-accent">
                     {card.title}
                   </h3>
-                  <p className="text-[12px] leading-relaxed text-theme-text-muted opacity-80">
+                  <p className="text-[12px] leading-relaxed text-theme-text-muted opacity-80 line-clamp-1 truncate">
                     {card.description}
                   </p>
 
                   <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-theme-accent">
-                    <span>View</span>
+                    <span>{language === 'ja' ? '詳細を見る' : 'View'}</span>
                     <IconArrowUpRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
@@ -174,14 +176,14 @@ export function RecentActivity() {
                   <IconBrandGooglePhotos size={20} stroke={1.5} />
                 </div>
                 <h3 className="mb-1 text-sm font-bold tracking-tight text-theme-text group-hover:text-theme-accent">
-                  Photo Gallery
+                  {language === 'ja' ? 'フォトギャラリー' : 'Photo Gallery'}
                 </h3>
                 <p className="text-[12px] leading-relaxed text-theme-text-muted opacity-80">
-                  Captured moments and visual inspirations.
+                  {language === 'ja' ? '切り取られた一瞬と視覚的なインスピレーション。' : 'Captured moments and visual inspirations.'}
                 </p>
               </div>
               <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-theme-accent">
-                <span>View Gallery</span>
+                <span>{language === 'ja' ? 'ギャラリーを見る' : 'View Gallery'}</span>
                 <IconArrowUpRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>

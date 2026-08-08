@@ -10,6 +10,7 @@ import { Project } from '../data/projects';
 import { ProjectPreview } from './ProjectPreview';
 import { TechTag } from './TechTag';
 import { useTheme } from '../theme/ThemeProvider';
+import { useLanguage } from '../context/LanguageContext';
 import { fadeUpVariants } from '../utils/animations';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import Lightbox from './Lightbox';
@@ -21,6 +22,7 @@ type ProjectDetailModalProps = {
 
 export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps) {
   const { theme } = useTheme();
+  const { t, language } = useLanguage();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   // Reset lightbox index when project changes
@@ -96,7 +98,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
 
               {/* Tag Cloud */}
               <div className="flex flex-col gap-2">
-                <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">Tech Stack</span>
+                <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">{t('projects.technologies', 'Tech Stack')}</span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
                     <TechTag key={tag} tag={tag} variant="modal" />
@@ -107,7 +109,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               {/* Screenshots Gallery - 2x2 Grid */}
               {project.screenshots && project.screenshots.length > 0 && (
                 <div className="flex flex-col gap-2">
-                  <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">Screenshots (Click to View)</span>
+                  <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">{t('projects.overview', 'Screenshots')}</span>
                   <div className="grid grid-cols-2 gap-2.5">
                     {project.screenshots.map((screenshot, idx) => (
                       <button
@@ -148,34 +150,32 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               <div className="flex flex-col gap-2 pt-2 pr-6">
                 {details?.subtitle ? (
                   <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-theme-accent leading-none">
-                    {details.subtitle}
+                    {(language === 'ja' && details.subtitle_ja) ? details.subtitle_ja : details.subtitle}
                   </span>
                 ) : (
                   <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-theme-text-muted leading-none">
-                    PROJECT OVERVIEW
+                    {t('projects.overview', 'PROJECT OVERVIEW')}
                   </span>
                 )}
                 <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-extrabold tracking-tight text-theme-text leading-tight">
-                  {project.title}
+                  {(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
                 </h2>
                 {details?.role && (
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-theme-text-muted/80">Role:</span>
-                    <span className="text-[10px] font-semibold tracking-wide text-theme-accent font-mono bg-theme-accent/10 px-2 py-0.5 rounded">{details.role}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-theme-text-muted/80">{language === 'ja' ? '役割:' : 'Role:'}</span>
+                    <span className="text-[10px] font-semibold tracking-wide text-theme-accent font-mono bg-theme-accent/10 px-2 py-0.5 rounded">
+                      {(language === 'ja' && details.role_ja) ? details.role_ja : details.role}
+                    </span>
                   </div>
                 )}
               </div>
 
               {/* Detailed Intro Description */}
-              {details?.detailedDescription ? (
-                <p className="text-sm sm:text-[15px] leading-relaxed text-theme-text-subtle/95 font-light">
-                  {details.detailedDescription}
-                </p>
-              ) : (
-                <p className="text-sm sm:text-[15px] leading-relaxed text-theme-text-subtle/95 font-light">
-                  {project.description}
-                </p>
-              )}
+              <p className="text-sm sm:text-[15px] leading-relaxed text-theme-text-subtle/95 font-light">
+                {language === 'ja'
+                  ? (details?.detailedDescription_ja || project.description_ja || details?.detailedDescription || project.description)
+                  : (details?.detailedDescription || project.description)}
+              </p>
 
               {details ? (
                 <div className="flex flex-col gap-8 mt-2">
@@ -193,14 +193,12 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                         {details.architecture.map((item, index) => (
                           <div key={index} className="relative group/arch">
                             {/* Connecting Point */}
-                            <div className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full border border-theme-accent bg-theme-bg transition-transform duration-300 group-hover/arch:scale-125 group-hover/arch:bg-theme-accent" />
-
-                            <div className="flex flex-col gap-1">
+                            <div className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full border border-theme-accent bg-theme-bg transition-transform duration-300 group-hover/arch:scale-125 group-hover/arch:bg-theme-accent" />                             <div className="flex flex-col gap-1">
                               <h4 className="text-[12px] font-semibold tracking-wider font-mono text-theme-accent uppercase">
                                 {item.tech}
                               </h4>
                               <p className="text-[13px] text-theme-text-subtle leading-relaxed font-light">
-                                {item.description}
+                                {(language === 'ja' && item.description_ja) ? item.description_ja : item.description}
                               </p>
                             </div>
                           </div>
@@ -210,14 +208,14 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                   )}
 
                   {/* Key Features Section */}
-                  {details.keyFeatures && details.keyFeatures.length > 0 && (
+                  {((language === 'ja' && details.keyFeatures_ja) || details.keyFeatures) && (
                     <section className="flex flex-col gap-4">
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-text-muted flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-theme-accent" />
-                        [02 // Key Features]
+                        [{language === 'ja' ? '02 // 主な機能' : '02 // Key Features'}]
                       </h3>
                       <ul className="flex flex-col gap-3.5 pl-1.5">
-                        {details.keyFeatures.map((feature, index) => {
+                        {((language === 'ja' && details.keyFeatures_ja) ? details.keyFeatures_ja : (details.keyFeatures || [])).map((feature, index) => {
                           const match = feature.match(/^((?:[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2300-\u32FF])[\uFE0F]?)\s*(.*)/);
                           const displayEmoji = match ? match[1] : null;
                           const displayText = match ? match[2] : feature;

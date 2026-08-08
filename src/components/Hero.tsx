@@ -12,6 +12,7 @@ import {
 import { YahhoTooltip } from './Tooltip';
 import { techStack, techStackIcons } from '../data/tech';
 import { useTerminal } from '../context/TerminalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const socialIcons = {
   'brand-github': IconBrandGithub,
@@ -24,6 +25,7 @@ const socialIcons = {
 
 export function Hero() {
   const { setHoveredCommand } = useTerminal();
+  const { t, language } = useLanguage();
 
   return (
     <section
@@ -38,12 +40,12 @@ export function Hero() {
           className="flex max-w-3xl flex-wrap items-center gap-x-3 gap-y-2 text-3xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-4xl lg:text-5xl"
         >
           <span>
-            <YahhoTooltip>Yahho!</YahhoTooltip>{' '}
-            I&apos;m
+            <YahhoTooltip>{t('hero.greeting', "Yahho! I'm")}</YahhoTooltip>{' '}
+            {language === 'en' ? "I'm" : ''}
           </span>
           <span className="inline-flex items-center gap-2 whitespace-nowrap">
             <span className="text-theme-accent ml-0 sm:ml-3">
-              James Michael
+              {t('hero.name', 'James Michael')}
             </span>
             {/* Mobile: WebP Image */}
             <img
@@ -69,22 +71,22 @@ export function Hero() {
 
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">
           <p>
-            I&apos;m an IT undergraduate specializing in Web Development. I currently build websites for personal projects and local businesses like helping a local <a
+            {t('hero.bio1')} <a
               href="#project-1"
               className="text-theme-accent -mx-1.5 px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20"
               onMouseEnter={() => setHoveredCommand('open projects/charlies-barber-salon')}
               onMouseLeave={() => setHoveredCommand(null)}
-            >Barbershop</a> increase their online awareness.
+            >{t('hero.barbershop')}</a> {t('hero.bio1_end')}
           </p>
           <p>
-            Right now, my main focus is learning <a
+            {t('hero.bio2_lead')} <a
               href="https://esotericsoftware.com/"
               className="text-theme-accent -mx-1.5 px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20"
               target="_blank"
               rel="noreferrer"
               onMouseEnter={() => setHoveredCommand('open spine2d')}
               onMouseLeave={() => setHoveredCommand(null)}
-            >Spine 2D</a> and crafting unique UI experiences for future projects. I&apos;m currently an OJT Intern to contribute and grow.
+            >Spine 2D</a> {t('hero.bio2_middle')}
           </p>
         </div>
 
@@ -103,13 +105,20 @@ export function Hero() {
             else if (isInternal) cmd = link.href.replace(/^\//, '');
             else cmd = `open ${link.label.toLowerCase()}`;
 
+            const displayLabel = language === 'ja' ? (
+              link.label === 'Resume' ? '履歴書' :
+              link.label === 'Mail' ? 'メール' :
+              link.label === 'About me...' ? '私について...' :
+              link.label
+            ) : link.label;
+
             const inner = (
               <>
                 {link.icon ? (() => {
                   const SocialIcon = socialIcons[link.icon as keyof typeof socialIcons];
                   return <SocialIcon size={16} stroke={1.8} aria-hidden="true" />;
                 })() : null}
-                <span>{link.label}</span>
+                <span>{displayLabel}</span>
               </>
             );
 
@@ -146,7 +155,7 @@ export function Hero() {
         <div className="mt-12 pt-6">
           <div className="mb-5 flex items-center gap-3">
             <p className="text-xs uppercase tracking-[0.35em] text-theme-text-muted/80">
-              Tech stack
+              {language === 'ja' ? '技術スタック' : 'Tech stack'}
             </p>
           </div>
 

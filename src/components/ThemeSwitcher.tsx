@@ -1,15 +1,17 @@
 import { motion } from 'framer-motion';
-import { themeLabels } from '../theme/catppuccin';
+import { themeLabels, themeLabelsJp } from '../theme/catppuccin';
 import { useTheme } from '../theme/ThemeProvider';
 import { useBackground } from '../context/BackgroundContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export function ThemeSwitcher({ id = 'default' }: { id?: string }) {
   const { theme, themes, setTheme } = useTheme();
   const { effect } = useBackground();
+  const { language } = useLanguage();
 
   return (
     <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
-      <span className="uppercase tracking-[0.35em] text-theme-text-muted/85">Theme</span>
+      <span className="uppercase tracking-[0.35em] text-theme-text-muted/85">{language === 'ja' ? 'テーマ' : 'Theme'}</span>
       <div
         className={[
           "relative inline-flex flex-wrap gap-1 rounded-xl border p-1 transition-all duration-300 ease-out",
@@ -44,7 +46,7 @@ export function ThemeSwitcher({ id = 'default' }: { id?: string }) {
                   transition={{ type: 'spring', stiffness: 150, damping: 22 }}
                 />
               )}
-              <span className="relative z-10">{themeLabels[option]}</span>
+              <span className="relative z-10">{language === 'ja' ? themeLabelsJp[option] : themeLabels[option]}</span>
             </button>
           );
         })}

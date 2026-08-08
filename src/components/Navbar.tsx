@@ -5,9 +5,11 @@ import { IconMenu2, IconX } from '@tabler/icons-react';
 import { primaryNavLinks } from '../data/navigation';
 import { AccentSwitcher } from './AccentSwitcher';
 import { ThemeSwitcher } from './ThemeSwitcher';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { TerminalHomeButton } from './TerminalHomeButton';
 import { useTerminal } from '../context/TerminalContext';
 import { useBackground } from '../context/BackgroundContext';
+import { useLanguage } from '../context/LanguageContext';
 
 
 const TRANSLATIONS: Record<string, string> = {
@@ -23,6 +25,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { hoveredCommand, setHoveredCommand } = useTerminal();
   const { effect } = useBackground();
+  const { language } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
@@ -75,8 +78,9 @@ export function Navbar() {
             onClick={() => handleLinkClick('#home')}
           />
 
-          <div className="hidden xl:block">
+          <div className="hidden xl:flex items-center gap-4">
             <ThemeSwitcher id="desktop" />
+            <LanguageSwitcher id="desktop" />
           </div>
 
           <button
@@ -135,9 +139,9 @@ export function Navbar() {
                       {isLinkActive && (
                         <span className="absolute left-2.5 top-3 bottom-3 w-[3px] rounded-full bg-theme-accent" />
                       )}
-                      <span>{link.label}</span>
+                      <span>{language === 'ja' ? jpLabel : link.label}</span>
                       <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
-                        {jpLabel}
+                        {language === 'ja' ? link.label : jpLabel}
                       </span>
                     </Link>
                   ) : (
@@ -150,9 +154,9 @@ export function Navbar() {
                       onMouseLeave={() => setHoveredCommand(null)}
                       className="group flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium text-theme-text-muted transition-all duration-300 hover:bg-theme-surface/75 hover:text-theme-text"
                     >
-                      <span>{link.label}</span>
+                      <span>{language === 'ja' ? jpLabel : link.label}</span>
                       <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
-                        {jpLabel}
+                        {language === 'ja' ? link.label : jpLabel}
                       </span>
                     </a>
                   );
@@ -163,6 +167,7 @@ export function Navbar() {
 
               <div className="flex flex-col gap-4 px-2 py-1">
                 <ThemeSwitcher id="mobile" />
+                <LanguageSwitcher id="mobile" />
 
                 <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-4 text-xs sm:text-sm">
                   <span className="uppercase tracking-[0.35em] text-theme-text-muted/85 shrink-0">Accent</span>
@@ -197,13 +202,16 @@ export function Navbar() {
               ? location.pathname === '/'
               : location.pathname.startsWith(href);
 
+            const primaryLabel = language === 'ja' ? jpLabel : link.label;
+            const secondaryLabel = language === 'ja' ? link.label : jpLabel;
+
             // Move overflow-hidden and 3D perspective inside the slide wrapper
             const content = (
               <div
                 className="relative h-[1.375rem] select-none flex items-center justify-center"
                 style={{ perspective: '600px' }}
               >
-                {/* English face */}
+                {/* Primary face */}
                 <motion.span
                   className={`block leading-[1.375rem] font-medium transition-colors duration-300 ${isLinkActive ? 'text-theme-accent' : 'text-theme-text-muted group-hover:text-theme-text'
                     }`}
@@ -213,10 +221,10 @@ export function Navbar() {
                   }}
                   transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 >
-                  {link.label}
+                  {primaryLabel}
                 </motion.span>
 
-                {/* Japanese face (Absolute so it doesn't artificially stretch the container width) */}
+                {/* Secondary face (Absolute so it doesn't artificially stretch the container width) */}
                 <motion.span
                   className="absolute block leading-[1.375rem] font-semibold text-theme-accent tracking-wider whitespace-nowrap pointer-events-none"
                   variants={{
@@ -225,7 +233,7 @@ export function Navbar() {
                   }}
                   transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                 >
-                  {jpLabel}
+                  {secondaryLabel}
                 </motion.span>
               </div>
             );

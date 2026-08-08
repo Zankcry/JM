@@ -8,10 +8,12 @@ import { useTerminal } from '../context/TerminalContext';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import { ProjectThumbnailStrip } from './ProjectThumbnailStrip';
 import { slideVariants } from '../utils/animations';
+import { useLanguage } from '../context/LanguageContext';
 
 export function Projects() {
   const [isHeartFilled, setIsHeartFilled] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { t, language } = useLanguage();
   const [slides, setSlides] = useState<Project[]>(() => {
     const rotated = [...projects];
     const last = rotated.pop();
@@ -137,7 +139,7 @@ export function Projects() {
               className="transition-all duration-300"
             />
           </button>
-          Featured Projects
+          {t('projects.title', 'Featured Projects')}
         </h2>
         <div className="h-px flex-1 bg-gradient-to-r from-theme-accent/40 to-transparent" />
         <Link
@@ -146,7 +148,7 @@ export function Projects() {
           onMouseLeave={() => setHoveredCommand(null)}
           className="group flex shrink-0 items-center gap-1.5 text-sm font-medium text-theme-text-muted transition-colors hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-md px-1"
         >
-          View All
+          {language === 'ja' ? 'すべて見る' : 'View All'}
           <IconArrowUpRight size={16} stroke={2} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </div>
@@ -220,8 +222,12 @@ export function Projects() {
                 className="absolute bottom-10 left-10 w-[440px] text-left p-7 text-white z-10 flex flex-col gap-4 max-lg:left-10 max-lg:bottom-[30px] max-lg:w-[380px] max-lg:p-6 max-md:left-5 max-md:right-5 max-md:bottom-6 max-md:w-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="text-lg font-bold leading-tight sm:text-2xl">{activeSlideProject.title}</div>
-                <div className="text-[11px] leading-relaxed text-white/70 line-clamp-2 sm:text-xs">{activeSlideProject.description}</div>
+                <div className="text-lg font-bold leading-tight sm:text-2xl">
+                  {(language === 'ja' && activeSlideProject.title_ja) ? activeSlideProject.title_ja : activeSlideProject.title}
+                </div>
+                <div className="text-[11px] leading-relaxed text-white/70 line-clamp-2 sm:text-xs">
+                  {(language === 'ja' && activeSlideProject.description_ja) ? activeSlideProject.description_ja : activeSlideProject.description}
+                </div>
 
                 <div className="hidden sm:flex flex-wrap gap-1.5">
                   {activeSlideProject.tags.map((tag) => {

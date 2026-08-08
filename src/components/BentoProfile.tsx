@@ -15,6 +15,7 @@ import {
   IconMessage2
 } from '@tabler/icons-react';
 import { useTheme } from '../theme/ThemeProvider';
+import { useLanguage } from '../context/LanguageContext';
 
 
 function MapRecenter({ center }: { center: [number, number] }) {
@@ -27,6 +28,7 @@ function MapRecenter({ center }: { center: [number, number] }) {
 
 function CopyEmailButton({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -46,7 +48,7 @@ function CopyEmailButton({ email }: { email: string }) {
         <IconCopy size={16} className="transition-transform group-hover/icon:scale-110" />
       )}
       <span className="text-[7px] font-bold uppercase tracking-widest opacity-50">
-        {copied ? 'COPIED' : 'COPY'}
+        {copied ? t('bento.copied', 'COPIED') : t('bento.copy', 'COPY')}
       </span>
     </button>
   );
@@ -55,6 +57,8 @@ function CopyEmailButton({ email }: { email: string }) {
 const PORAC_COORDINATES: [number, number] = [15.0731, 120.5435];
 
 export function AvailabilityCard() {
+  const { t, language } = useLanguage();
+
   return (
     <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1 min-h-[180px]">
       {/* Decorative Background Kanji */}
@@ -65,16 +69,20 @@ export function AvailabilityCard() {
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-center gap-3">
           <div className="h-4 w-[2px] bg-theme-accent"></div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Status: OJT Intern</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
+            {t('bento.status')}: {language === 'ja' ? 'OJT インターン' : 'OJT Intern'}
+          </span>
         </div>
 
         <div className="mt-5">
           <div className="flex items-center gap-2 text-theme-text-muted mb-1">
             <IconBriefcase size={14} />
-            <span className="text-[11px] font-mono tracking-tighter uppercase">Role: [OJT Intern]</span>
+            <span className="text-[11px] font-mono tracking-tighter uppercase">
+              {t('bento.focus')}: [{language === 'ja' ? 'OJT インターン' : 'OJT Intern'}]
+            </span>
           </div>
-          <h3 className="text-2xl font-black tracking-tighter text-theme-text leading-tight">
-            CURRENTLY AN <br /> <span className="text-theme-accent">OJT INTERN</span>
+          <h3 className="text-2xl font-black tracking-tighter text-theme-text leading-tight uppercase">
+            {t('bento.status_val', 'Open for Opportunities')}
           </h3>
         </div>
 
@@ -83,7 +91,7 @@ export function AvailabilityCard() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
           </div>
-          <span className="text-[10px] font-bold text-theme-text-muted uppercase">Currently Interning</span>
+          <span className="text-[10px] font-bold text-theme-text-muted uppercase">{t('bento.status_val')}</span>
         </div>
       </div>
     </div>
@@ -91,6 +99,8 @@ export function AvailabilityCard() {
 }
 
 export function ConnectCard() {
+  const { t } = useLanguage();
+
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg p-5 shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1 min-h-[180px]">
       {/* Decorative Background Kanji */}
@@ -102,12 +112,14 @@ export function ConnectCard() {
         <div>
           <div className="flex items-center gap-3">
             <div className="h-4 w-[2px] bg-theme-accent"></div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">Contact Me</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
+              {t('bento.contact_me', 'Contact Me')}
+            </span>
           </div>
 
           <div className="mt-4">
             <p className="text-[12px] leading-relaxed text-theme-text-muted mb-3">
-              Let's connect and explore opportunities together.
+              {t('bento.connect_text', "Let's connect and explore opportunities together.")}
             </p>
 
             <div className="grid grid-cols-3 gap-2">
@@ -141,7 +153,7 @@ export function ConnectCard() {
           className="group/btn mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-theme-accent px-3 py-1.5 text-[12px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
         >
           <IconMessage2 size={14} className="transition-transform group-hover/btn:rotate-12" />
-          <span>Send Message</span>
+          <span>{t('bento.send_message', 'Send Message')}</span>
           <IconArrowUpRight size={12} className="opacity-50" />
         </a>
       </div>
@@ -171,6 +183,7 @@ function ClockDisplay() {
 
 export function LocationCard() {
   const { theme } = useTheme();
+  const { t } = useLanguage();
 
   const mapUrl = theme === 'latte'
     ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
@@ -181,7 +194,7 @@ export function LocationCard() {
       {/* Header - Absolute overlay */}
       <div className="absolute left-4 top-4 z-20 flex items-center gap-1.5 text-theme-text drop-shadow-md">
         <IconMapPin size={16} stroke={2} className="text-theme-accent" />
-        <h3 className="text-xs font-semibold tracking-tight opacity-90">Located In</h3>
+        <h3 className="text-xs font-semibold tracking-tight opacity-90">{t('bento.located_in', 'Located In')}</h3>
       </div>
 
       {/* Map - Fits the container */}

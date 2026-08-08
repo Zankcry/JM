@@ -1,6 +1,7 @@
 import { IconBrandGithub, IconExternalLink } from '@tabler/icons-react';
 import { ProjectPreview } from './ProjectPreview';
 import { Project } from '../data/projects';
+import { useLanguage } from '../context/LanguageContext';
 
 export function FeaturedProjectBanner({
   project,
@@ -9,6 +10,9 @@ export function FeaturedProjectBanner({
   project: Project;
   onClick?: () => void;
 }) {
+  const { language, t } = useLanguage();
+  const descriptionText = (language === 'ja' && project.description_ja) ? project.description_ja : project.description;
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -28,14 +32,14 @@ export function FeaturedProjectBanner({
         {/* Left Content */}
         <div className="relative z-10 flex flex-1 flex-col justify-center p-8 md:p-10 lg:p-12">
           <span className="mb-5 text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
-            FEATURED PROJECT
+            {t('projects.title', 'FEATURED PROJECT')}
           </span>
           <h2 className="mb-3 text-3xl font-bold tracking-tight text-theme-text md:text-4xl lg:text-5xl group-hover:text-theme-accent transition-colors">
-            {project.title}
+            {(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
           </h2>
 
           <p className="max-w-md text-base leading-relaxed text-theme-text-muted font-light">
-            {project.description}
+            {descriptionText}
           </p>
 
           <div className="mt-8 flex items-center gap-6">
@@ -48,7 +52,7 @@ export function FeaturedProjectBanner({
                 onClick={(e) => e.stopPropagation()}
               >
                 <IconBrandGithub size={18} />
-                REPOSITORY
+                {t('projects.source_code', 'REPOSITORY')}
               </a>
             )}
             {project.links.live && (
@@ -60,7 +64,7 @@ export function FeaturedProjectBanner({
                 onClick={(e) => e.stopPropagation()}
               >
                 <IconExternalLink size={18} />
-                LIVE PREVIEW
+                {t('projects.live_demo', 'LIVE PREVIEW')}
               </a>
             )}
           </div>

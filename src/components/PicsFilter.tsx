@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Photo } from '../data/photos';
+import { useLanguage } from '../context/LanguageContext';
 
 type PicsFilterProps = {
   tags: string[];
@@ -9,7 +10,19 @@ type PicsFilterProps = {
   allPhotos: Photo[];
 };
 
+const tagMapJp: Record<string, string> = {
+  all: 'すべて',
+  memories: '思い出',
+  genshin: '原神',
+  scenery: '風景',
+  coffee: 'コーヒー',
+  university: '大学',
+  personal: 'プライベート',
+};
+
 export default function PicsFilter({ tags, filter, setFilter, allPhotos }: PicsFilterProps) {
+  const { language } = useLanguage();
+
   const getCount = (tag: string) => {
     if (tag === 'all') return allPhotos.length;
     return allPhotos.filter(p => p.tags.includes(tag)).length;
@@ -19,6 +32,10 @@ export default function PicsFilter({ tags, filter, setFilter, allPhotos }: PicsF
     <div className="flex flex-wrap gap-1 p-1 rounded-xl bg-theme-surface/50 w-fit">
       {tags.map(tag => {
         const isActive = filter === tag;
+        const displayTag = language === 'ja'
+          ? (tagMapJp[tag.toLowerCase()] || tag.charAt(0).toUpperCase() + tag.slice(1))
+          : (tag.charAt(0).toUpperCase() + tag.slice(1));
+
         return (
           <button
             key={tag}
@@ -38,7 +55,7 @@ export default function PicsFilter({ tags, filter, setFilter, allPhotos }: PicsF
               style={{ color: isActive ? 'rgb(var(--theme-bg))' : 'rgb(var(--theme-text-muted))' }}
             >
               <span className={isActive ? 'font-semibold' : ''}>
-                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                {displayTag}
               </span>
               <span className="opacity-60 text-[10px]">({getCount(tag)})</span>
             </span>

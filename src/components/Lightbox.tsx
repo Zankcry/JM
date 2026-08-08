@@ -2,10 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
+import { useLanguage } from '../context/LanguageContext';
 
 type LightboxItem = {
   src: string;
   comment?: string;
+  comment_ja?: string;
 };
 
 type LightboxProps = {
@@ -23,6 +25,7 @@ export default function Lightbox({
   onPrev,
   onNext
 }: LightboxProps) {
+  const { language } = useLanguage();
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -53,7 +56,7 @@ export default function Lightbox({
 
   const currentItem = items[currentIndex];
   const src = typeof currentItem === 'string' ? currentItem : currentItem.src;
-  const comment = typeof currentItem === 'string' ? undefined : currentItem.comment;
+  const comment = typeof currentItem === 'string' ? undefined : (language === 'ja' && currentItem.comment_ja ? currentItem.comment_ja : currentItem.comment);
 
   return (
     <AnimatePresence>

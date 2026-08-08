@@ -1,16 +1,40 @@
-import { IconBrandGithub, IconBrandLinkedin, IconMail, IconArrowUp, IconFileCv } from '@tabler/icons-react';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconMail,
+  IconArrowUp,
+  IconArrowDown,
+  IconArrowLeft,
+  IconArrowRight,
+  IconFileCv
+} from '@tabler/icons-react';
 import { socialLinks } from '../data/navigation';
 import { useTerminal } from '../context/TerminalContext';
 import { EffectSwitcher } from './EffectSwitcher';
 import { useBackground } from '../context/BackgroundContext';
 
 import { useTheme } from '../theme/ThemeProvider';
+import { useLanguage } from '../context/LanguageContext';
+
+const konamiSequence = [
+  { type: 'icon', Icon: IconArrowUp },
+  { type: 'icon', Icon: IconArrowUp },
+  { type: 'icon', Icon: IconArrowDown },
+  { type: 'icon', Icon: IconArrowDown },
+  { type: 'icon', Icon: IconArrowLeft },
+  { type: 'icon', Icon: IconArrowRight },
+  { type: 'icon', Icon: IconArrowLeft },
+  { type: 'icon', Icon: IconArrowRight },
+  { type: 'text', label: 'B' },
+  { type: 'text', label: 'A' },
+] as const;
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const { setHoveredCommand } = useTerminal();
   const { effect } = useBackground();
   const { theme } = useTheme();
+  const { t, language } = useLanguage();
   const isLight = theme === 'latte';
   const favDir = isLight ? 'favicon_black' : 'favicon_white';
 
@@ -60,31 +84,35 @@ export function Footer() {
               />
               <div className="h-4 w-px bg-theme-accent/20"></div>
               <span className="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted">
-                Portfolio v2
+                {language === 'ja' ? 'ポートフォリオ V2' : 'Portfolio v2'}
               </span>
             </div>
             <p className="text-[11px] font-medium text-theme-text-muted/60">
-              © {currentYear} James Michael. All rights reserved.
+              © {currentYear} {language === 'ja' ? 'ジェームズ・マイケル' : 'James Michael'}. {t('footer.rights', 'All rights reserved.')}
             </p>
           </div>
 
           {/* Middle: Konami Code Hint */}
           <div className="hidden lg:flex flex-col items-center gap-1.5 text-center">
             <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-theme-text-muted/60">
-              HINT //
+              {language === 'ja' ? 'ヒント //' : 'HINT //'}
             </span>
             <div className="flex items-center gap-1">
-              {['↑', '↑', '↓', '↓', '←', '→', '←', '→', 'B', 'A'].map((key, i) => (
+              {konamiSequence.map((item, i) => (
                 <span
                   key={i}
                   className="inline-flex h-5 w-5 items-center justify-center rounded border border-theme-accent/25 bg-theme-bg-elevated/40 font-mono text-[9px] font-bold text-theme-text-muted/70 transition-colors hover:border-theme-accent/50 hover:text-theme-accent/95"
                 >
-                  <span className="translate-y-[1px] transform leading-none">{key}</span>
+                  {item.type === 'icon' ? (
+                    <item.Icon size={10} stroke={2.5} />
+                  ) : (
+                    <span className="translate-y-[0.5px] transform leading-none">{item.label}</span>
+                  )}
                 </span>
               ))}
             </div>
             <span className="text-[8px] tracking-[0.2em] text-theme-text-muted/50 uppercase font-medium">
-              try it on keyboard
+              {language === 'ja' ? 'キーボードで試す' : 'try it on keyboard'}
             </span>
           </div>
 
@@ -116,7 +144,7 @@ export function Footer() {
               onMouseEnter={() => setHoveredCommand('cd ~')}
               onMouseLeave={() => setHoveredCommand(null)}
             >
-              <span>Back to Top</span>
+              <span>{t('footer.back_to_top', 'Back to Top')}</span>
               <IconArrowUp size={14} className="transition-transform group-hover:-translate-y-1" />
             </button>
           </div>
@@ -139,15 +167,15 @@ export function Footer() {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-theme-accent/5 pt-8 text-[9px] font-bold uppercase tracking-[0.2em] text-theme-text-muted/40">
           <div className="flex items-center gap-2">
             <span className="h-1 w-1 rounded-full bg-theme-accent/40"></span>
-            Built with React & Tailwind
+            {language === 'ja' ? 'REACT & TAILWIND で構築' : 'Built with React & Tailwind'}
           </div>
           <div className="flex items-center gap-2">
             <span className="h-1 w-1 rounded-full bg-theme-accent/40"></span>
-            Deployed on Vercel
+            {language === 'ja' ? 'VERCEL にデプロイ' : 'Deployed on Vercel'}
           </div>
           <div className="flex items-center gap-2">
             <span className="h-1 w-1 rounded-full bg-theme-accent/40"></span>
-            Open Source
+            {language === 'ja' ? 'オープンソース' : 'Open Source'}
           </div>
         </div>
       </div>

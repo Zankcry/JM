@@ -56,6 +56,13 @@ export const themeLabels: Record<ThemeFlavor, string> = {
   mocha: 'Mocha',
 };
 
+export const themeLabelsJp: Record<ThemeFlavor, string> = {
+  latte: 'ラテ',
+  frappe: 'フラッペ',
+  macchiato: 'マキアート',
+  mocha: 'モカ',
+};
+
 export const accentOrder: ThemeAccent[] = [
   'rosewater',
   'flamingo',

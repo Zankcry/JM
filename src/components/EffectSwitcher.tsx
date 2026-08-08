@@ -1,23 +1,27 @@
 import { motion } from 'framer-motion';
 import { useBackground } from '../context/BackgroundContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export function EffectSwitcher() {
   const { effect, setEffect, brushActive, setBrushActive } = useBackground();
+  const { language } = useLanguage();
 
   const options = [
-    { value: 'none', label: 'None' },
-    { value: 'cyber-pattern', label: 'Grid' },
-    { value: 'dot-matrix', label: 'Dot' },
-    { value: 'retro-scanlines', label: 'Lines' },
-    { value: 'hex-blueprint', label: 'Hex' },
-    { value: 'woven-grid', label: 'Woven' },
+    { value: 'none', label: 'None', label_ja: 'なし' },
+    { value: 'cyber-pattern', label: 'Grid', label_ja: 'グリッド' },
+    { value: 'dot-matrix', label: 'Dot', label_ja: 'ドット' },
+    { value: 'retro-scanlines', label: 'Lines', label_ja: 'ライン' },
+    { value: 'hex-blueprint', label: 'Hex', label_ja: 'ヘックス' },
+    { value: 'woven-grid', label: 'Woven', label_ja: '織物' },
   ] as const;
 
   return (
     <div className="flex flex-col lg:flex-row flex-wrap items-center justify-between gap-6 text-[10px] font-bold uppercase tracking-[0.2em] w-full py-2">
       {/* Background Effect Selector */}
       <div className="flex flex-col sm:flex-row items-center gap-3">
-        <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">FX //</span>
+        <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">
+          {language === 'ja' ? 'エフェクト //' : 'FX //'}
+        </span>
         <div
           className="relative inline-flex flex-wrap justify-center gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
           role="radiogroup"
@@ -25,6 +29,7 @@ export function EffectSwitcher() {
         >
           {options.map((option) => {
             const isActive = option.value === effect;
+            const displayLabel = language === 'ja' ? option.label_ja : option.label;
 
             return (
               <button
@@ -47,7 +52,7 @@ export function EffectSwitcher() {
                     transition={{ type: 'spring', stiffness: 200, damping: 24 }}
                   />
                 )}
-                <span className="relative z-10">{option.label}</span>
+                <span className="relative z-10">{displayLabel}</span>
               </button>
             );
           })}
@@ -59,17 +64,20 @@ export function EffectSwitcher() {
 
       {/* Brush Stroke Toggle Switcher */}
       <div className="hidden lg:flex flex-col sm:flex-row items-center gap-3">
-        <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">BRUSH //</span>
+        <span className="text-theme-accent/40 tracking-[0.3em] mb-2 sm:mb-0">
+          {language === 'ja' ? 'ブラシ //' : 'BRUSH //'}
+        </span>
         <div
           className="relative inline-flex gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
           role="radiogroup"
           aria-label="Interactive brush stroke"
         >
           {[
-            { value: true, label: 'ON' },
-            { value: false, label: 'OFF' },
+            { value: true, label: 'ON', label_ja: 'オン' },
+            { value: false, label: 'OFF', label_ja: 'オフ' },
           ].map((option) => {
             const isActive = option.value === brushActive;
+            const displayLabel = language === 'ja' ? option.label_ja : option.label;
 
             return (
               <button
@@ -92,7 +100,7 @@ export function EffectSwitcher() {
                     transition={{ type: 'spring', stiffness: 200, damping: 24 }}
                   />
                 )}
-                <span className="relative z-10">{option.label}</span>
+                <span className="relative z-10">{displayLabel}</span>
               </button>
             );
           })}

@@ -5,8 +5,10 @@ import { allPhotos } from '../data/photos';
 import PicsFilter from '../components/PicsFilter';
 import PicsGrid from '../components/PicsGrid';
 import Lightbox from '../components/Lightbox';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PicsPage() {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState('all');
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
@@ -34,12 +36,12 @@ export default function PicsPage() {
           <header className="flex w-full items-center gap-6">
             <h1 className="shrink-0 flex items-center gap-3 text-4xl font-bold tracking-tight text-theme-text sm:text-5xl">
               <IconBrandGooglePhotos className="w-10 h-10 sm:w-12 sm:h-12 text-theme-accent" />
-              Photos
+              {t('photos.title', 'Photos')}
             </h1>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-theme-accent/40" />
           </header>
           <p className="text-theme-text-muted text-base sm:text-lg leading-relaxed">
-            A collection of memories, random snaps, random thoughts, and visual sceneries.
+            {t('photos.subtitle', 'A collection of memories, random snaps, random thoughts, and visual sceneries.')}
           </p>
         </div>
 

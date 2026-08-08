@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Photo } from '../data/photos';
+import { useLanguage } from '../context/LanguageContext';
 
 type PicsGridProps = {
   photos: Photo[];
@@ -91,6 +92,7 @@ type PhotoCardProps = {
 };
 
 function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
+  const { language } = useLanguage();
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -103,6 +105,7 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
 
   const filename = photo.src.split('/').pop() || '';
   const ratio = ASPECT_RATIO_LOOKUP[filename] || 0.75;
+  const commentText = (language === 'ja' && photo.comment_ja) ? photo.comment_ja : photo.comment;
 
   return (
     <motion.div
@@ -130,7 +133,7 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
       />
       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 pointer-events-none z-10">
         <p className="text-white text-xs font-mono drop-shadow-[0_1px_2px_rgba(0,0,0,1)] line-clamp-2">
-          "{photo.comment}"
+          "{commentText}"
         </p>
       </div>
     </motion.div>

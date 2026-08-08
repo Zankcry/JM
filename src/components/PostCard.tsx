@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Post } from '../data/posts';
 import { useTerminal } from '../context/TerminalContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export function PostCard({ post }: { post: Post }) {
   const { setHoveredCommand } = useTerminal();
+  const { language, t } = useLanguage();
+
+  const titleText = (language === 'ja' && post.title_ja) ? post.title_ja : post.title;
+  const descriptionText = (language === 'ja' && post.description_ja) ? post.description_ja : post.description;
 
   return (
     <div className="w-full h-full flex">
@@ -27,17 +32,17 @@ export function PostCard({ post }: { post: Post }) {
             {/* Content */}
             <div className="flex flex-col gap-2.5">
               <h2 className="flex items-center gap-2 text-lg font-bold tracking-tight text-theme-text transition-colors duration-300 group-hover:text-theme-accent sm:text-xl line-clamp-2">
-                <span>{post.title}</span>
+                <span>{titleText}</span>
               </h2>
               <p className="text-[14px] leading-relaxed text-theme-text-muted sm:text-[15px] max-w-4xl font-light line-clamp-2">
-                {post.description}
+                {descriptionText}
               </p>
             </div>
           </div>
 
           {/* Bottom indicator */}
           <div className="flex items-center gap-1.5 text-xs font-semibold text-theme-accent/70 group-hover:text-theme-accent transition-colors duration-300 mt-auto pt-4">
-            <span>Read full article</span>
+            <span>{t('posts.read_more', 'Read full article')}</span>
           </div>
         </article>
       </Link>
