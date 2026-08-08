@@ -18,11 +18,12 @@ const STORAGE_KEY = 'portfolio-bg-effect';
 const BRUSH_STORAGE_KEY = 'portfolio-brush-active';
 const BRUSH_WIDTH_KEY = 'portfolio-brush-width';
 
+const EFFECTS: BackgroundEffect[] = ['none', 'cyber-pattern', 'dot-matrix', 'retro-scanlines', 'hex-blueprint', 'woven-grid'];
+
 export function BackgroundProvider({ children }: { children: ReactNode }) {
   const [effect, setEffect] = useState<BackgroundEffect>(() => {
-    if (typeof window === 'undefined') return 'none';
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return (stored === 'cyber-pattern' || stored === 'dot-matrix' || stored === 'retro-scanlines' || stored === 'hex-blueprint' || stored === 'woven-grid' || stored === 'none') ? (stored as BackgroundEffect) : 'none';
+    const randomIndex = Math.floor(Math.random() * EFFECTS.length);
+    return EFFECTS[randomIndex];
   });
 
   const [brushActive, setBrushActive] = useState<boolean>(() => {

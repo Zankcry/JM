@@ -35,21 +35,13 @@ const isThemeAccent = (value: string | null): value is ThemeAccent =>
   value !== null && (accentOrder as readonly string[]).includes(value);
 
 const getInitialTheme = (): ThemeFlavor => {
-  if (typeof window === 'undefined') {
-    return 'frappe';
-  }
-
-  const storedTheme = window.localStorage.getItem(STORAGE_KEY);
-  return isThemeFlavor(storedTheme) ? storedTheme : 'frappe';
+  const randomIndex = Math.floor(Math.random() * themeOrder.length);
+  return themeOrder[randomIndex];
 };
 
 const getInitialAccent = (): ThemeAccent => {
-  if (typeof window === 'undefined') {
-    return 'green';
-  }
-
-  const storedAccent = window.localStorage.getItem(STORAGE_ACCENT_KEY);
-  return isThemeAccent(storedAccent) ? storedAccent : 'green';
+  const randomIndex = Math.floor(Math.random() * accentOrder.length);
+  return accentOrder[randomIndex];
 };
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
