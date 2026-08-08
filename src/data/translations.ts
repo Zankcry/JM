@@ -121,4 +121,7 @@ export const translations: TranslationDictionary = {
   'footer.rights': { en: 'All rights reserved.', ja: '全著作権所有。' },
   'footer.built_with': { en: 'Built with React, TypeScript & Catppuccin', ja: 'React, TypeScript & Catppuccin で制作' },
   'footer.back_to_top': { en: 'Back to Top', ja: 'トップに戻る' },
+
+  // Easter Egg
+  'foxy.sorry': { en: 'Im sorry.. hehe ✌️', ja: 'ごめんなさい.. へへ ✌️' },
 };

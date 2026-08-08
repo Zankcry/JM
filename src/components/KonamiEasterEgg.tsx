@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FrameData {
   name: string;
@@ -41,6 +42,7 @@ const KONAMI_SEQUENCE = [
 ];
 
 export function KonamiEasterEgg() {
+  const { t } = useLanguage();
   const [activated, setActivated] = useState(false);
   const [showText, setShowText] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -244,7 +246,7 @@ export function KonamiEasterEgg() {
             transition={{ type: 'spring', damping: 15 }}
           >
             <span className="text-white text-3xl font-bold tracking-wide animate-pulse drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              Im sorry.. hehe ✌️
+              {t('foxy.sorry', 'Im sorry.. hehe ✌️')}
             </span>
           </motion.div>
         )}
