@@ -17,11 +17,11 @@ function pathToSegment(pathname: string): string {
 
 const segmentJpMap: Record<string, string> = {
   'home': 'ホーム',
-  'about': '私について',
+  'about': 'アバウト',
   'projects': 'プロジェクト',
-  'photos': '写真',
-  'posts': '記事',
-  'posts/article': '記事/詳細',
+  'photos': 'フォト',
+  'posts': 'ポスト',
+  'posts/article': 'ポスト/詳細',
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
