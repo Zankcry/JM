@@ -7,12 +7,10 @@ import { Project } from '../data/projects';
 
 export function ProjectCard({
   project,
-  id,
   padding = 'p-5',
   onClick
 }: {
   project: Project;
-  id?: string;
   padding?: string;
   onClick?: () => void;
 }) {
@@ -30,7 +28,6 @@ export function ProjectCard({
 
   return (
     <div
-      id={id}
       role="button"
       tabIndex={0}
       onClick={onClick}

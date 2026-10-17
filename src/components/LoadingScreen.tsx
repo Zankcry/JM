@@ -6,35 +6,32 @@ import { useTheme } from '../theme/ThemeProvider';
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const { language } = useLanguage();
   const { theme } = useTheme();
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(60);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Simulate loading progress
-    const steps = [
-      { target: 40, delay: 0, duration: 300 },
-      { target: 70, delay: 300, duration: 250 },
-      { target: 90, delay: 550, duration: 200 },
-      { target: 100, delay: 750, duration: 150 },
-    ];
-
     const timers: ReturnType<typeof setTimeout>[] = [];
+    let finished = false;
 
-    steps.forEach(({ target, delay }) => {
-      timers.push(
-        setTimeout(() => setProgress(target), delay)
-      );
-    });
-
-    // Dismiss after progress hits 100
-    timers.push(
-      setTimeout(() => {
+    // Close when the page has really loaded; the cap keeps one slow image from holding the screen
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      setProgress(100);
+      timers.push(setTimeout(() => {
         setVisible(false);
-        setTimeout(onDone, 500); // wait for exit animation
-      }, 950)
-    );
+        timers.push(setTimeout(onDone, 500)); // wait for exit animation
+      }, 200));
+    };
 
-    return () => timers.forEach(clearTimeout);
+    if (document.readyState === 'complete') finish();
+    else window.addEventListener('load', finish);
+    timers.push(setTimeout(finish, 1200));
+
+    return () => {
+      window.removeEventListener('load', finish);
+      timers.forEach(clearTimeout);
+    };
   }, [onDone]);
 
   return (

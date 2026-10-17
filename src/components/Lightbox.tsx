@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -58,87 +58,85 @@ export default function Lightbox({
   const src = typeof currentItem === 'string' ? currentItem : currentItem.src;
   const comment = typeof currentItem === 'string' ? undefined : (language === 'ja' && currentItem.comment_ja ? currentItem.comment_ja : currentItem.comment);
 
+  // Returns null when closed, so there is no exit animation to wait for
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.25 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-8"
-        onClick={onClose}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-8"
+      onClick={onClose}
+    >
+
+
+      {/* Previous Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
+        className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
+        aria-label={language === 'ja' ? '前の画像' : 'Previous image'}
       >
+        <IconChevronLeft
+          size={36}
+          className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+        />
+      </button>
 
+      {/* Main Content Container */}
+      <div
+        className="relative flex flex-col items-center justify-center max-w-full max-h-[80vh] z-[105]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Loading Spinner */}
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
+            </div>
+          )}
 
-        {/* Previous Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrev();
-          }}
-          className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-          aria-label={language === 'ja' ? '前の画像' : 'Previous image'}
-        >
-          <IconChevronLeft
-            size={36}
-            className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+          <motion.img
+            ref={imgRef}
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: loaded ? 1 : 0, scale: loaded ? 1 : 0.97 }}
+            transition={{ duration: 0.25 }}
+            src={src}
+            alt={comment || (language === 'ja' ? '拡大表示' : 'Lightbox view')}
+            onLoad={() => setLoaded(true)}
+            className="max-w-full max-h-[70vh] sm:max-h-[75vh] object-contain shadow-2xl"
           />
-        </button>
-
-        {/* Main Content Container */}
-        <div
-          className="relative flex flex-col items-center justify-center max-w-full max-h-[80vh] z-[105]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="relative flex items-center justify-center">
-            {/* Loading Spinner */}
-            {!loaded && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
-              </div>
-            )}
-
-            <motion.img
-              ref={imgRef}
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: loaded ? 1 : 0, scale: loaded ? 1 : 0.97 }}
-              transition={{ duration: 0.25 }}
-              src={src}
-              alt={comment || (language === 'ja' ? '拡大表示' : 'Lightbox view')}
-              onLoad={() => setLoaded(true)}
-              className="max-w-full max-h-[70vh] sm:max-h-[75vh] object-contain shadow-2xl"
-            />
-          </div>
-
-          {/* Footer Metadata / Caption */}
-          <div className="mt-5 w-full flex flex-col items-center gap-2 font-mono pointer-events-none text-center">
-            {comment && (
-              <p className="text-white text-sm sm:text-base max-w-xl px-4 select-text selection:bg-theme-accent/30">
-                "{comment}"
-              </p>
-            )}
-            <p className="text-white/40 text-[11px] tracking-[0.2em] uppercase">
-              {currentIndex + 1} / {items.length}
-            </p>
-          </div>
         </div>
 
-        {/* Next Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-          aria-label={language === 'ja' ? '次の画像' : 'Next image'}
-        >
-          <IconChevronRight
-            size={36}
-            className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
-          />
-        </button>
-      </motion.div>
-    </AnimatePresence>
+        {/* Footer Metadata / Caption */}
+        <div className="mt-5 w-full flex flex-col items-center gap-2 font-mono pointer-events-none text-center">
+          {comment && (
+            <p className="text-white text-sm sm:text-base max-w-xl px-4 select-text selection:bg-theme-accent/30">
+              "{comment}"
+            </p>
+          )}
+          <p className="text-white/40 text-[11px] tracking-[0.2em] uppercase">
+            {currentIndex + 1} / {items.length}
+          </p>
+        </div>
+      </div>
+
+      {/* Next Button */}
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+        className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
+        aria-label={language === 'ja' ? '次の画像' : 'Next image'}
+      >
+        <IconChevronRight
+          size={36}
+          className="text-white/60 sm:text-white/20 group-hover:text-white/90 group-active:scale-95 transition-all duration-300"
+        />
+      </button>
+    </motion.div>
   );
 }

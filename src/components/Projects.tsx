@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { IconArrowUpRight, IconHeart } from '@tabler/icons-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects, Project } from '../data/projects';
-import { techStack, techStackIcons } from '../data/tech';
+import { TechTag } from './TechTag';
 import { useTerminal } from '../context/TerminalContext';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import { ProjectThumbnailStrip } from './ProjectThumbnailStrip';
@@ -229,42 +229,9 @@ export function Projects() {
                 </div>
 
                 <div className="hidden sm:flex flex-wrap gap-1.5">
-                  {activeSlideProject.tags.map((tag) => {
-                    const tech = techStack.find(t =>
-                      t.label.toLowerCase() === tag.toLowerCase() ||
-                      t.shortLabel.toLowerCase() === tag.toLowerCase()
-                    );
-
-                    if (!tech) {
-                      return (
-                        <span
-                          key={tag}
-                          className="rounded-md bg-white/5 px-2 py-1 text-[9px] font-semibold uppercase tracking-wider text-white/70"
-                        >
-                          {tag}
-                        </span>
-                      );
-                    }
-
-                    const TechIcon = techStackIcons[tech.icon];
-
-                    return (
-                      <div
-                        key={tag}
-                        className="group/tag flex items-center gap-1 rounded-md bg-white/5 px-2 py-1 transition-all hover:bg-white/10"
-                      >
-                        <div
-                          className="flex h-3 w-3 items-center justify-center transition-transform group-hover/tag:scale-110"
-                          style={{ color: tech.tone }}
-                        >
-                          <TechIcon size={12} stroke={2} aria-hidden="true" />
-                        </div>
-                        <span className="text-[9px] font-semibold uppercase tracking-wider text-white/70 transition-colors group-hover/tag:text-white">
-                          {tech.label}
-                        </span>
-                      </div>
-                    );
-                  })}
+                  {activeSlideProject.tags.map((tag) => (
+                    <TechTag key={tag} tag={tag} variant="overlay" />
+                  ))}
                 </div>
               </motion.div>
             </AnimatePresence>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import {
   IconCalendar,
   IconMapPin,
@@ -16,24 +16,18 @@ import {
 } from '@tabler/icons-react';
 import { useTheme } from '../theme/ThemeProvider';
 import { useLanguage } from '../context/LanguageContext';
-
-
-function MapRecenter({ center }: { center: [number, number] }) {
-  const map = useMap();
-  useEffect(() => {
-    map.setView(center);
-  }, [center, map]);
-  return null;
-}
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '../data/navigation';
 
 function CopyEmailButton({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
   const { t, language } = useLanguage();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    // Only confirm once the browser actually accepted the write
+    navigator.clipboard?.writeText(email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }, () => {});
   };
 
   return (
@@ -124,7 +118,7 @@ export function ConnectCard() {
 
             <div className="grid grid-cols-3 gap-2">
               <a
-                href="https://github.com/Zankcry"
+                href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group/icon flex h-9 flex-col items-center justify-center gap-0.5 rounded-lg border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
@@ -134,7 +128,7 @@ export function ConnectCard() {
                 <span className="text-[6px] font-bold uppercase tracking-widest opacity-50">GH</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/jamesmichaelduque/"
+                href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group/icon flex h-9 flex-col items-center justify-center gap-0.5 rounded-lg border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
@@ -143,13 +137,13 @@ export function ConnectCard() {
                 <IconBrandLinkedin size={14} className="transition-transform group-hover/icon:scale-110" />
                 <span className="text-[6px] font-bold uppercase tracking-widest opacity-50">LI</span>
               </a>
-              <CopyEmailButton email="duquejames657@gmail.com" />
+              <CopyEmailButton email={EMAIL} />
             </div>
           </div>
         </div>
 
         <a
-          href="mailto:duquejames657@gmail.com"
+          href={`mailto:${EMAIL}`}
           className="group/btn mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-theme-accent px-3 py-1.5 text-[12px] font-bold text-theme-on-accent transition-all active:scale-95 hover:brightness-110"
         >
           <IconMessage2 size={14} className="transition-transform group-hover/btn:rotate-12" />
@@ -211,7 +205,6 @@ export function LocationCard() {
           <TileLayer
             url={mapUrl}
           />
-          <MapRecenter center={PORAC_COORDINATES} />
         </MapContainer>
       </div>
 

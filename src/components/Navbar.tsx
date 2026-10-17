@@ -10,15 +10,11 @@ import { TerminalHomeButton } from './TerminalHomeButton';
 import { useTerminal } from '../context/TerminalContext';
 import { useBackground } from '../context/BackgroundContext';
 import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 
 
-const TRANSLATIONS: Record<string, string> = {
-  Home: 'ホーム',
-  About: 'アバウト',
-  Projects: 'プロジェクト',
-  Posts: 'ポスト',
-  Photos: 'フォト',
-};
+// Japanese nav label, used as the second label on hover
+const jaLabel = (label: string) => translations[`nav.${label.toLowerCase()}`]?.ja ?? label;
 
 
 export function Navbar() {
@@ -121,7 +117,7 @@ export function Navbar() {
                 {primaryNavLinks.map((link) => {
                   const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
                   const href = link.href === '#projects' ? '/projects' : link.href;
-                  const jpLabel = TRANSLATIONS[link.label] || '';
+                  const jpLabel = jaLabel(link.label);
                   const isLinkActive = link.href === '/'
                     ? location.pathname === '/'
                     : location.pathname.startsWith(href);
@@ -201,7 +197,7 @@ export function Navbar() {
           {primaryNavLinks.map((link) => {
             const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
             const href = link.href === '#projects' ? '/projects' : link.href;
-            const jpLabel = TRANSLATIONS[link.label] || link.label;
+            const jpLabel = jaLabel(link.label);
             const isLinkActive = link.href === '/'
               ? location.pathname === '/'
               : location.pathname.startsWith(href);

@@ -1,8 +1,15 @@
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconFileCv,
+  IconMail,
+  IconAddressBook,
+  type Icon,
+} from '@tabler/icons-react';
+
 export type NavLink = {
   label: string;
   href: string;
-  description?: string;
-  icon?: string;
 };
 
 export const primaryNavLinks: NavLink[] = [
@@ -13,11 +20,21 @@ export const primaryNavLinks: NavLink[] = [
   { label: 'Photos', href: '/photos' },
 ];
 
+export const EMAIL = 'duquejames657@gmail.com';
+export const GITHUB_URL = 'https://github.com/Zankcry';
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/jamesmichaelduque/';
 
-export const socialLinks: NavLink[] = [
-  { label: 'GitHub', href: 'https://github.com/Zankcry', icon: 'brand-github' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jamesmichaelduque/', icon: 'brand-linkedin' },
-  { label: 'Resume', href: '/resume.pdf', icon: 'file-cv' },
-  { label: 'Mail', href: 'mailto:duquejames657@gmail.com', icon: 'mail' },
-  { label: 'About me...', href: '/about', icon: 'user' },
+export type SocialLink = NavLink & {
+  label_ja?: string;
+  Icon: Icon;
+  cmd: string; // shown in the navbar terminal on hover
+};
+
+// The first four are external contacts; footer and About page show only those
+export const socialLinks: SocialLink[] = [
+  { label: 'GitHub', href: GITHUB_URL, Icon: IconBrandGithub, cmd: 'open github' },
+  { label: 'LinkedIn', href: LINKEDIN_URL, Icon: IconBrandLinkedin, cmd: 'open linkedin' },
+  { label: 'Resume', label_ja: '履歴書', href: '/resume.pdf', Icon: IconFileCv, cmd: 'cat resume.pdf' },
+  { label: 'Mail', label_ja: 'メール', href: `mailto:${EMAIL}`, Icon: IconMail, cmd: 'ssh mail' },
+  { label: 'About me...', label_ja: '私について...', href: '/about', Icon: IconAddressBook, cmd: 'about' },
 ];

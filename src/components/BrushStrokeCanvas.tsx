@@ -317,29 +317,15 @@ export function BrushStrokeCanvas() {
         }
       }
 
+      // Read the accent once per frame (not per stroke) so strokes still follow accent changes
+      const accentParts = getComputedStyle(document.documentElement).getPropertyValue('--theme-accent').trim().split(/\s+/);
+      const colorBase = accentParts.length >= 3
+        ? { r: parseInt(accentParts[0], 10), g: parseInt(accentParts[1], 10), b: parseInt(accentParts[2], 10) }
+        : { r: 26, g: 26, b: 26 };
+
       // Render all strokes
       strokesRef.current.forEach((stroke) => {
         if (stroke.points.length === 0) return;
-
-        // Parse active CSS variables dynamically so strokes immediately respond to accent changes
-        const getCSSColor = (variableName: string, defaultColor: { r: number; g: number; b: number }) => {
-          if (typeof window === 'undefined') return defaultColor;
-          const val = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
-          if (!val) return defaultColor;
-          const parts = val.split(/\s+/);
-          if (parts.length >= 3) {
-            return {
-              r: parseInt(parts[0], 10),
-              g: parseInt(parts[1], 10),
-              b: parseInt(parts[2], 10),
-            };
-          }
-          return defaultColor;
-        };
-
-        const accentColor = getCSSColor('--theme-accent', { r: 26, g: 26, b: 26 });
-
-        const colorBase = accentColor;
 
         // Draw splatters first
         stroke.splatters.forEach((splat) => {

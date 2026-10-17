@@ -1,27 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { socialLinks } from '../data/navigation';
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconBrandInstagram,
-  IconFileCv,
-  IconAddressBook,
-  IconMail,
-} from '@tabler/icons-react';
 import { YahhoTooltip } from './Tooltip';
 import { techStack, techStackIcons } from '../data/tech';
 import { useTerminal } from '../context/TerminalContext';
 import { useLanguage } from '../context/LanguageContext';
-
-const socialIcons = {
-  'brand-github': IconBrandGithub,
-  'brand-linkedin': IconBrandLinkedin,
-  'brand-instagram': IconBrandInstagram,
-  'file-cv': IconFileCv,
-  user: IconAddressBook,
-  mail: IconMail,
-} as const;
 
 export function Hero() {
   const { setHoveredCommand } = useTerminal();
@@ -72,7 +55,7 @@ export function Hero() {
         <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-theme-text-muted sm:text-lg">
           <p>
             {t('hero.bio1')} <a
-              href="#project-1"
+              href="#projects"
               className="text-theme-accent -mx-1.5 px-1.5 py-0.5 rounded-md transition-colors hover:bg-theme-accent/20"
               onMouseEnter={() => setHoveredCommand('open projects/charlies-barber-salon')}
               onMouseLeave={() => setHoveredCommand(null)}
@@ -94,30 +77,12 @@ export function Hero() {
           {socialLinks.map((link) => {
             const isInternal = (link.href.startsWith('/') || link.href.startsWith('#')) && !link.href.endsWith('.pdf');
             const cls = "group flex items-center gap-2 rounded-lg border border-theme-accent/20 bg-theme-bg/50 px-3 py-1.5 text-xs font-medium text-theme-text-muted transition-all hover:border-theme-accent/50 hover:text-theme-text hover:shadow-sm active:scale-95";
-
-            // Determine command based on button destination/label
-            let cmd = '';
-            if (link.label === 'GitHub') cmd = 'open github';
-            else if (link.label === 'LinkedIn') cmd = 'open linkedin';
-            else if (link.label === 'Resume') cmd = 'cat resume.pdf';
-            else if (link.label === 'Mail') cmd = 'ssh mail';
-            else if (link.label === 'More about me...') cmd = 'about';
-            else if (isInternal) cmd = link.href.replace(/^\//, '');
-            else cmd = `open ${link.label.toLowerCase()}`;
-
-            const displayLabel = language === 'ja' ? (
-              link.label === 'Resume' ? '履歴書' :
-              link.label === 'Mail' ? 'メール' :
-              link.label === 'About me...' ? '私について...' :
-              link.label
-            ) : link.label;
+            const cmd = link.cmd;
+            const displayLabel = (language === 'ja' && link.label_ja) || link.label;
 
             const inner = (
               <>
-                {link.icon ? (() => {
-                  const SocialIcon = socialIcons[link.icon as keyof typeof socialIcons];
-                  return <SocialIcon size={16} stroke={1.8} aria-hidden="true" />;
-                })() : null}
+                <link.Icon size={16} stroke={1.8} aria-hidden="true" />
                 <span>{displayLabel}</span>
               </>
             );

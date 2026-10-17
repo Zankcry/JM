@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Photo } from '../data/photos';
+import { Photo, thumbOf } from '../data/photos';
 import { useLanguage } from '../context/LanguageContext';
 
 type PicsGridProps = {
@@ -53,36 +53,6 @@ const cardVariants: Variants = {
   },
 };
 
-const ASPECT_RATIO_LOOKUP: Record<string, number> = {
-  'august.jpg': 4640 / 2608,
-  'aurora-trip.jpg': 4032 / 3024,
-  'baguio.jpg': 3264 / 1836,
-  'billiards.jpg': 3024 / 4032,
-  'bonfire.jpg': 2608 / 4640,
-  'cafe-chill.jpg': 3024 / 4032,
-  'captured-moments.jpg': 688 / 917,
-  'christmas-day.jpg': 4640 / 2608,
-  'christmas-eve.jpg': 4640 / 2608,
-  'elegant-furina.png': 1920 / 1080,
-  'genshin-selfie.png': 1920 / 1080,
-  'good-times.jpg': 1223 / 917,
-  'heading-to-class.jpg': 3024 / 4032,
-  'holy-angel.webp': 3024 / 4032,
-  'late-night.jpg': 3024 / 4032,
-  'leaving-for-class.jpg': 3024 / 4032,
-  'luyang-academy.png': 1920 / 1080,
-  'mecha-oishii.jpeg': 1536 / 2048,
-  'missing.jpg': 843 / 474,
-  'motivation.jpg': 1080 / 1440,
-  'natlan-secret-place.png': 1920 / 1080,
-  'natlan-volcano-peak.png': 1920 / 1080,
-  'quiet-afternoon.jpg': 3024 / 4032,
-  'silly-furina.png': 1920 / 1080,
-  'starting-2025.jpg': 4640 / 2608,
-  'temple-of-space.png': 1920 / 1080,
-  'wandering.png': 1920 / 1080,
-  'windmills.png': 1920 / 1080
-};
 
 // Individual photo card with shimmer skeleton + fade-in on load (prevents flash/glitch)
 type PhotoCardProps = {
@@ -103,8 +73,6 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
     }
   }, []);
 
-  const filename = photo.src.split('/').pop() || '';
-  const ratio = ASPECT_RATIO_LOOKUP[filename] || 0.75;
   const commentText = (language === 'ja' && photo.comment_ja) ? photo.comment_ja : photo.comment;
 
   return (
@@ -113,7 +81,7 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
       className="relative group cursor-pointer overflow-hidden bg-theme-bg shadow-lg rounded-3xl w-full"
       onClick={() => onPhotoClick(globalIndex)}
       style={{
-        aspectRatio: `${ratio}`,
+        aspectRatio: `${photo.ratio}`,
       }}
     >
       {/* Shimmer skeleton shown while the image loads */}
@@ -123,7 +91,7 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
       />
       <img
         ref={imgRef}
-        src={photo.src}
+        src={thumbOf(photo.src)}
         alt={commentText}
         loading="lazy"
         decoding="async"
@@ -162,9 +130,6 @@ export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
   const colHeights = Array.from({ length: columnsCount }, () => 0);
 
   photos.forEach((photo) => {
-    const filename = photo.src.split('/').pop() || '';
-    const ratio = ASPECT_RATIO_LOOKUP[filename] || 0.75;
-
     // Find the column with the minimum height
     let minColIndex = 0;
     let minHeight = colHeights[0];
@@ -176,7 +141,7 @@ export default function PicsGrid({ photos, onPhotoClick }: PicsGridProps) {
     }
 
     cols[minColIndex].push(photo);
-    colHeights[minColIndex] += 1 / ratio;
+    colHeights[minColIndex] += 1 / photo.ratio;
   });
 
   return (

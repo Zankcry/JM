@@ -103,7 +103,7 @@ export function RecentActivity() {
                 {card.href.includes('word-of-the-week') ? (
                   <>
                     <img
-                      src="/images/pics/holy-angel.webp"
+                      src="/images/pics/thumbs/holy-angel.webp"
                       alt=""
                       className="h-full w-full object-cover opacity-20 transition-all duration-500 group-hover:scale-105 group-hover:opacity-45"
                     />
@@ -163,7 +163,7 @@ export function RecentActivity() {
             {/* Background image preview covering the right half */}
             <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 overflow-hidden pointer-events-none opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:scale-105">
               <img
-                src="/images/pics/quiet-afternoon.jpg"
+                src="/images/pics/thumbs/quiet-afternoon.webp"
                 alt={language === 'ja' ? 'ギャラリーのプレビュー' : 'Gallery Preview'}
                 className="h-full w-full object-cover"
               />

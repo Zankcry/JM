@@ -2,15 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { YahhoTooltip } from '../components/Tooltip';
 import { IconBrandSpotify } from '@tabler/icons-react';
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconFileCv,
-  IconStar,
-  IconArrowUpRight,
-  IconMail,
-} from '@tabler/icons-react';
-import { allPhotos } from '../data/photos';
+import { IconArrowUpRight } from '@tabler/icons-react';
+import { allPhotos, thumbOf } from '../data/photos';
+import { socialLinks } from '../data/navigation';
 import { useTerminal } from '../context/TerminalContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -150,7 +144,7 @@ export default function AboutPage() {
       }
 
       const img = new Image();
-      img.src = nextPhotoCandidate.src;
+      img.src = thumbOf(nextPhotoCandidate.src);
       img.onload = () => {
         if (!active) return;
         setIsFading(true);
@@ -217,18 +211,13 @@ export default function AboutPage() {
 
           {/* Social links */}
           <div className="flex w-full items-center justify-center gap-3 text-theme-text-muted">
-            {[
-              { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub', cmd: 'open github' },
-              { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/jamesmichaelduque/', label: 'LinkedIn', cmd: 'open linkedin' },
-              { icon: IconFileCv, href: '/resume.pdf', label: language === 'ja' ? '履歴書' : 'Resume', cmd: 'cat resume.pdf' },
-              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: language === 'ja' ? 'メール' : 'Mail', cmd: 'ssh mail' },
-            ].map(({ icon: Icon, href, label, cmd }) => (
+            {socialLinks.slice(0, 4).map(({ Icon, href, label, label_ja, cmd }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label}
+                aria-label={(language === 'ja' && label_ja) || label}
                 className="rounded-lg p-2 transition hover:bg-theme-surface/60 hover:text-theme-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus"
                 onMouseEnter={() => setHoveredCommand(cmd)}
                 onMouseLeave={() => setHoveredCommand(null)}
@@ -381,7 +370,7 @@ export default function AboutPage() {
               </Link>
               <div className={`h-full w-full transition-opacity duration-500 ease-in-out ${isFading ? 'opacity-0' : 'opacity-100'}`}>
                 <img
-                  src={randomPhoto.src}
+                  src={thumbOf(randomPhoto.src)}
                   alt={randomPhotoComment}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />

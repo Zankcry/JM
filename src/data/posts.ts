@@ -1,5 +1,8 @@
+// Each id needs a matching entry in PostDetailPage's postContent; the Record type enforces it
+export type PostId = 'why-i-built-simple-player' | 'spine-2d-guide';
+
 export type Post = {
-  id: string;
+  id: PostId;
   title: string;
   title_ja?: string;
   description: string;

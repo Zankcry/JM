@@ -2,10 +2,9 @@ import { useParams, Link } from 'react-router-dom';
 import { IconArrowLeft, IconCalendar } from '@tabler/icons-react';
 import type { ReactNode } from 'react';
 import { useLanguage, type Language } from '../context/LanguageContext';
-import { posts, formatPostDate } from '../data/posts';
+import { posts, formatPostDate, type PostId } from '../data/posts';
 
-// Every post in data/posts.ts needs an entry here; ids without one show "Post not found".
-const postContent: Record<string, { title: Record<Language, ReactNode>; body: Record<Language, ReactNode> }> = {
+const postContent: Record<PostId, { title: Record<Language, ReactNode>; body: Record<Language, ReactNode> }> = {
   'why-i-built-simple-player': {
     title: {
       ja: <>Simple Miniplayer <span className="text-theme-accent">拡張機能を作った理由</span></>,
@@ -423,7 +422,7 @@ export default function PostDetailPage() {
   const { id } = useParams();
   const { t, language } = useLanguage();
   const post = posts.find((p) => p.id === id);
-  const content = id ? postContent[id] : undefined;
+  const content = post && postContent[post.id];
 
   if (!post || !content) {
     return (

@@ -1,12 +1,8 @@
 import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconMail,
   IconArrowUp,
   IconArrowDown,
   IconArrowLeft,
   IconArrowRight,
-  IconFileCv
 } from '@tabler/icons-react';
 import { socialLinks } from '../data/navigation';
 import { useTerminal } from '../context/TerminalContext';
@@ -40,35 +36,6 @@ export function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const getIcon = (label: string) => {
-    switch (label) {
-      case 'GitHub': return IconBrandGithub;
-      case 'LinkedIn': return IconBrandLinkedin;
-      case 'Resume': return IconFileCv;
-      case 'Mail': return IconMail;
-      default: return IconMail;
-    }
-  };
-
-  const getAriaLabel = (label: string) => {
-    if (language !== 'ja') return label;
-    switch (label) {
-      case 'Resume': return '履歴書';
-      case 'Mail': return 'メール';
-      default: return label;
-    }
-  };
-
-  const getHoverCommand = (label: string) => {
-    switch (label) {
-      case 'GitHub': return 'open github';
-      case 'LinkedIn': return 'open linkedin';
-      case 'Resume': return 'cat resume.pdf';
-      case 'Mail': return 'ssh mail';
-      default: return 'ssh mail';
-    }
   };
 
   return (
@@ -128,23 +95,20 @@ export function Footer() {
           {/* Right: Socials & Back to Top */}
           <div className="flex flex-col items-center gap-6 sm:items-end sm:gap-4">
             <div className="flex items-center gap-5">
-              {socialLinks.slice(0, 4).map((link) => {
-                const Icon = getIcon(link.label);
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-theme-text-muted transition-colors hover:text-theme-accent"
-                    aria-label={getAriaLabel(link.label)}
-                    onMouseEnter={() => setHoveredCommand(getHoverCommand(link.label))}
-                    onMouseLeave={() => setHoveredCommand(null)}
-                  >
-                    <Icon size={20} stroke={1.5} />
-                  </a>
-                );
-              })}
+              {socialLinks.slice(0, 4).map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-theme-text-muted transition-colors hover:text-theme-accent"
+                  aria-label={(language === 'ja' && link.label_ja) || link.label}
+                  onMouseEnter={() => setHoveredCommand(link.cmd)}
+                  onMouseLeave={() => setHoveredCommand(null)}
+                >
+                  <link.Icon size={20} stroke={1.5} />
+                </a>
+              ))}
             </div>
 
             <button
