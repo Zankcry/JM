@@ -55,6 +55,15 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     document.documentElement.lang = language;
+    document.title = language === 'ja' ? 'ポートフォリオ' : 'Portfolio';
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute(
+        'content',
+        language === 'ja'
+          ? 'Catppuccinテーマで制作したViteポートフォリオ。クリーンなエディトリアル風ホームページから着想を得ています。'
+          : 'A Catppuccin-themed Vite portfolio inspired by a clean editorial homepage.'
+      );
   }, [language]);
 
   // Lookup key in translations dictionary

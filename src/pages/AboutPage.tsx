@@ -120,7 +120,9 @@ function WordOfTheWeek() {
               <div className="rounded-xl border border-theme-accent/20 bg-theme-bg/40 px-4 py-3 shadow-sm">
                 <p className="text-sm text-theme-text font-medium">{word.example.jp}</p>
                 <p className="text-[11px] text-theme-text-muted mt-1 opacity-80">{word.example.romaji}</p>
-                <p className="text-xs text-theme-text-muted mt-1 italic">{word.example.en}</p>
+                {language !== 'ja' && (
+                  <p className="text-xs text-theme-text-muted mt-1 italic">{word.example.en}</p>
+                )}
               </div>
             )}
           </div>
@@ -135,6 +137,7 @@ export default function AboutPage() {
   const { t, language } = useLanguage();
   const [randomPhoto, setRandomPhoto] = useState(allPhotos[Math.floor(Math.random() * allPhotos.length)]);
   const [isFading, setIsFading] = useState(false);
+  const randomPhotoComment = (language === 'ja' && randomPhoto.comment_ja) ? randomPhoto.comment_ja : randomPhoto.comment;
 
   useEffect(() => {
     let active = true;
@@ -183,7 +186,7 @@ export default function AboutPage() {
             <div className="h-52 w-52 overflow-hidden rounded-xl border-2 border-theme-accent/20 bg-theme-bg shadow-xl">
               <img
                 src="/images/profilePic.jpg"
-                alt="James Michael"
+                alt={language === 'ja' ? 'ジェームズ・マイケル' : 'James Michael'}
                 className="h-full w-full object-cover"
               />
             </div>
@@ -191,7 +194,7 @@ export default function AboutPage() {
             {/* Mobile: WebP Image */}
             <img
               src="/videos/chibi.webp"
-              alt="Chibi character overlay"
+              alt={language === 'ja' ? 'ミニキャラ' : 'Chibi character overlay'}
               className="absolute -bottom-5 -right-9 h-20 w-20 object-contain drop-shadow-lg pointer-events-none md:hidden"
             />
             {/* Desktop: WebM Video */}
@@ -217,8 +220,8 @@ export default function AboutPage() {
             {[
               { icon: IconBrandGithub, href: 'https://github.com/Zankcry', label: 'GitHub', cmd: 'open github' },
               { icon: IconBrandLinkedin, href: 'https://www.linkedin.com/in/jamesmichaelduque/', label: 'LinkedIn', cmd: 'open linkedin' },
-              { icon: IconFileCv, href: '/resume.pdf', label: 'Resume', cmd: 'cat resume.pdf' },
-              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: 'Mail', cmd: 'ssh mail' },
+              { icon: IconFileCv, href: '/resume.pdf', label: language === 'ja' ? '履歴書' : 'Resume', cmd: 'cat resume.pdf' },
+              { icon: IconMail, href: 'mailto:duquejames657@gmail.com', label: language === 'ja' ? 'メール' : 'Mail', cmd: 'ssh mail' },
             ].map(({ icon: Icon, href, label, cmd }) => (
               <a
                 key={label}
@@ -241,7 +244,7 @@ export default function AboutPage() {
           {language === 'ja' ? (
             <>
               <p>
-                <YahhoTooltip>Yahho! (やっほー)</YahhoTooltip>{' '}
+                <YahhoTooltip>ヤッホー！</YahhoTooltip>{' '}
                 フィリピンのパンパンガ州にある{' '}
                 <span className="text-theme-accent">ホーリー・エンジェル大学</span> のIT専攻学生、
                 <span className="text-theme-accent">ジェームズ・マイケル</span> です{' '}
@@ -379,12 +382,12 @@ export default function AboutPage() {
               <div className={`h-full w-full transition-opacity duration-500 ease-in-out ${isFading ? 'opacity-0' : 'opacity-100'}`}>
                 <img
                   src={randomPhoto.src}
-                  alt={randomPhoto.id}
+                  alt={randomPhotoComment}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
                 <p className="absolute bottom-3 left-4 text-[10px] font-mono text-white opacity-0 transition-all duration-500 translate-y-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] group-hover:opacity-100 group-hover:translate-y-0 pointer-events-none">
-                  {randomPhoto.comment}
+                  {randomPhotoComment}
                 </p>
               </div>
             </div>
@@ -400,7 +403,7 @@ export default function AboutPage() {
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
                 className="border-0 w-full block"
-                title="Spotify playlist"
+                title={language === 'ja' ? 'Spotify プレイリスト' : 'Spotify playlist'}
               />
             </div>
           </div>

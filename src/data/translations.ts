@@ -17,7 +17,7 @@ export const translations: TranslationDictionary = {
   'nav.language': { en: 'Language', ja: '言語' },
 
   // Hero Section
-  'hero.greeting': { en: "Yahho! I'm", ja: 'ヤッホー！' },
+  'hero.greeting': { en: 'Yahho!', ja: 'ヤッホー！' },
   'hero.name': { en: 'James Michael', ja: 'ジェームズ・マイケルです' },
   'hero.bio1': {
     en: "I'm an IT undergraduate specializing in Web Development. I currently build websites for personal projects and local businesses like helping a local",
@@ -85,6 +85,7 @@ export const translations: TranslationDictionary = {
   'projects.overview': { en: 'Overview', ja: '概要' },
   'projects.technologies': { en: 'Technologies Used', ja: '使用テクノロジー' },
   'projects.close': { en: 'Close', ja: '閉じる' },
+  'projects.screenshots': { en: 'Screenshots', ja: 'スクリーンショット' },
 
   // Posts / Recent Activity
   'posts.title': { en: 'Recent Posts', ja: '最新の記事' },
@@ -96,6 +97,7 @@ export const translations: TranslationDictionary = {
   'posts.read_more': { en: 'Read Article', ja: '記事を読む' },
   'posts.min_read': { en: 'min read', ja: '分で読める' },
   'posts.back_to_posts': { en: 'Back to Posts', ja: '記事一覧に戻る' },
+  'posts.my_picks': { en: 'My Picks', ja: 'おすすめ作品' },
 
   // About Page
   'about.title': { en: 'About Me', ja: '私について' },

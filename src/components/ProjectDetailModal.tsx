@@ -45,6 +45,8 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
   if (!project) return null;
 
   const details = project.details;
+  const isJa = language === 'ja';
+  const projectTitle = (isJa && project.title_ja) ? project.title_ja : project.title;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8">
@@ -109,18 +111,18 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               {/* Screenshots Gallery - 2x2 Grid */}
               {project.screenshots && project.screenshots.length > 0 && (
                 <div className="flex flex-col gap-2">
-                  <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">{t('projects.overview', 'Screenshots')}</span>
+                  <span className="text-[9px] font-bold tracking-[0.15em] text-theme-text-muted uppercase">{t('projects.screenshots', 'Screenshots')}</span>
                   <div className="grid grid-cols-2 gap-2.5">
                     {project.screenshots.map((screenshot, idx) => (
                       <button
                         key={idx}
                         onClick={() => setLightboxIndex(idx)}
                         className="group/thumb relative aspect-[16/9] rounded-lg overflow-hidden border border-theme-border/20 bg-theme-bg-elevated/40 hover:border-theme-accent/40 hover:shadow-md transition-all duration-300 shadow-sm active:scale-98"
-                        aria-label={`View screenshot ${idx + 1}`}
+                        aria-label={isJa ? `スクリーンショット ${idx + 1} を表示` : `View screenshot ${idx + 1}`}
                       >
-                        <img 
-                          src={screenshot} 
-                          alt={`${project.title} screenshot ${idx + 1}`} 
+                        <img
+                          src={screenshot}
+                          alt={isJa ? `${projectTitle} スクリーンショット ${idx + 1}` : `${project.title} screenshot ${idx + 1}`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" 
                         />
                         <div className="absolute inset-0 bg-black/45 opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -158,7 +160,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                   </span>
                 )}
                 <h2 id="modal-project-title" className="text-2xl sm:text-3xl font-extrabold tracking-tight text-theme-text leading-tight">
-                  {(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
+                  {projectTitle}
                 </h2>
                 {details?.role && (
                   <div className="flex items-center gap-1.5 mt-0.5">
@@ -185,7 +187,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                     <section className="flex flex-col gap-4">
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-text-muted flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-theme-accent" />
-                        [01 // System Architecture]
+                        [{isJa ? '01 // システム構成' : '01 // System Architecture'}]
                       </h3>
                       
                       {/* Vertical Blueprint List */}
@@ -195,7 +197,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                             {/* Connecting Point */}
                             <div className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full border border-theme-accent bg-theme-bg transition-transform duration-300 group-hover/arch:scale-125 group-hover/arch:bg-theme-accent" />                             <div className="flex flex-col gap-1">
                               <h4 className="text-[12px] font-semibold tracking-wider font-mono text-theme-accent uppercase">
-                                {item.tech}
+                                {(isJa && item.tech_ja) ? item.tech_ja : item.tech}
                               </h4>
                               <p className="text-[13px] text-theme-text-subtle leading-relaxed font-light">
                                 {(language === 'ja' && item.description_ja) ? item.description_ja : item.description}
@@ -240,7 +242,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                     <section className="flex flex-col gap-4">
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-text-muted flex items-center gap-2">
                         <span className="h-1.5 w-1.5 rounded-full bg-theme-accent" />
-                        [03 // Performance & Strategic Loops]
+                        [{isJa ? '03 // 成果 ＆ 戦略' : '03 // Performance & Strategic Loops'}]
                       </h3>
                       
                       {/* High Fidelity Developer Dashboard grid */}
@@ -252,25 +254,25 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                             <div className="flex items-center justify-between">
                               <span className="text-[9px] font-mono text-theme-accent uppercase tracking-wider flex items-center gap-1.5">
                                 <IconSearch size={12} stroke={2.5} />
-                                Local SEO Domination
+                                {isJa ? 'ローカルSEO 上位獲得' : 'Local SEO Domination'}
                               </span>
                               <span className="text-[10px] font-mono text-theme-text-muted uppercase">
-                                {details.localSeo.achievement}
+                                {(isJa && details.localSeo.achievement_ja) ? details.localSeo.achievement_ja : details.localSeo.achievement}
                               </span>
                             </div>
-                            
+
                             <p className="text-[13px] leading-relaxed text-theme-text-subtle font-light">
-                              {details.localSeo.details}
+                              {(isJa && details.localSeo.details_ja) ? details.localSeo.details_ja : details.localSeo.details}
                             </p>
-                            
+
                             <div className="grid grid-cols-2 gap-2 mt-1">
                               <div className="rounded border border-theme-border/5 bg-theme-bg/40 p-2 flex flex-col gap-0.5">
-                                <span className="text-[9px] font-mono text-theme-text-muted uppercase">Search Query</span>
-                                <span className="text-[11px] font-mono font-semibold text-theme-text truncate">"{details.localSeo.term}"</span>
+                                <span className="text-[9px] font-mono text-theme-text-muted uppercase">{isJa ? '検索キーワード' : 'Search Query'}</span>
+                                <span className="text-[11px] font-mono font-semibold text-theme-text truncate">"{(isJa && details.localSeo.term_ja) ? details.localSeo.term_ja : details.localSeo.term}"</span>
                               </div>
                               <div className="rounded border border-theme-border/5 bg-theme-bg/40 p-2 flex flex-col gap-0.5">
-                                <span className="text-[9px] font-mono text-theme-text-muted uppercase">Location</span>
-                                <span className="text-[11px] font-mono font-semibold text-theme-text truncate">{details.localSeo.location}</span>
+                                <span className="text-[9px] font-mono text-theme-text-muted uppercase">{isJa ? '所在地' : 'Location'}</span>
+                                <span className="text-[11px] font-mono font-semibold text-theme-text truncate">{(isJa && details.localSeo.location_ja) ? details.localSeo.location_ja : details.localSeo.location}</span>
                               </div>
                             </div>
                           </div>
@@ -285,20 +287,20 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                           <div className="flex flex-col gap-3">
                             <span className="text-[10px] font-mono text-theme-accent uppercase tracking-wider flex items-center gap-1.5">
                               <IconChartBar size={12} stroke={2.5} />
-                              GA4 Analytics Loops
+                              {isJa ? 'GA4 アナリティクス' : 'GA4 Analytics Loops'}
                             </span>
-                            
+
                             <div className="flex flex-col gap-3">
                               <div className="flex flex-col gap-1">
-                                <span className="text-[10px] font-bold text-theme-text uppercase tracking-wider font-mono">Strategy & Setup</span>
+                                <span className="text-[10px] font-bold text-theme-text uppercase tracking-wider font-mono">{isJa ? '戦略 ＆ 設定' : 'Strategy & Setup'}</span>
                                 <p className="text-[13px] leading-relaxed text-theme-text-subtle font-light">
-                                  {details.ga4Seo.implementation}
+                                  {(isJa && details.ga4Seo.implementation_ja) ? details.ga4Seo.implementation_ja : details.ga4Seo.implementation}
                                 </p>
                               </div>
                               <div className="flex flex-col gap-1">
-                                <span className="text-[10px] font-bold text-theme-text uppercase tracking-wider font-mono">Results</span>
+                                <span className="text-[10px] font-bold text-theme-text uppercase tracking-wider font-mono">{isJa ? '成果' : 'Results'}</span>
                                 <p className="text-[13px] leading-relaxed text-theme-text-subtle font-light">
-                                  {details.ga4Seo.results}
+                                  {(isJa && details.ga4Seo.results_ja) ? details.ga4Seo.results_ja : details.ga4Seo.results}
                                 </p>
                               </div>
                             </div>
@@ -315,10 +317,12 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                   <div className="flex flex-col gap-2">
                     <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-text-muted flex items-center gap-2">
                       <span className="h-1.5 w-1.5 rounded-full bg-theme-accent" />
-                      [Project Highlights]
+                      [{isJa ? 'プロジェクトのハイライト' : 'Project Highlights'}]
                     </h3>
                     <p className="text-[13px] text-theme-text-subtle font-light leading-relaxed">
-                      This standard module features high performance compiling, a light structural core, responsive assets mapping, and clear modular structure.
+                      {isJa
+                        ? 'この標準モジュールは、高速なコンパイル、軽量な構造コア、レスポンシブなアセット管理、明快なモジュール構成を備えています。'
+                        : 'This standard module features high performance compiling, a light structural core, responsive assets mapping, and clear modular structure.'}
                     </p>
                   </div>
                 </div>
@@ -337,7 +341,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                     className="flex items-center justify-center gap-1.5 rounded-full border border-theme-border/20 bg-theme-bg-elevated/40 hover:bg-theme-bg-elevated/80 px-3.5 py-1.5 text-[9px] font-bold text-theme-text-muted hover:text-theme-accent active:scale-98 transition-all duration-200 font-mono tracking-wider"
                   >
                     <IconExternalLink size={11} stroke={2.5} />
-                    LIVE PREVIEW
+                    {isJa ? 'ライブプレビュー' : 'LIVE PREVIEW'}
                   </a>
                 )}
                 {project.links.github && (
@@ -348,7 +352,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                     className="flex items-center justify-center gap-1.5 rounded-full border border-theme-border/20 bg-theme-bg-elevated/40 hover:bg-theme-bg-elevated/80 px-3.5 py-1.5 text-[9px] font-bold text-theme-text-muted hover:text-theme-text active:scale-98 transition-all duration-200 font-mono tracking-wider"
                   >
                     <IconBrandGithub size={11} stroke={2} />
-                    REPOSITORY
+                    {isJa ? 'リポジトリ' : 'REPOSITORY'}
                   </a>
                 )}
               </div>
@@ -358,7 +362,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                 onClick={onClose}
                 className="text-[9px] font-bold uppercase tracking-widest text-theme-text-muted hover:text-theme-text transition-colors duration-200 py-0.5 sm:py-0 font-mono border-b border-dotted border-theme-text-muted/40 hover:border-theme-text"
               >
-                Close Details
+                {isJa ? '詳細を閉じる' : 'Close Details'}
               </button>
             </div>
           </motion.div>

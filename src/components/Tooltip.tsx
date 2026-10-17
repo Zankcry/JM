@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 interface TooltipProps {
   content: React.ReactNode;
@@ -65,14 +66,22 @@ function Tooltip({ content, children }: TooltipProps) {
 }
 
 export function YahhoTooltip({ children }: { children: React.ReactNode }) {
+  const { language } = useLanguage();
+
   return (
     <Tooltip
       content={
         <span className="block font-sans text-center">
-          <strong className="text-theme-accent">やっほー (Yahho!)</strong>
-          <span className="block mt-1 text-[11px] leading-normal text-theme-text-muted">
-            A friendly, casual Japanese greeting meaning <span className="text-theme-text">"Yo!"</span>, <span className="text-theme-text">"Hey!"</span>, or <span className="text-theme-text">"Hi!"</span>.
-          </span>
+          <strong className="text-theme-accent">{language === 'ja' ? 'やっほー' : 'やっほー (Yahho!)'}</strong>
+          {language === 'ja' ? (
+            <span className="block mt-1 text-[11px] leading-normal text-theme-text-muted">
+              <span className="text-theme-text">「やあ！」</span>や<span className="text-theme-text">「よっ！」</span>のような、親しい相手に使うカジュアルな挨拶です。
+            </span>
+          ) : (
+            <span className="block mt-1 text-[11px] leading-normal text-theme-text-muted">
+              A friendly, casual Japanese greeting meaning <span className="text-theme-text">"Yo!"</span>, <span className="text-theme-text">"Hey!"</span>, or <span className="text-theme-text">"Hi!"</span>.
+            </span>
+          )}
         </span>
       }
     >

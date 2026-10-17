@@ -64,7 +64,7 @@ export default function PostsPage() {
             ) : (
               <>
                 <IconHeart size={42} stroke={2} className="text-theme-accent animate-pulse" />
-                {t('posts.title', 'My Picks')}
+                {t('posts.my_picks', 'My Picks')}
               </>
             )}
           </h1>
@@ -134,7 +134,9 @@ export default function PostsPage() {
               ))
             ) : (
               <div className="text-center py-20 text-theme-text-muted">
-                <p className="text-lg">No posts yet. Check back soon! ✍️</p>
+                <p className="text-lg">
+                  {language === 'ja' ? 'まだ記事はありません。近日公開予定です！✍️' : 'No posts yet. Check back soon! ✍️'}
+                </p>
               </div>
             )}
           </div>
@@ -147,7 +149,7 @@ export default function PostsPage() {
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6 max-w-2xl">
                 <img
                   src="/images/peak.jpg"
-                  alt="Peak Taste"
+                  alt={language === 'ja' ? '最高のセンス' : 'Peak Taste'}
                   className="w-32 h-32 md:w-44 md:h-44 rounded-full object-cover border border-theme-accent/20 shrink-0 shadow-sm transition-all duration-300 hover:scale-105 hover:rotate-3"
                 />
                 <div className="flex flex-col gap-4">
@@ -221,7 +223,7 @@ export default function PostsPage() {
                     <div className="relative aspect-[2/3] w-32 shrink-0 overflow-hidden rounded-2xl border border-theme-accent/10 bg-theme-bg-elevated shadow-lg group-hover:shadow-theme-accent/5 transition-all duration-300">
                       <img
                         src={item.image}
-                        alt={item.title}
+                        alt={(language === 'ja' && item.title_ja) ? item.title_ja : item.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
 
@@ -277,18 +279,18 @@ export default function PostsPage() {
               type="button"
               onClick={closeTastePopup}
               className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/30 p-2 text-white/80 transition hover:text-white"
-              aria-label="Close popup"
+              aria-label={language === 'ja' ? 'ポップアップを閉じる' : 'Close popup'}
             >
               <IconX size={16} />
             </button>
             <img
               src="/images/myboiii.jpg"
-              alt="Peak taste popup"
+              alt={language === 'ja' ? '最高のセンス ポップアップ' : 'Peak taste popup'}
               className="block h-auto w-full object-cover"
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 text-center">
               <h2 className="text-4xl md:text-5xl font-black uppercase italic tracking-widest text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
-                My Boiii!!!
+                {language === 'ja' ? 'わかってるね！！！' : 'My Boiii!!!'}
               </h2>
             </div>
           </div>

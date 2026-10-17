@@ -8,7 +8,7 @@ export function LanguageSwitcher({ id = 'default' }: { id?: string }) {
   const { effect } = useBackground();
 
   const options: { value: Language; label: string; fullLabel: string }[] = [
-    { value: 'en', label: 'EN', fullLabel: 'English' },
+    { value: 'en', label: 'EN', fullLabel: language === 'ja' ? '英語' : 'English' },
     { value: 'ja', label: 'JP', fullLabel: '日本語' },
   ];
 
@@ -23,7 +23,7 @@ export function LanguageSwitcher({ id = 'default' }: { id?: string }) {
             : 'border-theme-accent/20 bg-theme-bg shadow-lg',
         ].join(' ')}
         role="radiogroup"
-        aria-label="Select language"
+        aria-label={language === 'ja' ? '言語を選択' : 'Select language'}
       >
         {options.map((option) => {
           const isActive = option.value === language;
@@ -34,7 +34,7 @@ export function LanguageSwitcher({ id = 'default' }: { id?: string }) {
               type="button"
               role="radio"
               aria-checked={isActive}
-              aria-label={`Switch language to ${option.fullLabel}`}
+              aria-label={language === 'ja' ? `${option.fullLabel}に切り替え` : `Switch language to ${option.fullLabel}`}
               onClick={() => setLanguage(option.value)}
               className={[
                 'relative rounded-lg px-2.5 py-1 text-xs font-semibold tracking-wide transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg',

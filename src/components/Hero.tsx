@@ -40,7 +40,7 @@ export function Hero() {
           className="flex max-w-3xl flex-wrap items-center gap-x-3 gap-y-2 text-3xl font-semibold leading-[1.1] tracking-snug text-theme-text sm:text-4xl lg:text-5xl"
         >
           <span>
-            <YahhoTooltip>{t('hero.greeting', "Yahho! I'm")}</YahhoTooltip>{' '}
+            <YahhoTooltip>{t('hero.greeting', 'Yahho!')}</YahhoTooltip>{' '}
             {language === 'en' ? "I'm" : ''}
           </span>
           <span className="inline-flex items-center gap-2 whitespace-nowrap">
@@ -50,7 +50,7 @@ export function Hero() {
             {/* Mobile: WebP Image */}
             <img
               src="/videos/chibi.webp"
-              alt="Chibi character"
+              alt={language === 'ja' ? 'ミニキャラ' : 'Chibi character'}
               className="h-14 w-14 rounded-2xl object-cover sm:h-16 sm:w-16 md:hidden"
               aria-hidden="true"
             />
@@ -127,7 +127,7 @@ export function Hero() {
                 {isInternal ? (
                   <Link
                     to={link.href}
-                    aria-label={link.label}
+                    aria-label={displayLabel}
                     className={cls}
                     onMouseEnter={() => setHoveredCommand(cmd)}
                     onMouseLeave={() => setHoveredCommand(null)}
@@ -137,7 +137,7 @@ export function Hero() {
                 ) : (
                   <a
                     href={link.href}
-                    aria-label={link.label}
+                    aria-label={displayLabel}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cls}

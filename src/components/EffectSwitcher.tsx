@@ -25,7 +25,7 @@ export function EffectSwitcher() {
         <div
           className="relative inline-flex flex-wrap justify-center gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
           role="radiogroup"
-          aria-label="Background effect"
+          aria-label={language === 'ja' ? '背景エフェクト' : 'Background effect'}
         >
           {options.map((option) => {
             const isActive = option.value === effect;
@@ -70,7 +70,7 @@ export function EffectSwitcher() {
         <div
           className="relative inline-flex gap-1 rounded-lg border border-theme-accent/15 bg-theme-bg/60 p-0.5 shadow-sm"
           role="radiogroup"
-          aria-label="Interactive brush stroke"
+          aria-label={language === 'ja' ? 'インタラクティブ筆ストローク' : 'Interactive brush stroke'}
         >
           {[
             { value: true, label: 'ON', label_ja: 'オン' },

@@ -1,13 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
 import { IconArrowLeft, IconCalendar } from '@tabler/icons-react';
 import { useLanguage } from '../context/LanguageContext';
+import { posts, formatPostDate } from '../data/posts';
 
 export default function PostDetailPage() {
   const { id } = useParams();
   const { t, language } = useLanguage();
+  const post = posts.find((p) => p.id === id);
 
   // Validate the post ID
-  if (id !== 'spine-2d-guide' && id !== 'why-i-built-simple-player') {
+  if (!post || (id !== 'spine-2d-guide' && id !== 'why-i-built-simple-player')) {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
         <h1 className="text-2xl font-bold text-theme-text">{language === 'ja' ? '記事が見つかりません' : 'Post not found'}</h1>
@@ -17,10 +19,8 @@ export default function PostDetailPage() {
   }
 
   const isSimplePlayer = id === 'why-i-built-simple-player';
-  const postDate = isSimplePlayer ? "May 26, 2026" : "May 12, 2026";
-  const postTags = isSimplePlayer
-    ? ['ChromeExtension', 'JavaScript', 'Anime', 'DIY']
-    : ['Spine', 'Animation', 'UX Design', 'WebDev'];
+  const postDate = formatPostDate(post.date, language);
+  const postTags = (language === 'ja' && post.tags_ja) ? post.tags_ja : post.tags;
 
   return (
     <article className="mx-auto flex w-full max-w-3xl flex-col gap-12 pt-8 sm:pt-14 lg:pt-16 pb-20 sm:pb-32">
@@ -92,7 +92,7 @@ export default function PostDetailPage() {
                 <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                   <img
                     src="/images/project6Preview_1.png"
-                    alt="Simple Miniplayer Active Subtitle View"
+                    alt="Simple Miniplayer 字幕表示画面"
                     className="w-full"
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function PostDetailPage() {
                 <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                   <img
                     src="/images/project6Preview_2.png"
-                    alt="Simple Miniplayer UI Preview"
+                    alt="Simple Miniplayer UI プレビュー"
                     className="w-full"
                   />
                 </div>
@@ -165,7 +165,7 @@ export default function PostDetailPage() {
                 <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                   <img
                     src="/images/project6Preview_4.png"
-                    alt="Live Chat Console View"
+                    alt="ライブチャット表示画面"
                     className="w-full"
                   />
                 </div>
@@ -307,13 +307,13 @@ export default function PostDetailPage() {
                   Spine 2Dが活用される最大の理由は<strong className="text-theme-accent underline decoration-theme-accent/30 underline-offset-4">高いパフォーマンスとインタラクティブ性</strong>です。従来の動画形式と異なり、軽量なWebベクターデータで滑らかな動きを実現します。
                 </p>
                 <p>
-                  <a href="https://www.zenlesszonezero.com" className="text-theme-accent">Zenless Zone Zero</a> の公式サイトなど、トップレベルのWebデザインでも活用されています。
+                  <a href="https://www.zenlesszonezero.com" className="text-theme-accent">ゼンレスゾーンゼロ</a> の公式サイトなど、トップレベルのWebデザインでも活用されています。
                 </p>
 
                 <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                   <img
                     src="/videos/spine2d.webp"
-                    alt="Spine 2D Demonstration"
+                    alt="Spine 2D デモ"
                     className="w-full"
                   />
                 </div>
@@ -345,7 +345,7 @@ export default function PostDetailPage() {
                 <div className="overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg">
                   <img
                     src="/videos/spine2d_2.webp"
-                    alt="Spine 2D Tutorial Example"
+                    alt="Spine 2D チュートリアル例"
                     className="w-full"
                   />
                 </div>

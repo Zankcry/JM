@@ -52,6 +52,15 @@ export function Footer() {
     }
   };
 
+  const getAriaLabel = (label: string) => {
+    if (language !== 'ja') return label;
+    switch (label) {
+      case 'Resume': return '履歴書';
+      case 'Mail': return 'メール';
+      default: return label;
+    }
+  };
+
   const getHoverCommand = (label: string) => {
     switch (label) {
       case 'GitHub': return 'open github';
@@ -79,7 +88,7 @@ export function Footer() {
             <div className="flex items-center gap-2">
               <img
                 src={`/${favDir}/apple-touch-icon.png?v=3`}
-                alt="Logo"
+                alt={language === 'ja' ? 'ロゴ' : 'Logo'}
                 className="h-6 w-6 sm:h-7 sm:w-7 object-contain"
               />
               <div className="h-4 w-px bg-theme-accent/20"></div>
@@ -128,7 +137,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-theme-text-muted transition-colors hover:text-theme-accent"
-                    aria-label={link.label}
+                    aria-label={getAriaLabel(link.label)}
                     onMouseEnter={() => setHoveredCommand(getHoverCommand(link.label))}
                     onMouseLeave={() => setHoveredCommand(null)}
                   >

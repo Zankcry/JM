@@ -52,7 +52,7 @@ export function ProjectCard({
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub Repository"
+                aria-label={language === 'ja' ? 'GitHub リポジトリ' : 'GitHub Repository'}
                 className="hover:text-theme-accent transition-colors relative z-10"
                 onClick={(e) => e.stopPropagation()}
               >
@@ -64,7 +64,7 @@ export function ProjectCard({
                 href={project.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Live Project"
+                aria-label={language === 'ja' ? 'ライブサイト' : 'Live Project'}
                 className="group/link hover:text-theme-accent transition-colors relative z-10"
                 onClick={(e) => e.stopPropagation()}
               >

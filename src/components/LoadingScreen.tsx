@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
+  const { language } = useLanguage();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -43,7 +45,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
           transition={{ duration: 0.45, ease: 'easeInOut' }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
           style={{ background: 'rgb(var(--theme-bg))' }}
-          aria-label="Loading"
+          aria-label={language === 'ja' ? '読み込み中' : 'Loading'}
           role="status"
         >
           {/* Logo */}
@@ -75,7 +77,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
               {/* Light theme: black logo */}
               <img
                 src="/favicon_black/android-chrome-512x512.png"
-                alt="Logo"
+                alt={language === 'ja' ? 'ロゴ' : 'Logo'}
                 className="relative h-44 w-44 rounded-3xl object-contain drop-shadow-2xl"
                 draggable={false}
               />
@@ -102,7 +104,7 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
             transition={{ delay: 0.3, duration: 0.4 }}
             className="mt-4 text-[10px] uppercase tracking-[0.4em] text-theme-text-muted"
           >
-            Loading...
+            {language === 'ja' ? '読み込み中...' : 'Loading...'}
           </motion.p>
         </motion.div>
       )}

@@ -41,7 +41,9 @@ export function LanguageTransitionOverlay({
     }
   }, [targetLang]);
 
-  const label = (targetLang || activeLang) === 'ja' ? '翻訳中...' : 'TRANSLATING...';
+  // Label in the language being switched away from, so it matches what the user is currently reading
+  const isJa = (targetLang || activeLang) === 'en';
+  const label = isJa ? '翻訳中...' : 'TRANSLATING...';
 
   return (
     <AnimatePresence mode="wait">
@@ -54,7 +56,7 @@ export function LanguageTransitionOverlay({
           transition={{ duration: 0.35, ease: 'easeInOut' }}
           className="fixed inset-0 z-[99999] flex flex-col items-center justify-center pointer-events-auto selection:bg-transparent backdrop-blur-md"
           style={{ background: 'rgb(var(--theme-bg))' }}
-          aria-label="Language transition"
+          aria-label={isJa ? '言語切り替え中' : 'Language transition'}
           role="status"
         >
           {/* Logo */}
@@ -84,7 +86,7 @@ export function LanguageTransitionOverlay({
               />
               <img
                 src="/favicon_black/android-chrome-512x512.png"
-                alt="Logo"
+                alt={isJa ? 'ロゴ' : 'Logo'}
                 className="relative h-36 w-36 rounded-3xl object-contain drop-shadow-2xl"
                 draggable={false}
               />

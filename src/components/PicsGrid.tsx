@@ -124,7 +124,7 @@ function PhotoCard({ photo, globalIndex, onPhotoClick }: PhotoCardProps) {
       <img
         ref={imgRef}
         src={photo.src}
-        alt={photo.id}
+        alt={commentText}
         loading="lazy"
         decoding="async"
         onLoad={() => setLoaded(true)}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { accentLabels, catppuccinPalettes, ThemeAccent } from '../theme/catppuccin';
 import { useTheme } from '../theme/ThemeProvider';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Ripple {
   id: string;
@@ -21,6 +22,8 @@ interface AccentHexButtonProps {
 }
 
 function AccentHexButton({ option, isActive, swatchColor, layoutId, onClick }: AccentHexButtonProps) {
+  const { language } = useLanguage();
+
   return (
     <div className="relative h-5 w-5 flex items-center justify-center">
       {isActive && (
@@ -46,7 +49,7 @@ function AccentHexButton({ option, isActive, swatchColor, layoutId, onClick }: A
       )}
       <button
         type="button"
-        aria-label={`Set accent to ${accentLabels[option]}`}
+        aria-label={language === 'ja' ? `アクセントカラーを ${accentLabels[option]} に変更` : `Set accent to ${accentLabels[option]}`}
         aria-pressed={isActive}
         onClick={onClick}
         className={[

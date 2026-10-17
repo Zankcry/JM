@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Post } from '../data/posts';
+import { Post, formatPostDate } from '../data/posts';
 import { useTerminal } from '../context/TerminalContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -9,6 +9,7 @@ export function PostCard({ post }: { post: Post }) {
 
   const titleText = (language === 'ja' && post.title_ja) ? post.title_ja : post.title;
   const descriptionText = (language === 'ja' && post.description_ja) ? post.description_ja : post.description;
+  const tags = (language === 'ja' && post.tags_ja) ? post.tags_ja : post.tags;
 
   return (
     <div className="w-full h-full flex">
@@ -22,10 +23,10 @@ export function PostCard({ post }: { post: Post }) {
           <div className="flex flex-col gap-3.5">
             {/* Top Metadata */}
             <div className="flex items-center gap-3 text-[11px] font-semibold tracking-wider text-theme-text-muted/60 uppercase w-full overflow-hidden">
-              <span className="shrink-0">{post.date}</span>
+              <span className="shrink-0">{formatPostDate(post.date, language)}</span>
               <span aria-hidden="true" className="text-theme-accent/40 font-bold shrink-0">•</span>
               <div className="truncate tracking-widest font-mono text-theme-accent flex-1">
-                {post.tags.map(tag => `#${tag.toUpperCase()}`).join(' ')}
+                {tags.map(tag => `#${tag.toUpperCase()}`).join(' ')}
               </div>
             </div>
 

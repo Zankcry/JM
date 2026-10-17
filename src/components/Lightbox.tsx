@@ -77,7 +77,7 @@ export default function Lightbox({
             onPrev();
           }}
           className="absolute bottom-4 left-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:left-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-          aria-label="Previous image"
+          aria-label={language === 'ja' ? '前の画像' : 'Previous image'}
         >
           <IconChevronLeft
             size={36}
@@ -105,7 +105,7 @@ export default function Lightbox({
               animate={{ opacity: loaded ? 1 : 0, scale: loaded ? 1 : 0.97 }}
               transition={{ duration: 0.25 }}
               src={src}
-              alt="Lightbox view"
+              alt={comment || (language === 'ja' ? '拡大表示' : 'Lightbox view')}
               onLoad={() => setLoaded(true)}
               className="max-w-full max-h-[70vh] sm:max-h-[75vh] object-contain shadow-2xl"
             />
@@ -131,7 +131,7 @@ export default function Lightbox({
             onNext();
           }}
           className="absolute bottom-4 right-4 h-12 w-12 sm:bottom-auto sm:top-0 sm:right-0 sm:h-full sm:w-[120px] z-[110] flex items-center justify-center cursor-pointer group bg-transparent focus:outline-none border-none"
-          aria-label="Next image"
+          aria-label={language === 'ja' ? '次の画像' : 'Next image'}
         >
           <IconChevronRight
             size={36}

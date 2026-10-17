@@ -88,7 +88,11 @@ export function Navbar() {
             className="inline-flex items-center justify-center text-theme-text-muted transition hover:text-theme-text focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg xl:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={
+              language === 'ja'
+                ? (menuOpen ? 'メニューを閉じる' : 'メニューを開く')
+                : (menuOpen ? 'Close menu' : 'Open menu')
+            }
             onClick={() => setMenuOpen((current) => !current)}
           >
             <motion.span
@@ -113,7 +117,7 @@ export function Navbar() {
         >
           <div className="overflow-hidden rounded-3xl border border-theme-border/60 bg-theme-bg-elevated/95 p-4 shadow-soft backdrop-blur">
             <div className="flex flex-col gap-4">
-              <nav className="grid gap-2" aria-label="Mobile primary">
+              <nav className="grid gap-2" aria-label={language === 'ja' ? 'モバイルナビゲーション' : 'Mobile primary'}>
                 {primaryNavLinks.map((link) => {
                   const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
                   const href = link.href === '#projects' ? '/projects' : link.href;
@@ -170,7 +174,7 @@ export function Navbar() {
                 <LanguageSwitcher id="mobile" />
 
                 <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-4 text-xs sm:text-sm">
-                  <span className="uppercase tracking-[0.35em] text-theme-text-muted/85 shrink-0">Accent</span>
+                  <span className="uppercase tracking-[0.35em] text-theme-text-muted/85 shrink-0">{language === 'ja' ? 'アクセント' : 'Accent'}</span>
                   <div className="relative inline-flex items-center rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg p-1.5 px-2.5">
                     <AccentSwitcher inline={true} />
                   </div>
@@ -193,7 +197,7 @@ export function Navbar() {
       />
 
       <aside className="fixed left-[5rem] top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 xl:block">
-        <nav className="flex flex-col items-center gap-2" aria-label="Section navigation">
+        <nav className="flex flex-col items-center gap-2" aria-label={language === 'ja' ? 'セクションナビゲーション' : 'Section navigation'}>
           {primaryNavLinks.map((link) => {
             const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
             const href = link.href === '#projects' ? '/projects' : link.href;

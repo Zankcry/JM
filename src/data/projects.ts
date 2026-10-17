@@ -7,6 +7,7 @@ export type ProjectDetail = {
   detailedDescription_ja?: string;
   architecture?: {
     tech: string;
+    tech_ja?: string;
     description: string;
     description_ja?: string;
   }[];
@@ -14,14 +15,21 @@ export type ProjectDetail = {
   keyFeatures_ja?: string[];
   localSeo?: {
     achievement: string;
+    achievement_ja?: string;
     term: string;
+    term_ja?: string;
     location: string;
+    location_ja?: string;
     details: string;
+    details_ja?: string;
   };
   ga4Seo?: {
     strategy: string;
+    strategy_ja?: string;
     implementation: string;
+    implementation_ja?: string;
     results: string;
+    results_ja?: string;
   };
 };
 
@@ -67,21 +75,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Vanilla Tech Stack",
+          tech_ja: "バニラ技術スタック",
           description: "Built without framework overhead to maintain sub-second page loads, near-zero layout shifts, and 95+ Lighthouse performance scores.",
           description_ja: "サブセカンドのページ読み込み、ほぼゼロのレイアウトシフト、95以上のLighthouseスコアを維持するためフレームワークなしで構築。"
         },
         {
           tech: "Firebase Auth & Realtime Services",
+          tech_ja: "Firebase 認証 ＆ リアルタイムサービス",
           description: "Secures admin functions and manages live service status updates using Firebase SDK modules.",
           description_ja: "Firebase SDKモジュールを使用して管理者機能を保護し、ライブサービスステータスの更新を管理。"
         },
         {
           tech: "Structured Schema Markup",
+          tech_ja: "構造化スキーママークアップ",
           description: "Uses JSON-LD LocalBusiness schema with precise geo-coordinates, opening hours, and service categories to dominate local search packs.",
           description_ja: "ローカル検索パックで上位表示するため、正確な地理座標、営業時間、サービスカテゴリを含むJSON-LD LocalBusinessスキーマを使用。"
         },
         {
           tech: "Google Analytics 4 & Tag Manager",
+          tech_ja: "Google アナリティクス 4 ＆ タグマネージャー",
           description: "Configured custom event listeners tracking button clicks, appointment funnels, gallery views, and directions requests.",
           description_ja: "ボタンのクリック、予約ファンネル、ギャラリー閲覧、アクセス経路のリクエストを計測するカスタムイベントリスナーを構成。"
         }
@@ -102,14 +114,21 @@ export const projects: Project[] = [
       ],
       localSeo: {
         achievement: "Top 10 Google Rank",
+        achievement_ja: "Google検索 トップ10入り",
         term: "Barbershop in Angeles City",
+        term_ja: "アンヘレス市 理髪店",
         location: "Angeles City, Pampanga",
-        details: "Optimized Google Business Profile integration, structured data markup, and localized keyword targeting pushed the barbershop into the top 10 search results within 60 days of launch."
+        location_ja: "パンパンガ州アンヘレス市",
+        details: "Optimized Google Business Profile integration, structured data markup, and localized keyword targeting pushed the barbershop into the top 10 search results within 60 days of launch.",
+        details_ja: "Googleビジネスプロフィールの最適化、構造化データマークアップ、地域キーワードのターゲティングにより、公開から60日以内に理髪店を検索結果のトップ10に押し上げました。"
       },
       ga4Seo: {
         strategy: "Conversion Funnel Instrumentation",
+        strategy_ja: "コンバージョンファネルの計測設計",
         implementation: "Tagged all high-intent CTAs including call buttons, location directions, and service menu views using custom dataLayer events.",
-        results: "Delivered actionable analytics showing peak appointment inquiry times and top-performing hair service categories."
+        implementation_ja: "電話ボタン、経路案内、サービスメニューの閲覧など、成約につながるすべてのCTAにカスタムdataLayerイベントでタグを設定。",
+        results: "Delivered actionable analytics showing peak appointment inquiry times and top-performing hair service categories.",
+        results_ja: "予約問い合わせが集中する時間帯や人気の高いヘアサービスのカテゴリを把握できる、実用的なアナリティクスを提供。"
       }
     }
   },
@@ -138,21 +157,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Angular 18+ Signals & RxJS",
+          tech_ja: "Angular 18+ Signals ＆ RxJS",
           description: "Utilizes Angular Signals for fine-grained reactive state updates alongside RxJS streams for asynchronous search filtering.",
           description_ja: "微細なリアクティブ状態更新のためのAngular Signalsと、非同期検索フィルターのためのRxJSストリームを活用。"
         },
         {
           tech: "Tailwind CSS Component Engine",
+          tech_ja: "Tailwind CSS コンポーネントエンジン",
           description: "Styled with utility-first Tailwind classes, implementing custom glassmorphism overlays and vibrant game-inspired color schemes.",
           description_ja: "ユーティリティファーストのTailwindクラスでスタイリングし、ゲームにインスパイアされた鮮やかな配色を実装。"
         },
         {
           tech: "Staff Directory CRUD Engine",
+          tech_ja: "スタッフ名簿 CRUD エンジン",
           description: "Features a full database panel allowing users to create, update, filter, and delete personnel records with reactive form validation.",
           description_ja: "リアクティブフォームのバリデーションを備え、スタッフ記録の作成、更新、検索、削除を行えるデータベースパネル。"
         },
         {
           tech: "Modular Standalone Components",
+          tech_ja: "モジュール式スタンドアロンコンポーネント",
           description: "Built using Angular's standalone component architecture for cleaner code separation and lazy-loaded routes.",
           description_ja: "コードの分離と遅延読み込みルートを実現するAngularのスタンドアロンコンポーネントアーキテクチャ。"
         }
@@ -177,6 +200,7 @@ export const projects: Project[] = [
     title: 'Yomi (読み)',
     title_ja: 'Yomi (読み)',
     description: 'A clean, ad-free novel reader app with a Tachiyomi-inspired dark UI, built using Flutter. Integrates custom reading views, reading progress syncing, and a PHP/MySQL API backend.',
+    description_ja: 'Flutterで構築された、Tachiyomi風のダークUIを備えたクリーンで広告なしの小説リーダーアプリ。カスタム読書ビュー、読書進捗の同期、PHP/MySQL APIバックエンドを搭載。',
     image: '/videos/project_3.webp',
     poster: '/images/project_poster_3.png',
     tags: ['Flutter', 'Dart', 'PHP', 'MySQL'],
@@ -197,21 +221,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Flutter (Dart) Frontend",
+          tech_ja: "Flutter (Dart) フロントエンド",
           description: "Uses Flutter's cross-platform engine to deploy a single responsive app for Web, Windows, and mobile screens.",
           description_ja: "Flutterのクロスプラットフォームエンジンを使用し、Web、Windows、モバイル画面向けに単一のレスポンシブアプリを配信。"
         },
         {
           tech: "PHP REST API Backend",
+          tech_ja: "PHP REST API バックエンド",
           description: "A lightweight PHP API served locally via XAMPP and live in production on InfinityFree hosting.",
           description_ja: "XAMPPでローカル動作し、InfinityFreeホスティングで本番運用される軽量なPHP API。"
         },
         {
           tech: "MySQL Relational DB",
+          tech_ja: "MySQL リレーショナルDB",
           description: "Uses a MySQL database to track user profiles, novel catalogs, shelf structures, and reading progress coordinates.",
           description_ja: "MySQLデータベースを使用して、ユーザープロファイル、小説カタログ、本棚構造、読書の進捗位置を記録。"
         },
         {
           tech: "GitHub Actions CI/CD",
+          tech_ja: "GitHub Actions による CI/CD",
           description: "Automated pipeline that compiles production Flutter Web builds and pushes updates directly to the web host.",
           description_ja: "本番向けFlutter Webビルドをコンパイルし、Webホストに直接更新をデプロイする自動パイプライン。"
         }
@@ -257,21 +285,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Next.js 16 & React 19",
+          tech_ja: "Next.js 16 ＆ React 19",
           description: "Built on Next.js 16 with the App Router, utilizing dynamic layouts, type-safe API endpoints, and optimized server-side components.",
           description_ja: "App Routerを備えたNext.js 16をベースに、動的レイアウト、型安全なAPIエンドポイント、最適化されたSSRコンポーネントを活用。"
         },
         {
           tech: "Supabase & Postgres",
+          tech_ja: "Supabase ＆ Postgres",
           description: "Uses Supabase for real-time PostgreSQL database synchronization, instant queries, and secure database indexing.",
           description_ja: "リアルタイムのPostgreSQLデータベース同期、即時クエリ、安全なデータベースインデックス作成にSupabaseを使用。"
         },
         {
           tech: "Tailwind CSS v4.0",
+          tech_ja: "Tailwind CSS v4.0",
           description: "Uses the modern Tailwind CSS v4 engine, incorporating customized color transitions and dark/light mode toggles.",
           description_ja: "モダンなTailwind CSS v4エンジンを使用し、カスタムカラー切り替えとダーク/ライトモード切り替えを組み込み。"
         },
         {
           tech: "Moderation Dashboard",
+          tech_ja: "モデレーションダッシュボード",
           description: "Features a password-protected admin dashboard to approve, reject, or restore posts.",
           description_ja: "投稿の承認、拒否、復元を行えるパスワード保護された管理者ダッシュボード。"
         }
@@ -319,21 +351,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Dark UI & Typography",
+          tech_ja: "ダークUI ＆ タイポグラフィ",
           description: "Uses cozy dark utility blocks, custom scrollbars, Poppins typography, and AOS (Animate On Scroll) to create a warm, inviting café atmosphere.",
           description_ja: "落ち着いたダークテーマ、カスタムスクロールバー、Poppinsタイポグラフィ、AOSを使用して居心地の良いカフェ空間を演出。"
         },
         {
           tech: "Leaflet.js Map Integration",
+          tech_ja: "Leaflet.js マップ統合",
           description: "Includes a custom Leaflet map centered at the café coordinates, styled with CartoDB Dark Matter tiles and gold-tinted map markers.",
           description_ja: "カフェの座標を中心に、CartoDB Dark Matterタイルとゴールドのマップマーカーで装飾したカスタムLeafletマップ。"
         },
         {
           tech: "Dynamic API Mocking",
+          tech_ja: "動的APIモック",
           description: "Configured mock API fetch endpoints (/products, /customers) that resolve dynamically depending on whether the site is running locally or live.",
           description_ja: "ローカルか本番環境かに応じて動的に解決されるモックAPIエンドポイント（/products, /customers）を構成。"
         },
         {
           tech: "Interactive Cart & Ratings",
+          tech_ja: "インタラクティブカート ＆ 評価機能",
           description: "Uses custom vanilla JavaScript to handle live shopping cart updates, PHP price calculations, and star rating interactions.",
           description_ja: "バニラJavaScriptにより、リアルタイムのショッピングカート更新、価格計算、星評価のインタラクションを処理。"
         }
@@ -381,21 +417,25 @@ export const projects: Project[] = [
       architecture: [
         {
           tech: "Tiered Capture Chain",
+          tech_ja: "多層キャプチャチェーン",
           description: "A priority-ordered rendering pipeline featuring Direct PiP (DOM migration), same-origin Iframe Proxy (canvas drawing), cross-origin Iframe Relay (ImageBitmap buffers over postMessage), and DRM Fallback overlays.",
           description_ja: "Direct PiP、同一オリジンIframeプロキシ、クロスオリジンIframeリレー、DRMフォールバックオーバーレイを備えた優先順位付きパイプライン。"
         },
         {
           tech: "SyncManager Layer",
+          tech_ja: "SyncManager レイヤー",
           description: "A cross-frame event bus built on chrome.storage.session that syncs play, pause, seek, and volume changes immediately without heavy messaging overhead.",
           description_ja: "再生、一時停止、シーク、音量変更を即座に同期するイベントバス。"
         },
         {
           tech: "BFS Discovery Engine",
+          tech_ja: "BFS 探索エンジン",
           description: "A custom Breadth-First-Search scanner that traverses frame boundaries and Shadow DOMs to find and lock onto active video elements.",
           description_ja: "フレーム境界やShadow DOMを走査してアクティブな動画要素をロックオンするカスタム幅優先探索スキャナー。"
         },
         {
           tech: "Cinematic Terminal UI",
+          tech_ja: "シネマティックターミナル UI",
           description: "A dark theme using glassmorphism backgrounds (backdrop-filter: blur(20px)) with neon accents, monospace typography, terminal-style audio visualizers, and customized subtitles.",
           description_ja: "ネオンアクセント、等幅フォント、ターミナル風オーディオビジュアライザーを備えたダークグラスモーフィズムUI。"
         }

@@ -130,8 +130,8 @@ export function Projects() {
           <button
             onClick={() => setIsHeartFilled(!isHeartFilled)}
             className="text-theme-accent transition-transform hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus rounded-full"
-            aria-label={isHeartFilled ? "Unlike" : "Like"}
-            title={isHeartFilled ? "Unlike" : "Like"}
+            aria-label={language === 'ja' ? (isHeartFilled ? 'いいねを取り消す' : 'いいね') : (isHeartFilled ? 'Unlike' : 'Like')}
+            title={language === 'ja' ? (isHeartFilled ? 'いいねを取り消す' : 'いいね') : (isHeartFilled ? 'Unlike' : 'Like')}
           >
             <IconHeart
               size={24}
@@ -285,7 +285,7 @@ export function Projects() {
         <div className="absolute inset-y-0 left-0 w-full z-20 flex justify-between p-0 pointer-events-none">
           <button
             onClick={handlePrev}
-            aria-label="Previous Project"
+            aria-label={language === 'ja' ? '前のプロジェクト' : 'Previous Project'}
             onMouseEnter={() => setHoveredCommand('prev project')}
             onMouseLeave={() => setHoveredCommand(isHovered ? `open projects/${activeProjectSlug}` : null)}
             className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-start pl-5 text-3xl opacity-35 hover:opacity-95 hover:pl-3 hover:bg-gradient-to-r hover:from-black/15 hover:to-transparent active:opacity-60"
@@ -294,7 +294,7 @@ export function Projects() {
           </button>
           <button
             onClick={handleNext}
-            aria-label="Next Project"
+            aria-label={language === 'ja' ? '次のプロジェクト' : 'Next Project'}
             onMouseEnter={() => setHoveredCommand('next project')}
             onMouseLeave={() => setHoveredCommand(isHovered ? `open projects/${activeProjectSlug}` : null)}
             className="pointer-events-auto w-[100px] h-full border-none bg-transparent text-white transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer flex items-center justify-end pr-5 text-3xl opacity-35 hover:opacity-95 hover:pr-3 hover:bg-gradient-to-l hover:from-black/15 hover:to-transparent active:opacity-60"
@@ -315,8 +315,8 @@ export function Projects() {
                 ? 'bg-theme-accent w-5'
                 : 'bg-white/40 hover:bg-white/70'
                 }`}
-              aria-label={`Go to project ${idx + 1}`}
-              title={proj.title}
+              aria-label={language === 'ja' ? `プロジェクト ${idx + 1} へ移動` : `Go to project ${idx + 1}`}
+              title={(language === 'ja' && proj.title_ja) ? proj.title_ja : proj.title}
             />
           ))}
         </div>

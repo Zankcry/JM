@@ -20,7 +20,7 @@ export function ThemeSwitcher({ id = 'default' }: { id?: string }) {
             : "border-theme-accent/20 bg-theme-bg shadow-lg"
         ].join(' ')}
         role="radiogroup"
-        aria-label="Color theme"
+        aria-label={language === 'ja' ? 'カラーテーマ' : 'Color theme'}
       >
         {themes.map((option) => {
           const isActive = option === theme;

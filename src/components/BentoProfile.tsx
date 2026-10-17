@@ -28,7 +28,7 @@ function MapRecenter({ center }: { center: [number, number] }) {
 
 function CopyEmailButton({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -40,7 +40,7 @@ function CopyEmailButton({ email }: { email: string }) {
     <button
       onClick={handleCopy}
       className="group/icon flex h-10 flex-col items-center justify-center gap-0.5 rounded-xl border border-theme-border/40 bg-theme-surface/40 text-theme-text-muted transition-all hover:border-theme-accent/20 hover:bg-theme-surface/70 hover:text-theme-accent"
-      title="Copy Email"
+      title={language === 'ja' ? 'メールアドレスをコピー' : 'Copy Email'}
     >
       {copied ? (
         <IconCheck size={16} className="text-green-500" />
@@ -163,6 +163,7 @@ export function ConnectCard() {
 
 function ClockDisplay() {
   const [time, setTime] = useState(new Date());
+  const { language } = useLanguage();
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -172,7 +173,7 @@ function ClockDisplay() {
   return (
     <div className="flex items-center gap-1 text-[10px] opacity-80">
       <IconClock size={11} />
-      {time.toLocaleTimeString('en-US', {
+      {time.toLocaleTimeString(language === 'ja' ? 'ja-JP' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: true
@@ -183,7 +184,7 @@ function ClockDisplay() {
 
 export function LocationCard() {
   const { theme } = useTheme();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const mapUrl = theme === 'latte'
     ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
@@ -217,7 +218,7 @@ export function LocationCard() {
       {/* Footer - Minimal overlay for small size */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between p-4 bg-gradient-to-t from-theme-bg/95 to-transparent pt-8 text-theme-text drop-shadow-md">
         <div className="text-[11px] font-bold">
-          Porac, PH
+          {language === 'ja' ? 'フィリピン・ポラック' : 'Porac, PH'}
         </div>
         <ClockDisplay />
       </div>

@@ -164,7 +164,7 @@ export function RecentActivity() {
             <div className="absolute right-0 top-0 bottom-0 w-full md:w-1/2 overflow-hidden pointer-events-none opacity-20 transition-all duration-500 group-hover:opacity-40 group-hover:scale-105">
               <img
                 src="/images/pics/quiet-afternoon.jpg"
-                alt="Gallery Preview"
+                alt={language === 'ja' ? 'ギャラリーのプレビュー' : 'Gallery Preview'}
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-theme-bg via-theme-bg/60 to-transparent"></div>

@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 type Project = {
     title: string;
+    title_ja?: string;
     image: string;
     poster?: string;
 };
 
 export function ProjectPreview({ project, className }: { project: Project; className?: string }) {
     const [isLoaded, setIsLoaded] = useState(false);
+    const { language } = useLanguage();
 
     return (
         <div
@@ -28,7 +31,7 @@ export function ProjectPreview({ project, className }: { project: Project; class
             {/* Animated WebP (Lazy Loaded) */}
             <img
                 src={project.image}
-                alt={project.title}
+                alt={(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
                 onLoad={() => setIsLoaded(true)}
                 loading="lazy"
                 style={{ objectFit: 'cover', objectPosition: 'center' }}

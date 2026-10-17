@@ -95,7 +95,7 @@ export function TerminalHomeButton({
     <Link
       to="/"
       onClick={onClick}
-      aria-label="Go to home"
+      aria-label={language === 'ja' ? 'ホームへ移動' : 'Go to home'}
       className="group focus:outline-none"
       onMouseEnter={() => onHoverChange('home')}
       onMouseLeave={() => onHoverChange(null)}
