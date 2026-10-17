@@ -46,22 +46,6 @@ export function KonamiEasterEgg() {
   const [activated, setActivated] = useState(false);
   const [showText, setShowText] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  // Preload foxy assets in the background (only on desktop where it's visible)
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      const img = new Image();
-      img.src = 'foxy/foxy-jump.png';
-      imgRef.current = img;
-
-      const audio = new Audio('foxy/Xscream3.ogg');
-      audio.preload = 'auto';
-      audio.load();
-      audioRef.current = audio;
-    }
-  }, []);
 
   // Konami code listener
   useEffect(() => {
@@ -106,13 +90,11 @@ export function KonamiEasterEgg() {
   useEffect(() => {
     if (!activated) return;
 
-    // Use preloaded elements if available
-    const img = imgRef.current || new Image();
-    if (!imgRef.current) {
-      img.src = 'foxy/foxy-jump.png';
-    }
+    // Loaded on demand: the sprite is 5.6 MB and almost nobody triggers this
+    const img = new Image();
+    img.src = '/foxy/foxy-jump.png';
 
-    const audio = audioRef.current || new Audio('foxy/Xscream3.ogg');
+    const audio = new Audio('/foxy/Xscream3.ogg');
     audio.volume = 1;
     audio.currentTime = 0;
     audio.play().catch(err => {
@@ -198,14 +180,11 @@ export function KonamiEasterEgg() {
       animationFrameId = requestAnimationFrame(renderLoop);
     };
 
+    // A new Image fires onload even when cached, so this is the only start point
     img.onload = () => {
       animationFrameId = requestAnimationFrame(renderLoop);
     };
-
-    // If image is already cached/complete, start immediately
-    if (img.complete) {
-      animationFrameId = requestAnimationFrame(renderLoop);
-    }
+    img.onerror = () => setActivated(false);
 
     return () => {
       isPlaying = false;

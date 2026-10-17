@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Language } from '../context/LanguageContext';
+import { useTheme } from '../theme/ThemeProvider';
 
 export function LanguageTransitionOverlay({
   targetLang,
@@ -10,6 +11,7 @@ export function LanguageTransitionOverlay({
   onDone: () => void;
 }) {
   const [progress, setProgress] = useState(0);
+  const { theme } = useTheme();
   const onDoneRef = useRef(onDone);
 
   useEffect(() => {
@@ -79,18 +81,12 @@ export function LanguageTransitionOverlay({
             />
 
             {/* Logo image */}
-            <picture>
-              <source
-                media="(prefers-color-scheme: dark)"
-                srcSet="/favicon_white/android-chrome-512x512.png"
-              />
-              <img
-                src="/favicon_black/android-chrome-512x512.png"
-                alt={isJa ? 'ロゴ' : 'Logo'}
-                className="relative h-36 w-36 rounded-3xl object-contain drop-shadow-2xl"
-                draggable={false}
-              />
-            </picture>
+            <img
+              src={`/${theme === 'latte' ? 'favicon_black' : 'favicon_white'}/android-chrome-512x512.png`}
+              alt={isJa ? 'ロゴ' : 'Logo'}
+              className="relative h-36 w-36 rounded-3xl object-contain drop-shadow-2xl"
+              draggable={false}
+            />
           </motion.div>
 
           {/* Progress bar */}

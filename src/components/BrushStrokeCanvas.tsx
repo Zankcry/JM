@@ -13,7 +13,6 @@ interface Point {
 interface Stroke {
   id: string;
   points: Point[];
-  isRightClick: boolean;
   opacity: number; // current fading opacity
   isDrawing: boolean;
   splatters: { x: number; y: number; r: number; opacity: number }[];
@@ -49,13 +48,12 @@ export function BrushStrokeCanvas() {
   useEffect(() => {
     sizesRef.current = sizes;
   }, [sizes]);
-  const mouseRef = useRef<{ x: number; y: number; clientX: number; clientY: number; isDown: boolean; isRight: boolean }>({
+  const mouseRef = useRef<{ x: number; y: number; clientX: number; clientY: number; isDown: boolean }>({
     x: 0,
     y: 0,
     clientX: 0,
     clientY: 0,
     isDown: false,
-    isRight: false,
   });
 
   // Spring physics variables for dragging the brush tip
@@ -103,8 +101,8 @@ export function BrushStrokeCanvas() {
     if (!canvas) return;
 
     const handleMouseDown = (e: MouseEvent) => {
-      // Allow drawing with left click (button 0) and right click (button 2)
-      if (e.button !== 0 && e.button !== 2) return;
+      // Left click only: on macOS/Linux the right-click context menu swallows mouseup, so the stroke would never end
+      if (e.button !== 0) return;
 
       // Ignore clicks on scrollbars
       if (e.clientX >= document.documentElement.clientWidth || e.clientY >= document.documentElement.clientHeight) {
@@ -128,13 +126,9 @@ export function BrushStrokeCanvas() {
         }
       }
 
-      const isRight = e.button === 2;
-      
-      // Prevent text selection/highlighting when starting to draw with left click
-      if (e.button === 0) {
-        e.preventDefault();
-        window.getSelection()?.removeAllRanges();
-      }
+      // Prevent text selection/highlighting when starting to draw
+      e.preventDefault();
+      window.getSelection()?.removeAllRanges();
       document.body.style.userSelect = 'none';
 
       mouseRef.current = {
@@ -143,7 +137,6 @@ export function BrushStrokeCanvas() {
         clientX: e.clientX,
         clientY: e.clientY,
         isDown: true,
-        isRight,
       };
 
       // Set physics brush position directly to click position to start stroke
@@ -164,7 +157,6 @@ export function BrushStrokeCanvas() {
             opacity: 1.0,
           },
         ],
-        isRightClick: isRight,
         opacity: 1.0,
         isDrawing: true,
         splatters: [],
@@ -347,7 +339,6 @@ export function BrushStrokeCanvas() {
 
         const accentColor = getCSSColor('--theme-accent', { r: 26, g: 26, b: 26 });
 
-        // Both left and right click draw in the active accent color
         const colorBase = accentColor;
 
         // Draw splatters first

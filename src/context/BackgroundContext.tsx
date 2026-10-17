@@ -14,11 +14,27 @@ type BackgroundContextType = {
 
 const BackgroundContext = createContext<BackgroundContextType | null>(null);
 
-const STORAGE_KEY = 'portfolio-bg-effect';
 const BRUSH_STORAGE_KEY = 'portfolio-brush-active';
 const BRUSH_WIDTH_KEY = 'portfolio-brush-width';
 
 const EFFECTS: BackgroundEffect[] = ['none', 'cyber-pattern', 'dot-matrix', 'retro-scanlines', 'hex-blueprint', 'woven-grid'];
+
+// localStorage throws when the visitor blocks site data; fall back to defaults instead of crashing.
+const readStorage = (key: string) => {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const writeStorage = (key: string, value: string) => {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // ignore
+  }
+};
 
 export function BackgroundProvider({ children }: { children: ReactNode }) {
   const [effect, setEffect] = useState<BackgroundEffect>(() => {
@@ -27,27 +43,21 @@ export function BackgroundProvider({ children }: { children: ReactNode }) {
   });
 
   const [brushActive, setBrushActive] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return true;
-    const stored = window.localStorage.getItem(BRUSH_STORAGE_KEY);
+    const stored = readStorage(BRUSH_STORAGE_KEY);
     return stored === null ? true : stored === 'true';
   });
 
   const [brushWidth, setBrushWidth] = useState<BrushWidth>(() => {
-    if (typeof window === 'undefined') return 'thin';
-    const stored = window.localStorage.getItem(BRUSH_WIDTH_KEY);
-    return (stored === 'thin' || stored === 'medium' || stored === 'thick') ? (stored as BrushWidth) : 'thin';
+    const stored = readStorage(BRUSH_WIDTH_KEY);
+    return (stored === 'thin' || stored === 'medium' || stored === 'thick') ? stored : 'thin';
   });
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, effect);
-  }, [effect]);
-
-  useEffect(() => {
-    window.localStorage.setItem(BRUSH_STORAGE_KEY, String(brushActive));
+    writeStorage(BRUSH_STORAGE_KEY, String(brushActive));
   }, [brushActive]);
 
   useEffect(() => {
-    window.localStorage.setItem(BRUSH_WIDTH_KEY, brushWidth);
+    writeStorage(BRUSH_WIDTH_KEY, brushWidth);
   }, [brushWidth]);
 
   return (

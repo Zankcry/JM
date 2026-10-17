@@ -303,3 +303,7 @@ summary::-webkit-details-marker {
 .animate-infinite-loading {
   animation: infinite-loading 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+/* iOS Low Power Mode blocks autoplay and draws a play button over the preview videos */
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}

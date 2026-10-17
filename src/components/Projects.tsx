@@ -162,13 +162,7 @@ export function Projects() {
           {/* Card 1: Exiting/Background slide (matching :nth-child(1)) */}
           <div
             className="absolute inset-0 bg-cover bg-center opacity-30 z-0 pointer-events-none"
-            style={{
-              backgroundImage: `url(${
-                isMobile
-                  ? (slides[0]?.poster || slides[0]?.image || activeSlideProject.poster || activeSlideProject.image)
-                  : (slides[0]?.image || activeSlideProject.image)
-              })`,
-            }}
+            style={{ backgroundImage: `url(${slides[0]?.poster || activeSlideProject.poster})` }}
           />
 
           {/* Card 2: Active Background slide and glass text card (matching :nth-child(2)) */}
@@ -200,9 +194,14 @@ export function Projects() {
                     />
                   </AnimatePresence>
                 ) : (
-                  <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${activeSlideProject.image})` }}
+                  <video
+                    src={activeSlideProject.image}
+                    poster={activeSlideProject.poster}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 )}
                 {/* Cinematic bottom-left gradient overlay to make text highly readable */}

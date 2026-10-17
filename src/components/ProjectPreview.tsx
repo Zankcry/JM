@@ -28,12 +28,15 @@ export function ProjectPreview({ project, className }: { project: Project; class
                 />
             )}
 
-            {/* Animated WebP (Lazy Loaded) */}
-            <img
+            {/* Looping preview video (MP4 is ~10x smaller than the old animated WebP) */}
+            <video
                 src={project.image}
-                alt={(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
-                onLoad={() => setIsLoaded(true)}
-                loading="lazy"
+                aria-label={(language === 'ja' && project.title_ja) ? project.title_ja : project.title}
+                onLoadedData={() => setIsLoaded(true)}
+                autoPlay
+                muted
+                loop
+                playsInline
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
                 className={`h-full w-full object-cover rounded-[inherit] transition-all duration-700 ease-out group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'
                     }`}

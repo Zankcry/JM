@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { useTheme } from '../theme/ThemeProvider';
 
 export function LoadingScreen({ onDone }: { onDone: () => void }) {
   const { language } = useLanguage();
+  const { theme } = useTheme();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -67,21 +69,13 @@ export function LoadingScreen({ onDone }: { onDone: () => void }) {
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Logo image — uses theme-aware logo */}
-            <picture>
-              {/* Dark theme: white logo */}
-              <source
-                media="(prefers-color-scheme: dark)"
-                srcSet="/favicon_white/android-chrome-512x512.png"
-              />
-              {/* Light theme: black logo */}
-              <img
-                src="/favicon_black/android-chrome-512x512.png"
-                alt={language === 'ja' ? 'ロゴ' : 'Logo'}
-                className="relative h-44 w-44 rounded-3xl object-contain drop-shadow-2xl"
-                draggable={false}
-              />
-            </picture>
+            {/* Logo image: black on the light theme, white on dark themes */}
+            <img
+              src={`/${theme === 'latte' ? 'favicon_black' : 'favicon_white'}/android-chrome-512x512.png`}
+              alt={language === 'ja' ? 'ロゴ' : 'Logo'}
+              className="relative h-44 w-44 rounded-3xl object-contain drop-shadow-2xl"
+              draggable={false}
+            />
           </motion.div>
 
           {/* Progress bar */}
