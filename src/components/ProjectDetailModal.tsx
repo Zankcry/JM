@@ -73,8 +73,8 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
           transition={{ duration: 0.55, ease: 'easeOut' }}
           className={`w-full rounded-xl border border-theme-accent/20 backdrop-blur-xl overflow-y-auto md:overflow-hidden max-h-[90vh] md:h-[85vh] md:max-h-[800px] p-6 sm:p-8 text-left flex flex-col md:flex-row gap-8 ${
             theme === 'latte'
-              ? 'bg-theme-bg/85 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_20_50px_-12px_rgba(var(--theme-shadow),0.15)]'
-              : 'bg-theme-bg/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_20_50px_-12px_rgba(var(--theme-shadow),0.4)]'
+              ? 'bg-theme-bg/85 shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_20px_50px_-12px_rgb(var(--theme-shadow)/0.15)]'
+              : 'bg-theme-bg/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_20px_50px_-12px_rgb(var(--theme-shadow)/0.4)]'
           }`}
           role="dialog"
           aria-modal="true"

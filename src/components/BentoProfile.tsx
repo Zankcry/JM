@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import {
   IconCalendar,
   IconMapPin,
@@ -47,8 +45,6 @@ function CopyEmailButton({ email }: { email: string }) {
     </button>
   );
 }
-
-const PORAC_COORDINATES: [number, number] = [15.0731, 120.5435];
 
 export function AvailabilityCard() {
   const { t, language } = useLanguage();
@@ -180,10 +176,6 @@ export function LocationCard() {
   const { theme } = useTheme();
   const { t, language } = useLanguage();
 
-  const mapUrl = theme === 'latte'
-    ? "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-    : "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
-
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-theme-accent/20 bg-theme-bg shadow-lg transition-all hover:border-theme-accent/70 lg:col-span-1 min-h-[180px]">
       {/* Header - Absolute overlay */}
@@ -194,19 +186,15 @@ export function LocationCard() {
 
       {/* Map - Fits the container */}
       <div className="absolute inset-0 z-10 grayscale-0 contrast-40 opacity-90 transition-all duration-700 ease-out group-hover:scale-105">
-        <MapContainer
-          center={PORAC_COORDINATES}
-          zoom={13}
-          scrollWheelZoom={false}
-          zoomControl={false}
-          attributionControl={false}
-          style={{ height: '100%', width: '100%', background: 'transparent' }}
-        >
-          <TileLayer
-            url={mapUrl}
-          />
-        </MapContainer>
+        {/* Static OSM render of Porac at zoom 13; the old live map was decoration only */}
+        <img
+          src={theme === 'latte' ? '/images/map-light.webp' : '/images/map-dark.webp'}
+          alt={language === 'ja' ? 'ポラックの地図' : 'Map of Porac'}
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
       </div>
+      <span className="absolute right-2 top-1 z-20 text-[8px] text-theme-text-muted/70">© OpenStreetMap</span>
 
       {/* Footer - Minimal overlay for small size */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between p-4 bg-gradient-to-t from-theme-bg/95 to-transparent pt-8 text-theme-text drop-shadow-md">

@@ -281,8 +281,9 @@ export function BrushStrokeCanvas() {
 
         // Add a new point to the currently drawing stroke
         const activeStroke = strokesRef.current.find((s) => s.isDrawing);
-        if (activeStroke) {
-          const speed = Math.hypot(brush.vx, brush.vy);
+        const speed = Math.hypot(brush.vx, brush.vy);
+        // A resting brush adds nothing past the 2nd point (enough to draw a click's dot); otherwise held-down clicks pile up points redrawn every frame
+        if (activeStroke && (activeStroke.points.length < 2 || speed >= 0.5)) {
           const currentSizes = sizesRef.current;
           
           // Width is inversely proportional to speed (thicker when slow, thinner when fast)

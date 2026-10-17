@@ -7,7 +7,7 @@ export type Photo = {
   comment_ja?: string;
 };
 
-// 1200px WebP copies in pics/thumbs; originals are only for the lightbox
+// 1200px WebP copies in pics/thumbs, used by the grid and the lightbox; originals are 2-3 MB source files
 export const thumbOf = (src: string) => src.replace('/pics/', '/pics/thumbs/').replace(/\.\w+$/, '.webp');
 
 export const allPhotos: Photo[] = [

@@ -62,7 +62,7 @@ function AccentHexButton({ option, isActive, swatchColor, layoutId, onClick }: A
           <polygon
             points="12,2.5 20.2,7.2 20.2,16.8 12,21.5 3.8,16.8 3.8,7.2"
             fill={`rgb(${swatchColor[0]} ${swatchColor[1]} ${swatchColor[2]})`}
-            stroke={isActive ? "rgb(var(--theme-border-strong))" : "rgba(var(--theme-border), 0.3)"}
+            stroke={isActive ? "rgb(var(--theme-border-strong))" : "rgb(var(--theme-border) / 0.3)"}
             strokeWidth="1.5"
             strokeLinejoin="round"
             className="transition-all duration-200 ease-out"

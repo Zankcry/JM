@@ -34,10 +34,10 @@ const FOXY_FRAMES: FrameData[] = [
 ];
 
 const KONAMI_SEQUENCE = [
-  'ArrowUp', 'ArrowUp',
-  'ArrowDown', 'ArrowDown',
-  'ArrowLeft', 'ArrowRight',
-  'ArrowLeft', 'ArrowRight',
+  'arrowup', 'arrowup',
+  'arrowdown', 'arrowdown',
+  'arrowleft', 'arrowright',
+  'arrowleft', 'arrowright',
   'b', 'a',
 ];
 
@@ -49,26 +49,16 @@ export function KonamiEasterEgg() {
 
   // Konami code listener
   useEffect(() => {
-    let current = 0;
+    // Last keys pressed; comparing the tail lets extra presses (e.g. a third Up) still match
+    let recent: string[] = [];
 
     const handleKey = (e: KeyboardEvent) => {
-      const key =
-        e.key === 'ArrowUp' ? 'ArrowUp' :
-          e.key === 'ArrowDown' ? 'ArrowDown' :
-            e.key === 'ArrowLeft' ? 'ArrowLeft' :
-              e.key === 'ArrowRight' ? 'ArrowRight' :
-                e.key.toLowerCase();
+      recent = [...recent, e.key.toLowerCase()].slice(-KONAMI_SEQUENCE.length);
 
-      if (key === KONAMI_SEQUENCE[current]) {
-        current++;
-
-        if (current === KONAMI_SEQUENCE.length) {
-          current = 0;
-          setActivated(true);
-          setShowText(false);
-        }
-      } else {
-        current = 0;
+      if (recent.join() === KONAMI_SEQUENCE.join()) {
+        recent = [];
+        setActivated(true);
+        setShowText(false);
       }
     };
 
@@ -90,16 +80,11 @@ export function KonamiEasterEgg() {
   useEffect(() => {
     if (!activated) return;
 
-    // Loaded on demand: the sprite is 5.6 MB and almost nobody triggers this
+    // Loaded on demand: the sprite is large and almost nobody triggers this
     const img = new Image();
-    img.src = '/foxy/foxy-jump.png';
+    img.src = '/foxy/foxy-jump.webp';
 
     const audio = new Audio('/foxy/Xscream3.ogg');
-    audio.volume = 1;
-    audio.currentTime = 0;
-    audio.play().catch(err => {
-      console.warn('Audio autoplay prevented or failed:', err);
-    });
 
     let animationFrameId: number;
     let isPlaying = true;
@@ -182,6 +167,10 @@ export function KonamiEasterEgg() {
 
     // A new Image fires onload even when cached, so this is the only start point
     img.onload = () => {
+      // Scream starts with the first frame, not before the sprite has downloaded
+      audio.play().catch(err => {
+        console.warn('Audio autoplay prevented or failed:', err);
+      });
       animationFrameId = requestAnimationFrame(renderLoop);
     };
     img.onerror = () => setActivated(false);
