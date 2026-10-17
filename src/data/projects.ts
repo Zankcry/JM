@@ -58,7 +58,7 @@ export const projects: Project[] = [
     image: '/videos/project_1.webp',
     poster: '/images/project_poster_1.webp',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'GA4'],
-    links: { live: 'https://charlies-barber.vercel.app/' },
+    links: { github: 'https://github.com/Zankcry/Barbershop_Website', live: 'https://charliesbarbershop.vercel.app/' },
     screenshots: [
       '/images/project1Preview_1.png',
       '/images/project1Preview_2.png',
