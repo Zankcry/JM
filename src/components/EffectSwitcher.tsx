@@ -13,6 +13,7 @@ export function EffectSwitcher() {
     { value: 'retro-scanlines', label: 'Lines', label_ja: 'ライン' },
     { value: 'hex-blueprint', label: 'Hex', label_ja: 'ヘックス' },
     { value: 'woven-grid', label: 'Woven', label_ja: '織物' },
+    { value: 'diamond-grid', label: 'Diamond', label_ja: 'ダイヤ' },
   ] as const;
 
   return (

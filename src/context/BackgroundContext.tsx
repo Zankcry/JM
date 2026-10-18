@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
-type BackgroundEffect = 'none' | 'cyber-pattern' | 'dot-matrix' | 'retro-scanlines' | 'hex-blueprint' | 'woven-grid';
+type BackgroundEffect = 'none' | 'cyber-pattern' | 'dot-matrix' | 'retro-scanlines' | 'hex-blueprint' | 'woven-grid' | 'diamond-grid';
 type BrushWidth = 'thin' | 'medium' | 'thick';
 
 type BackgroundContextType = {
@@ -17,7 +17,7 @@ const BackgroundContext = createContext<BackgroundContextType | null>(null);
 const BRUSH_STORAGE_KEY = 'portfolio-brush-active';
 const BRUSH_WIDTH_KEY = 'portfolio-brush-width';
 
-const EFFECTS: BackgroundEffect[] = ['none', 'cyber-pattern', 'dot-matrix', 'retro-scanlines', 'hex-blueprint', 'woven-grid'];
+const EFFECTS: BackgroundEffect[] = ['none', 'cyber-pattern', 'dot-matrix', 'retro-scanlines', 'hex-blueprint', 'woven-grid', 'diamond-grid'];
 
 // localStorage throws when the visitor blocks site data; fall back to defaults instead of crashing.
 const readStorage = (key: string) => {
