@@ -251,8 +251,8 @@ export function DiamondGrid() {
     let inkStyles = makeAlphaStyles(readInk());
     let reduce = motionMq.matches;
     let field: Field | null = null;
-    let elapsed = 0;
-    let drift = 0;
+    // Unwrapped ms; the pulse loop and the drift are both derived from it so neither ever jumps.
+    let clock = 0;
     let pad = 0;
     let last = 0;
     let raf = 0;
@@ -391,14 +391,17 @@ export function DiamondGrid() {
       ctx.fill();
     };
 
-    const paintIgnition = (event: Ignition, time: number) => {
+    const paintIgnition = (event: Ignition, time: number, drift: number) => {
       if (!field) return;
       const age = eventAge(event, time);
       const level = eventLevel(event, age);
       if (level <= 0.002) return;
 
       const f = field;
-      const x = f.x0 + event.col * f.cell;
+      // Pin the pulse to the lattice node it ignited on: the drift at ignition (wrapped to a cell)
+      // plus the distance travelled since. Using the wrapped drift alone made pulses snap back a cell.
+      const travelled = age * DRIFT_SPEED;
+      const x = f.x0 + event.col * f.cell + (((drift - travelled) % f.cell) + f.cell) % f.cell + travelled;
       const y = f.y0 + event.row * f.cell;
       const front = frontDistance(event, age);
 
@@ -422,17 +425,18 @@ export function DiamondGrid() {
       ctx.globalAlpha = 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       // Drift along the grid's x axis, i.e. diagonally down-right on screen; wraps every cell.
-      const shift = drift * GRID_COS;
+      const drift = time * DRIFT_SPEED;
+      const shift = (drift % field.cell) * GRID_COS;
       ctx.drawImage(baseCanvas, (shift - pad) * dpr, (shift - pad) * dpr);
-      setGridTransform(ctx, field, shift, shift);
+      setGridTransform(ctx, field);
       ctx.globalCompositeOperation = C.comp;
 
       for (let i = 0; i < field.events.length; i++) {
-        paintIgnition(field.events[i], time);
+        paintIgnition(field.events[i], time % LOOP_MS, drift);
       }
     };
 
-    const drawIdle = () => drawScene(reduce ? STATIC_TIME_MS : elapsed);
+    const drawIdle = () => drawScene(reduce ? STATIC_TIME_MS : clock);
 
     const rebuild = () => {
       W = Math.max(1, Math.round(host.clientWidth));
@@ -451,10 +455,9 @@ export function DiamondGrid() {
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const dt = Math.min(33, last ? now - last : 16);
-      elapsed = (elapsed + dt) % LOOP_MS;
-      if (field) drift = (drift + dt * DRIFT_SPEED) % field.cell;
+      clock += dt;
       last = now;
-      drawScene(elapsed);
+      drawScene(clock);
     };
 
     const start = () => {
