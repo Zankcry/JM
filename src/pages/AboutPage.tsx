@@ -242,8 +242,8 @@ export default function AboutPage() {
                   alt="🇵🇭"
                   className="inline-block h-[1.1em] w-auto align-middle mb-0.5"
                 />。主に <span className="text-theme-accent">フロントエンドWebデベロッパー</span> として活動していますが、
-                <span className="text-theme-accent">フルスタック開発</span> 全般にも柔軟に対応できます。現在は実務でのスキル向上を目指し、
-                <span className="text-theme-accent">OJTインターン</span> として研鑽を積んでいます。
+                <span className="text-theme-accent">フルスタック開発</span> 全般にも柔軟に対応できます。現在は
+                <span className="text-theme-accent">新しいお仕事を募集中</span> です。
               </p>
               <p>
                 これまでに個人制作や地元の理髪店のWebサイトを制作し、<span className="text-theme-accent">ローカルSEO検索でトップ10</span> 入りを達成しました。現在は、キャラクターアニメーション表現を極めるための{' '}
@@ -286,9 +286,9 @@ export default function AboutPage() {
                 </span>. I&apos;m
                 primarily a <span className="text-theme-accent">Frontend Web Developer</span>,
                 but I&apos;m fully capable of working across the{' '}
-                <span className="text-theme-accent">Full Stack</span>. I am currently an{' '}
-                <span className="text-theme-accent">OJT Intern</span> to further
-                apply my knowledge in real-world environments.
+                <span className="text-theme-accent">Full Stack</span>. I am currently{' '}
+                <span className="text-theme-accent">available for work</span> and open to
+                new opportunities.
               </p>
               <p>
                 I&apos;ve worked on personal projects and helped a local barbershop achieve <span className="text-theme-accent">Top 10</span> on seo local search. Right now I&apos;m deep in learning{' '}

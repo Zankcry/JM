@@ -38,7 +38,7 @@ export const translations: TranslationDictionary = {
   'bento.located_in': { en: 'Located In', ja: '所在地' },
   'bento.focus': { en: 'Focus', ja: '注力分野' },
   'bento.status': { en: 'Status', ja: 'ステータス' },
-  'bento.status_val': { en: 'Open for Opportunities', ja: 'お仕事・ご相談受付中' },
+  'bento.status_val': { en: 'Available for Work', ja: 'お仕事募集中' },
   'bento.contact_me': { en: 'Contact Me', ja: 'お問い合わせ' },
   'bento.connect_text': {
     en: "Let's connect and explore opportunities together.",

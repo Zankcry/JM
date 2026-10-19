@@ -60,7 +60,7 @@ export function AvailabilityCard() {
         <div className="flex items-center gap-3">
           <div className="h-4 w-[2px] bg-theme-accent"></div>
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-theme-accent">
-            {t('bento.status')}: {language === 'ja' ? 'OJT インターン' : 'OJT Intern'}
+            {t('bento.status')}: {language === 'ja' ? '稼働可能' : 'Available'}
           </span>
         </div>
 
@@ -68,11 +68,11 @@ export function AvailabilityCard() {
           <div className="flex items-center gap-2 text-theme-text-muted mb-1">
             <IconBriefcase size={14} />
             <span className="text-[11px] font-mono tracking-tighter uppercase">
-              {t('bento.focus')}: [{language === 'ja' ? 'OJT インターン' : 'OJT Intern'}]
+              {t('bento.focus')}: [{language === 'ja' ? 'ITサポート / ジュニアWeb開発' : 'IT Support / Junior Web Dev'}]
             </span>
           </div>
           <h3 className="text-2xl font-black tracking-tighter text-theme-text leading-tight uppercase">
-            {t('bento.status_val', 'Open for Opportunities')}
+            {t('bento.status_val', 'Available for Work')}
           </h3>
         </div>
 
@@ -81,7 +81,6 @@ export function AvailabilityCard() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
           </div>
-          <span className="text-[10px] font-bold text-theme-text-muted uppercase">{t('bento.status_val')}</span>
         </div>
       </div>
     </div>
@@ -190,7 +189,8 @@ export function LocationCard() {
         <img
           src={theme === 'latte' ? '/images/map-light.webp' : '/images/map-dark.webp'}
           alt={language === 'ja' ? 'ポラックの地図' : 'Map of Porac'}
-          className="h-full w-full object-cover"
+          // shortcut: CSS zoom on an 800px render, blurs on retina; re-render tiles at zoom 14 if it looks soft
+          className="h-full w-full object-cover scale-[1.75]"
           loading="lazy"
         />
       </div>
