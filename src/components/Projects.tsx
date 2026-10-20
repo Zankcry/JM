@@ -8,6 +8,7 @@ import { useTerminal } from '../context/TerminalContext';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import { ProjectThumbnailStrip } from './ProjectThumbnailStrip';
 import { slideVariants } from '../utils/animations';
+import { thumbOf } from '../data/photos';
 import { useLanguage } from '../context/LanguageContext';
 
 export function Projects() {
@@ -45,7 +46,7 @@ export function Projects() {
   // Extract poster and screenshots for mobile slideshow
   const mediaList = [
     activeSlideProject?.poster,
-    ...(activeSlideProject?.screenshots || [])
+    ...(activeSlideProject?.screenshots || []).map(thumbOf)
   ].filter(Boolean) as string[];
 
   // Reset media cycle index when the active project slide changes

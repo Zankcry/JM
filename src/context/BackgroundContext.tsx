@@ -1,6 +1,17 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
-type BackgroundEffect = 'none' | 'cyber-pattern' | 'dot-matrix' | 'retro-scanlines' | 'hex-blueprint' | 'woven-grid' | 'diamond-grid';
+// The one list of effects: the random pick on load and the footer switcher both read it
+export const EFFECT_OPTIONS = [
+  { value: 'none', label: 'None', label_ja: 'なし' },
+  { value: 'cyber-pattern', label: 'Grid', label_ja: 'グリッド' },
+  { value: 'dot-matrix', label: 'Dot', label_ja: 'ドット' },
+  { value: 'retro-scanlines', label: 'Lines', label_ja: 'ライン' },
+  { value: 'hex-blueprint', label: 'Hex', label_ja: 'ヘックス' },
+  { value: 'woven-grid', label: 'Woven', label_ja: '織物' },
+  { value: 'diamond-grid', label: 'Diamond', label_ja: 'ダイヤ' },
+] as const;
+
+type BackgroundEffect = (typeof EFFECT_OPTIONS)[number]['value'];
 type BrushWidth = 'thin' | 'medium' | 'thick';
 
 type BackgroundContextType = {
@@ -16,8 +27,6 @@ const BackgroundContext = createContext<BackgroundContextType | null>(null);
 
 const BRUSH_STORAGE_KEY = 'portfolio-brush-active';
 const BRUSH_WIDTH_KEY = 'portfolio-brush-width';
-
-const EFFECTS: BackgroundEffect[] = ['none', 'cyber-pattern', 'dot-matrix', 'retro-scanlines', 'hex-blueprint', 'woven-grid', 'diamond-grid'];
 
 // localStorage throws when the visitor blocks site data; fall back to defaults instead of crashing.
 const readStorage = (key: string) => {
@@ -38,8 +47,7 @@ const writeStorage = (key: string, value: string) => {
 
 export function BackgroundProvider({ children }: { children: ReactNode }) {
   const [effect, setEffect] = useState<BackgroundEffect>(() => {
-    const randomIndex = Math.floor(Math.random() * EFFECTS.length);
-    return EFFECTS[randomIndex];
+    return EFFECT_OPTIONS[Math.floor(Math.random() * EFFECT_OPTIONS.length)].value;
   });
 
   const [brushActive, setBrushActive] = useState<boolean>(() => {

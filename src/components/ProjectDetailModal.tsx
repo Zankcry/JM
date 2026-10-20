@@ -14,6 +14,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { fadeUpVariants } from '../utils/animations';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import Lightbox from './Lightbox';
+import { thumbOf } from '../data/photos';
 
 type ProjectDetailModalProps = {
   project: Project | null;
@@ -121,7 +122,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
                         aria-label={isJa ? `スクリーンショット ${idx + 1} を表示` : `View screenshot ${idx + 1}`}
                       >
                         <img
-                          src={screenshot}
+                          src={thumbOf(screenshot)}
                           alt={isJa ? `${projectTitle} スクリーンショット ${idx + 1}` : `${project.title} screenshot ${idx + 1}`}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover/thumb:scale-105" 
                         />

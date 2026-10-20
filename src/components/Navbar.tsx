@@ -24,6 +24,9 @@ export function Navbar() {
   const { language } = useLanguage();
   const location = useLocation();
 
+  // Clicking a card that changes page unmounts it before onMouseLeave, which would leave its command stuck
+  useEffect(() => setHoveredCommand(null), [location.pathname, setHoveredCommand]);
+
   useEffect(() => {
     if (!menuOpen) {
       return;
@@ -41,6 +44,9 @@ export function Navbar() {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [menuOpen]);
+
+  const isLinkActive = (href: string) =>
+    href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
 
   // Helper to handle hash scrolling if on home page
   const handleLinkClick = (href: string) => {
@@ -115,28 +121,24 @@ export function Navbar() {
             <div className="flex flex-col gap-4">
               <nav className="grid gap-2" aria-label={language === 'ja' ? 'モバイルナビゲーション' : 'Mobile primary'}>
                 {primaryNavLinks.map((link) => {
-                  const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
-                  const href = link.href === '#projects' ? '/projects' : link.href;
                   const jpLabel = jaLabel(link.label);
-                  const isLinkActive = link.href === '/'
-                    ? location.pathname === '/'
-                    : location.pathname.startsWith(href);
+                  const isActive = isLinkActive(link.href);
 
-                  return isInternal ? (
+                  return (
                     <Link
                       key={link.label}
-                      to={href}
-                      onClick={() => handleLinkClick(href)}
+                      to={link.href}
+                      onClick={() => handleLinkClick(link.href)}
                       onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
                       onMouseLeave={() => setHoveredCommand(null)}
                       className={[
                         "group relative flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium transition-all duration-300",
-                        isLinkActive
+                        isActive
                           ? "bg-theme-accent/10 text-theme-accent font-semibold pl-6"
                           : "text-theme-text-muted hover:bg-theme-surface/75 hover:text-theme-text"
                       ].join(' ')}
                     >
-                      {isLinkActive && (
+                      {isActive && (
                         <span className="absolute left-2.5 top-3 bottom-3 w-[3px] rounded-full bg-theme-accent" />
                       )}
                       <span>{language === 'ja' ? jpLabel : link.label}</span>
@@ -144,21 +146,6 @@ export function Navbar() {
                         {language === 'ja' ? link.label : jpLabel}
                       </span>
                     </Link>
-                  ) : (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
-                      onMouseLeave={() => setHoveredCommand(null)}
-                      className="group flex items-center justify-between rounded-2xl px-4 py-2.5 text-sm font-medium text-theme-text-muted transition-all duration-300 hover:bg-theme-surface/75 hover:text-theme-text"
-                    >
-                      <span>{language === 'ja' ? jpLabel : link.label}</span>
-                      <span className="font-mono text-[10px] tracking-wider opacity-45 uppercase text-theme-text-muted/80 group-hover:opacity-75 transition-opacity">
-                        {language === 'ja' ? link.label : jpLabel}
-                      </span>
-                    </a>
                   );
                 })}
               </nav>
@@ -195,12 +182,8 @@ export function Navbar() {
       <aside className="fixed left-[5rem] top-1/2 z-50 hidden -translate-x-1/2 -translate-y-1/2 xl:block">
         <nav className="flex flex-col items-center gap-2" aria-label={language === 'ja' ? 'セクションナビゲーション' : 'Section navigation'}>
           {primaryNavLinks.map((link) => {
-            const isInternal = link.href.startsWith('/') || link.href.startsWith('#');
-            const href = link.href === '#projects' ? '/projects' : link.href;
             const jpLabel = jaLabel(link.label);
-            const isLinkActive = link.href === '/'
-              ? location.pathname === '/'
-              : location.pathname.startsWith(href);
+            const isActive = isLinkActive(link.href);
 
             const primaryLabel = language === 'ja' ? jpLabel : link.label;
             const secondaryLabel = language === 'ja' ? link.label : jpLabel;
@@ -213,7 +196,7 @@ export function Navbar() {
               >
                 {/* Primary face */}
                 <motion.span
-                  className={`block leading-[1.375rem] font-medium transition-colors duration-300 ${isLinkActive ? 'text-theme-accent' : 'text-theme-text-muted group-hover:text-theme-text'
+                  className={`block leading-[1.375rem] font-medium transition-colors duration-300 ${isActive ? 'text-theme-accent' : 'text-theme-text-muted group-hover:text-theme-text'
                     }`}
                   variants={{
                     initial: { y: 0, opacity: 1, rotateX: 0 },
@@ -238,11 +221,11 @@ export function Navbar() {
               </div>
             );
 
-            return isInternal ? (
+            return (
               <Link
                 key={link.label}
-                to={href}
-                onClick={() => handleLinkClick(href)}
+                to={link.href}
+                onClick={() => handleLinkClick(link.href)}
                 onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
                 onMouseLeave={() => setHoveredCommand(null)}
                 className="group relative block text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-xl"
@@ -256,7 +239,7 @@ export function Navbar() {
                 </motion.div>
 
                 {/* Dynamic gliding active marker under the text (scales with layoutId width) */}
-                {isLinkActive && (
+                {isActive && (
                   <motion.span
                     layoutId="active-indicator-underline"
                     className="absolute bottom-2 left-7 right-7 h-[2px] rounded bg-theme-accent shadow-glow shadow-theme-accent/50"
@@ -264,24 +247,6 @@ export function Navbar() {
                   />
                 )}
               </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => setHoveredCommand(link.label.toLowerCase())}
-                onMouseLeave={() => setHoveredCommand(null)}
-                className="group relative block text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-focus focus-visible:ring-offset-2 focus-visible:ring-offset-theme-bg rounded-xl"
-              >
-                <motion.div
-                  className="py-3 px-6"
-                  initial="initial"
-                  whileHover="hover"
-                >
-                  {content}
-                </motion.div>
-              </a>
             );
           })}
         </nav>

@@ -35,18 +35,20 @@ function AnimatedRoutes() {
     const hash = location.hash;
     if (!hash) return;
 
+    // Up to ~3s: the 0.75s page fade plus downloading a lazy page on a slow connection
     let attempts = 0;
+    let timer: ReturnType<typeof setTimeout>;
     const tryScroll = () => {
       const element = document.querySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (attempts < 10) {
+      } else if (attempts < 30) {
         attempts++;
-        setTimeout(tryScroll, 100);
+        timer = setTimeout(tryScroll, 100);
       }
     };
 
-    const timer = setTimeout(tryScroll, 300);
+    timer = setTimeout(tryScroll, 300);
     return () => clearTimeout(timer);
   }, [location.pathname, location.hash]);
 

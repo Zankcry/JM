@@ -15,9 +15,13 @@ interface Stroke {
   points: Point[];
   opacity: number; // current fading opacity
   isDrawing: boolean;
-  splatters: { x: number; y: number; r: number; opacity: number }[];
+  splatters: { x: number; y: number; r: number; opacity: number; at: number }[]; // at: stroke.drawn when it was made
   releasedAt: number | null;
+  length: number; // px along the points, kept under MAX_STROKE_LENGTH
+  drawn: number; // total px ever drawn; drawn - length is where the trimmed tail now starts
 }
+
+const MAX_STROKE_LENGTH = 3000;
 
 export function BrushStrokeCanvas() {
   const { brushActive, brushWidth } = useBackground();
@@ -161,6 +165,8 @@ export function BrushStrokeCanvas() {
         isDrawing: true,
         splatters: [],
         releasedAt: null,
+        length: 0,
+        drawn: 0,
       };
 
       // Create initial splatters for dynamic sumi-e feedback based on stroke width
@@ -175,6 +181,7 @@ export function BrushStrokeCanvas() {
           y: e.clientY + window.scrollY + Math.sin(angle) * dist,
           r: Math.random() * currentSizes.splatter + 0.5,
           opacity: Math.random() * 0.7 + 0.3,
+          at: 0,
         });
       }
 
@@ -303,6 +310,22 @@ export function BrushStrokeCanvas() {
             width: newWidth,
             opacity: 1.0,
           });
+          // Every px of a stroke is redrawn each frame; dropping the oldest points keeps fast scribbles from lagging the page
+          const pts = activeStroke.points;
+          if (prevPoint) {
+            const segment = Math.hypot(brush.x - prevPoint.x, brush.y - prevPoint.y);
+            activeStroke.length += segment;
+            activeStroke.drawn += segment;
+          }
+          if (activeStroke.length > MAX_STROKE_LENGTH) {
+            while (activeStroke.length > MAX_STROKE_LENGTH && pts.length > 2) {
+              activeStroke.length -= Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+              pts.shift();
+            }
+            // Splatters go with the part of the stroke they were made on
+            const tailStart = activeStroke.drawn - activeStroke.length;
+            activeStroke.splatters = activeStroke.splatters.filter((splat) => splat.at >= tailStart);
+          }
 
           // Add a few dynamic splatters for fast movements
           if (speed > 12 && Math.random() < 0.35) {
@@ -313,6 +336,7 @@ export function BrushStrokeCanvas() {
               y: brush.y + Math.sin(angle) * dist,
               r: Math.random() * currentSizes.splatter + 0.5,
               opacity: Math.random() * 0.6 + 0.2,
+              at: activeStroke.drawn,
             });
           }
         }

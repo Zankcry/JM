@@ -64,6 +64,8 @@ export function TerminalHomeButton({
       if (allowedPages.includes(pageName)) {
         const displayPage = language === 'ja' ? (segmentJpMap[pageName] || pageName) : pageName;
         target = `cd ${displayPage}`;
+      } else {
+        target = normalizedCmd;
       }
     }
     setTyping(true);
@@ -89,7 +91,7 @@ export function TerminalHomeButton({
     return () => {
       if (typingTimer.current) clearInterval(typingTimer.current);
     };
-  }, [hoverCommand]);
+  }, [hoverCommand, language]);
 
   return (
     <Link
@@ -121,7 +123,7 @@ export function TerminalHomeButton({
         <span className="text-theme-text/70">~/{segment}</span>
         <span className="text-theme-text/40">$</span>
         {commandText && (
-          <span className="ml-1 text-theme-text/80">{commandText}</span>
+          <span className="ml-1 min-w-0 max-w-[35vw] truncate text-theme-text/80 sm:max-w-none">{commandText}</span>
         )}
         <motion.span
           className="ml-0.5 inline-block h-[0.85em] w-[0.55ch] rounded-[1px] bg-theme-accent align-middle"

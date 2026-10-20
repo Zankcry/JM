@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { thumbnailVariants } from '../utils/animations';
+import { thumbOf } from '../data/photos';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -94,7 +95,7 @@ export function ProjectThumbnailStrip({
                 }}
                 exit="exit"
                 className="flex-shrink-0 w-[260px] h-[155px] bg-center bg-cover rounded-md cursor-pointer transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.05] max-lg:w-[190px] max-lg:h-[115px]"
-                style={{ backgroundImage: `url(${screenshot})` }}
+                style={{ backgroundImage: `url(${thumbOf(screenshot)})` }}
                 onClick={onScreenshotClick}
               />
             );

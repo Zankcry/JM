@@ -7,8 +7,8 @@ export type Photo = {
   comment_ja?: string;
 };
 
-// 1200px WebP copies in pics/thumbs; originals are only for the lightbox
-export const thumbOf = (src: string) => src.replace('/pics/', '/pics/thumbs/').replace(/\.\w+$/, '.webp');
+// Small WebP copies in a thumbs/ folder next to the original (pics: 1200px, screenshots: 960px); originals are only for the lightbox
+export const thumbOf = (src: string) => src.replace(/\/([^/]+)\.\w+$/, '/thumbs/$1.webp');
 
 export const allPhotos: Photo[] = [
   {
