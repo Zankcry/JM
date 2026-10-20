@@ -93,7 +93,7 @@ export default function Lightbox({
           {/* Loading Spinner */}
           {!loaded && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
+              <div className="w-8 h-8 shrink-0 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
             </div>
           )}
 
