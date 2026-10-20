@@ -165,7 +165,8 @@ function ClockDisplay() {
       {time.toLocaleTimeString(language === 'ja' ? 'ja-JP' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
-        hour12: true
+        hour12: true,
+        timeZone: 'Asia/Manila'
       })}
     </div>
   );

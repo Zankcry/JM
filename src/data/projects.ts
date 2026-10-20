@@ -138,7 +138,7 @@ export const projects: Project[] = [
     description: 'A responsive fan portal built with Angular 18+ and Tailwind CSS. Features a game catalog, active status, search filters, and a database management custom staff directory.',
     description_ja: 'Angular 18+とTailwind CSSで構築されたレスポンシブなファンポータル。ゲームカタログ、アクティブステータス、検索フィルター、データベース管理機能を備えたカスタムスタッフディレクトリを搭載。',
     image: '/videos/project_2.mp4',
-    poster: '/images/project_poster_2.png',
+    poster: '/images/project_poster_2.webp',
     tags: ['Angular', 'TypeScript', 'TailwindCSS'],
     links: { github: 'https://github.com/Zankcry/Hoyoverse-Hub', live: 'https://hoyoverse-hub.vercel.app/' },
     screenshots: [
