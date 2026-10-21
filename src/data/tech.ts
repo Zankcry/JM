@@ -50,13 +50,17 @@ export const techStack: TechStackItem[] = [
   { label: 'TypeScript', shortLabel: 'TS', tone: '#3178C6', icon: 'brand-typescript', url: 'https://www.typescriptlang.org/' },
   { label: 'PHP', shortLabel: 'PHP', tone: '#777BB4', icon: 'brand-php', url: 'https://www.php.net/' },
   { label: 'React', shortLabel: 'React', tone: '#61DAFB', icon: 'brand-react', url: 'https://react.dev/' },
-  { label: 'Angular', shortLabel: 'Ng', tone: '#DD0031', icon: 'brand-angular', url: 'https://angular.dev/' },
   { label: 'TailwindCSS', shortLabel: 'TW', tone: '#38BDF8', icon: 'brand-tailwind', url: 'https://tailwindcss.com/' },
   { label: 'MongoDB', shortLabel: 'MDB', tone: '#47A248', icon: 'brand-mongodb', url: 'https://www.mongodb.com/' },
   { label: 'MySQL', shortLabel: 'SQL', tone: '#4479A1', icon: 'brand-mysql', url: 'https://www.mysql.com/' },
   { label: 'Firebase', shortLabel: 'FB', tone: '#FFCA28', icon: 'brand-firebase', url: 'https://firebase.google.com/' },
   { label: 'Supabase', shortLabel: 'Supa', tone: '#3ECF8E', icon: 'brand-supabase', url: 'https://supabase.com/' },
   { label: 'Vercel', shortLabel: 'Ver', tone: 'currentColor', icon: 'brand-vercel', url: 'https://vercel.com/' },
+];
+
+// Not shown in the hero stack, but still gives project tags their icons
+export const projectOnlyTech: TechStackItem[] = [
+  { label: 'Angular', shortLabel: 'Ng', tone: '#DD0031', icon: 'brand-angular', url: 'https://angular.dev/' },
   { label: 'Flutter', shortLabel: 'Flu', tone: '#02569B', icon: 'brand-flutter', url: 'https://flutter.dev/' },
   { label: 'Dart', shortLabel: 'Dart', tone: '#00CC76', icon: 'code', url: 'https://dart.dev/' },
   { label: 'Next.js', shortLabel: 'Next', tone: 'currentColor', icon: 'brand-nextjs', url: 'https://nextjs.org/' },

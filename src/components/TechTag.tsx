@@ -1,4 +1,4 @@
-import { techStack, techStackIcons } from '../data/tech';
+import { techStack, projectOnlyTech, techStackIcons } from '../data/tech';
 
 type TechTagProps = {
   tag: string;
@@ -32,7 +32,7 @@ const styles = {
 
 export function TechTag({ tag, variant = 'card' }: TechTagProps) {
   const s = styles[variant];
-  const tech = techStack.find(t =>
+  const tech = [...techStack, ...projectOnlyTech].find(t =>
     t.label.toLowerCase() === tag.toLowerCase() ||
     t.shortLabel.toLowerCase() === tag.toLowerCase()
   );
